@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ECRespiratoryProtectionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ECRespiratoryProtectionComments">
+    <Key>
+      <PropertyRef Name="CommentId" />
+    </Key>
+    <Property Name="CommentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CommentText" Type="varchar(max)" Nullable="false" />
+    <Property Name="FormId" Type="int" Nullable="false" />
+    <Property Name="Created" Type="datetime" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="ECRespiratoryProtectionForm">
+    <Key>
+      <PropertyRef Name="FormId" />
+    </Key>
+    <Property Name="FormId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmpName" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="EmpNumber" Type="int" Nullable="false" />
+    <Property Name="EmpADID" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="EmpJobTitle" Type="varchar" MaxLength="75" Nullable="false" />
+    <Property Name="EmpJobCode" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="EmpDepartment" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="EmpCostCenter" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="CurrentRiskLevel" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="StatusId" Type="int" Nullable="false" />
+    <Property Name="WaivedReasonId" Type="int" Nullable="false" />
+    <Property Name="IsRespiratoryRiskLevelHIGH" Type="bit" />
+    <Property Name="DirectpatientOrPerformingJobRelatedTasks" Type="bit" />
+    <Property Name="RespiratoryRiskLevelMEDIUM" Type="bit" />
+    <Property Name="N95RespiratorReadily" Type="bit" />
+    <Property Name="EmployeeWorkPartTimePRN" Type="bit" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Created" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Modified" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ECRespiratoryProtectionStatusMaster">
+    <Key>
+      <PropertyRef Name="StatusId" />
+    </Key>
+    <Property Name="StatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ECRespiratoryProtectionWaivedReason">
+    <Key>
+      <PropertyRef Name="WaivedReasonId" />
+    </Key>
+    <Property Name="WaivedReasonId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Reason" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'ECRespiratoryProtection.dbo.Test' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Test">
+          <Property Name="PersonID" Type="int" />
+        </EntityType>-->
+  <Association Name="FK_ECRespiratoryProtectionComments_ECRespiratoryProtectionForm">
+    <End Role="ECRespiratoryProtectionForm" Type="Self.ECRespiratoryProtectionForm" Multiplicity="1" />
+    <End Role="ECRespiratoryProtectionComments" Type="Self.ECRespiratoryProtectionComments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ECRespiratoryProtectionForm">
+        <PropertyRef Name="FormId" />
+      </Principal>
+      <Dependent Role="ECRespiratoryProtectionComments">
+        <PropertyRef Name="FormId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ECRespiratoryProtectionStatusMaster_ECRespiratoryProtectionForm">
+    <End Role="ECRespiratoryProtectionStatusMaster" Type="Self.ECRespiratoryProtectionStatusMaster" Multiplicity="1" />
+    <End Role="ECRespiratoryProtectionForm" Type="Self.ECRespiratoryProtectionForm" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ECRespiratoryProtectionStatusMaster">
+        <PropertyRef Name="StatusId" />
+      </Principal>
+      <Dependent Role="ECRespiratoryProtectionForm">
+        <PropertyRef Name="StatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ECRespiratoryProtectionWaivedReason_ECRespiratoryProtectionForm">
+    <End Role="ECRespiratoryProtectionWaivedReason" Type="Self.ECRespiratoryProtectionWaivedReason" Multiplicity="1" />
+    <End Role="ECRespiratoryProtectionForm" Type="Self.ECRespiratoryProtectionForm" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ECRespiratoryProtectionWaivedReason">
+        <PropertyRef Name="WaivedReasonId" />
+      </Principal>
+      <Dependent Role="ECRespiratoryProtectionForm">
+        <PropertyRef Name="WaivedReasonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ECRespiratoryProtectionModelStoreContainer">
+    <EntitySet Name="ECRespiratoryProtectionComments" EntityType="Self.ECRespiratoryProtectionComments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ECRespiratoryProtectionForm" EntityType="Self.ECRespiratoryProtectionForm" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ECRespiratoryProtectionStatusMaster" EntityType="Self.ECRespiratoryProtectionStatusMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ECRespiratoryProtectionWaivedReason" EntityType="Self.ECRespiratoryProtectionWaivedReason" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ECRespiratoryProtectionComments_ECRespiratoryProtectionForm" Association="Self.FK_ECRespiratoryProtectionComments_ECRespiratoryProtectionForm">
+      <End Role="ECRespiratoryProtectionForm" EntitySet="ECRespiratoryProtectionForm" />
+      <End Role="ECRespiratoryProtectionComments" EntitySet="ECRespiratoryProtectionComments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ECRespiratoryProtectionStatusMaster_ECRespiratoryProtectionForm" Association="Self.FK_ECRespiratoryProtectionStatusMaster_ECRespiratoryProtectionForm">
+      <End Role="ECRespiratoryProtectionStatusMaster" EntitySet="ECRespiratoryProtectionStatusMaster" />
+      <End Role="ECRespiratoryProtectionForm" EntitySet="ECRespiratoryProtectionForm" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ECRespiratoryProtectionWaivedReason_ECRespiratoryProtectionForm" Association="Self.FK_ECRespiratoryProtectionWaivedReason_ECRespiratoryProtectionForm">
+      <End Role="ECRespiratoryProtectionWaivedReason" EntitySet="ECRespiratoryProtectionWaivedReason" />
+      <End Role="ECRespiratoryProtectionForm" EntitySet="ECRespiratoryProtectionForm" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EHCheckModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="EHCheckBridgeMaster">
+    <Key>
+      <PropertyRef Name="EHMasterID" />
+    </Key>
+    <Property Name="EHMasterID" Type="Int32" Nullable="false" />
+    <Property Name="EHDetailIDCurrentRecord" Type="Int32" Nullable="false" />
+    <Property Name="EHDetailIDFirstRecord" Type="Int32" Nullable="false" />
+    <Property Name="EHDetailIDPrevRecord" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="EHCheckMaster" Relationship="Self.FK_EHCheckBridgeMaster_EHCheckMaster" FromRole="EHCheckBridgeMaster" ToRole="EHCheckMaster" />
+  </EntityType>
+  <EntityType Name="EHCheckConfigMaster">
+    <Key>
+      <PropertyRef Name="ConfigID" />
+    </Key>
+    <Property Name="ConfigID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ConfigParamName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ConfigParamColType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ConfigColTypeIntValue" Type="Int32" />
+    <Property Name="IsParamAnInt" Type="Boolean" Nullable="false" />
+    <Property Name="ConfigColTypeBitValue" Type="Boolean" Nullable="false" />
+    <Property Name="IsParamABit" Type="Boolean" Nullable="false" />
+    <Property Name="ConfigColTypeStringValue" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsParamAString" Type="Boolean" Nullable="false" />
+    <Property Name="ConfigEmailAddr" Type="String" MaxLength="125" FixedLength="false" Unicode="false" />
+    <Property Name="IsParamAnEmail" Type="Boolean" Nullable="false" />
+    <Property Name="SendMgrEmail" Type="Boolean" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EHCheckDetail">
+    <Key>
+      <PropertyRef Name="EHDetailID" />
+    </Key>
+    <Property Name="EHDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EHMasterID" Type="Int32" Nullable="false" />
+    <Property Name="RecordDate" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RecordTime" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Temperature" Type="Decimal" Precision="8" Scale="3" Nullable="false" />
+    <Property Name="NauseaVomiting" Type="Boolean" Nullable="false" />
+    <Property Name="NVComment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Diarrhea" Type="Boolean" Nullable="false" />
+    <Property Name="DIAComment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Headache" Type="Boolean" Nullable="false" />
+    <Property Name="HEADComment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="MusclePain" Type="Boolean" Nullable="false" />
+    <Property Name="MPComment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Weakness" Type="Boolean" Nullable="false" />
+    <Property Name="WEAKComment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Fatigue" Type="Boolean" Nullable="false" />
+    <Property Name="FATComment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="AbdominalPain" Type="Boolean" Nullable="false" />
+    <Property Name="APComment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Hemorrhage" Type="Boolean" Nullable="false" />
+    <Property Name="HEMComment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="CreatedBy" Type="Int64" Nullable="false" />
+    <Property Name="ModifyDate" Type="DateTime" Precision="0" />
+    <Property Name="ModifiedBy" Type="Int64" />
+    <Property Name="EmailSentCounter" Type="Int16" Nullable="false" />
+    <Property Name="KeepSendingEmails" Type="Boolean" Nullable="false" />
+    <Property Name="ExposureDate" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="EHCheckMaster" Relationship="Self.FK_EHCheckDetail_EHCheckMaster" FromRole="EHCheckDetail" ToRole="EHCheckMaster" />
+    <NavigationProperty Name="EHCheckEmailDetails" Relationship="EHCheckModel.FK_EHCheckEmailDetail_EHCheckDetail" FromRole="EHCheckDetail" ToRole="EHCheckEmailDetail" />
+  </EntityType>
+  <EntityType Name="EHCheckMaster">
+    <Key>
+      <PropertyRef Name="EHMasterID" />
+    </Key>
+    <Property Name="EHMasterID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+    <Property Name="AdId" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FullName" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EmailAddr" Type="String" MaxLength="125" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NonCentraEmail" Type="String" MaxLength="125" FixedLength="false" Unicode="false" />
+    <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="AutumnEnd" Type="Int32" />
+    <Property Name="ContactPhone" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MgrEmplID" Type="Int32" Nullable="false" />
+    <Property Name="MgrName" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MgrEmail" Type="String" MaxLength="125" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CostCenter" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DeptName" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Location" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LocationName" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="ModifyDate" Type="DateTime" Precision="0" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="EHDetailIDCurrentRecord" Type="Int32" />
+    <Property Name="EHDetailIDFirstRecord" Type="Int32" />
+    <Property Name="EHDetailIDPrevRecord" Type="Int32" />
+    <Property Name="DeactivatedDate" Type="DateTime" Precision="0" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="EHCheckBridgeMaster" Relationship="Self.FK_EHCheckBridgeMaster_EHCheckMaster" FromRole="EHCheckMaster" ToRole="EHCheckBridgeMaster" />
+    <NavigationProperty Name="EHCheckDetails" Relationship="Self.FK_EHCheckDetail_EHCheckMaster" FromRole="EHCheckMaster" ToRole="EHCheckDetail" />
+    <NavigationProperty Name="EHCheckEmailDetails" Relationship="EHCheckModel.FK_EHCheckEmailDetail_EHCheckMaster" FromRole="EHCheckMaster" ToRole="EHCheckEmailDetail" />
+  </EntityType>
+  <EntityType Name="AuditEHCheckDetail">
+    <Key>
+      <PropertyRef Name="EHDetailID" />
+      <PropertyRef Name="EHMasterID" />
+      <PropertyRef Name="RecordDate" />
+      <PropertyRef Name="RecordTime" />
+      <PropertyRef Name="Temperature" />
+      <PropertyRef Name="NauseaVomiting" />
+      <PropertyRef Name="Diarrhea" />
+      <PropertyRef Name="Headache" />
+      <PropertyRef Name="MusclePain" />
+      <PropertyRef Name="Weakness" />
+      <PropertyRef Name="Fatigue" />
+      <PropertyRef Name="AbdominalPain" />
+      <PropertyRef Name="Hemorrhage" />
+      <PropertyRef Name="CreateDate" />
+      <PropertyRef Name="CreatedBy" />
+      <PropertyRef Name="EmailSentCounter" />
+      <PropertyRef Name="KeepSendingEmails" />
+    </Key>
+    <Property Name="Operation" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="OperationDateTime" Type="DateTime" Precision="3" />
+    <Property Name="OperationUser" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="EHDetailID" Type="Int32" Nullable="false" />
+    <Property Name="EHMasterID" Type="Int32" Nullable="false" />
+    <Property Name="RecordDate" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RecordTime" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Temperature" Type="Decimal" Precision="8" Scale="3" Nullable="false" />
+    <Property Name="NauseaVomiting" Type="Boolean" Nullable="false" />
+    <Property Name="NVComment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Diarrhea" Type="Boolean" Nullable="false" />
+    <Property Name="DIAComment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Headache" Type="Boolean" Nullable="false" />
+    <Property Name="HEADComment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="MusclePain" Type="Boolean" Nullable="false" />
+    <Property Name="MPComment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Weakness" Type="Boolean" Nullable="false" />
+    <Property Name="WEAKComment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Fatigue" Type="Boolean" Nullable="false" />
+    <Property Name="FATComment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="AbdominalPain" Type="Boolean" Nullable="false" />
+    <Property Name="APComment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Hemorrhage" Type="Boolean" Nullable="false" />
+    <Property Name="HEMComment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="CreatedBy" Type="Int64" Nullable="false" />
+    <Property Name="ModifyDate" Type="DateTime" Precision="0" />
+    <Property Name="ModifiedBy" Type="Int64" />
+    <Property Name="EmailSentCounter" Type="Int16" Nullable="false" />
+    <Property Name="KeepSendingEmails" Type="Boolean" Nullable="false" />
+    <Property Name="ExposureDate" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="AuditEHCheckMaster">
+    <Key>
+      <PropertyRef Name="EHMasterID" />
+      <PropertyRef Name="EmployeeID" />
+      <PropertyRef Name="AdId" />
+      <PropertyRef Name="LastName" />
+      <PropertyRef Name="FirstName" />
+      <PropertyRef Name="FullName" />
+      <PropertyRef Name="EmailAddr" />
+      <PropertyRef Name="DOB" />
+      <PropertyRef Name="ContactPhone" />
+      <PropertyRef Name="MgrEmplID" />
+      <PropertyRef Name="MgrName" />
+      <PropertyRef Name="MgrEmail" />
+      <PropertyRef Name="CostCenter" />
+      <PropertyRef Name="DeptName" />
+      <PropertyRef Name="Location" />
+      <PropertyRef Name="LocationName" />
+      <PropertyRef Name="CreateDate" />
+      <PropertyRef Name="CreatedBy" />
+      <PropertyRef Name="IsActive" />
+    </Key>
+    <Property Name="Operation" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="OperationDateTime" Type="DateTime" Precision="3" />
+    <Property Name="OperationUser" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="EHMasterID" Type="Int32" Nullable="false" />
+    <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+    <Property Name="AdId" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FullName" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EmailAddr" Type="String" MaxLength="125" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NonCentraEmail" Type="String" MaxLength="125" FixedLength="false" Unicode="false" />
+    <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="AutumnEnd" Type="Int32" />
+    <Property Name="ContactPhone" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MgrEmplID" Type="Int32" Nullable="false" />
+    <Property Name="MgrName" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MgrEmail" Type="String" MaxLength="125" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CostCenter" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DeptName" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Location" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LocationName" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="ModifyDate" Type="DateTime" Precision="0" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="EHDetailIDCurrentRecord" Type="Int32" />
+    <Property Name="EHDetailIDFirstRecord" Type="Int32" />
+    <Property Name="EHDetailIDPrevRecord" Type="Int32" />
+    <Property Name="DeactivatedDate" Type="DateTime" Precision="0" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_EHCheckBridgeMaster_EHCheckMaster">
+    <End Role="EHCheckMaster" Type="Self.EHCheckMaster" Multiplicity="1" />
+    <End Role="EHCheckBridgeMaster" Type="Self.EHCheckBridgeMaster" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="EHCheckMaster">
+        <PropertyRef Name="EHMasterID" />
+      </Principal>
+      <Dependent Role="EHCheckBridgeMaster">
+        <PropertyRef Name="EHMasterID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EHCheckDetail_EHCheckMaster">
+    <End Role="EHCheckMaster" Type="Self.EHCheckMaster" Multiplicity="1" />
+    <End Role="EHCheckDetail" Type="Self.EHCheckDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EHCheckMaster">
+        <PropertyRef Name="EHMasterID" />
+      </Principal>
+      <Dependent Role="EHCheckDetail">
+        <PropertyRef Name="EHMasterID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EHCheckEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="EHCheckBridgeMasters" EntityType="Self.EHCheckBridgeMaster" />
+    <EntitySet Name="EHCheckConfigMasters" EntityType="Self.EHCheckConfigMaster" />
+    <EntitySet Name="EHCheckDetails" EntityType="Self.EHCheckDetail" />
+    <EntitySet Name="EHCheckMasters" EntityType="Self.EHCheckMaster" />
+    <EntitySet Name="AuditEHCheckDetails" EntityType="Self.AuditEHCheckDetail" />
+    <EntitySet Name="AuditEHCheckMasters" EntityType="Self.AuditEHCheckMaster" />
+    <AssociationSet Name="FK_EHCheckBridgeMaster_EHCheckMaster" Association="Self.FK_EHCheckBridgeMaster_EHCheckMaster">
+      <End Role="EHCheckMaster" EntitySet="EHCheckMasters" />
+      <End Role="EHCheckBridgeMaster" EntitySet="EHCheckBridgeMasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EHCheckDetail_EHCheckMaster" Association="Self.FK_EHCheckDetail_EHCheckMaster">
+      <End Role="EHCheckMaster" EntitySet="EHCheckMasters" />
+      <End Role="EHCheckDetail" EntitySet="EHCheckDetails" />
+    </AssociationSet>
+    <EntitySet Name="EHCheckEmailDetails" EntityType="EHCheckModel.EHCheckEmailDetail" />
+    <AssociationSet Name="FK_EHCheckEmailDetail_EHCheckDetail" Association="EHCheckModel.FK_EHCheckEmailDetail_EHCheckDetail">
+      <End Role="EHCheckDetail" EntitySet="EHCheckDetails" />
+      <End Role="EHCheckEmailDetail" EntitySet="EHCheckEmailDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EHCheckEmailDetail_EHCheckMaster" Association="EHCheckModel.FK_EHCheckEmailDetail_EHCheckMaster">
+      <End Role="EHCheckMaster" EntitySet="EHCheckMasters" />
+      <End Role="EHCheckEmailDetail" EntitySet="EHCheckEmailDetails" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="EHCheckEmailDetail">
+    <Key>
+      <PropertyRef Name="EHEmailID" />
+    </Key>
+    <Property Name="EHEmailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EHMasterID" Type="Int32" Nullable="false" />
+    <Property Name="EHDetailID" Type="Int32" Nullable="false" />
+    <Property Name="EmailSentDateTime" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="EHCheckDetail" Relationship="EHCheckModel.FK_EHCheckEmailDetail_EHCheckDetail" FromRole="EHCheckEmailDetail" ToRole="EHCheckDetail" />
+    <NavigationProperty Name="EHCheckMaster" Relationship="EHCheckModel.FK_EHCheckEmailDetail_EHCheckMaster" FromRole="EHCheckEmailDetail" ToRole="EHCheckMaster" />
+  </EntityType>
+  <Association Name="FK_EHCheckEmailDetail_EHCheckDetail">
+    <End Type="EHCheckModel.EHCheckDetail" Role="EHCheckDetail" Multiplicity="1" />
+    <End Type="EHCheckModel.EHCheckEmailDetail" Role="EHCheckEmailDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EHCheckDetail">
+        <PropertyRef Name="EHDetailID" />
+      </Principal>
+      <Dependent Role="EHCheckEmailDetail">
+        <PropertyRef Name="EHDetailID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EHCheckEmailDetail_EHCheckMaster">
+    <End Type="EHCheckModel.EHCheckMaster" Role="EHCheckMaster" Multiplicity="1" />
+    <End Type="EHCheckModel.EHCheckEmailDetail" Role="EHCheckEmailDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EHCheckMaster">
+        <PropertyRef Name="EHMasterID" />
+      </Principal>
+      <Dependent Role="EHCheckEmailDetail">
+        <PropertyRef Name="EHMasterID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

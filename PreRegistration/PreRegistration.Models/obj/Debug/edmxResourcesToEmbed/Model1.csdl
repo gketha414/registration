@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ECRespiratoryProtectionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ECRespiratoryProtectionComment">
+    <Key>
+      <PropertyRef Name="CommentId" />
+    </Key>
+    <Property Name="CommentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CommentText" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FormId" Type="Int32" Nullable="false" />
+    <Property Name="Created" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ECRespiratoryProtectionForm" Relationship="Self.FK_ECRespiratoryProtectionComments_ECRespiratoryProtectionForm" FromRole="ECRespiratoryProtectionComments" ToRole="ECRespiratoryProtectionForm" />
+  </EntityType>
+  <EntityType Name="ECRespiratoryProtectionForm">
+    <Key>
+      <PropertyRef Name="FormId" />
+    </Key>
+    <Property Name="FormId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmpName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EmpNumber" Type="Int32" Nullable="false" />
+    <Property Name="EmpADID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EmpJobTitle" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EmpJobCode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EmpDepartment" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EmpCostCenter" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CurrentRiskLevel" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="StatusId" Type="Int32" Nullable="false" />
+    <Property Name="WaivedReasonId" Type="Int32" Nullable="false" />
+    <Property Name="IsRespiratoryRiskLevelHIGH" Type="Boolean" />
+    <Property Name="DirectpatientOrPerformingJobRelatedTasks" Type="Boolean" />
+    <Property Name="RespiratoryRiskLevelMEDIUM" Type="Boolean" />
+    <Property Name="N95RespiratorReadily" Type="Boolean" />
+    <Property Name="EmployeeWorkPartTimePRN" Type="Boolean" />
+    <Property Name="CreatedBy" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Modified" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="ECRespiratoryProtectionComments" Relationship="Self.FK_ECRespiratoryProtectionComments_ECRespiratoryProtectionForm" FromRole="ECRespiratoryProtectionForm" ToRole="ECRespiratoryProtectionComments" />
+    <NavigationProperty Name="ECRespiratoryProtectionStatusMaster" Relationship="Self.FK_ECRespiratoryProtectionStatusMaster_ECRespiratoryProtectionForm" FromRole="ECRespiratoryProtectionForm" ToRole="ECRespiratoryProtectionStatusMaster" />
+    <NavigationProperty Name="ECRespiratoryProtectionWaivedReason" Relationship="Self.FK_ECRespiratoryProtectionWaivedReason_ECRespiratoryProtectionForm" FromRole="ECRespiratoryProtectionForm" ToRole="ECRespiratoryProtectionWaivedReason" />
+  </EntityType>
+  <EntityType Name="ECRespiratoryProtectionStatusMaster">
+    <Key>
+      <PropertyRef Name="StatusId" />
+    </Key>
+    <Property Name="StatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Status" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="ECRespiratoryProtectionForms" Relationship="Self.FK_ECRespiratoryProtectionStatusMaster_ECRespiratoryProtectionForm" FromRole="ECRespiratoryProtectionStatusMaster" ToRole="ECRespiratoryProtectionForm" />
+  </EntityType>
+  <EntityType Name="ECRespiratoryProtectionWaivedReason">
+    <Key>
+      <PropertyRef Name="WaivedReasonId" />
+    </Key>
+    <Property Name="WaivedReasonId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Reason" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="ECRespiratoryProtectionForms" Relationship="Self.FK_ECRespiratoryProtectionWaivedReason_ECRespiratoryProtectionForm" FromRole="ECRespiratoryProtectionWaivedReason" ToRole="ECRespiratoryProtectionForm" />
+  </EntityType>
+  <Association Name="FK_ECRespiratoryProtectionComments_ECRespiratoryProtectionForm">
+    <End Role="ECRespiratoryProtectionForm" Type="Self.ECRespiratoryProtectionForm" Multiplicity="1" />
+    <End Role="ECRespiratoryProtectionComments" Type="Self.ECRespiratoryProtectionComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ECRespiratoryProtectionForm">
+        <PropertyRef Name="FormId" />
+      </Principal>
+      <Dependent Role="ECRespiratoryProtectionComments">
+        <PropertyRef Name="FormId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ECRespiratoryProtectionStatusMaster_ECRespiratoryProtectionForm">
+    <End Role="ECRespiratoryProtectionStatusMaster" Type="Self.ECRespiratoryProtectionStatusMaster" Multiplicity="1" />
+    <End Role="ECRespiratoryProtectionForm" Type="Self.ECRespiratoryProtectionForm" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ECRespiratoryProtectionStatusMaster">
+        <PropertyRef Name="StatusId" />
+      </Principal>
+      <Dependent Role="ECRespiratoryProtectionForm">
+        <PropertyRef Name="StatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ECRespiratoryProtectionWaivedReason_ECRespiratoryProtectionForm">
+    <End Role="ECRespiratoryProtectionWaivedReason" Type="Self.ECRespiratoryProtectionWaivedReason" Multiplicity="1" />
+    <End Role="ECRespiratoryProtectionForm" Type="Self.ECRespiratoryProtectionForm" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ECRespiratoryProtectionWaivedReason">
+        <PropertyRef Name="WaivedReasonId" />
+      </Principal>
+      <Dependent Role="ECRespiratoryProtectionForm">
+        <PropertyRef Name="WaivedReasonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ECRespiratoryProtectionEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ECRespiratoryProtectionComments" EntityType="Self.ECRespiratoryProtectionComment" />
+    <EntitySet Name="ECRespiratoryProtectionForms" EntityType="Self.ECRespiratoryProtectionForm" />
+    <EntitySet Name="ECRespiratoryProtectionStatusMasters" EntityType="Self.ECRespiratoryProtectionStatusMaster" />
+    <EntitySet Name="ECRespiratoryProtectionWaivedReasons" EntityType="Self.ECRespiratoryProtectionWaivedReason" />
+    <AssociationSet Name="FK_ECRespiratoryProtectionComments_ECRespiratoryProtectionForm" Association="Self.FK_ECRespiratoryProtectionComments_ECRespiratoryProtectionForm">
+      <End Role="ECRespiratoryProtectionForm" EntitySet="ECRespiratoryProtectionForms" />
+      <End Role="ECRespiratoryProtectionComments" EntitySet="ECRespiratoryProtectionComments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ECRespiratoryProtectionStatusMaster_ECRespiratoryProtectionForm" Association="Self.FK_ECRespiratoryProtectionStatusMaster_ECRespiratoryProtectionForm">
+      <End Role="ECRespiratoryProtectionStatusMaster" EntitySet="ECRespiratoryProtectionStatusMasters" />
+      <End Role="ECRespiratoryProtectionForm" EntitySet="ECRespiratoryProtectionForms" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ECRespiratoryProtectionWaivedReason_ECRespiratoryProtectionForm" Association="Self.FK_ECRespiratoryProtectionWaivedReason_ECRespiratoryProtectionForm">
+      <End Role="ECRespiratoryProtectionWaivedReason" EntitySet="ECRespiratoryProtectionWaivedReasons" />
+      <End Role="ECRespiratoryProtectionForm" EntitySet="ECRespiratoryProtectionForms" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

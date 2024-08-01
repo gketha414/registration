@@ -1,0 +1,209 @@
+﻿
+@{
+    ViewBag.Title = "OnlinePreRegistration";
+}
+<style>
+    .formBulletList {
+        text-align: left;
+        font-weight: bold;
+        color: #333333;
+    }
+
+    ul {
+        list-style-image: url('../../images/blackCheck.gif');
+    }
+
+    .imageFirstPage {
+        float: right;
+    }
+
+    .btn1, .btn1-large {
+        text-decoration: none;
+        color: #fff;
+        font-weight: 700 !important;
+        font-style: normal !important;
+        background-color: #2196f3;
+        text-align: center;
+        letter-spacing: .5px;
+        transition: .2s ease-out;
+        cursor: pointer;
+    }
+
+    .btn1, .btn1-large, .btn-floating, .btn1-large, .btn1-flat {
+        font-size: 13px;
+        outline: 0;
+    }
+
+    .btn1, .btn-large1, .btn1-flat {
+        border: none;
+        border-radius: 2px !important;
+        display: inline-block;
+        height: 28px !important;
+        line-height: 28px !important;
+        padding: 0 8px !important;
+        text-transform: uppercase !important;
+        vertical-align: middle !important;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .btn1, .btn1-large {
+        min-width: 120px;
+    }
+
+    .btn-flat {
+        box-shadow: none;
+        background-color: transparent;
+        color: #2196f3;
+        cursor: pointer;
+        transition: background-color .2s;
+        font-weight: 700
+    }
+
+        .btn-flat:focus, .btn-flat:hover {
+            box-shadow: 2px 3px 8px 2px rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12) !important;
+            background-color: #fff
+        }
+
+        .btn-flat:focus {
+            background-color: rgba(0,0,0,0.1)
+        }
+
+        .btn-flat.disabled {
+            background-color: transparent !important;
+            color: #b3b3b3 !important;
+            cursor: default
+        }
+
+    .btn-large {
+        height: 42px;
+        line-height: 42px
+    }
+
+        .btn-large i {
+            font-size: 1.6rem
+        }
+
+    .btn-block {
+        display: block
+    }
+
+
+    fieldset.group {
+        margin: 0;
+        padding: 0;
+        margin-bottom: 1.25em;
+        padding: .125em;
+    }
+
+        fieldset.group legend {
+            margin: 0;
+            padding: 0;
+            font-weight: bold;
+            margin-left: 20px;
+            font-size: 100%;
+            color: black;
+        }
+</style>
+<br /><br /><br /><br />
+
+<div id="container-consent">
+    <div id="consent">
+        <h3>You may also contact us by calling 1-888-671-8923</h3>
+        <hr>
+        <div class="legal well">
+            <div id="firstreg">
+                <p style="font-weight:500;font-size:14px">
+                    Complete the Online Pre-Registration Form and click the submit button at the end. This information will be sent to our Patient Access Department who will register you for your hospital stay and ensure a smooth transition. It is recommended that this form be submitted at least three days prior to your expected admitting date for insurance verification purposes.
+                </p>
+                <br />
+                <p style="font-weight:500;font-size:14px">
+                    Please enter all required information in order to avoid having to re-key each field.
+                </p>
+
+                <p style="font-weight:500;font-size:14px">
+                    For more information about Centra hospitals or preregistering online, please call (434) 200-4545.
+                </p>
+
+                <p style="font-weight:500;font-size:14px">
+                    After you preregister, please bring the following items with you to check in at registration:
+                </p>
+
+                @*<button type="button" class="btn btn-default btn-sm" onClick="window.print();">
+                        <span class="glyphicon glyphicon-print"></span> Print a copy of this
+                    </button>*@
+                <br />
+                <div class="row">
+                    <div style="width:550px;" class="col-lg-6">
+                        <ul class="formBulletList">
+                            <li>Insurance Card</li>
+                            <li>Photo ID</li>
+                            <li>Copays and Deductibles</li>
+                        </ul>
+                       
+                    </div>
+                    <div class="col-lg-6">
+                        <img id="ctl00_ContentPreRegistration_Image2" class="imageFirstPage" src="~/images/patient_reg.png" style="border-color:CadetBlue;border-width:2px;border-style:Ridge;height:250px;width:250px">
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <center>
+                        @*<button type="button" class="btn btn-primary btn-lg" onClick="window.location='/exp?hitId={{ hitid }}&assignmentId={{ assignmentid }}&workerId={{ workerid }}'">
+                <span class="glyphicon glyphicon-ok"></span> I agree
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-danger btn-lg" onClick="onexit()">
+                <span class="glyphicon glyphicon-ban-circle"></span> No thanks, I do not want to do this HIT
+            </button>*@
+                        <input type="submit" class="btn1 btn-primary" value="Continue Registration" id="btnContinueToRegister" style="width:15em;">
+                        <input type="submit" class="btn1 btn-flat waves-effect" value="Exit - Do Not Register" id="btnExit" title="Questions about how to register?  Please call Patient Access at (434) 200-4545." style="width:15em;">
+
+                    </center>
+                </div>
+
+            </div>
+            <div id="secondreg" class="row" style="display:none">
+                <center>
+                    <input type="submit" class="btn1 btn-primary" value="Continue Registration" id="btnContinueToRegister" style="width:15em;">
+                    <input type="submit" class="btn1 btn-flat waves-effect" value="Exit - Do Not Register" id="btnExit2" title="Questions about how to register?  Please call Patient Access at (434) 200-4545." style="width:15em;">
+                </center>
+                <br /> <br />
+
+                <fieldset class="scheduler-border" id="frmcomments">
+                    <legend class="scheduler-border"></legend>
+                    <div class="control-group">
+                        <div class="controls">
+                            <h3 style="font-size: 1.3em;">Questions about how to register?  Please call Patient Access at (434) 200-4545.  If you want to continue with online process, click Continue Registration.</h3>
+                        </div>
+                    </div>
+                </fieldset>
+
+            </div>
+        </div>
+
+        @*<hr> style="display:none"
+            <h4>Do you understand and consent to these terms?</h4>
+            <br>*@
+
+
+
+
+
+    </div>
+</div>
+<script>
+    $(document).ready(function ($) {
+        $("#btnExit").click(function () {
+            $('#secondreg').show();
+            $('#firstreg').hide();
+        });
+        $("#btnExit2").click(function () {
+            window.location.href = 'https://www.centrahealth.com/';
+        });
+        $("#btnContinueToRegister").click(function () {
+            window.location.href = '@Url.Action("ReleaseInfo", "PreRegistration")';
+        });
+    });
+</script>

@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EHCheckModelStoreContainer" CdmEntityContainer="EHCheckEntities">
+    <EntitySetMapping Name="EHCheckBridgeMasters">
+      <EntityTypeMapping TypeName="EHCheckModel.EHCheckBridgeMaster">
+        <MappingFragment StoreEntitySet="EHCheckBridgeMaster">
+          <ScalarProperty Name="EHMasterID" ColumnName="EHMasterID" />
+          <ScalarProperty Name="EHDetailIDCurrentRecord" ColumnName="EHDetailIDCurrentRecord" />
+          <ScalarProperty Name="EHDetailIDFirstRecord" ColumnName="EHDetailIDFirstRecord" />
+          <ScalarProperty Name="EHDetailIDPrevRecord" ColumnName="EHDetailIDPrevRecord" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EHCheckConfigMasters">
+      <EntityTypeMapping TypeName="EHCheckModel.EHCheckConfigMaster">
+        <MappingFragment StoreEntitySet="EHCheckConfigMaster">
+          <ScalarProperty Name="ConfigID" ColumnName="ConfigID" />
+          <ScalarProperty Name="ConfigParamName" ColumnName="ConfigParamName" />
+          <ScalarProperty Name="ConfigParamColType" ColumnName="ConfigParamColType" />
+          <ScalarProperty Name="ConfigColTypeIntValue" ColumnName="ConfigColTypeIntValue" />
+          <ScalarProperty Name="IsParamAnInt" ColumnName="IsParamAnInt" />
+          <ScalarProperty Name="ConfigColTypeBitValue" ColumnName="ConfigColTypeBitValue" />
+          <ScalarProperty Name="IsParamABit" ColumnName="IsParamABit" />
+          <ScalarProperty Name="ConfigColTypeStringValue" ColumnName="ConfigColTypeStringValue" />
+          <ScalarProperty Name="IsParamAString" ColumnName="IsParamAString" />
+          <ScalarProperty Name="ConfigEmailAddr" ColumnName="ConfigEmailAddr" />
+          <ScalarProperty Name="IsParamAnEmail" ColumnName="IsParamAnEmail" />
+          <ScalarProperty Name="SendMgrEmail" ColumnName="SendMgrEmail" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EHCheckDetails">
+      <EntityTypeMapping TypeName="EHCheckModel.EHCheckDetail">
+        <MappingFragment StoreEntitySet="EHCheckDetail">
+          <ScalarProperty Name="EHDetailID" ColumnName="EHDetailID" />
+          <ScalarProperty Name="EHMasterID" ColumnName="EHMasterID" />
+          <ScalarProperty Name="RecordDate" ColumnName="RecordDate" />
+          <ScalarProperty Name="RecordTime" ColumnName="RecordTime" />
+          <ScalarProperty Name="Temperature" ColumnName="Temperature" />
+          <ScalarProperty Name="NauseaVomiting" ColumnName="NauseaVomiting" />
+          <ScalarProperty Name="NVComment" ColumnName="NVComment" />
+          <ScalarProperty Name="Diarrhea" ColumnName="Diarrhea" />
+          <ScalarProperty Name="DIAComment" ColumnName="DIAComment" />
+          <ScalarProperty Name="Headache" ColumnName="Headache" />
+          <ScalarProperty Name="HEADComment" ColumnName="HEADComment" />
+          <ScalarProperty Name="MusclePain" ColumnName="MusclePain" />
+          <ScalarProperty Name="MPComment" ColumnName="MPComment" />
+          <ScalarProperty Name="Weakness" ColumnName="Weakness" />
+          <ScalarProperty Name="WEAKComment" ColumnName="WEAKComment" />
+          <ScalarProperty Name="Fatigue" ColumnName="Fatigue" />
+          <ScalarProperty Name="FATComment" ColumnName="FATComment" />
+          <ScalarProperty Name="AbdominalPain" ColumnName="AbdominalPain" />
+          <ScalarProperty Name="APComment" ColumnName="APComment" />
+          <ScalarProperty Name="Hemorrhage" ColumnName="Hemorrhage" />
+          <ScalarProperty Name="HEMComment" ColumnName="HEMComment" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="EmailSentCounter" ColumnName="EmailSentCounter" />
+          <ScalarProperty Name="KeepSendingEmails" ColumnName="KeepSendingEmails" />
+          <ScalarProperty Name="ExposureDate" ColumnName="ExposureDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EHCheckMasters">
+      <EntityTypeMapping TypeName="EHCheckModel.EHCheckMaster">
+        <MappingFragment StoreEntitySet="EHCheckMaster">
+          <ScalarProperty Name="EHMasterID" ColumnName="EHMasterID" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="AdId" ColumnName="AdId" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="EmailAddr" ColumnName="EmailAddr" />
+          <ScalarProperty Name="NonCentraEmail" ColumnName="NonCentraEmail" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="AutumnEnd" ColumnName="AutumnEnd" />
+          <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
+          <ScalarProperty Name="MgrEmplID" ColumnName="MgrEmplID" />
+          <ScalarProperty Name="MgrName" ColumnName="MgrName" />
+          <ScalarProperty Name="MgrEmail" ColumnName="MgrEmail" />
+          <ScalarProperty Name="CostCenter" ColumnName="CostCenter" />
+          <ScalarProperty Name="DeptName" ColumnName="DeptName" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="EHDetailIDCurrentRecord" ColumnName="EHDetailIDCurrentRecord" />
+          <ScalarProperty Name="EHDetailIDFirstRecord" ColumnName="EHDetailIDFirstRecord" />
+          <ScalarProperty Name="EHDetailIDPrevRecord" ColumnName="EHDetailIDPrevRecord" />
+          <ScalarProperty Name="DeactivatedDate" ColumnName="DeactivatedDate" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AuditEHCheckDetails">
+      <EntityTypeMapping TypeName="EHCheckModel.AuditEHCheckDetail">
+        <MappingFragment StoreEntitySet="AuditEHCheckDetail">
+          <ScalarProperty Name="Operation" ColumnName="Operation" />
+          <ScalarProperty Name="OperationDateTime" ColumnName="OperationDateTime" />
+          <ScalarProperty Name="OperationUser" ColumnName="OperationUser" />
+          <ScalarProperty Name="EHDetailID" ColumnName="EHDetailID" />
+          <ScalarProperty Name="EHMasterID" ColumnName="EHMasterID" />
+          <ScalarProperty Name="RecordDate" ColumnName="RecordDate" />
+          <ScalarProperty Name="RecordTime" ColumnName="RecordTime" />
+          <ScalarProperty Name="Temperature" ColumnName="Temperature" />
+          <ScalarProperty Name="NauseaVomiting" ColumnName="NauseaVomiting" />
+          <ScalarProperty Name="NVComment" ColumnName="NVComment" />
+          <ScalarProperty Name="Diarrhea" ColumnName="Diarrhea" />
+          <ScalarProperty Name="DIAComment" ColumnName="DIAComment" />
+          <ScalarProperty Name="Headache" ColumnName="Headache" />
+          <ScalarProperty Name="HEADComment" ColumnName="HEADComment" />
+          <ScalarProperty Name="MusclePain" ColumnName="MusclePain" />
+          <ScalarProperty Name="MPComment" ColumnName="MPComment" />
+          <ScalarProperty Name="Weakness" ColumnName="Weakness" />
+          <ScalarProperty Name="WEAKComment" ColumnName="WEAKComment" />
+          <ScalarProperty Name="Fatigue" ColumnName="Fatigue" />
+          <ScalarProperty Name="FATComment" ColumnName="FATComment" />
+          <ScalarProperty Name="AbdominalPain" ColumnName="AbdominalPain" />
+          <ScalarProperty Name="APComment" ColumnName="APComment" />
+          <ScalarProperty Name="Hemorrhage" ColumnName="Hemorrhage" />
+          <ScalarProperty Name="HEMComment" ColumnName="HEMComment" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="EmailSentCounter" ColumnName="EmailSentCounter" />
+          <ScalarProperty Name="KeepSendingEmails" ColumnName="KeepSendingEmails" />
+          <ScalarProperty Name="ExposureDate" ColumnName="ExposureDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AuditEHCheckMasters">
+      <EntityTypeMapping TypeName="EHCheckModel.AuditEHCheckMaster">
+        <MappingFragment StoreEntitySet="AuditEHCheckMaster">
+          <ScalarProperty Name="Operation" ColumnName="Operation" />
+          <ScalarProperty Name="OperationDateTime" ColumnName="OperationDateTime" />
+          <ScalarProperty Name="OperationUser" ColumnName="OperationUser" />
+          <ScalarProperty Name="EHMasterID" ColumnName="EHMasterID" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="AdId" ColumnName="AdId" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="EmailAddr" ColumnName="EmailAddr" />
+          <ScalarProperty Name="NonCentraEmail" ColumnName="NonCentraEmail" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="AutumnEnd" ColumnName="AutumnEnd" />
+          <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
+          <ScalarProperty Name="MgrEmplID" ColumnName="MgrEmplID" />
+          <ScalarProperty Name="MgrName" ColumnName="MgrName" />
+          <ScalarProperty Name="MgrEmail" ColumnName="MgrEmail" />
+          <ScalarProperty Name="CostCenter" ColumnName="CostCenter" />
+          <ScalarProperty Name="DeptName" ColumnName="DeptName" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="EHDetailIDCurrentRecord" ColumnName="EHDetailIDCurrentRecord" />
+          <ScalarProperty Name="EHDetailIDFirstRecord" ColumnName="EHDetailIDFirstRecord" />
+          <ScalarProperty Name="EHDetailIDPrevRecord" ColumnName="EHDetailIDPrevRecord" />
+          <ScalarProperty Name="DeactivatedDate" ColumnName="DeactivatedDate" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EHCheckEmailDetails">
+      <EntityTypeMapping TypeName="EHCheckModel.EHCheckEmailDetail">
+        <MappingFragment StoreEntitySet="EHCheckEmailDetail">
+          <ScalarProperty Name="EmailSentDateTime" ColumnName="EmailSentDateTime" />
+          <ScalarProperty Name="EHDetailID" ColumnName="EHDetailID" />
+          <ScalarProperty Name="EHMasterID" ColumnName="EHMasterID" />
+          <ScalarProperty Name="EHEmailID" ColumnName="EHEmailID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,206 @@
+﻿@*@model PreRegistration.Models.ViewModels.ECRespiratoryProtectionFormViewModel*@
+@{
+    ViewBag.Title = "SearchAll";
+    Layout = @Model.GetLayout();
+}
+
+<style>
+    .maroonLists {
+        color: maroon;
+        font-weight: bold;
+    }
+
+    .dataTables_length {
+        margin: 10px !important;
+    }
+
+    a {
+        font-weight: 600;
+    }
+
+    .custom-loader-color {
+        color: #2196f3 !important;
+        font-size: 40px !important;
+        margin-left: 200px;
+        z-index: 1000;
+    }
+</style>
+<br /><br /><br /><br />
+
+<form id="landingpage">
+    <div class="form-group col-md-12 box-shadow--8dp" style="background-color:white">
+        <br />
+        <div class="row">
+            <br />
+            @*<button type="button" class="btn btn-primary box-shadow--8dp" id="btnClear" style="float:right">Clear Filter</button>*@
+            <div class="col-xs-12" id="divsubmitted">
+                <table class="table table-hover dataTable box-shadow--8dp" style="background-color:#add8e6" id="submitted">
+                    <thead>
+                        <tr>
+                            <th>FormID</th>
+                            <th>View</th>
+                            <th>Name</th>
+                            <th>Employee #</th>
+                            <th>Dept #</th>
+                            <th>Cost Center</th>
+                            <th>Job Code</th>
+                            <th>Job Title</th>
+                            <th>Risk Level</th>
+                            <th>Status</th>
+                            <th>Created</th>
+                        </tr>
+                    </thead>
+                    <tbody style="font-weight: bold;">
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>FormID</th>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Employee #</th>
+                            <th>Dept #</th>
+                            <th>Cost Center</th>
+                            <th>Job Code</th>
+                            <th>Job Title</th>
+                            <th>Risk Level</th>
+                            <th>Status</th>
+                            <th>Created</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-12">
+            </div>
+        </div>
+    </div>
+    <br />
+    </div>
+</form>
+<script>
+    $(document).ready(function () {
+          $('#submitted tfoot th').each(function () {
+            var title = $(this).text();
+            if (title != "") {
+                $(this).html('<input type="text" placeholder="' + title + '" />');
+            }
+        });
+
+        var submittedTable = $('#submitted').DataTable({
+             "ajax": {
+                            "url": '@Url.Action("GetAllForms", "Admin")',
+                            "type": 'POST',
+                            "dataSrc": "",
+            },
+            dom: 'lBfrtip',
+            "order": [[0, "desc"]],
+            "scrollX": true,
+            "sScrollXInner": "100%",
+            scrollX: true,
+            "searching": true,
+            "language":
+            {
+                "processing": "<div class='overlay custom-loader-background'><i class='fa fa-cog fa-spin custom-loader-color'></i></div>"
+            },
+            "processing": true, // for show progress bar
+            buttons: [
+                {
+                    text: 'Clear filters',
+                    action: function (e, dt, node, config) {
+                        submittedTable.search('').columns('').search('').draw();
+                        $('input[type=text]').val('');
+                    }
+                }
+            ],
+            initComplete: function () {
+                var btns = $('.dt-button');
+                btns.addClass('btn btn-primary');
+                btns.removeClass('dt-button');
+                var dropdown = $('#tblForms_length');
+                dropdown.removeClass('dataTables_length');
+            },
+            "columnDefs": [
+           {
+                    "name": "FormId",
+                    "data": "FormId",
+                    "aTargets": [0],
+                    "visible": false,
+                    "searchable": false
+                },
+                {
+                    "name": "View",
+                    "data": "View",
+                    "targets": [1],
+                    "mRender": function (data, type, full) {
+                        return '<a class="btn waves-effect waves-light" target="_blank" href=' + '@Url.Action("ECRespiratoryProtectionForms", "PreRegistration")?FormId=' + full.FormId + '>View</a>';
+                    },
+                    "sClass": "alignCenter"
+                },
+                {
+                    "name": "EmpName",
+                    "data": "EmpName",
+                    "targets": [2]
+                },
+                {
+                    "name": "EmpNumber",
+                    "data": "EmpNumber",
+                    "targets": [3]
+                },
+                {
+                    "name": "EmpDepartment",
+                    "data": "EmpDepartment",
+                    "targets": [4]
+                },
+                {
+                    "name": "EmpCostCenter",
+                    "data": "EmpCostCenter",
+                    "targets": [5]
+                },
+                {
+                    "name": "EmpJobCode",
+                    "data": "EmpJobCode",
+                    "targets": [6]
+                },
+                {
+                    "name": "EmpJobTitle",
+                    "data": "EmpJobTitle",
+                    "targets": [7]
+                },
+                {
+                    "name": "CurrentRiskLevel",
+                    "data": "CurrentRiskLevel",
+                    "targets": [8]
+                },
+                {
+                    "name": "Status",
+                    "data": "Status",
+                    "targets": [9]
+                },
+                {
+                    "name": "Created",
+                    "data": "Created",
+                    "targets": [10],
+                    "mRender": function (data, type, full) {
+                        return moment(data).format('MM/DD/YYYY') == "Invalid date" ? "" : moment(data).format('MM/DD/YYYY');
+                    }
+                },
+            ]
+        });
+
+        submittedTable.columns().every(function () {
+            var dataTableColumn = this;
+            $(this.footer()).find('input').on('keyup change', function () {
+                dataTableColumn.search(this.value).draw();
+            });
+        });
+
+        $('#btnClear').bind('click', function () {
+            $('#divsubmitted input').val('');
+            students.columns().search(this.value).draw();
+        })
+    });
+</script>
+
