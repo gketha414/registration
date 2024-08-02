@@ -1,0 +1,88 @@
+C:\new\online\PreRegistration\PreRegistration.DAL\bin\Debug\PreRegistration.DAL.dll.config
+C:\new\online\PreRegistration\PreRegistration.DAL\bin\Debug\PreRegistration.DAL.dll
+C:\new\online\PreRegistration\PreRegistration.DAL\bin\Debug\PreRegistration.DAL.pdb
+C:\new\online\PreRegistration\PreRegistration.DAL\bin\Debug\AutoMapper.dll
+C:\new\online\PreRegistration\PreRegistration.DAL\bin\Debug\CentraPeople.dll
+C:\new\online\PreRegistration\PreRegistration.DAL\bin\Debug\EntityFramework.dll
+C:\new\online\PreRegistration\PreRegistration.DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\new\online\PreRegistration\PreRegistration.DAL\bin\Debug\PreRegistration.Models.dll
+C:\new\online\PreRegistration\PreRegistration.DAL\bin\Debug\System.Web.Mvc.dll
+C:\new\online\PreRegistration\PreRegistration.DAL\bin\Debug\PreRegistration.Models.pdb
+C:\new\online\PreRegistration\PreRegistration.DAL\bin\Debug\PreRegistration.Models.dll.config
+C:\new\online\PreRegistration\PreRegistration.DAL\bin\Debug\AutoMapper.xml
+C:\new\online\PreRegistration\PreRegistration.DAL\bin\Debug\EntityFramework.xml
+C:\new\online\PreRegistration\PreRegistration.DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\new\online\PreRegistration\PreRegistration.DAL\obj\Debug\PreRegistration.DAL.csprojAssemblyReference.cache
+C:\new\online\PreRegistration\PreRegistration.DAL\obj\Debug\PreRegistration.DAL.csproj.CoreCompileInputs.cache
+C:\new\online\PreRegistration\PreRegistration.DAL\obj\Debug\PreRegistration.DAL.csproj.CopyComplete
+C:\new\online\PreRegistration\PreRegistration.DAL\obj\Debug\PreRegistration.DAL.dll
+C:\new\online\PreRegistration\PreRegistration.DAL\obj\Debug\PreRegistration.DAL.pdb
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.DAL\bin\Debug\PreRegistration.DAL.dll.config
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.DAL\bin\Debug\PreRegistration.DAL.dll
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.DAL\bin\Debug\PreRegistration.DAL.pdb
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.DAL\bin\Debug\AutoMapper.dll
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.DAL\bin\Debug\CentraPeople.dll
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.DAL\bin\Debug\EntityFramework.dll
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.DAL\bin\Debug\PreRegistration.Models.dll
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.DAL\bin\Debug\PreRegistration.Models.pdb
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.DAL\bin\Debug\PreRegistration.Models.dll.config
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.DAL\bin\Debug\AutoMapper.xml
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.DAL\bin\Debug\EntityFramework.xml
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.DAL\obj\Debug\PreRegistration.DAL.csprojAssemblyReference.cache
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.DAL\obj\Debug\PreRegistration.DAL.csproj.CoreCompileInputs.cache
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.DAL\obj\Debug\PreRegistration.DAL.csproj.CopyComplete
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.DAL\obj\Debug\PreRegistration.DAL.dll
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.DAL\obj\Debug\PreRegistration.DAL.pdb
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.DAL\bin\Debug\PreRegistration.DAL.dll.config
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.DAL\bin\Debug\PreRegistration.DAL.dll
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.DAL\bin\Debug\PreRegistration.DAL.pdb
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.DAL\bin\Debug\AutoMapper.dll
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.DAL\bin\Debug\EntityFramework.dll
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.DAL\bin\Debug\PreRegistration.Models.dll
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.DAL\bin\Debug\PreRegistration.Models.pdb
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.DAL\bin\Debug\PreRegistration.Models.dll.config
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.DAL\bin\Debug\AutoMapper.xml
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.DAL\bin\Debug\EntityFramework.xml
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.DAL\obj\Debug\PreRegistration.DAL.csproj.AssemblyReference.cache
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.DAL\obj\Debug\PreRegistration.DAL.csproj.CoreCompileInputs.cache
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.DAL\obj\Debug\PreRegis.E47E74ED.Up2Date
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.DAL\obj\Debug\PreRegistration.DAL.dll
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.DAL\obj\Debug\PreRegistration.DAL.pdb
+G:\Oficial\Giri\registration\PreRegistration.DAL\bin\Debug\PreRegistration.DAL.dll.config
+G:\Oficial\Giri\registration\PreRegistration.DAL\bin\Debug\PreRegistration.DAL.dll
+G:\Oficial\Giri\registration\PreRegistration.DAL\bin\Debug\PreRegistration.DAL.pdb
+G:\Oficial\Giri\registration\PreRegistration.DAL\bin\Debug\AutoMapper.dll
+G:\Oficial\Giri\registration\PreRegistration.DAL\bin\Debug\EntityFramework.dll
+G:\Oficial\Giri\registration\PreRegistration.DAL\bin\Debug\EntityFramework.SqlServer.dll
+G:\Oficial\Giri\registration\PreRegistration.DAL\bin\Debug\PreRegistration.Models.dll
+G:\Oficial\Giri\registration\PreRegistration.DAL\bin\Debug\PreRegistration.Models.pdb
+G:\Oficial\Giri\registration\PreRegistration.DAL\bin\Debug\PreRegistration.Models.dll.config
+G:\Oficial\Giri\registration\PreRegistration.DAL\bin\Debug\AutoMapper.xml
+G:\Oficial\Giri\registration\PreRegistration.DAL\bin\Debug\EntityFramework.xml
+G:\Oficial\Giri\registration\PreRegistration.DAL\bin\Debug\EntityFramework.SqlServer.xml
+G:\Oficial\Giri\registration\PreRegistration.DAL\obj\Debug\PreRegistration.DAL.csproj.AssemblyReference.cache
+G:\Oficial\Giri\registration\PreRegistration.DAL\obj\Debug\PreRegistration.DAL.csproj.CoreCompileInputs.cache
+G:\Oficial\Giri\registration\PreRegistration.DAL\obj\Debug\PreRegis.E47E74ED.Up2Date
+G:\Oficial\Giri\registration\PreRegistration.DAL\obj\Debug\PreRegistration.DAL.dll
+G:\Oficial\Giri\registration\PreRegistration.DAL\obj\Debug\PreRegistration.DAL.pdb
+G:\Oficial\Giri\registration_Clone\PreRegistration.DAL\bin\Debug\PreRegistration.DAL.dll.config
+G:\Oficial\Giri\registration_Clone\PreRegistration.DAL\bin\Debug\PreRegistration.DAL.dll
+G:\Oficial\Giri\registration_Clone\PreRegistration.DAL\bin\Debug\PreRegistration.DAL.pdb
+G:\Oficial\Giri\registration_Clone\PreRegistration.DAL\bin\Debug\AutoMapper.dll
+G:\Oficial\Giri\registration_Clone\PreRegistration.DAL\bin\Debug\EntityFramework.dll
+G:\Oficial\Giri\registration_Clone\PreRegistration.DAL\bin\Debug\EntityFramework.SqlServer.dll
+G:\Oficial\Giri\registration_Clone\PreRegistration.DAL\bin\Debug\PreRegistration.Models.dll
+G:\Oficial\Giri\registration_Clone\PreRegistration.DAL\bin\Debug\PreRegistration.Models.pdb
+G:\Oficial\Giri\registration_Clone\PreRegistration.DAL\bin\Debug\PreRegistration.Models.dll.config
+G:\Oficial\Giri\registration_Clone\PreRegistration.DAL\bin\Debug\AutoMapper.xml
+G:\Oficial\Giri\registration_Clone\PreRegistration.DAL\bin\Debug\EntityFramework.xml
+G:\Oficial\Giri\registration_Clone\PreRegistration.DAL\bin\Debug\EntityFramework.SqlServer.xml
+G:\Oficial\Giri\registration_Clone\PreRegistration.DAL\obj\Debug\PreRegistration.DAL.csproj.AssemblyReference.cache
+G:\Oficial\Giri\registration_Clone\PreRegistration.DAL\obj\Debug\PreRegistration.DAL.csproj.CoreCompileInputs.cache
+G:\Oficial\Giri\registration_Clone\PreRegistration.DAL\obj\Debug\PreRegis.E47E74ED.Up2Date
+G:\Oficial\Giri\registration_Clone\PreRegistration.DAL\obj\Debug\PreRegistration.DAL.dll
+G:\Oficial\Giri\registration_Clone\PreRegistration.DAL\obj\Debug\PreRegistration.DAL.pdb

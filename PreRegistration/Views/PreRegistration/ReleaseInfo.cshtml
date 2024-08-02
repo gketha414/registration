@@ -1,0 +1,230 @@
+﻿
+@{
+    ViewBag.Title = "OnlinePreRegistration";
+}
+<style>
+    .formBulletList {
+        text-align: left;
+        font-weight: bold;
+        color: #333333;
+    }
+
+    ul {
+        list-style-image: url('../../images/blackCheck.gif');
+    }
+
+    .imageFirstPage {
+        float: right;
+        margin-top: -85px;
+    }
+
+    .btn1, .btn1-large {
+        text-decoration: none;
+        color: #fff;
+        font-weight: 700 !important;
+        font-style: normal !important;
+        background-color: #2196f3;
+        text-align: center;
+        letter-spacing: .5px;
+        transition: .2s ease-out;
+        cursor: pointer;
+    }
+
+    .btn1, .btn1-large, .btn-floating, .btn1-large, .btn1-flat {
+        font-size: 13px;
+        outline: 0;
+    }
+
+    .btn1, .btn-large1, .btn1-flat {
+        border: none;
+        border-radius: 2px !important;
+        display: inline-block;
+        height: 28px !important;
+        line-height: 28px !important;
+        padding: 0 8px !important;
+        text-transform: uppercase !important;
+        vertical-align: middle !important;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .btn1, .btn1-large {
+        min-width: 120px;
+    }
+
+    .btn-flat {
+        box-shadow: none;
+        background-color: transparent;
+        color: #2196f3;
+        cursor: pointer;
+        transition: background-color .2s;
+        font-weight: 700
+    }
+
+        .btn-flat:focus, .btn-flat:hover {
+            box-shadow: 2px 3px 8px 2px rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12) !important;
+            background-color: #fff
+        }
+
+        .btn-flat:focus {
+            background-color: rgba(0,0,0,0.1)
+        }
+
+        .btn-flat.disabled {
+            background-color: transparent !important;
+            color: #b3b3b3 !important;
+            cursor: default
+        }
+
+    .btn-large {
+        height: 42px;
+        line-height: 42px
+    }
+
+        .btn-large i {
+            font-size: 1.6rem
+        }
+
+    .btn-block {
+        display: block
+    }
+
+
+    fieldset.group {
+        margin: 0;
+        padding: 0;
+        margin-bottom: 1.25em;
+        padding: .125em;
+    }
+
+        fieldset.group legend {
+            margin: 0;
+            padding: 0;
+            font-weight: bold;
+            margin-left: 20px;
+            font-size: 100%;
+            color: black;
+        }
+
+
+</style>
+<br /><br /><br /><br />
+
+<div id="container-consent">
+    <div id="consent">
+        <div class="legal well">
+            <div id="firstreg">
+                <center>
+                    <img src="~/images/centra_3d_web_transp.gif" height="65px" style="margin-left:-14px" />
+                    @*<img src="~/images/centra_3d_web_transp.gif" />*@
+                    <p style="font-weight:700">
+                        Virginia Baptist Hospital, Lynchburg, Virginia<br />
+                        Lynchburg General Hospital, Lynchburg, Virginia<br />
+                        Southside Community Hospital, Farmville, Virginia
+                    </p>
+                    <br />
+                    <h4 style="font-weight:700">Release of Information and Assignment of Insurance Benefits</h4>
+                </center>
+
+                <p style="font-weight:500;font-size:14px">
+                    I authorize Centra to release any part of the patient’s medical record to insurance companies or other third-party payers as needed to verify insurance coverage, submit claims or pay claims. (The information to be released may include psychiatric or mental health records, drug and alcohol abuse conditions or information about HIV status and AIDS.)
+                </p>
+
+                <p style="font-weight:500;font-size:14px">
+                    If I am covered by Medicare, I request payment of authorized Medicare benefits to me or on my behalf or any services furnished me by or in Centra. I authorize any holder or medical or other information about me to release to Medicare and its agents any information needed to determine these benefits or benefits for related services.
+                </p>
+
+                <p style="font-weight:500;font-size:14px">
+                    As a service to our patients, Centra will make every effort to precertify or preauthorize treatment with third-party payors that conduct case management. However, Centra does not accept responsibility for lack of precertification or precertification or preauthorization and is not responsible for the final payment outcomes.
+                </p>
+
+                <p style="font-weight:500;font-size:14px">
+                    I authorize my insurance company to pay Centra directly for the hospital services rendered to me. I understand that I am financially responsible to Centra for the charges not covered by insurance or other third party payors. I agree that the assignment of benefits and release of information includes all professional services rendered to me by any physician on the Medical Staff or Centra for the purpose of filing this claim.
+                </p>
+
+                <p style="font-weight:500;font-size:14px">
+                    I acknowledge that I have been given Centra’s Notice of Privacy Practices. I agree that a photocopy of this form will be valid as the original to the third party payors in processing or payment of claim for these services. In this form, “I” includes all individuals who sign this form. All individuals who sign this form agree that they are individually responsible for the charges not covered by insurance or other third party payors.
+                </p>
+                <br />
+                <center>
+                    <h4 style="font-weight:700">Guaranty of Account</h4>
+                </center>
+                <p style="font-weight:500;font-size:14px">I agree to pay all charges of Centra and the physicians on its Medical Staff for services, facilities, food, medications and any other service or item provided to me. No extensions that may be granted to me and no delays by Centra or members of its Medical Staff in enforcing any rights against me will release me or affect my financial liability. My obligation to pay is cumulative and in addition to all other remedies of Centra and its Medical Staff physicians.</p>
+
+                <br />
+                <center>
+                    <h4 style="font-weight:700">Personal Valuables</h4>
+                </center>
+                <p style="font-weight:500;font-size:14px">I understand that Centra maintains a safe for safekeeping of property and that Centra will not be liable for the loss or damage of any money, jewelry, glasses, prosthetic, document, or other item, regardless of the item’s value or size, unless the items are placed in Centra’s safe. VALUABLES ARE NOT TO BE KEPT IN PATIENTS’ ROOMS. Centra is NOT responsible for any items until they are actually placed in the safe. Centra does not guarantee the condition of the article placed in the safe upon the patient’s discharge. Centra has the right to retain articles in its possession until it is determined who is legally entitled to them. In the event of loss or damage to the possessions held by Centra, Centra will only by liable upon affirmative proof of its gross negligence.</p>
+
+                <br />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <span>@Html.RadioButton("read", true)&nbsp; By selecting this option, I acknowledge that I have read the Release of Information and that I understand all of the information in it.</span>
+                    </div>
+                    @*<div class="col-lg-4" id="divBtns" style="display:none">
+            <input type="submit" class="btn1 btn-primary" value="Begin Pre-Registration Form" id="btnAccept" style="width:17em;">
+            <input type="submit" class="btn1 btn-flat waves-effect" value="Exit - Do Not Register" id="btnExit" style="width:15em;">
+        </div>*@
+                    <div class="col-lg-12">
+                        <span>@Html.RadioButton("notread", true)&nbsp;By selecting this option, I acknowledge that I have not read the information and in doing so I waive any rights listed above.</span>
+                    </div>
+                    <br />
+                    @*<div class="col-lg-4" id="divCall" style="display:none">
+            <fieldset class="scheduler-border alerts-border">
+                <legend class="scheduler-border alerts-border"></legend>
+                <div class="control-group">
+                    <div class="controls">
+                        <h5 style="font-weight: bolder; color: blueviolet;font-size: 1.5em;">Please call Patient Access at (434) 200-4545 and someone will assist you with your questions!</h5>
+                    </div>
+                </div>font-weight: bolder; color: blueviolet;
+            </fieldset>
+        </div>*@
+                </div>
+                <div class="row" id="divBtns" style="display:none">
+                    <div class="col-lg-6">
+                        <h5 style="font-size: 1.3em;">Please call Patient Access at (434) 200-4545 and someone will assist you with your questions!</h5>
+                    </div>
+                    <div class="col-lg-6 text-right">
+                        <input type="submit" class="btn1 btn-primary" value="Begin Pre-Registration Form" id="btnAccept" style="width:17em;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    $(document).ready(function ($) {
+
+        $("#btnAccept").click(function () {
+            window.location.href = '@Url.Action("LandingPage", "PreRegistration")';
+        });
+
+        $(':radio[name=read]').change(function () {
+            $("input:radio[name='notread']").attr("checked", false);
+            var value = $(this).val();
+            if (value == 'True') {
+                $('#divBtns').show();
+                $('#divCall').show();
+               
+            } else {
+                $('#divBtns').hide();
+                $('#divCall').hide();
+            }
+        });
+
+        $(':radio[name=notread]').change(function () {
+            $("input:radio[name='read']").attr("checked", false);
+            var value = $(this).val();
+            if (value == 'True') {
+                $('#divBtns').show();
+                $('#divCall').show();
+
+            } else {
+                $('#divBtns').hide();
+                $('#divCall').hide();
+
+            }
+        });
+    });
+</script>
