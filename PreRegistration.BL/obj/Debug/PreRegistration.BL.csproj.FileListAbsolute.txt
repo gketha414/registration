@@ -1,0 +1,76 @@
+C:\new\online\PreRegistration\PreRegistration.BL\bin\Debug\PreRegistration.BL.dll
+C:\new\online\PreRegistration\PreRegistration.BL\bin\Debug\PreRegistration.BL.pdb
+C:\new\online\PreRegistration\PreRegistration.BL\bin\Debug\PreRegistration.DAL.dll
+C:\new\online\PreRegistration\PreRegistration.BL\bin\Debug\PreRegistration.Models.dll
+C:\new\online\PreRegistration\PreRegistration.BL\bin\Debug\System.Web.Mvc.dll
+C:\new\online\PreRegistration\PreRegistration.BL\bin\Debug\CentraPeople.dll
+C:\new\online\PreRegistration\PreRegistration.BL\bin\Debug\AutoMapper.dll
+C:\new\online\PreRegistration\PreRegistration.BL\bin\Debug\EntityFramework.dll
+C:\new\online\PreRegistration\PreRegistration.BL\bin\Debug\PreRegistration.DAL.pdb
+C:\new\online\PreRegistration\PreRegistration.BL\bin\Debug\PreRegistration.DAL.dll.config
+C:\new\online\PreRegistration\PreRegistration.BL\bin\Debug\PreRegistration.Models.pdb
+C:\new\online\PreRegistration\PreRegistration.BL\bin\Debug\PreRegistration.Models.dll.config
+C:\new\online\PreRegistration\PreRegistration.BL\bin\Debug\AutoMapper.xml
+C:\new\online\PreRegistration\PreRegistration.BL\bin\Debug\EntityFramework.xml
+C:\new\online\PreRegistration\PreRegistration.BL\obj\Debug\PreRegistration.BL.csprojAssemblyReference.cache
+C:\new\online\PreRegistration\PreRegistration.BL\obj\Debug\PreRegistration.BL.csproj.CoreCompileInputs.cache
+C:\new\online\PreRegistration\PreRegistration.BL\obj\Debug\PreRegistration.BL.csproj.CopyComplete
+C:\new\online\PreRegistration\PreRegistration.BL\obj\Debug\PreRegistration.BL.dll
+C:\new\online\PreRegistration\PreRegistration.BL\obj\Debug\PreRegistration.BL.pdb
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.BL\bin\Debug\PreRegistration.BL.dll
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.BL\bin\Debug\PreRegistration.BL.pdb
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.BL\bin\Debug\PreRegistration.DAL.dll
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.BL\bin\Debug\PreRegistration.Models.dll
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.BL\bin\Debug\System.Web.Mvc.dll
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.BL\bin\Debug\EntityFramework.dll
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.BL\bin\Debug\CentraPeople.dll
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.BL\bin\Debug\AutoMapper.dll
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.BL\bin\Debug\PreRegistration.DAL.pdb
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.BL\bin\Debug\PreRegistration.DAL.dll.config
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.BL\bin\Debug\PreRegistration.Models.pdb
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.BL\bin\Debug\PreRegistration.Models.dll.config
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.BL\bin\Debug\EntityFramework.xml
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.BL\bin\Debug\AutoMapper.xml
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.BL\obj\Debug\PreRegistration.BL.csprojAssemblyReference.cache
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.BL\obj\Debug\PreRegistration.BL.csproj.CoreCompileInputs.cache
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.BL\obj\Debug\PreRegistration.BL.csproj.CopyComplete
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.BL\obj\Debug\PreRegistration.BL.dll
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.BL\obj\Debug\PreRegistration.BL.pdb
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.BL\bin\Debug\PreRegistration.BL.dll
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.BL\bin\Debug\PreRegistration.BL.pdb
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.BL\bin\Debug\PreRegistration.DAL.dll
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.BL\bin\Debug\PreRegistration.Models.dll
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.BL\bin\Debug\System.Web.Mvc.dll
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.BL\bin\Debug\EntityFramework.dll
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.BL\bin\Debug\CentraPeople.dll
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.BL\bin\Debug\AutoMapper.dll
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.BL\bin\Debug\PreRegistration.DAL.pdb
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.BL\bin\Debug\PreRegistration.DAL.dll.config
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.BL\bin\Debug\PreRegistration.Models.pdb
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.BL\bin\Debug\PreRegistration.Models.dll.config
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.BL\bin\Debug\EntityFramework.xml
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.BL\bin\Debug\AutoMapper.xml
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.BL\obj\Debug\PreRegistration.BL.csproj.AssemblyReference.cache
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.BL\obj\Debug\PreRegistration.BL.csproj.CoreCompileInputs.cache
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.BL\obj\Debug\PreRegis.5C7DC956.Up2Date
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.BL\obj\Debug\PreRegistration.BL.dll
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.BL\obj\Debug\PreRegistration.BL.pdb
+G:\Oficial\Giri\registration\PreRegistration.BL\bin\Debug\PreRegistration.BL.dll
+G:\Oficial\Giri\registration\PreRegistration.BL\bin\Debug\PreRegistration.BL.pdb
+G:\Oficial\Giri\registration\PreRegistration.BL\bin\Debug\PreRegistration.DAL.dll
+G:\Oficial\Giri\registration\PreRegistration.BL\bin\Debug\PreRegistration.Models.dll
+G:\Oficial\Giri\registration\PreRegistration.BL\bin\Debug\System.Web.Mvc.dll
+G:\Oficial\Giri\registration\PreRegistration.BL\bin\Debug\EntityFramework.dll
+G:\Oficial\Giri\registration\PreRegistration.BL\bin\Debug\CentraPeople.dll
+G:\Oficial\Giri\registration\PreRegistration.BL\bin\Debug\AutoMapper.dll
+G:\Oficial\Giri\registration\PreRegistration.BL\bin\Debug\PreRegistration.DAL.pdb
+G:\Oficial\Giri\registration\PreRegistration.BL\bin\Debug\PreRegistration.DAL.dll.config
+G:\Oficial\Giri\registration\PreRegistration.BL\bin\Debug\PreRegistration.Models.pdb
+G:\Oficial\Giri\registration\PreRegistration.BL\bin\Debug\PreRegistration.Models.dll.config
+G:\Oficial\Giri\registration\PreRegistration.BL\bin\Debug\EntityFramework.xml
+G:\Oficial\Giri\registration\PreRegistration.BL\bin\Debug\AutoMapper.xml
+G:\Oficial\Giri\registration\PreRegistration.BL\obj\Debug\PreRegistration.BL.csproj.AssemblyReference.cache
+G:\Oficial\Giri\registration\PreRegistration.BL\obj\Debug\PreRegistration.BL.csproj.CoreCompileInputs.cache
+G:\Oficial\Giri\registration\PreRegistration.BL\obj\Debug\PreRegis.5C7DC956.Up2Date
+G:\Oficial\Giri\registration\PreRegistration.BL\obj\Debug\PreRegistration.BL.dll
+G:\Oficial\Giri\registration\PreRegistration.BL\obj\Debug\PreRegistration.BL.pdb

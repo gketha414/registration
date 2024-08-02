@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ECRespiratoryProtectionModelStoreContainer" CdmEntityContainer="RespiratoryProtectionEntities">
+    <EntitySetMapping Name="ECRespiratoryProtectionComments">
+      <EntityTypeMapping TypeName="ECRespiratoryProtectionModel.ECRespiratoryProtectionComment">
+        <MappingFragment StoreEntitySet="ECRespiratoryProtectionComments">
+          <ScalarProperty Name="CommentId" ColumnName="CommentId" />
+          <ScalarProperty Name="CommentText" ColumnName="CommentText" />
+          <ScalarProperty Name="FormId" ColumnName="FormId" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ECRespiratoryProtectionForms">
+      <EntityTypeMapping TypeName="ECRespiratoryProtectionModel.ECRespiratoryProtectionForm">
+        <MappingFragment StoreEntitySet="ECRespiratoryProtectionForm">
+          <ScalarProperty Name="FormId" ColumnName="FormId" />
+          <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+          <ScalarProperty Name="EmpNumber" ColumnName="EmpNumber" />
+          <ScalarProperty Name="EmpADID" ColumnName="EmpADID" />
+          <ScalarProperty Name="EmpJobTitle" ColumnName="EmpJobTitle" />
+          <ScalarProperty Name="EmpJobCode" ColumnName="EmpJobCode" />
+          <ScalarProperty Name="EmpDepartment" ColumnName="EmpDepartment" />
+          <ScalarProperty Name="EmpCostCenter" ColumnName="EmpCostCenter" />
+          <ScalarProperty Name="CurrentRiskLevel" ColumnName="CurrentRiskLevel" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="WaivedReasonId" ColumnName="WaivedReasonId" />
+          <ScalarProperty Name="IsRespiratoryRiskLevelHIGH" ColumnName="IsRespiratoryRiskLevelHIGH" />
+          <ScalarProperty Name="DirectpatientOrPerformingJobRelatedTasks" ColumnName="DirectpatientOrPerformingJobRelatedTasks" />
+          <ScalarProperty Name="RespiratoryRiskLevelMEDIUM" ColumnName="RespiratoryRiskLevelMEDIUM" />
+          <ScalarProperty Name="N95RespiratorReadily" ColumnName="N95RespiratorReadily" />
+          <ScalarProperty Name="EmployeeWorkPartTimePRN" ColumnName="EmployeeWorkPartTimePRN" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ECRespiratoryProtectionStatusMasters">
+      <EntityTypeMapping TypeName="ECRespiratoryProtectionModel.ECRespiratoryProtectionStatusMaster">
+        <MappingFragment StoreEntitySet="ECRespiratoryProtectionStatusMaster">
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ECRespiratoryProtectionWaivedReasons">
+      <EntityTypeMapping TypeName="ECRespiratoryProtectionModel.ECRespiratoryProtectionWaivedReason">
+        <MappingFragment StoreEntitySet="ECRespiratoryProtectionWaivedReason">
+          <ScalarProperty Name="WaivedReasonId" ColumnName="WaivedReasonId" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

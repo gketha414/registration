@@ -1,0 +1,57 @@
+C:\new\online\PreRegistration\PreRegistration.Models\bin\Debug\PreRegistration.Models.dll.config
+C:\new\online\PreRegistration\PreRegistration.Models\bin\Debug\PreRegistration.Models.dll
+C:\new\online\PreRegistration\PreRegistration.Models\bin\Debug\PreRegistration.Models.pdb
+C:\new\online\PreRegistration\PreRegistration.Models\bin\Debug\EntityFramework.dll
+C:\new\online\PreRegistration\PreRegistration.Models\bin\Debug\EntityFramework.SqlServer.dll
+C:\new\online\PreRegistration\PreRegistration.Models\bin\Debug\Newtonsoft.Json.dll
+C:\new\online\PreRegistration\PreRegistration.Models\bin\Debug\System.Web.Mvc.dll
+C:\new\online\PreRegistration\PreRegistration.Models\bin\Debug\EntityFramework.xml
+C:\new\online\PreRegistration\PreRegistration.Models\bin\Debug\EntityFramework.SqlServer.xml
+C:\new\online\PreRegistration\PreRegistration.Models\bin\Debug\Newtonsoft.Json.xml
+C:\new\online\PreRegistration\PreRegistration.Models\obj\Debug\PreRegistration.Models.csproj.CoreCompileInputs.cache
+C:\new\online\PreRegistration\PreRegistration.Models\obj\Debug\PreRegistration.Models.csproj.CopyComplete
+C:\new\online\PreRegistration\PreRegistration.Models\obj\Debug\PreRegistration.Models.dll
+C:\new\online\PreRegistration\PreRegistration.Models\obj\Debug\PreRegistration.Models.pdb
+C:\new\online\PreRegistration\PreRegistration.Models\obj\Debug\PreRegistration.Models.csprojAssemblyReference.cache
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.Models\bin\Debug\PreRegistration.Models.dll.config
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.Models\bin\Debug\PreRegistration.Models.dll
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.Models\bin\Debug\PreRegistration.Models.pdb
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.Models\bin\Debug\EntityFramework.dll
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.Models\bin\Debug\EntityFramework.SqlServer.dll
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.Models\bin\Debug\Newtonsoft.Json.dll
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.Models\bin\Debug\EntityFramework.xml
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.Models\bin\Debug\EntityFramework.SqlServer.xml
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.Models\bin\Debug\Newtonsoft.Json.xml
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.Models\obj\Debug\PreRegistration.Models.csprojAssemblyReference.cache
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.Models\obj\Debug\PreRegistration.Models.csproj.CoreCompileInputs.cache
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.Models\obj\Debug\PreRegistration.Models.csproj.CopyComplete
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.Models\obj\Debug\PreRegistration.Models.dll
+C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.Models\obj\Debug\PreRegistration.Models.pdb
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.Models\bin\Debug\PreRegistration.Models.dll.config
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.Models\bin\Debug\PreRegistration.Models.dll
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.Models\bin\Debug\PreRegistration.Models.pdb
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.Models\bin\Debug\EntityFramework.dll
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.Models\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.Models\bin\Debug\Newtonsoft.Json.dll
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.Models\bin\Debug\EntityFramework.xml
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.Models\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.Models\bin\Debug\Newtonsoft.Json.xml
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.Models\obj\Debug\PreRegistration.Models.csproj.AssemblyReference.cache
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.Models\obj\Debug\PreRegistration.Models.csproj.CoreCompileInputs.cache
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.Models\obj\Debug\PreRegis.83C23387.Up2Date
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.Models\obj\Debug\PreRegistration.Models.dll
+C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.Models\obj\Debug\PreRegistration.Models.pdb
+G:\Oficial\Giri\registration\PreRegistration.Models\bin\Debug\PreRegistration.Models.dll.config
+G:\Oficial\Giri\registration\PreRegistration.Models\bin\Debug\PreRegistration.Models.dll
+G:\Oficial\Giri\registration\PreRegistration.Models\bin\Debug\PreRegistration.Models.pdb
+G:\Oficial\Giri\registration\PreRegistration.Models\bin\Debug\EntityFramework.dll
+G:\Oficial\Giri\registration\PreRegistration.Models\bin\Debug\EntityFramework.SqlServer.dll
+G:\Oficial\Giri\registration\PreRegistration.Models\bin\Debug\Newtonsoft.Json.dll
+G:\Oficial\Giri\registration\PreRegistration.Models\bin\Debug\EntityFramework.xml
+G:\Oficial\Giri\registration\PreRegistration.Models\bin\Debug\EntityFramework.SqlServer.xml
+G:\Oficial\Giri\registration\PreRegistration.Models\bin\Debug\Newtonsoft.Json.xml
+G:\Oficial\Giri\registration\PreRegistration.Models\obj\Debug\PreRegistration.Models.csproj.AssemblyReference.cache
+G:\Oficial\Giri\registration\PreRegistration.Models\obj\Debug\PreRegistration.Models.csproj.CoreCompileInputs.cache
+G:\Oficial\Giri\registration\PreRegistration.Models\obj\Debug\PreRegis.83C23387.Up2Date
+G:\Oficial\Giri\registration\PreRegistration.Models\obj\Debug\PreRegistration.Models.dll
+G:\Oficial\Giri\registration\PreRegistration.Models\obj\Debug\PreRegistration.Models.pdb

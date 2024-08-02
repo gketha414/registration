@@ -1,0 +1,906 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PatientPreRegistrationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AccidentDetail">
+    <Key>
+      <PropertyRef Name="AccidentDetailID" />
+    </Key>
+    <Property Name="AccidentDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PersonID" Type="Int32" Nullable="false" />
+    <Property Name="AccidentTypeID" Type="Int16" Nullable="false" />
+    <Property Name="DateOfAccident" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="TimeOfAccident" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Location" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="AccidentType" Relationship="Self.FK_AccidentDetails_AccidentType" FromRole="AccidentDetails" ToRole="AccidentType" />
+    <NavigationProperty Name="PatientDemographic" Relationship="Self.FK_AccidentDetails_PatientDemographics" FromRole="AccidentDetails" ToRole="PatientDemographics" />
+  </EntityType>
+  <EntityType Name="AccidentType">
+    <Key>
+      <PropertyRef Name="AccidentTypeID" />
+    </Key>
+    <Property Name="AccidentTypeID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="AccidentDetails" Relationship="Self.FK_AccidentDetails_AccidentType" FromRole="AccidentType" ToRole="AccidentDetails" />
+  </EntityType>
+  <EntityType Name="EmergencyContact">
+    <Key>
+      <PropertyRef Name="EmergContactID" />
+    </Key>
+    <Property Name="EmergContactID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PersonID" Type="Int32" Nullable="false" />
+    <Property Name="Nearest_Relative_Name" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="Relationship" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Address1" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="Address2" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="StateProvince" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="ZipCode" Type="Int64" />
+    <Property Name="Contact_Phone" Type="Int64" />
+    <NavigationProperty Name="PatientDemographic" Relationship="Self.FK_EmergencyContact_PatientDemographics" FromRole="EmergencyContact" ToRole="PatientDemographics" />
+  </EntityType>
+  <EntityType Name="FormSection">
+    <Key>
+      <PropertyRef Name="SectionID" />
+    </Key>
+    <Property Name="SectionID" Type="Int16" Nullable="false" />
+    <Property Name="SectionName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="PatientDemographics" Relationship="Self.FK_PatientDemographics_FormSection" FromRole="FormSection" ToRole="PatientDemographics" />
+  </EntityType>
+  <EntityType Name="Hospital">
+    <Key>
+      <PropertyRef Name="HospitalID" />
+    </Key>
+    <Property Name="HospitalID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HospitalName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="PatientDemographics" Relationship="Self.FK_PatientDemographics_Hospital" FromRole="Hospital" ToRole="PatientDemographics" />
+  </EntityType>
+  <EntityType Name="InsuranceInformation">
+    <Key>
+      <PropertyRef Name="InsId" />
+    </Key>
+    <Property Name="InsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PersonID" Type="Int32" Nullable="false" />
+    <Property Name="InsRank" Type="Int16" Nullable="false" />
+    <Property Name="InsPlanName" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Subscriber_Name" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="Rel_PolicyHolder_To_Patient" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Policy_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Group_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PlanCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="InsAddress1" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="InsAddress2" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="InsCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="InsState" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="InsZip" Type="Int64" />
+    <Property Name="InsPhone" Type="Int64" />
+    <NavigationProperty Name="PatientDemographic" Relationship="Self.FK_InsuranceInformation_PatientDemographics" FromRole="InsuranceInformation" ToRole="PatientDemographics" />
+  </EntityType>
+  <EntityType Name="MinorInformation">
+    <Key>
+      <PropertyRef Name="MinorID" />
+    </Key>
+    <Property Name="MinorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PersonID" Type="Int32" Nullable="false" />
+    <Property Name="ResponsiblePartyID" Type="Int32" Nullable="false" />
+    <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Middle_Init" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address1" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="Address2" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="StateProvince" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="ZipCode" Type="Int64" />
+    <Property Name="Dob" Type="DateTime" Precision="3" />
+    <Property Name="Race" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="Marital_Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="SSN" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <Property Name="HomePhone" Type="Int64" />
+    <Property Name="Cell_Phone" Type="Int64" />
+    <Property Name="MailAddress1" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="MailAddress2" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="MailCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MailState" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="MailZip" Type="Int64" />
+    <Property Name="E911Address1" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="E911Address2" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="E911City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="E911State" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="E911Zip" Type="Int64" />
+    <Property Name="BillAddress1" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="BillAddress2" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="BillCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BillState" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="BillZip" Type="Int64" />
+    <Property Name="Employer" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="Job_Title" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="EmployerAddress1" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="EmployerAddress2" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="EmployerCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EmployerState" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="EmployerZip" Type="Int64" />
+    <Property Name="EmployerPhone" Type="Int64" />
+    <NavigationProperty Name="PatientDemographic" Relationship="Self.FK_MinorInformation_PatientDemographics" FromRole="MinorInformation" ToRole="PatientDemographics" />
+    <NavigationProperty Name="ResponsibleParty" Relationship="Self.FK_MinorInformation_ResponsibleParty" FromRole="MinorInformation" ToRole="ResponsibleParty" />
+  </EntityType>
+  <EntityType Name="PatientDemographic">
+    <Key>
+      <PropertyRef Name="PersonID" />
+    </Key>
+    <Property Name="PersonID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SectionID" Type="Int16" Nullable="false" />
+    <Property Name="HospitalID" Type="Int16" Nullable="false" />
+    <Property Name="In_Hospital_Directory" Type="Boolean" />
+    <Property Name="HospitalService" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PrimaryCarePhys" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AdmitDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PatientHereBefore" Type="Boolean" />
+    <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Middle_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Entitlement" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="Gender" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Address1" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="Address2" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="StateProvince" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="ZipCode" Type="Int64" />
+    <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Race" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="Marital_Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="SSN" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <Property Name="Home_Phone" Type="Int64" Nullable="false" />
+    <Property Name="Cell_Phone" Type="Int64" />
+    <Property Name="Email_Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Church_Choice" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Mailing_Address1" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="Mailing_Address2" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="MailingCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MailingState" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="MailingZip" Type="Int64" />
+    <Property Name="E911Address1" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="E911Address2" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="E911City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="E911State" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="E911Zip" Type="Int64" />
+    <Property Name="ResponsiblePartyID" Type="Int32" Nullable="false" />
+    <Property Name="GuarNameIfOther" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Bill_Address1" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="Bill_Address2" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="Bill_City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Bill_State" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="Bill_ZipCode" Type="Int64" />
+    <Property Name="Employer" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="Job_Title" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="EmployerAddress1" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="EmployerAddress2" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="EmployerCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EmployerState" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="EmployerZip" Type="Int64" />
+    <Property Name="EmployerPhone" Type="Int64" />
+    <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="ProcessDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="AccidentDetails" Relationship="Self.FK_AccidentDetails_PatientDemographics" FromRole="PatientDemographics" ToRole="AccidentDetails" />
+    <NavigationProperty Name="EmergencyContacts" Relationship="Self.FK_EmergencyContact_PatientDemographics" FromRole="PatientDemographics" ToRole="EmergencyContact" />
+    <NavigationProperty Name="FormSection" Relationship="Self.FK_PatientDemographics_FormSection" FromRole="PatientDemographics" ToRole="FormSection" />
+    <NavigationProperty Name="Hospital" Relationship="Self.FK_PatientDemographics_Hospital" FromRole="PatientDemographics" ToRole="Hospital" />
+    <NavigationProperty Name="InsuranceInformations" Relationship="Self.FK_InsuranceInformation_PatientDemographics" FromRole="PatientDemographics" ToRole="InsuranceInformation" />
+    <NavigationProperty Name="MinorInformations" Relationship="Self.FK_MinorInformation_PatientDemographics" FromRole="PatientDemographics" ToRole="MinorInformation" />
+    <NavigationProperty Name="SpouseInformations" Relationship="Self.FK_SpouseInformation_PatientDemographics1" FromRole="PatientDemographics" ToRole="SpouseInformation" />
+  </EntityType>
+  <EntityType Name="ResponsibleParty">
+    <Key>
+      <PropertyRef Name="ResponsiblePartyID" />
+    </Key>
+    <Property Name="ResponsiblePartyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ResponsiblePartyDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="MinorInformations" Relationship="Self.FK_MinorInformation_ResponsibleParty" FromRole="ResponsibleParty" ToRole="MinorInformation" />
+  </EntityType>
+  <EntityType Name="SpouseInformation">
+    <Key>
+      <PropertyRef Name="SpouseID" />
+    </Key>
+    <Property Name="SpouseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PersonID" Type="Int32" Nullable="false" />
+    <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Middle_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address1" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="Address2" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="StateProvince" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="ZipCode" Type="Int64" />
+    <Property Name="BirthDate" Type="DateTime" Precision="3" />
+    <Property Name="Race" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="Marital_Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="SSN" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <Property Name="Home_Phone" Type="Int64" />
+    <Property Name="Cell_Phone" Type="Int64" />
+    <Property Name="Employer" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="Job_Title" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="EmployerAddress1" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="EmployerAddress2" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="EmployerCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EmployerState" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="EmployerZip" Type="Int64" />
+    <Property Name="Employer_Phone" Type="Int64" />
+    <NavigationProperty Name="PatientDemographic" Relationship="Self.FK_SpouseInformation_PatientDemographics1" FromRole="SpouseInformation" ToRole="PatientDemographics" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="State">
+    <Key>
+      <PropertyRef Name="StateID" />
+      <PropertyRef Name="StateName" />
+    </Key>
+    <Property Name="StateID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="StateName" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VW_PatientDemosGridView">
+    <Key>
+      <PropertyRef Name="PersonID" />
+      <PropertyRef Name="HospitalID" />
+      <PropertyRef Name="HospitalName" />
+      <PropertyRef Name="HospitalService" />
+      <PropertyRef Name="PrimaryCarePhys" />
+      <PropertyRef Name="AdmitDate" />
+      <PropertyRef Name="First_Name" />
+      <PropertyRef Name="Last_Name" />
+      <PropertyRef Name="Gender" />
+      <PropertyRef Name="BirthDate" />
+      <PropertyRef Name="Status" />
+    </Key>
+    <Property Name="PersonID" Type="Int32" Nullable="false" />
+    <Property Name="HospitalID" Type="Int16" Nullable="false" />
+    <Property Name="HospitalName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="In_Hospital_Directory" Type="Boolean" />
+    <Property Name="HospitalService" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PrimaryCarePhys" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AdmitDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PatientHereBefore" Type="Boolean" />
+    <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Middle_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Entitlement" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="Gender" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ProcessDate" Type="DateTime" Precision="3" />
+    <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_AccidentDetails_AccidentType">
+    <End Role="AccidentType" Type="Self.AccidentType" Multiplicity="1" />
+    <End Role="AccidentDetails" Type="Self.AccidentDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccidentType">
+        <PropertyRef Name="AccidentTypeID" />
+      </Principal>
+      <Dependent Role="AccidentDetails">
+        <PropertyRef Name="AccidentTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AccidentDetails_PatientDemographics">
+    <End Role="PatientDemographics" Type="Self.PatientDemographic" Multiplicity="1" />
+    <End Role="AccidentDetails" Type="Self.AccidentDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PatientDemographics">
+        <PropertyRef Name="PersonID" />
+      </Principal>
+      <Dependent Role="AccidentDetails">
+        <PropertyRef Name="PersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmergencyContact_PatientDemographics">
+    <End Role="PatientDemographics" Type="Self.PatientDemographic" Multiplicity="1" />
+    <End Role="EmergencyContact" Type="Self.EmergencyContact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PatientDemographics">
+        <PropertyRef Name="PersonID" />
+      </Principal>
+      <Dependent Role="EmergencyContact">
+        <PropertyRef Name="PersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientDemographics_FormSection">
+    <End Role="FormSection" Type="Self.FormSection" Multiplicity="1" />
+    <End Role="PatientDemographics" Type="Self.PatientDemographic" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FormSection">
+        <PropertyRef Name="SectionID" />
+      </Principal>
+      <Dependent Role="PatientDemographics">
+        <PropertyRef Name="SectionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientDemographics_Hospital">
+    <End Role="Hospital" Type="Self.Hospital" Multiplicity="1" />
+    <End Role="PatientDemographics" Type="Self.PatientDemographic" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hospital">
+        <PropertyRef Name="HospitalID" />
+      </Principal>
+      <Dependent Role="PatientDemographics">
+        <PropertyRef Name="HospitalID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InsuranceInformation_PatientDemographics">
+    <End Role="PatientDemographics" Type="Self.PatientDemographic" Multiplicity="1" />
+    <End Role="InsuranceInformation" Type="Self.InsuranceInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PatientDemographics">
+        <PropertyRef Name="PersonID" />
+      </Principal>
+      <Dependent Role="InsuranceInformation">
+        <PropertyRef Name="PersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MinorInformation_PatientDemographics">
+    <End Role="PatientDemographics" Type="Self.PatientDemographic" Multiplicity="1" />
+    <End Role="MinorInformation" Type="Self.MinorInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PatientDemographics">
+        <PropertyRef Name="PersonID" />
+      </Principal>
+      <Dependent Role="MinorInformation">
+        <PropertyRef Name="PersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MinorInformation_ResponsibleParty">
+    <End Role="ResponsibleParty" Type="Self.ResponsibleParty" Multiplicity="1" />
+    <End Role="MinorInformation" Type="Self.MinorInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ResponsibleParty">
+        <PropertyRef Name="ResponsiblePartyID" />
+      </Principal>
+      <Dependent Role="MinorInformation">
+        <PropertyRef Name="ResponsiblePartyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SpouseInformation_PatientDemographics1">
+    <End Role="PatientDemographics" Type="Self.PatientDemographic" Multiplicity="1" />
+    <End Role="SpouseInformation" Type="Self.SpouseInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PatientDemographics">
+        <PropertyRef Name="PersonID" />
+      </Principal>
+      <Dependent Role="SpouseInformation">
+        <PropertyRef Name="PersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PatientPreRegistrationEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AccidentDetails" EntityType="Self.AccidentDetail" />
+    <EntitySet Name="AccidentTypes" EntityType="Self.AccidentType" />
+    <EntitySet Name="EmergencyContacts" EntityType="Self.EmergencyContact" />
+    <EntitySet Name="FormSections" EntityType="Self.FormSection" />
+    <EntitySet Name="Hospitals" EntityType="Self.Hospital" />
+    <EntitySet Name="InsuranceInformations" EntityType="Self.InsuranceInformation" />
+    <EntitySet Name="MinorInformations" EntityType="Self.MinorInformation" />
+    <EntitySet Name="PatientDemographics" EntityType="Self.PatientDemographic" />
+    <EntitySet Name="ResponsibleParties" EntityType="Self.ResponsibleParty" />
+    <EntitySet Name="SpouseInformations" EntityType="Self.SpouseInformation" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="States" EntityType="Self.State" />
+    <EntitySet Name="VW_PatientDemosGridView" EntityType="Self.VW_PatientDemosGridView" />
+    <AssociationSet Name="FK_AccidentDetails_AccidentType" Association="Self.FK_AccidentDetails_AccidentType">
+      <End Role="AccidentType" EntitySet="AccidentTypes" />
+      <End Role="AccidentDetails" EntitySet="AccidentDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccidentDetails_PatientDemographics" Association="Self.FK_AccidentDetails_PatientDemographics">
+      <End Role="PatientDemographics" EntitySet="PatientDemographics" />
+      <End Role="AccidentDetails" EntitySet="AccidentDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmergencyContact_PatientDemographics" Association="Self.FK_EmergencyContact_PatientDemographics">
+      <End Role="PatientDemographics" EntitySet="PatientDemographics" />
+      <End Role="EmergencyContact" EntitySet="EmergencyContacts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientDemographics_FormSection" Association="Self.FK_PatientDemographics_FormSection">
+      <End Role="FormSection" EntitySet="FormSections" />
+      <End Role="PatientDemographics" EntitySet="PatientDemographics" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientDemographics_Hospital" Association="Self.FK_PatientDemographics_Hospital">
+      <End Role="Hospital" EntitySet="Hospitals" />
+      <End Role="PatientDemographics" EntitySet="PatientDemographics" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InsuranceInformation_PatientDemographics" Association="Self.FK_InsuranceInformation_PatientDemographics">
+      <End Role="PatientDemographics" EntitySet="PatientDemographics" />
+      <End Role="InsuranceInformation" EntitySet="InsuranceInformations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MinorInformation_PatientDemographics" Association="Self.FK_MinorInformation_PatientDemographics">
+      <End Role="PatientDemographics" EntitySet="PatientDemographics" />
+      <End Role="MinorInformation" EntitySet="MinorInformations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MinorInformation_ResponsibleParty" Association="Self.FK_MinorInformation_ResponsibleParty">
+      <End Role="ResponsibleParty" EntitySet="ResponsibleParties" />
+      <End Role="MinorInformation" EntitySet="MinorInformations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SpouseInformation_PatientDemographics1" Association="Self.FK_SpouseInformation_PatientDemographics1">
+      <End Role="PatientDemographics" EntitySet="PatientDemographics" />
+      <End Role="SpouseInformation" EntitySet="SpouseInformations" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(PatientPreRegistrationModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(PatientPreRegistrationModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="usp_DeletePatientInfoFromPreReg">
+      <Parameter Name="PersonID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_FindByID_Accident" ReturnType="Collection(PatientPreRegistrationModel.usp_FindByID_Accident_Result)">
+      <Parameter Name="PersonID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_FindByID_EmergContact" ReturnType="Collection(PatientPreRegistrationModel.usp_FindByID_EmergContact_Result)">
+      <Parameter Name="PersonID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_FindByID_Insurances" ReturnType="Collection(PatientPreRegistrationModel.usp_FindByID_Insurances_Result)">
+      <Parameter Name="PersonID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_FindByID_Minors" ReturnType="Collection(PatientPreRegistrationModel.usp_FindByID_Minors_Result)">
+      <Parameter Name="PersonID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_FindByID_Person" ReturnType="Collection(PatientPreRegistrationModel.usp_FindByID_Person_Result)">
+      <Parameter Name="PersonID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_FindByID_Spouse" ReturnType="Collection(PatientPreRegistrationModel.usp_FindByID_Spouse_Result)">
+      <Parameter Name="PersonID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GetInsuranceByPersonID" ReturnType="Collection(PatientPreRegistrationModel.usp_GetInsuranceByPersonID_Result)">
+      <Parameter Name="InsId" Mode="In" Type="Int32" />
+      <Parameter Name="PersonID" Mode="In" Type="Int32" />
+      <Parameter Name="InsRank" Mode="In" Type="Int16" />
+      <Parameter Name="InsPlanName" Mode="In" Type="String" />
+      <Parameter Name="Subscriber_Name" Mode="In" Type="String" />
+      <Parameter Name="Rel_PolicyHolder_To_Patient" Mode="In" Type="String" />
+      <Parameter Name="Policy_Number" Mode="In" Type="String" />
+      <Parameter Name="Group_Number" Mode="In" Type="String" />
+      <Parameter Name="InsAddress1" Mode="In" Type="String" />
+      <Parameter Name="InsAddress2" Mode="In" Type="String" />
+      <Parameter Name="InsCity" Mode="In" Type="String" />
+      <Parameter Name="InsState" Mode="In" Type="String" />
+      <Parameter Name="InsZip" Mode="In" Type="Int64" />
+      <Parameter Name="InsPhone" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GetNonProcessedPatients" ReturnType="Collection(PatientPreRegistrationModel.usp_GetNonProcessedPatients_Result)">
+      <Parameter Name="HospitalID" Mode="In" Type="Int16" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GetProcessedPatients" ReturnType="Collection(PatientPreRegistrationModel.usp_GetProcessedPatients_Result)">
+      <Parameter Name="HospitalID" Mode="In" Type="Int16" />
+    </FunctionImport>
+    <FunctionImport Name="usp_InsertAccidentDetail" ReturnType="Collection(Decimal)">
+      <Parameter Name="PersonID" Mode="In" Type="Int32" />
+      <Parameter Name="AccidentTypeID" Mode="In" Type="Int16" />
+      <Parameter Name="DateOfAccident" Mode="In" Type="String" />
+      <Parameter Name="TimeOfAccident" Mode="In" Type="String" />
+      <Parameter Name="Location" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_InsertEmergContact" ReturnType="Collection(Decimal)">
+      <Parameter Name="PersonID" Mode="In" Type="Int32" />
+      <Parameter Name="Nearest_Relative_Name" Mode="In" Type="String" />
+      <Parameter Name="Relationship" Mode="In" Type="String" />
+      <Parameter Name="Address1" Mode="In" Type="String" />
+      <Parameter Name="Address2" Mode="In" Type="String" />
+      <Parameter Name="City" Mode="In" Type="String" />
+      <Parameter Name="StateProvince" Mode="In" Type="String" />
+      <Parameter Name="ZipCode" Mode="In" Type="Int64" />
+      <Parameter Name="Contact_Phone" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="usp_InsertInsuranceInfo" ReturnType="Collection(Decimal)">
+      <Parameter Name="PersonID" Mode="In" Type="Int32" />
+      <Parameter Name="InsRank" Mode="In" Type="Int16" />
+      <Parameter Name="InsPlanName" Mode="In" Type="String" />
+      <Parameter Name="Subscriber_Name" Mode="In" Type="String" />
+      <Parameter Name="Rel_PolicyHolder_To_Patient" Mode="In" Type="String" />
+      <Parameter Name="Policy_Number" Mode="In" Type="String" />
+      <Parameter Name="Group_Number" Mode="In" Type="String" />
+      <Parameter Name="PlanCode" Mode="In" Type="String" />
+      <Parameter Name="InsAddress1" Mode="In" Type="String" />
+      <Parameter Name="InsAddress2" Mode="In" Type="String" />
+      <Parameter Name="InsCity" Mode="In" Type="String" />
+      <Parameter Name="InsState" Mode="In" Type="String" />
+      <Parameter Name="InsZip" Mode="In" Type="Int64" />
+      <Parameter Name="InsPhone" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="usp_InsertMinorInfo" ReturnType="Collection(Decimal)">
+      <Parameter Name="PersonID" Mode="In" Type="Int32" />
+      <Parameter Name="ResponsiblePartyID" Mode="In" Type="Int32" />
+      <Parameter Name="First_Name" Mode="In" Type="String" />
+      <Parameter Name="Middle_Init" Mode="In" Type="String" />
+      <Parameter Name="Last_Name" Mode="In" Type="String" />
+      <Parameter Name="Address1" Mode="In" Type="String" />
+      <Parameter Name="Address2" Mode="In" Type="String" />
+      <Parameter Name="City" Mode="In" Type="String" />
+      <Parameter Name="StateProvince" Mode="In" Type="String" />
+      <Parameter Name="ZipCode" Mode="In" Type="Int64" />
+      <Parameter Name="Dob" Mode="In" Type="DateTime" />
+      <Parameter Name="Race" Mode="In" Type="String" />
+      <Parameter Name="Marital_Status" Mode="In" Type="String" />
+      <Parameter Name="SSN" Mode="In" Type="String" />
+      <Parameter Name="HomePhone" Mode="In" Type="Int64" />
+      <Parameter Name="Cell_Phone" Mode="In" Type="Int64" />
+      <Parameter Name="MailAddress1" Mode="In" Type="String" />
+      <Parameter Name="MailAddress2" Mode="In" Type="String" />
+      <Parameter Name="MailCity" Mode="In" Type="String" />
+      <Parameter Name="MailState" Mode="In" Type="String" />
+      <Parameter Name="MailZip" Mode="In" Type="Int64" />
+      <Parameter Name="E911Address1" Mode="In" Type="String" />
+      <Parameter Name="E911Address2" Mode="In" Type="String" />
+      <Parameter Name="E911City" Mode="In" Type="String" />
+      <Parameter Name="E911State" Mode="In" Type="String" />
+      <Parameter Name="E911Zip" Mode="In" Type="Int64" />
+      <Parameter Name="BillAddress1" Mode="In" Type="String" />
+      <Parameter Name="BillAddress2" Mode="In" Type="String" />
+      <Parameter Name="BillCity" Mode="In" Type="String" />
+      <Parameter Name="BillState" Mode="In" Type="String" />
+      <Parameter Name="BillZip" Mode="In" Type="Int64" />
+      <Parameter Name="Employer" Mode="In" Type="String" />
+      <Parameter Name="Job_Title" Mode="In" Type="String" />
+      <Parameter Name="EmployerAddress1" Mode="In" Type="String" />
+      <Parameter Name="EmployerAddress2" Mode="In" Type="String" />
+      <Parameter Name="EmployerCity" Mode="In" Type="String" />
+      <Parameter Name="EmployerState" Mode="In" Type="String" />
+      <Parameter Name="EmployerZip" Mode="In" Type="Int64" />
+      <Parameter Name="EmployerPhone" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="usp_InsertPatientDemos" ReturnType="Collection(Decimal)">
+      <Parameter Name="SectionID" Mode="In" Type="Int16" />
+      <Parameter Name="HospitalID" Mode="In" Type="Int16" />
+      <Parameter Name="In_Hospital_Directory" Mode="In" Type="Boolean" />
+      <Parameter Name="HospitalService" Mode="In" Type="String" />
+      <Parameter Name="PrimaryCarePhys" Mode="In" Type="String" />
+      <Parameter Name="AdmitDate" Mode="In" Type="DateTime" />
+      <Parameter Name="PatientHereBefore" Mode="In" Type="Boolean" />
+      <Parameter Name="First_Name" Mode="In" Type="String" />
+      <Parameter Name="Middle_Name" Mode="In" Type="String" />
+      <Parameter Name="Last_Name" Mode="In" Type="String" />
+      <Parameter Name="Entitlement" Mode="In" Type="String" />
+      <Parameter Name="Gender" Mode="In" Type="String" />
+      <Parameter Name="Address1" Mode="In" Type="String" />
+      <Parameter Name="Address2" Mode="In" Type="String" />
+      <Parameter Name="City" Mode="In" Type="String" />
+      <Parameter Name="StateProvince" Mode="In" Type="String" />
+      <Parameter Name="ZipCode" Mode="In" Type="Int64" />
+      <Parameter Name="BirthDate" Mode="In" Type="DateTime" />
+      <Parameter Name="Race" Mode="In" Type="String" />
+      <Parameter Name="Marital_Status" Mode="In" Type="String" />
+      <Parameter Name="SSN" Mode="In" Type="String" />
+      <Parameter Name="Home_Phone" Mode="In" Type="Int64" />
+      <Parameter Name="Cell_Phone" Mode="In" Type="Int64" />
+      <Parameter Name="Email_Address" Mode="In" Type="String" />
+      <Parameter Name="Church_Choice" Mode="In" Type="String" />
+      <Parameter Name="Mailing_Address1" Mode="In" Type="String" />
+      <Parameter Name="Mailing_Address2" Mode="In" Type="String" />
+      <Parameter Name="MailingCity" Mode="In" Type="String" />
+      <Parameter Name="MailingState" Mode="In" Type="String" />
+      <Parameter Name="MailingZip" Mode="In" Type="Int64" />
+      <Parameter Name="E911Address1" Mode="In" Type="String" />
+      <Parameter Name="E911Address2" Mode="In" Type="String" />
+      <Parameter Name="E911City" Mode="In" Type="String" />
+      <Parameter Name="E911State" Mode="In" Type="String" />
+      <Parameter Name="E911Zip" Mode="In" Type="Int64" />
+      <Parameter Name="ResponsiblePartyID" Mode="In" Type="Int32" />
+      <Parameter Name="GuarNameIfOther" Mode="In" Type="String" />
+      <Parameter Name="Bill_Address1" Mode="In" Type="String" />
+      <Parameter Name="Bill_Address2" Mode="In" Type="String" />
+      <Parameter Name="Bill_City" Mode="In" Type="String" />
+      <Parameter Name="Bill_State" Mode="In" Type="String" />
+      <Parameter Name="Bill_ZipCode" Mode="In" Type="Int64" />
+      <Parameter Name="Employer" Mode="In" Type="String" />
+      <Parameter Name="Job_Title" Mode="In" Type="String" />
+      <Parameter Name="EmployerAddress1" Mode="In" Type="String" />
+      <Parameter Name="EmployerAddress2" Mode="In" Type="String" />
+      <Parameter Name="EmployerCity" Mode="In" Type="String" />
+      <Parameter Name="EmployerState" Mode="In" Type="String" />
+      <Parameter Name="EmployerZip" Mode="In" Type="Int64" />
+      <Parameter Name="EmployerPhone" Mode="In" Type="Int64" />
+      <Parameter Name="Status" Mode="In" Type="String" />
+      <Parameter Name="Created" Mode="In" Type="DateTime" />
+      <Parameter Name="Modified" Mode="In" Type="DateTime" />
+      <Parameter Name="ModifiedBy" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_InsertSpouseInfo" ReturnType="Collection(Decimal)">
+      <Parameter Name="PersonID" Mode="In" Type="Int32" />
+      <Parameter Name="First_Name" Mode="In" Type="String" />
+      <Parameter Name="Middle_Name" Mode="In" Type="String" />
+      <Parameter Name="Last_Name" Mode="In" Type="String" />
+      <Parameter Name="Address1" Mode="In" Type="String" />
+      <Parameter Name="Address2" Mode="In" Type="String" />
+      <Parameter Name="City" Mode="In" Type="String" />
+      <Parameter Name="StateProvince" Mode="In" Type="String" />
+      <Parameter Name="ZipCode" Mode="In" Type="Int64" />
+      <Parameter Name="BirthDate" Mode="In" Type="DateTime" />
+      <Parameter Name="Race" Mode="In" Type="String" />
+      <Parameter Name="Marital_Status" Mode="In" Type="String" />
+      <Parameter Name="SSN" Mode="In" Type="String" />
+      <Parameter Name="Home_Phone" Mode="In" Type="Int64" />
+      <Parameter Name="Cell_Phone" Mode="In" Type="Int64" />
+      <Parameter Name="Employer" Mode="In" Type="String" />
+      <Parameter Name="Job_Title" Mode="In" Type="String" />
+      <Parameter Name="EmployerAddress1" Mode="In" Type="String" />
+      <Parameter Name="EmployerAddress2" Mode="In" Type="String" />
+      <Parameter Name="EmployerCity" Mode="In" Type="String" />
+      <Parameter Name="EmployerState" Mode="In" Type="String" />
+      <Parameter Name="EmployerZip" Mode="In" Type="Int64" />
+      <Parameter Name="Employer_Phone" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="usp_InsertTestPatient">
+      <Parameter Name="FirstName" Mode="In" Type="String" />
+      <Parameter Name="MiddleName" Mode="In" Type="String" />
+      <Parameter Name="LastName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_PageLoadQuery" ReturnType="Collection(PatientPreRegistrationModel.usp_PageLoadQuery_Result)">
+      <Parameter Name="PersonID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_UpdatePatientAccessHasProcessed">
+      <Parameter Name="PersonID" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="usp_FindByID_Accident_Result">
+    <Property Type="Int32" Name="AccidentDetailID" Nullable="false" />
+    <Property Type="Int32" Name="PersonID" Nullable="false" />
+    <Property Type="Int16" Name="AccidentTypeID" Nullable="false" />
+    <Property Type="String" Name="Description" Nullable="false" MaxLength="40" />
+    <Property Type="String" Name="DateOfAccident" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="TimeOfAccident" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="Location" Nullable="true" MaxLength="300" />
+  </ComplexType>
+  <ComplexType Name="usp_FindByID_EmergContact_Result">
+    <Property Type="Int32" Name="EmergContactID" Nullable="false" />
+    <Property Type="Int32" Name="PersonID" Nullable="false" />
+    <Property Type="String" Name="Nearest_Relative_Name" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="Relationship" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Address1" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="Address2" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="StateProvince" Nullable="true" MaxLength="2" />
+    <Property Type="Int64" Name="ZipCode" Nullable="true" />
+    <Property Type="Int64" Name="Contact_Phone" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="usp_FindByID_Insurances_Result">
+    <Property Type="Int32" Name="InsId" Nullable="false" />
+    <Property Type="Int32" Name="PersonID" Nullable="false" />
+    <Property Type="Int16" Name="InsRank" Nullable="false" />
+    <Property Type="String" Name="InsPlanName" Nullable="false" MaxLength="75" />
+    <Property Type="String" Name="Subscriber_Name" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="Rel_PolicyHolder_To_Patient" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Policy_Number" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Group_Number" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PlanCode" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="InsAddress1" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="InsAddress2" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="InsCity" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="InsState" Nullable="true" MaxLength="2" />
+    <Property Type="Int64" Name="InsZip" Nullable="true" />
+    <Property Type="Int64" Name="InsPhone" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="usp_FindByID_Minors_Result">
+    <Property Type="Int32" Name="MinorID" Nullable="false" />
+    <Property Type="Int32" Name="PersonID" Nullable="false" />
+    <Property Type="Int32" Name="ResponsiblePartyID" Nullable="false" />
+    <Property Type="String" Name="First_Name" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Middle_Init" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Last_Name" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Address1" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="Address2" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="StateProvince" Nullable="true" MaxLength="2" />
+    <Property Type="Int64" Name="ZipCode" Nullable="true" />
+    <Property Type="DateTime" Name="Dob" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Race" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="Marital_Status" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="SSN" Nullable="true" MaxLength="11" />
+    <Property Type="Int64" Name="HomePhone" Nullable="true" />
+    <Property Type="Int64" Name="Cell_Phone" Nullable="true" />
+    <Property Type="String" Name="MailAddress1" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="MailAddress2" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="MailCity" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="MailState" Nullable="true" MaxLength="2" />
+    <Property Type="Int64" Name="MailZip" Nullable="true" />
+    <Property Type="String" Name="E911Address1" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="E911Address2" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="E911City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="E911State" Nullable="true" MaxLength="2" />
+    <Property Type="Int64" Name="E911Zip" Nullable="true" />
+    <Property Type="String" Name="BillAddress1" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="BillAddress2" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="BillCity" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="BillState" Nullable="true" MaxLength="2" />
+    <Property Type="Int64" Name="BillZip" Nullable="true" />
+    <Property Type="String" Name="Employer" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="Job_Title" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="EmployerAddress1" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="EmployerAddress2" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="EmployerCity" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="EmployerState" Nullable="true" MaxLength="2" />
+    <Property Type="Int64" Name="EmployerZip" Nullable="true" />
+    <Property Type="Int64" Name="EmployerPhone" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="usp_FindByID_Person_Result">
+    <Property Type="Int32" Name="PersonID" Nullable="false" />
+    <Property Type="Int16" Name="SectionID" Nullable="false" />
+    <Property Type="Int16" Name="HospitalID" Nullable="false" />
+    <Property Type="Boolean" Name="In_Hospital_Directory" Nullable="true" />
+    <Property Type="String" Name="HospitalService" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="PrimaryCarePhys" Nullable="false" MaxLength="75" />
+    <Property Type="DateTime" Name="AdmitDate" Nullable="false" Precision="23" />
+    <Property Type="Boolean" Name="PatientHereBefore" Nullable="true" />
+    <Property Type="String" Name="First_Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Middle_Name" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Last_Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Entitlement" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="Gender" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="Address1" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="Address2" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="StateProvince" Nullable="true" MaxLength="2" />
+    <Property Type="Int64" Name="ZipCode" Nullable="true" />
+    <Property Type="DateTime" Name="BirthDate" Nullable="false" Precision="23" />
+    <Property Type="String" Name="Race" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="Marital_Status" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="SSN" Nullable="true" MaxLength="11" />
+    <Property Type="Int64" Name="Home_Phone" Nullable="false" />
+    <Property Type="Int64" Name="Cell_Phone" Nullable="true" />
+    <Property Type="String" Name="Email_Address" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Church_Choice" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Mailing_Address1" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="Mailing_Address2" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="MailingCity" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="MailingState" Nullable="true" MaxLength="2" />
+    <Property Type="Int64" Name="MailingZip" Nullable="true" />
+    <Property Type="String" Name="E911Address1" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="E911Address2" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="E911City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="E911State" Nullable="true" MaxLength="2" />
+    <Property Type="Int64" Name="E911Zip" Nullable="true" />
+    <Property Type="Int32" Name="ResponsiblePartyID" Nullable="false" />
+    <Property Type="String" Name="GuarNameIfOther" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Bill_Address1" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="Bill_Address2" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="Bill_City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Bill_State" Nullable="true" MaxLength="2" />
+    <Property Type="Int64" Name="Bill_ZipCode" Nullable="true" />
+    <Property Type="String" Name="Employer" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="Job_Title" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="EmployerAddress1" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="EmployerAddress2" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="EmployerCity" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="EmployerState" Nullable="true" MaxLength="2" />
+    <Property Type="Int64" Name="EmployerZip" Nullable="true" />
+    <Property Type="Int64" Name="EmployerPhone" Nullable="true" />
+    <Property Type="String" Name="Status" Nullable="false" MaxLength="20" />
+    <Property Type="DateTime" Name="Created" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="Modified" Nullable="false" Precision="23" />
+    <Property Type="String" Name="ModifiedBy" Nullable="true" MaxLength="25" />
+    <Property Type="DateTime" Name="ProcessDate" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="usp_FindByID_Spouse_Result">
+    <Property Type="Int32" Name="SpouseID" Nullable="false" />
+    <Property Type="Int32" Name="PersonID" Nullable="false" />
+    <Property Type="String" Name="First_Name" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Middle_Name" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Last_Name" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Address1" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="Address2" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="StateProvince" Nullable="true" MaxLength="2" />
+    <Property Type="Int64" Name="ZipCode" Nullable="true" />
+    <Property Type="DateTime" Name="BirthDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Race" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="Marital_Status" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="SSN" Nullable="true" MaxLength="11" />
+    <Property Type="Int64" Name="Home_Phone" Nullable="true" />
+    <Property Type="Int64" Name="Cell_Phone" Nullable="true" />
+    <Property Type="String" Name="Employer" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="Job_Title" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="EmployerAddress1" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="EmployerAddress2" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="EmployerCity" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="EmployerState" Nullable="true" MaxLength="2" />
+    <Property Type="Int64" Name="EmployerZip" Nullable="true" />
+    <Property Type="Int64" Name="Employer_Phone" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="usp_GetInsuranceByPersonID_Result">
+    <Property Type="Int32" Name="InsId" Nullable="false" />
+    <Property Type="Int32" Name="PersonID" Nullable="false" />
+    <Property Type="Int16" Name="InsRank" Nullable="false" />
+    <Property Type="String" Name="InsPlanName" Nullable="false" MaxLength="75" />
+    <Property Type="String" Name="Subscriber_Name" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="Rel_PolicyHolder_To_Patient" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Policy_Number" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Group_Number" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="InsAddress1" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="InsAddress2" Nullable="true" MaxLength="75" />
+    <Property Type="String" Name="InsCity" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="InsState" Nullable="true" MaxLength="2" />
+    <Property Type="Int64" Name="InsZip" Nullable="true" />
+    <Property Type="Int64" Name="InsPhone" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="usp_GetNonProcessedPatients_Result">
+    <Property Type="Int32" Name="PersonID" Nullable="false" />
+    <Property Type="Int16" Name="HospitalID" Nullable="false" />
+    <Property Type="String" Name="HospitalService" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="PrimaryCarePhys" Nullable="false" MaxLength="75" />
+    <Property Type="DateTime" Name="AdmitDate" Nullable="false" Precision="23" />
+    <Property Type="Boolean" Name="PatientHereBefore" Nullable="true" />
+    <Property Type="String" Name="First_Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Middle_Name" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Last_Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Entitlement" Nullable="true" MaxLength="10" />
+    <Property Type="DateTime" Name="BirthDate" Nullable="false" Precision="23" />
+    <Property Type="String" Name="Status" Nullable="false" MaxLength="20" />
+    <Property Type="DateTime" Name="ProcessDate" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="usp_GetProcessedPatients_Result">
+    <Property Type="Int32" Name="PersonID" Nullable="false" />
+    <Property Type="Int16" Name="HospitalID" Nullable="false" />
+    <Property Type="String" Name="HospitalService" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="PrimaryCarePhys" Nullable="false" MaxLength="75" />
+    <Property Type="DateTime" Name="AdmitDate" Nullable="false" Precision="23" />
+    <Property Type="Boolean" Name="PatientHereBefore" Nullable="true" />
+    <Property Type="String" Name="First_Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Middle_Name" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Last_Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Entitlement" Nullable="true" MaxLength="10" />
+    <Property Type="DateTime" Name="BirthDate" Nullable="false" Precision="23" />
+    <Property Type="String" Name="Status" Nullable="false" MaxLength="20" />
+    <Property Type="DateTime" Name="ProcessDate" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="usp_PageLoadQuery_Result">
+    <Property Type="Boolean" Name="HasSpouse" Nullable="true" />
+    <Property Type="Int32" Name="MinorCount" Nullable="true" />
+    <Property Type="Int32" Name="InsuranceCount" Nullable="true" />
+    <Property Type="Boolean" Name="HasEmergContact" Nullable="true" />
+    <Property Type="Boolean" Name="HadAccident" Nullable="true" />
+  </ComplexType>
+</Schema>

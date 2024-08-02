@@ -1,0 +1,704 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PatientPreRegistrationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AccidentDetails">
+    <Key>
+      <PropertyRef Name="AccidentDetailID" />
+    </Key>
+    <Property Name="AccidentDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PersonID" Type="int" Nullable="false" />
+    <Property Name="AccidentTypeID" Type="smallint" Nullable="false" />
+    <Property Name="DateOfAccident" Type="varchar" MaxLength="20" />
+    <Property Name="TimeOfAccident" Type="varchar" MaxLength="20" />
+    <Property Name="Location" Type="varchar" MaxLength="300" />
+  </EntityType>
+  <EntityType Name="AccidentType">
+    <Key>
+      <PropertyRef Name="AccidentTypeID" />
+    </Key>
+    <Property Name="AccidentTypeID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="40" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EmergencyContact">
+    <Key>
+      <PropertyRef Name="EmergContactID" />
+    </Key>
+    <Property Name="EmergContactID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PersonID" Type="int" Nullable="false" />
+    <Property Name="Nearest_Relative_Name" Type="varchar" MaxLength="75" />
+    <Property Name="Relationship" Type="varchar" MaxLength="30" />
+    <Property Name="Address1" Type="varchar" MaxLength="75" />
+    <Property Name="Address2" Type="varchar" MaxLength="75" />
+    <Property Name="City" Type="varchar" MaxLength="50" />
+    <Property Name="StateProvince" Type="char" MaxLength="2" />
+    <Property Name="ZipCode" Type="bigint" />
+    <Property Name="Contact_Phone" Type="bigint" />
+  </EntityType>
+  <EntityType Name="FormSection">
+    <Key>
+      <PropertyRef Name="SectionID" />
+    </Key>
+    <Property Name="SectionID" Type="smallint" Nullable="false" />
+    <Property Name="SectionName" Type="varchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Hospital">
+    <Key>
+      <PropertyRef Name="HospitalID" />
+    </Key>
+    <Property Name="HospitalID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HospitalName" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="InsuranceInformation">
+    <Key>
+      <PropertyRef Name="InsId" />
+    </Key>
+    <Property Name="InsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PersonID" Type="int" Nullable="false" />
+    <Property Name="InsRank" Type="smallint" Nullable="false" />
+    <Property Name="InsPlanName" Type="varchar" MaxLength="75" Nullable="false" />
+    <Property Name="Subscriber_Name" Type="varchar" MaxLength="75" />
+    <Property Name="Rel_PolicyHolder_To_Patient" Type="varchar" MaxLength="30" />
+    <Property Name="Policy_Number" Type="varchar" MaxLength="50" />
+    <Property Name="Group_Number" Type="varchar" MaxLength="50" />
+    <Property Name="PlanCode" Type="varchar" MaxLength="50" />
+    <Property Name="InsAddress1" Type="varchar" MaxLength="75" />
+    <Property Name="InsAddress2" Type="varchar" MaxLength="75" />
+    <Property Name="InsCity" Type="varchar" MaxLength="50" />
+    <Property Name="InsState" Type="char" MaxLength="2" />
+    <Property Name="InsZip" Type="bigint" />
+    <Property Name="InsPhone" Type="bigint" />
+  </EntityType>
+  <EntityType Name="MinorInformation">
+    <Key>
+      <PropertyRef Name="MinorID" />
+    </Key>
+    <Property Name="MinorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PersonID" Type="int" Nullable="false" />
+    <Property Name="ResponsiblePartyID" Type="int" Nullable="false" />
+    <Property Name="First_Name" Type="varchar" MaxLength="50" />
+    <Property Name="Middle_Init" Type="varchar" MaxLength="50" />
+    <Property Name="Last_Name" Type="varchar" MaxLength="50" />
+    <Property Name="Address1" Type="varchar" MaxLength="75" />
+    <Property Name="Address2" Type="varchar" MaxLength="75" />
+    <Property Name="City" Type="varchar" MaxLength="50" />
+    <Property Name="StateProvince" Type="char" MaxLength="2" />
+    <Property Name="ZipCode" Type="bigint" />
+    <Property Name="Dob" Type="datetime" />
+    <Property Name="Race" Type="varchar" MaxLength="75" />
+    <Property Name="Marital_Status" Type="varchar" MaxLength="20" />
+    <Property Name="SSN" Type="varchar" MaxLength="11" />
+    <Property Name="HomePhone" Type="bigint" />
+    <Property Name="Cell_Phone" Type="bigint" />
+    <Property Name="MailAddress1" Type="varchar" MaxLength="75" />
+    <Property Name="MailAddress2" Type="varchar" MaxLength="75" />
+    <Property Name="MailCity" Type="varchar" MaxLength="50" />
+    <Property Name="MailState" Type="char" MaxLength="2" />
+    <Property Name="MailZip" Type="bigint" />
+    <Property Name="E911Address1" Type="varchar" MaxLength="75" />
+    <Property Name="E911Address2" Type="varchar" MaxLength="75" />
+    <Property Name="E911City" Type="varchar" MaxLength="50" />
+    <Property Name="E911State" Type="char" MaxLength="2" />
+    <Property Name="E911Zip" Type="bigint" />
+    <Property Name="BillAddress1" Type="varchar" MaxLength="75" />
+    <Property Name="BillAddress2" Type="varchar" MaxLength="75" />
+    <Property Name="BillCity" Type="varchar" MaxLength="50" />
+    <Property Name="BillState" Type="char" MaxLength="2" />
+    <Property Name="BillZip" Type="bigint" />
+    <Property Name="Employer" Type="varchar" MaxLength="75" />
+    <Property Name="Job_Title" Type="varchar" MaxLength="75" />
+    <Property Name="EmployerAddress1" Type="varchar" MaxLength="75" />
+    <Property Name="EmployerAddress2" Type="varchar" MaxLength="75" />
+    <Property Name="EmployerCity" Type="varchar" MaxLength="50" />
+    <Property Name="EmployerState" Type="char" MaxLength="2" />
+    <Property Name="EmployerZip" Type="bigint" />
+    <Property Name="EmployerPhone" Type="bigint" />
+  </EntityType>
+  <EntityType Name="PatientDemographics">
+    <Key>
+      <PropertyRef Name="PersonID" />
+    </Key>
+    <Property Name="PersonID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SectionID" Type="smallint" Nullable="false" />
+    <Property Name="HospitalID" Type="smallint" Nullable="false" />
+    <Property Name="In_Hospital_Directory" Type="bit" />
+    <Property Name="HospitalService" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="PrimaryCarePhys" Type="varchar" MaxLength="75" Nullable="false" />
+    <Property Name="AdmitDate" Type="datetime" Nullable="false" />
+    <Property Name="PatientHereBefore" Type="bit" />
+    <Property Name="First_Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Middle_Name" Type="varchar" MaxLength="50" />
+    <Property Name="Last_Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Entitlement" Type="char" MaxLength="10" />
+    <Property Name="Gender" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="Address1" Type="varchar" MaxLength="75" />
+    <Property Name="Address2" Type="varchar" MaxLength="75" />
+    <Property Name="City" Type="varchar" MaxLength="50" />
+    <Property Name="StateProvince" Type="char" MaxLength="2" />
+    <Property Name="ZipCode" Type="bigint" />
+    <Property Name="BirthDate" Type="datetime" Nullable="false" />
+    <Property Name="Race" Type="varchar" MaxLength="75" />
+    <Property Name="Marital_Status" Type="varchar" MaxLength="20" />
+    <Property Name="SSN" Type="varchar" MaxLength="11" />
+    <Property Name="Home_Phone" Type="bigint" Nullable="false" />
+    <Property Name="Cell_Phone" Type="bigint" />
+    <Property Name="Email_Address" Type="varchar" MaxLength="100" />
+    <Property Name="Church_Choice" Type="varchar" MaxLength="100" />
+    <Property Name="Mailing_Address1" Type="varchar" MaxLength="75" />
+    <Property Name="Mailing_Address2" Type="varchar" MaxLength="75" />
+    <Property Name="MailingCity" Type="varchar" MaxLength="50" />
+    <Property Name="MailingState" Type="char" MaxLength="2" />
+    <Property Name="MailingZip" Type="bigint" />
+    <Property Name="E911Address1" Type="varchar" MaxLength="75" />
+    <Property Name="E911Address2" Type="varchar" MaxLength="75" />
+    <Property Name="E911City" Type="varchar" MaxLength="50" />
+    <Property Name="E911State" Type="char" MaxLength="2" />
+    <Property Name="E911Zip" Type="bigint" />
+    <Property Name="ResponsiblePartyID" Type="int" Nullable="false" />
+    <Property Name="GuarNameIfOther" Type="varchar" MaxLength="100" />
+    <Property Name="Bill_Address1" Type="varchar" MaxLength="75" />
+    <Property Name="Bill_Address2" Type="varchar" MaxLength="75" />
+    <Property Name="Bill_City" Type="varchar" MaxLength="50" />
+    <Property Name="Bill_State" Type="char" MaxLength="2" />
+    <Property Name="Bill_ZipCode" Type="bigint" />
+    <Property Name="Employer" Type="varchar" MaxLength="75" />
+    <Property Name="Job_Title" Type="varchar" MaxLength="75" />
+    <Property Name="EmployerAddress1" Type="varchar" MaxLength="75" />
+    <Property Name="EmployerAddress2" Type="varchar" MaxLength="75" />
+    <Property Name="EmployerCity" Type="varchar" MaxLength="50" />
+    <Property Name="EmployerState" Type="char" MaxLength="2" />
+    <Property Name="EmployerZip" Type="bigint" />
+    <Property Name="EmployerPhone" Type="bigint" />
+    <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Created" Type="datetime" Nullable="false" />
+    <Property Name="Modified" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="varchar" MaxLength="25" />
+    <Property Name="ProcessDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="ResponsibleParty">
+    <Key>
+      <PropertyRef Name="ResponsiblePartyID" />
+    </Key>
+    <Property Name="ResponsiblePartyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ResponsiblePartyDescription" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SpouseInformation">
+    <Key>
+      <PropertyRef Name="SpouseID" />
+    </Key>
+    <Property Name="SpouseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PersonID" Type="int" Nullable="false" />
+    <Property Name="First_Name" Type="varchar" MaxLength="50" />
+    <Property Name="Middle_Name" Type="varchar" MaxLength="50" />
+    <Property Name="Last_Name" Type="varchar" MaxLength="50" />
+    <Property Name="Address1" Type="varchar" MaxLength="75" />
+    <Property Name="Address2" Type="varchar" MaxLength="75" />
+    <Property Name="City" Type="varchar" MaxLength="50" />
+    <Property Name="StateProvince" Type="char" MaxLength="2" />
+    <Property Name="ZipCode" Type="bigint" />
+    <Property Name="BirthDate" Type="datetime" />
+    <Property Name="Race" Type="varchar" MaxLength="75" />
+    <Property Name="Marital_Status" Type="varchar" MaxLength="20" />
+    <Property Name="SSN" Type="varchar" MaxLength="11" />
+    <Property Name="Home_Phone" Type="bigint" />
+    <Property Name="Cell_Phone" Type="bigint" />
+    <Property Name="Employer" Type="varchar" MaxLength="75" />
+    <Property Name="Job_Title" Type="varchar" MaxLength="75" />
+    <Property Name="EmployerAddress1" Type="varchar" MaxLength="75" />
+    <Property Name="EmployerAddress2" Type="varchar" MaxLength="75" />
+    <Property Name="EmployerCity" Type="varchar" MaxLength="50" />
+    <Property Name="EmployerState" Type="char" MaxLength="2" />
+    <Property Name="EmployerZip" Type="bigint" />
+    <Property Name="Employer_Phone" Type="bigint" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'PatientPreRegistration_TEST.dbo.States' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="States">
+    <Key>
+      <PropertyRef Name="StateID" />
+      <PropertyRef Name="StateName" />
+    </Key>
+    <Property Name="StateID" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="StateName" Type="varchar" MaxLength="70" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'PatientPreRegistration_TEST.dbo.VW_PatientDemosGridView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="VW_PatientDemosGridView">
+    <Key>
+      <PropertyRef Name="PersonID" />
+      <PropertyRef Name="HospitalID" />
+      <PropertyRef Name="HospitalName" />
+      <PropertyRef Name="HospitalService" />
+      <PropertyRef Name="PrimaryCarePhys" />
+      <PropertyRef Name="AdmitDate" />
+      <PropertyRef Name="First_Name" />
+      <PropertyRef Name="Last_Name" />
+      <PropertyRef Name="Gender" />
+      <PropertyRef Name="BirthDate" />
+      <PropertyRef Name="Status" />
+    </Key>
+    <Property Name="PersonID" Type="int" Nullable="false" />
+    <Property Name="HospitalID" Type="smallint" Nullable="false" />
+    <Property Name="HospitalName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="In_Hospital_Directory" Type="bit" />
+    <Property Name="HospitalService" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="PrimaryCarePhys" Type="varchar" MaxLength="75" Nullable="false" />
+    <Property Name="AdmitDate" Type="datetime" Nullable="false" />
+    <Property Name="PatientHereBefore" Type="bit" />
+    <Property Name="First_Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Middle_Name" Type="varchar" MaxLength="50" />
+    <Property Name="Last_Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Entitlement" Type="char" MaxLength="10" />
+    <Property Name="Gender" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="BirthDate" Type="datetime" Nullable="false" />
+    <Property Name="ProcessDate" Type="datetime" />
+    <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_AccidentDetails_AccidentType">
+    <End Role="AccidentType" Type="Self.AccidentType" Multiplicity="1" />
+    <End Role="AccidentDetails" Type="Self.AccidentDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccidentType">
+        <PropertyRef Name="AccidentTypeID" />
+      </Principal>
+      <Dependent Role="AccidentDetails">
+        <PropertyRef Name="AccidentTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AccidentDetails_PatientDemographics">
+    <End Role="PatientDemographics" Type="Self.PatientDemographics" Multiplicity="1" />
+    <End Role="AccidentDetails" Type="Self.AccidentDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PatientDemographics">
+        <PropertyRef Name="PersonID" />
+      </Principal>
+      <Dependent Role="AccidentDetails">
+        <PropertyRef Name="PersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmergencyContact_PatientDemographics">
+    <End Role="PatientDemographics" Type="Self.PatientDemographics" Multiplicity="1" />
+    <End Role="EmergencyContact" Type="Self.EmergencyContact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PatientDemographics">
+        <PropertyRef Name="PersonID" />
+      </Principal>
+      <Dependent Role="EmergencyContact">
+        <PropertyRef Name="PersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InsuranceInformation_PatientDemographics">
+    <End Role="PatientDemographics" Type="Self.PatientDemographics" Multiplicity="1" />
+    <End Role="InsuranceInformation" Type="Self.InsuranceInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PatientDemographics">
+        <PropertyRef Name="PersonID" />
+      </Principal>
+      <Dependent Role="InsuranceInformation">
+        <PropertyRef Name="PersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MinorInformation_PatientDemographics">
+    <End Role="PatientDemographics" Type="Self.PatientDemographics" Multiplicity="1" />
+    <End Role="MinorInformation" Type="Self.MinorInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PatientDemographics">
+        <PropertyRef Name="PersonID" />
+      </Principal>
+      <Dependent Role="MinorInformation">
+        <PropertyRef Name="PersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MinorInformation_ResponsibleParty">
+    <End Role="ResponsibleParty" Type="Self.ResponsibleParty" Multiplicity="1" />
+    <End Role="MinorInformation" Type="Self.MinorInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ResponsibleParty">
+        <PropertyRef Name="ResponsiblePartyID" />
+      </Principal>
+      <Dependent Role="MinorInformation">
+        <PropertyRef Name="ResponsiblePartyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientDemographics_FormSection">
+    <End Role="FormSection" Type="Self.FormSection" Multiplicity="1" />
+    <End Role="PatientDemographics" Type="Self.PatientDemographics" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FormSection">
+        <PropertyRef Name="SectionID" />
+      </Principal>
+      <Dependent Role="PatientDemographics">
+        <PropertyRef Name="SectionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientDemographics_Hospital">
+    <End Role="Hospital" Type="Self.Hospital" Multiplicity="1" />
+    <End Role="PatientDemographics" Type="Self.PatientDemographics" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hospital">
+        <PropertyRef Name="HospitalID" />
+      </Principal>
+      <Dependent Role="PatientDemographics">
+        <PropertyRef Name="HospitalID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SpouseInformation_PatientDemographics1">
+    <End Role="PatientDemographics" Type="Self.PatientDemographics" Multiplicity="1" />
+    <End Role="SpouseInformation" Type="Self.SpouseInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PatientDemographics">
+        <PropertyRef Name="PersonID" />
+      </Principal>
+      <Dependent Role="SpouseInformation">
+        <PropertyRef Name="PersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="funcCountInsurances" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+    <Parameter Name="PersonId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="funcCountMinors" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+    <Parameter Name="PersonId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="funcHadAccident" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
+    <Parameter Name="PersonId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="funcHasEmergContact" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
+    <Parameter Name="PersonId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="funcHasSpouse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
+    <Parameter Name="PersonId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="usp_DeletePatientInfoFromPreReg" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PersonID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_FindByID_Accident" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PersonID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_FindByID_EmergContact" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PersonID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_FindByID_Insurances" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PersonID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_FindByID_Minors" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PersonID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_FindByID_Person" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PersonID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_FindByID_Spouse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PersonID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_GetInsuranceByPersonID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="InsId" Type="int" Mode="In" />
+    <Parameter Name="PersonID" Type="int" Mode="In" />
+    <Parameter Name="InsRank" Type="smallint" Mode="In" />
+    <Parameter Name="InsPlanName" Type="varchar" Mode="In" />
+    <Parameter Name="Subscriber_Name" Type="varchar" Mode="In" />
+    <Parameter Name="Rel_PolicyHolder_To_Patient" Type="varchar" Mode="In" />
+    <Parameter Name="Policy_Number" Type="varchar" Mode="In" />
+    <Parameter Name="Group_Number" Type="varchar" Mode="In" />
+    <Parameter Name="InsAddress1" Type="varchar" Mode="In" />
+    <Parameter Name="InsAddress2" Type="varchar" Mode="In" />
+    <Parameter Name="InsCity" Type="varchar" Mode="In" />
+    <Parameter Name="InsState" Type="char" Mode="In" />
+    <Parameter Name="InsZip" Type="bigint" Mode="In" />
+    <Parameter Name="InsPhone" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="usp_GetNonProcessedPatients" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="HospitalID" Type="smallint" Mode="In" />
+  </Function>
+  <Function Name="usp_GetProcessedPatients" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="HospitalID" Type="smallint" Mode="In" />
+  </Function>
+  <Function Name="usp_InsertAccidentDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PersonID" Type="int" Mode="In" />
+    <Parameter Name="AccidentTypeID" Type="smallint" Mode="In" />
+    <Parameter Name="DateOfAccident" Type="varchar" Mode="In" />
+    <Parameter Name="TimeOfAccident" Type="varchar" Mode="In" />
+    <Parameter Name="Location" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="usp_InsertEmergContact" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PersonID" Type="int" Mode="In" />
+    <Parameter Name="Nearest_Relative_Name" Type="varchar" Mode="In" />
+    <Parameter Name="Relationship" Type="varchar" Mode="In" />
+    <Parameter Name="Address1" Type="varchar" Mode="In" />
+    <Parameter Name="Address2" Type="varchar" Mode="In" />
+    <Parameter Name="City" Type="varchar" Mode="In" />
+    <Parameter Name="StateProvince" Type="char" Mode="In" />
+    <Parameter Name="ZipCode" Type="bigint" Mode="In" />
+    <Parameter Name="Contact_Phone" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="usp_InsertInsuranceInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PersonID" Type="int" Mode="In" />
+    <Parameter Name="InsRank" Type="smallint" Mode="In" />
+    <Parameter Name="InsPlanName" Type="varchar" Mode="In" />
+    <Parameter Name="Subscriber_Name" Type="varchar" Mode="In" />
+    <Parameter Name="Rel_PolicyHolder_To_Patient" Type="varchar" Mode="In" />
+    <Parameter Name="Policy_Number" Type="varchar" Mode="In" />
+    <Parameter Name="Group_Number" Type="varchar" Mode="In" />
+    <Parameter Name="PlanCode" Type="varchar" Mode="In" />
+    <Parameter Name="InsAddress1" Type="varchar" Mode="In" />
+    <Parameter Name="InsAddress2" Type="varchar" Mode="In" />
+    <Parameter Name="InsCity" Type="varchar" Mode="In" />
+    <Parameter Name="InsState" Type="char" Mode="In" />
+    <Parameter Name="InsZip" Type="bigint" Mode="In" />
+    <Parameter Name="InsPhone" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="usp_InsertMinorInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PersonID" Type="int" Mode="In" />
+    <Parameter Name="ResponsiblePartyID" Type="int" Mode="In" />
+    <Parameter Name="First_Name" Type="varchar" Mode="In" />
+    <Parameter Name="Middle_Init" Type="varchar" Mode="In" />
+    <Parameter Name="Last_Name" Type="varchar" Mode="In" />
+    <Parameter Name="Address1" Type="varchar" Mode="In" />
+    <Parameter Name="Address2" Type="varchar" Mode="In" />
+    <Parameter Name="City" Type="varchar" Mode="In" />
+    <Parameter Name="StateProvince" Type="char" Mode="In" />
+    <Parameter Name="ZipCode" Type="bigint" Mode="In" />
+    <Parameter Name="Dob" Type="datetime" Mode="In" />
+    <Parameter Name="Race" Type="varchar" Mode="In" />
+    <Parameter Name="Marital_Status" Type="varchar" Mode="In" />
+    <Parameter Name="SSN" Type="varchar" Mode="In" />
+    <Parameter Name="HomePhone" Type="bigint" Mode="In" />
+    <Parameter Name="Cell_Phone" Type="bigint" Mode="In" />
+    <Parameter Name="MailAddress1" Type="varchar" Mode="In" />
+    <Parameter Name="MailAddress2" Type="varchar" Mode="In" />
+    <Parameter Name="MailCity" Type="varchar" Mode="In" />
+    <Parameter Name="MailState" Type="char" Mode="In" />
+    <Parameter Name="MailZip" Type="bigint" Mode="In" />
+    <Parameter Name="E911Address1" Type="varchar" Mode="In" />
+    <Parameter Name="E911Address2" Type="varchar" Mode="In" />
+    <Parameter Name="E911City" Type="varchar" Mode="In" />
+    <Parameter Name="E911State" Type="char" Mode="In" />
+    <Parameter Name="E911Zip" Type="bigint" Mode="In" />
+    <Parameter Name="BillAddress1" Type="varchar" Mode="In" />
+    <Parameter Name="BillAddress2" Type="varchar" Mode="In" />
+    <Parameter Name="BillCity" Type="varchar" Mode="In" />
+    <Parameter Name="BillState" Type="char" Mode="In" />
+    <Parameter Name="BillZip" Type="bigint" Mode="In" />
+    <Parameter Name="Employer" Type="varchar" Mode="In" />
+    <Parameter Name="Job_Title" Type="varchar" Mode="In" />
+    <Parameter Name="EmployerAddress1" Type="varchar" Mode="In" />
+    <Parameter Name="EmployerAddress2" Type="varchar" Mode="In" />
+    <Parameter Name="EmployerCity" Type="varchar" Mode="In" />
+    <Parameter Name="EmployerState" Type="char" Mode="In" />
+    <Parameter Name="EmployerZip" Type="bigint" Mode="In" />
+    <Parameter Name="EmployerPhone" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="usp_InsertPatientDemos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SectionID" Type="smallint" Mode="In" />
+    <Parameter Name="HospitalID" Type="smallint" Mode="In" />
+    <Parameter Name="In_Hospital_Directory" Type="bit" Mode="In" />
+    <Parameter Name="HospitalService" Type="varchar" Mode="In" />
+    <Parameter Name="PrimaryCarePhys" Type="varchar" Mode="In" />
+    <Parameter Name="AdmitDate" Type="datetime" Mode="In" />
+    <Parameter Name="PatientHereBefore" Type="bit" Mode="In" />
+    <Parameter Name="First_Name" Type="varchar" Mode="In" />
+    <Parameter Name="Middle_Name" Type="varchar" Mode="In" />
+    <Parameter Name="Last_Name" Type="varchar" Mode="In" />
+    <Parameter Name="Entitlement" Type="varchar" Mode="In" />
+    <Parameter Name="Gender" Type="char" Mode="In" />
+    <Parameter Name="Address1" Type="varchar" Mode="In" />
+    <Parameter Name="Address2" Type="varchar" Mode="In" />
+    <Parameter Name="City" Type="varchar" Mode="In" />
+    <Parameter Name="StateProvince" Type="char" Mode="In" />
+    <Parameter Name="ZipCode" Type="bigint" Mode="In" />
+    <Parameter Name="BirthDate" Type="datetime" Mode="In" />
+    <Parameter Name="Race" Type="varchar" Mode="In" />
+    <Parameter Name="Marital_Status" Type="varchar" Mode="In" />
+    <Parameter Name="SSN" Type="varchar" Mode="In" />
+    <Parameter Name="Home_Phone" Type="bigint" Mode="In" />
+    <Parameter Name="Cell_Phone" Type="bigint" Mode="In" />
+    <Parameter Name="Email_Address" Type="varchar" Mode="In" />
+    <Parameter Name="Church_Choice" Type="varchar" Mode="In" />
+    <Parameter Name="Mailing_Address1" Type="varchar" Mode="In" />
+    <Parameter Name="Mailing_Address2" Type="varchar" Mode="In" />
+    <Parameter Name="MailingCity" Type="varchar" Mode="In" />
+    <Parameter Name="MailingState" Type="char" Mode="In" />
+    <Parameter Name="MailingZip" Type="bigint" Mode="In" />
+    <Parameter Name="E911Address1" Type="varchar" Mode="In" />
+    <Parameter Name="E911Address2" Type="varchar" Mode="In" />
+    <Parameter Name="E911City" Type="varchar" Mode="In" />
+    <Parameter Name="E911State" Type="char" Mode="In" />
+    <Parameter Name="E911Zip" Type="bigint" Mode="In" />
+    <Parameter Name="ResponsiblePartyID" Type="int" Mode="In" />
+    <Parameter Name="GuarNameIfOther" Type="varchar" Mode="In" />
+    <Parameter Name="Bill_Address1" Type="varchar" Mode="In" />
+    <Parameter Name="Bill_Address2" Type="varchar" Mode="In" />
+    <Parameter Name="Bill_City" Type="varchar" Mode="In" />
+    <Parameter Name="Bill_State" Type="char" Mode="In" />
+    <Parameter Name="Bill_ZipCode" Type="bigint" Mode="In" />
+    <Parameter Name="Employer" Type="varchar" Mode="In" />
+    <Parameter Name="Job_Title" Type="varchar" Mode="In" />
+    <Parameter Name="EmployerAddress1" Type="varchar" Mode="In" />
+    <Parameter Name="EmployerAddress2" Type="varchar" Mode="In" />
+    <Parameter Name="EmployerCity" Type="varchar" Mode="In" />
+    <Parameter Name="EmployerState" Type="char" Mode="In" />
+    <Parameter Name="EmployerZip" Type="bigint" Mode="In" />
+    <Parameter Name="EmployerPhone" Type="bigint" Mode="In" />
+    <Parameter Name="Status" Type="varchar" Mode="In" />
+    <Parameter Name="Created" Type="datetime" Mode="In" />
+    <Parameter Name="Modified" Type="datetime" Mode="In" />
+    <Parameter Name="ModifiedBy" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="usp_InsertSpouseInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PersonID" Type="int" Mode="In" />
+    <Parameter Name="First_Name" Type="varchar" Mode="In" />
+    <Parameter Name="Middle_Name" Type="varchar" Mode="In" />
+    <Parameter Name="Last_Name" Type="varchar" Mode="In" />
+    <Parameter Name="Address1" Type="varchar" Mode="In" />
+    <Parameter Name="Address2" Type="varchar" Mode="In" />
+    <Parameter Name="City" Type="varchar" Mode="In" />
+    <Parameter Name="StateProvince" Type="char" Mode="In" />
+    <Parameter Name="ZipCode" Type="bigint" Mode="In" />
+    <Parameter Name="BirthDate" Type="datetime" Mode="In" />
+    <Parameter Name="Race" Type="varchar" Mode="In" />
+    <Parameter Name="Marital_Status" Type="varchar" Mode="In" />
+    <Parameter Name="SSN" Type="varchar" Mode="In" />
+    <Parameter Name="Home_Phone" Type="bigint" Mode="In" />
+    <Parameter Name="Cell_Phone" Type="bigint" Mode="In" />
+    <Parameter Name="Employer" Type="varchar" Mode="In" />
+    <Parameter Name="Job_Title" Type="varchar" Mode="In" />
+    <Parameter Name="EmployerAddress1" Type="varchar" Mode="In" />
+    <Parameter Name="EmployerAddress2" Type="varchar" Mode="In" />
+    <Parameter Name="EmployerCity" Type="varchar" Mode="In" />
+    <Parameter Name="EmployerState" Type="char" Mode="In" />
+    <Parameter Name="EmployerZip" Type="bigint" Mode="In" />
+    <Parameter Name="Employer_Phone" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="usp_InsertTestPatient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FirstName" Type="varchar" Mode="In" />
+    <Parameter Name="MiddleName" Type="varchar" Mode="In" />
+    <Parameter Name="LastName" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="usp_PageLoadQuery" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PersonID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_UpdatePatientAccessHasProcessed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PersonID" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="PatientPreRegistrationModelStoreContainer">
+    <EntitySet Name="AccidentDetails" EntityType="Self.AccidentDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AccidentType" EntityType="Self.AccidentType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmergencyContact" EntityType="Self.EmergencyContact" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FormSection" EntityType="Self.FormSection" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Hospital" EntityType="Self.Hospital" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InsuranceInformation" EntityType="Self.InsuranceInformation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MinorInformation" EntityType="Self.MinorInformation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PatientDemographics" EntityType="Self.PatientDemographics" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ResponsibleParty" EntityType="Self.ResponsibleParty" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SpouseInformation" EntityType="Self.SpouseInformation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="States" EntityType="Self.States" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [States].[StateID] AS [StateID], 
+    [States].[StateName] AS [StateName]
+    FROM [dbo].[States] AS [States]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="VW_PatientDemosGridView" EntityType="Self.VW_PatientDemosGridView" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [VW_PatientDemosGridView].[PersonID] AS [PersonID], 
+    [VW_PatientDemosGridView].[HospitalID] AS [HospitalID], 
+    [VW_PatientDemosGridView].[HospitalName] AS [HospitalName], 
+    [VW_PatientDemosGridView].[In_Hospital_Directory] AS [In_Hospital_Directory], 
+    [VW_PatientDemosGridView].[HospitalService] AS [HospitalService], 
+    [VW_PatientDemosGridView].[PrimaryCarePhys] AS [PrimaryCarePhys], 
+    [VW_PatientDemosGridView].[AdmitDate] AS [AdmitDate], 
+    [VW_PatientDemosGridView].[PatientHereBefore] AS [PatientHereBefore], 
+    [VW_PatientDemosGridView].[First_Name] AS [First_Name], 
+    [VW_PatientDemosGridView].[Middle_Name] AS [Middle_Name], 
+    [VW_PatientDemosGridView].[Last_Name] AS [Last_Name], 
+    [VW_PatientDemosGridView].[Entitlement] AS [Entitlement], 
+    [VW_PatientDemosGridView].[Gender] AS [Gender], 
+    [VW_PatientDemosGridView].[BirthDate] AS [BirthDate], 
+    [VW_PatientDemosGridView].[ProcessDate] AS [ProcessDate], 
+    [VW_PatientDemosGridView].[Status] AS [Status]
+    FROM [dbo].[VW_PatientDemosGridView] AS [VW_PatientDemosGridView]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_AccidentDetails_AccidentType" Association="Self.FK_AccidentDetails_AccidentType">
+      <End Role="AccidentType" EntitySet="AccidentType" />
+      <End Role="AccidentDetails" EntitySet="AccidentDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccidentDetails_PatientDemographics" Association="Self.FK_AccidentDetails_PatientDemographics">
+      <End Role="PatientDemographics" EntitySet="PatientDemographics" />
+      <End Role="AccidentDetails" EntitySet="AccidentDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmergencyContact_PatientDemographics" Association="Self.FK_EmergencyContact_PatientDemographics">
+      <End Role="PatientDemographics" EntitySet="PatientDemographics" />
+      <End Role="EmergencyContact" EntitySet="EmergencyContact" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InsuranceInformation_PatientDemographics" Association="Self.FK_InsuranceInformation_PatientDemographics">
+      <End Role="PatientDemographics" EntitySet="PatientDemographics" />
+      <End Role="InsuranceInformation" EntitySet="InsuranceInformation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MinorInformation_PatientDemographics" Association="Self.FK_MinorInformation_PatientDemographics">
+      <End Role="PatientDemographics" EntitySet="PatientDemographics" />
+      <End Role="MinorInformation" EntitySet="MinorInformation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MinorInformation_ResponsibleParty" Association="Self.FK_MinorInformation_ResponsibleParty">
+      <End Role="ResponsibleParty" EntitySet="ResponsibleParty" />
+      <End Role="MinorInformation" EntitySet="MinorInformation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientDemographics_FormSection" Association="Self.FK_PatientDemographics_FormSection">
+      <End Role="FormSection" EntitySet="FormSection" />
+      <End Role="PatientDemographics" EntitySet="PatientDemographics" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientDemographics_Hospital" Association="Self.FK_PatientDemographics_Hospital">
+      <End Role="Hospital" EntitySet="Hospital" />
+      <End Role="PatientDemographics" EntitySet="PatientDemographics" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SpouseInformation_PatientDemographics1" Association="Self.FK_SpouseInformation_PatientDemographics1">
+      <End Role="PatientDemographics" EntitySet="PatientDemographics" />
+      <End Role="SpouseInformation" EntitySet="SpouseInformation" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
