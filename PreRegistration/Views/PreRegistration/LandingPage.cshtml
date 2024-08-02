@@ -149,6 +149,17 @@
             font-size: 100%;
             color: black;
         }
+    .stepwizard-step a.disableButton {
+        pointer-events: none;
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+        .stepwizard-step {
+            pointer-events: auto;
+            opacity: 1;
+            cursor: pointer;
+        }
 </style>
 <br />
 <br />
@@ -161,32 +172,32 @@
             <div class="stepwizard-step col-xs-1"></div>
             <div class="stepwizard-step col-xs-1"></div>
             <div class="stepwizard-step col-xs-1">
-                <a href="#patient" type="button" id="patientStep" onclick="onPatientStepClick()" class="btn btn-success btn-circle">1</a>
+                <a href="#patient" type="button" id="patientStep" class="btn btn-success btn-circle">1</a>
                 <p><small>Patient Information</small></p>
             </div>
 
             <div class="stepwizard-step col-xs-1">
-                <a href="#spouse" type="button" id="spouseStep" class="btn btn-default btn-circle" disabled="disabled">2</a>
+                <a href="#spouse" type="button" id="spouseStep" class="btn btn-default btn-circle disableButton" disabled="disabled">2</a>
                 <p><small>Spouse Information</small></p>
             </div>
             <div class="stepwizard-step col-xs-1">
-                <a href="#minor" type="button" id="minorStep" class="btn btn-default btn-circle" disabled="disabled">3</a>
+                <a href="#minor" type="button" id="minorStep" class="btn btn-default btn-circle disableButton" disabled="disabled">3</a>
                 <p><small>Minor Information</small></p>
             </div>
             <div class="stepwizard-step col-xs-1">
-                <a href="#emergency" type="button" id="emergencyStep" class="btn btn-default btn-circle" disabled="disabled">4</a>
+                <a href="#emergency" type="button" id="emergencyStep" class="btn btn-default btn-circle disableButton" disabled="disabled">4</a>
                 <p><small>Emergency Contact Information</small></p>
             </div>
             <div class="stepwizard-step col-xs-1">
-                <a href="#insurance" type="button" id="insuranceStep" class="btn btn-default btn-circle" disabled="disabled">5</a>
+                <a href="#insurance" type="button" id="insuranceStep" class="btn btn-default btn-circle disableButton" disabled="disabled">5</a>
                 <p><small>Insurance Information</small></p>
             </div>
             <div class="stepwizard-step col-xs-1">
-                <a href="#accident" type="button"id="accidentStep" class="btn btn-default btn-circle" disabled="disabled">6</a>
+                <a href="#accident" type="button" id="accidentStep" class="btn btn-default btn-circle disableButton" disabled="disabled">6</a>
                 <p><small>Accident Information</small></p>
             </div>
             <div class="stepwizard-step col-xs-1">
-                <a href="#step-7" type="button" id="verifyStep" class="btn btn-default btn-circle" disabled="disabled">7</a>
+                <a href="#step-7" type="button" id="verifyStep" class="btn btn-default btn-circle disableButton" disabled="disabled">7</a>
                 <p><small>Verify Information</small></p>
             </div>
             <div class="stepwizard-step col-xs-1"></div>
@@ -1216,7 +1227,7 @@
                         <div id="ErrorMessages"></div>
                     </div>
                 </div>
-                <button class="btn1 btn-primary nextBtn pull-right"  type="submit">Finish!</button>
+                <button class="btn1 btn-primary nextBtn pull-right" onclick="onAccidentClick()" type="submit">Finish!</button>
             </div>
         </div>
     </form>
@@ -1346,7 +1357,6 @@
         });
 
         $("input[type=radio][name='PatientDemographicsViewModel.ResponsiblePartyID']").on('change', function () {
-            debugger
             switch ($(this).val()) {
                 case '4':
                     $('#divGuarNameIfOther').show();
@@ -1356,8 +1366,9 @@
                     break;
             }
         });
+    });
 
-   
+
 
 
     //Step 1 Validation
@@ -1365,24 +1376,20 @@
         var canUserSubmit = validatePatientData();
 
         if (canUserSubmit) {
-           
+
             $('#patient').hide();
             $('#spouse').show();
             enableNextStep('spouse');
         }
     }
-
-   
-
-
     function onSpouseClick() {
-     
+
         var notMarried = $("#notmarried").is(":checked");
         if (notMarried) {
             $('#spouse').hide();
             $('#minor').show();
             enableNextStep('minor');
-            
+
         }
         var canUserSubmit = validateSpouseData();
         if (canUserSubmit) {
@@ -1391,8 +1398,9 @@
             enableNextStep('minor');
         }
     }
+
     function onMinorClick() {
-        
+
         var notMinor = $("#notMinor").is(":checked");
         if (notMinor) {
             $('#minor').hide();
@@ -1406,8 +1414,9 @@
             enableNextStep('emergency');
         }
     }
+
     function onEmergencyClick() {
-        
+
         var emergecny = $("#emergecny").is(":checked");
         if (emergecny) {
             $('#emergency').hide();
@@ -1421,8 +1430,9 @@
             enableNextStep('insurance');
         }
     }
+
     function onInsuranceClick() {
-      
+
         var insuranceCheckBox = $("#insuranceCheckBox").is(":checked");
         if (insuranceCheckBox) {
             $('#insurance').hide();
@@ -1437,7 +1447,6 @@
         }
     }
     function onAccidentClick() {
-       
         var canUserSubmit = validateAccidentData();
         if (canUserSubmit) {
             $('#accident').hide();
@@ -1447,7 +1456,6 @@
     }
     //Step 6 Validation
     function validateAccidentData() {
-   
         var selectedHSVal = "";
         var selected = $("input[type='radio'][name='AccidentDetail.AccidentTypeID']:checked");
         if (selected.length > 0) {
@@ -1460,9 +1468,9 @@
         var errorMessages = '';
 
         // Validate InsRank
-     
+
         var InsRank = $("#AccentInformationInsRank").val().trim();
-        if (InsRank == '0') {
+        if (InsRank === '0') {
             canSubmit = false;
             $("#AccentInformationInsRank").css({ "background-color": "pink" });
             errorMessages += "<ul><li>InsRank field is required.</li></ul>";
@@ -1497,7 +1505,7 @@
                 $("#AccidentDetail_AccidentTypeID").css({ "background-color": "" });
             }
         }
-      
+
 
         // Display errors if any
         if (errorMessages.length > 0) {
@@ -1509,7 +1517,7 @@
     }
     //Step 5 Validation
     function validateInsuranceData() {
-        debugger
+      
         var canSubmit = true;
         var $errorDiv = $("#insuranceErrors");
         $errorDiv.hide();
@@ -1521,7 +1529,7 @@
 
         // Validate InsRank
         var InsRank = $("#InsuranceInformation_InsRank").val().trim();
-        if (InsRank == '0') {
+        if (InsRank === '0') {
             canSubmit = false;
             $("#InsuranceInformation_InsRank").css({ "background-color": "pink" });
             errorMessages += "<ul><li>InsRank field is required.</li></ul>";
@@ -1551,11 +1559,11 @@
     }
     //Step 4 Validation
     function validateEmergencyData() {
-        debugger
+      
         var canSubmit = true;
         var $errorDiv = $("#emergencyErrors");
         $errorDiv.hide();
-        var errorMessages = ''; 
+        var errorMessages = '';
         var emergecny = $("#emergecny").is(":checked");
         if (emergecny) {
             return true;
@@ -1582,7 +1590,7 @@
     }
     //Step 3 Validation
     function validateMinorData() {
-        debugger
+      
         var canSubmit = true;
         var $errorDiv = $("#minorErrors");
         $errorDiv.hide();
@@ -1630,7 +1638,7 @@
         }
 
         // Validate Marital Status
-        debugger
+      
         if ($("#Marital-Status option:selected").val() === "") {
             canSubmit = false;
             $("#Marital-Status").css({ "background-color": "pink" });
@@ -1657,7 +1665,7 @@
     }
     //Step 2 Validation
     function validateSpouseData() {
-        debugger
+     
         var canSubmit = true;
         var $errorDiv = $("#spouseErrors");
         $errorDiv.hide();
@@ -1731,15 +1739,23 @@
         return canSubmit;
     }
 
-    
+    $('.stepwizard-step a').on('click', function (event) {
+      
+        if ($(this).hasClass('disableButton')) {
+            event.preventDefault();
+            return false;
+        }
+    });
+
 
     function enableNextStep(stepId) {
         $('.stepwizard-step a').addClass('btn-default').removeClass('btn-success').prop('disabled', true);
         $(`.stepwizard-step a[href="#${stepId}"]`).removeClass('btn-default').addClass('btn-success').prop('disabled', false);
+        $(`.stepwizard-step a[href="#${stepId}"]`).removeClass('disableButton').prop('disabled', false);
     }
 
     function validatePatientData() {
-      
+
         // alert($("input[type=radio][name='PatientDemographicsViewModel.ResponsiblePartyID']").val())
         var selectedHSVal = "";
         var selected = $("input[type='radio'][name='PatientDemographicsViewModel.HospitalService']:checked");
@@ -1869,6 +1885,6 @@
         }
         return canSubmit;
     }
-  });
+
 
 </script>
