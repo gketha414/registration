@@ -222,7 +222,7 @@ namespace PreRegistration.DAL
                         EmployerState = patientViewModel.PatientDemographicsViewModel.EmployerState,
                         EmployerZip = patientViewModel.PatientDemographicsViewModel.EmployerZip,
                         EmployerPhone = patientViewModel.PatientDemographicsViewModel.EmployerPhone,
-                        //       Status = patientViewModel.PatientDemographicsViewModel.Status,
+                        Status = patientViewModel.PatientDemographicsViewModel.Status,
 
                         SectionID = 1,
                         Created = DateTime.Now,
