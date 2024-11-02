@@ -27,6 +27,13 @@
         <AssociationConnector Association="PatientPreRegistrationModel.FK_MinorInformation_PatientDemographics" ManuallyRouted="false" />
         <AssociationConnector Association="PatientPreRegistrationModel.FK_MinorInformation_ResponsibleParty" ManuallyRouted="false" />
         <AssociationConnector Association="PatientPreRegistrationModel.FK_SpouseInformation_PatientDemographics1" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="PatientPreRegistrationModel.Ethnicity" Width="1.5" PointX="3.375" PointY="3.75" />
+        <EntityTypeShape EntityType="PatientPreRegistrationModel.Gender" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="PatientPreRegistrationModel.AttachmentType" Width="1.5" PointX="5.375" PointY="3.75" />
+        <EntityTypeShape EntityType="PatientPreRegistrationModel.BirthGender" Width="1.5" PointX="3.375" PointY="6.75" />
+        <EntityTypeShape EntityType="PatientPreRegistrationModel.HospitalService" Width="1.5" PointX="5.375" PointY="6.75" />
+        <EntityTypeShape EntityType="PatientPreRegistrationModel.MaritalStatu" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="PatientPreRegistrationModel.Race" Width="1.5" PointX="7.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PatientPreRegistrationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="PatientPreRegistrationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AccidentDetails">
           <Key>
             <PropertyRef Name="AccidentDetailID" />
@@ -22,6 +22,23 @@
           </Key>
           <Property Name="AccidentTypeID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AttachmentTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AttachmentType" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BirthGender">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="EmergencyContact">
           <Key>
@@ -38,6 +55,14 @@
           <Property Name="ZipCode" Type="bigint" />
           <Property Name="Contact_Phone" Type="bigint" />
         </EntityType>
+        <EntityType Name="Ethnicity">
+          <Key>
+            <PropertyRef Name="EthnicityID" />
+          </Key>
+          <Property Name="EthnicityID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="FormSection">
           <Key>
             <PropertyRef Name="SectionID" />
@@ -45,12 +70,29 @@
           <Property Name="SectionID" Type="smallint" Nullable="false" />
           <Property Name="SectionName" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="GenderID" />
+          </Key>
+          <Property Name="GenderID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="Hospital">
           <Key>
             <PropertyRef Name="HospitalID" />
           </Key>
           <Property Name="HospitalID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="HospitalName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HospitalService">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="InsuranceInformation">
           <Key>
@@ -71,6 +113,14 @@
           <Property Name="InsState" Type="char" MaxLength="2" />
           <Property Name="InsZip" Type="bigint" />
           <Property Name="InsPhone" Type="bigint" />
+        </EntityType>
+        <EntityType Name="MaritalStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="MinorInformation">
           <Key>
@@ -178,12 +228,21 @@
           <Property Name="ModifiedBy" Type="varchar" MaxLength="25" />
           <Property Name="ProcessDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="Race">
+          <Key>
+            <PropertyRef Name="RaceID" />
+          </Key>
+          <Property Name="RaceID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="ResponsibleParty">
           <Key>
             <PropertyRef Name="ResponsiblePartyID" />
           </Key>
           <Property Name="ResponsiblePartyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ResponsiblePartyDescription" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="SpouseInformation">
           <Key>
@@ -219,10 +278,12 @@ warning 6002: The table/view 'PatientPreRegistration_TEST.dbo.States' does not h
         <EntityType Name="States">
           <Key>
             <PropertyRef Name="StateID" />
-            <PropertyRef Name="StateName" />
+            
+            <PropertyRef Name="IsActive" />
           </Key>
           <Property Name="StateID" Type="varchar" MaxLength="5" Nullable="false" />
           <Property Name="StateName" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -634,19 +695,27 @@ warning 6002: The table/view 'PatientPreRegistration_TEST.dbo.VW_PatientDemosGri
         <EntityContainer Name="PatientPreRegistrationModelStoreContainer">
           <EntitySet Name="AccidentDetails" EntityType="Self.AccidentDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccidentType" EntityType="Self.AccidentType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AttachmentTypes" EntityType="Self.AttachmentTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BirthGender" EntityType="Self.BirthGender" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmergencyContact" EntityType="Self.EmergencyContact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ethnicity" EntityType="Self.Ethnicity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FormSection" EntityType="Self.FormSection" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Hospital" EntityType="Self.Hospital" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HospitalService" EntityType="Self.HospitalService" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InsuranceInformation" EntityType="Self.InsuranceInformation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MaritalStatus" EntityType="Self.MaritalStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MinorInformation" EntityType="Self.MinorInformation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PatientDemographics" EntityType="Self.PatientDemographics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Race" EntityType="Self.Race" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ResponsibleParty" EntityType="Self.ResponsibleParty" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SpouseInformation" EntityType="Self.SpouseInformation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="States" EntityType="Self.States" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [States].[StateID] AS [StateID], 
-    [States].[StateName] AS [StateName]
+    [States].[StateName] AS [StateName], 
+    [States].[IsActive] AS [IsActive]
     FROM [dbo].[States] AS [States]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VW_PatientDemosGridView" EntityType="Self.VW_PatientDemosGridView" store:Type="Views" store:Schema="dbo">
@@ -706,8 +775,7 @@ warning 6002: The table/view 'PatientPreRegistration_TEST.dbo.VW_PatientDemosGri
             <End Role="SpouseInformation" EntitySet="SpouseInformation" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PatientPreRegistrationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -731,6 +799,7 @@ warning 6002: The table/view 'PatientPreRegistration_TEST.dbo.VW_PatientDemosGri
           <Property Name="AccidentTypeID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Description" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="AccidentDetails" Relationship="Self.FK_AccidentDetails_AccidentType" FromRole="AccidentType" ToRole="AccidentDetails" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="EmergencyContact">
           <Key>
@@ -763,6 +832,7 @@ warning 6002: The table/view 'PatientPreRegistration_TEST.dbo.VW_PatientDemosGri
           <Property Name="HospitalID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="HospitalName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="PatientDemographics" Relationship="Self.FK_PatientDemographics_Hospital" FromRole="Hospital" ToRole="PatientDemographics" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="InsuranceInformation">
           <Key>
@@ -907,6 +977,7 @@ warning 6002: The table/view 'PatientPreRegistration_TEST.dbo.VW_PatientDemosGri
           <Property Name="ResponsiblePartyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ResponsiblePartyDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="MinorInformations" Relationship="Self.FK_MinorInformation_ResponsibleParty" FromRole="ResponsibleParty" ToRole="MinorInformation" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="SpouseInformation">
           <Key>
@@ -951,10 +1022,11 @@ warning 6002: The table/view 'PatientPreRegistration_TEST.dbo.VW_PatientDemosGri
         <EntityType Name="State">
           <Key>
             <PropertyRef Name="StateID" />
-            <PropertyRef Name="StateName" />
+            <PropertyRef Name="IsActive" />
           </Key>
           <Property Name="StateID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="StateName" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="VW_PatientDemosGridView">
           <Key>
@@ -1176,25 +1248,25 @@ warning 6002: The table/view 'PatientPreRegistration_TEST.dbo.VW_PatientDemosGri
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
           <FunctionImport Name="usp_DeletePatientInfoFromPreReg">
-            <Parameter Name="PersonID" Mode="In" Type="Int32" />
+          <Parameter Name="PersonID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_FindByID_Accident" ReturnType="Collection(PatientPreRegistrationModel.usp_FindByID_Accident_Result)">
-            <Parameter Name="PersonID" Mode="In" Type="Int32" />
+          <Parameter Name="PersonID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_FindByID_EmergContact" ReturnType="Collection(PatientPreRegistrationModel.usp_FindByID_EmergContact_Result)">
-            <Parameter Name="PersonID" Mode="In" Type="Int32" />
+          <Parameter Name="PersonID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_FindByID_Insurances" ReturnType="Collection(PatientPreRegistrationModel.usp_FindByID_Insurances_Result)">
-            <Parameter Name="PersonID" Mode="In" Type="Int32" />
+          <Parameter Name="PersonID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_FindByID_Minors" ReturnType="Collection(PatientPreRegistrationModel.usp_FindByID_Minors_Result)">
-            <Parameter Name="PersonID" Mode="In" Type="Int32" />
+          <Parameter Name="PersonID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_FindByID_Person" ReturnType="Collection(PatientPreRegistrationModel.usp_FindByID_Person_Result)">
-            <Parameter Name="PersonID" Mode="In" Type="Int32" />
+          <Parameter Name="PersonID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_FindByID_Spouse" ReturnType="Collection(PatientPreRegistrationModel.usp_FindByID_Spouse_Result)">
-            <Parameter Name="PersonID" Mode="In" Type="Int32" />
+          <Parameter Name="PersonID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_GetInsuranceByPersonID" ReturnType="Collection(PatientPreRegistrationModel.usp_GetInsuranceByPersonID_Result)">
             <Parameter Name="InsId" Mode="In" Type="Int32" />
@@ -1213,10 +1285,10 @@ warning 6002: The table/view 'PatientPreRegistration_TEST.dbo.VW_PatientDemosGri
             <Parameter Name="InsPhone" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="usp_GetNonProcessedPatients" ReturnType="Collection(PatientPreRegistrationModel.usp_GetNonProcessedPatients_Result)">
-            <Parameter Name="HospitalID" Mode="In" Type="Int16" />
+          <Parameter Name="HospitalID" Mode="In" Type="Int16" />
           </FunctionImport>
           <FunctionImport Name="usp_GetProcessedPatients" ReturnType="Collection(PatientPreRegistrationModel.usp_GetProcessedPatients_Result)">
-            <Parameter Name="HospitalID" Mode="In" Type="Int16" />
+          <Parameter Name="HospitalID" Mode="In" Type="Int16" />
           </FunctionImport>
           <FunctionImport Name="usp_InsertAccidentDetail" ReturnType="Collection(Decimal)">
             <Parameter Name="PersonID" Mode="In" Type="Int32" />
@@ -1380,11 +1452,18 @@ warning 6002: The table/view 'PatientPreRegistration_TEST.dbo.VW_PatientDemosGri
             <Parameter Name="LastName" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="usp_PageLoadQuery" ReturnType="Collection(PatientPreRegistrationModel.usp_PageLoadQuery_Result)">
-            <Parameter Name="PersonID" Mode="In" Type="Int32" />
+          <Parameter Name="PersonID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_UpdatePatientAccessHasProcessed">
-            <Parameter Name="PersonID" Mode="In" Type="Int32" />
+          <Parameter Name="PersonID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="Ethnicities" EntityType="PatientPreRegistrationModel.Ethnicity" />
+          <EntitySet Name="Genders" EntityType="PatientPreRegistrationModel.Gender" />
+          <EntitySet Name="AttachmentTypes" EntityType="PatientPreRegistrationModel.AttachmentType" />
+          <EntitySet Name="BirthGenders" EntityType="PatientPreRegistrationModel.BirthGender" />
+          <EntitySet Name="HospitalServices" EntityType="PatientPreRegistrationModel.HospitalService" />
+          <EntitySet Name="MaritalStatus" EntityType="PatientPreRegistrationModel.MaritalStatu" />
+          <EntitySet Name="Races" EntityType="PatientPreRegistrationModel.Race" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1614,6 +1693,62 @@ warning 6002: The table/view 'PatientPreRegistration_TEST.dbo.VW_PatientDemosGri
           <Property Type="Boolean" Name="HasEmergContact" Nullable="true" />
           <Property Type="Boolean" Name="HadAccident" Nullable="true" />
         </ComplexType>
+        <EntityType Name="Ethnicity">
+          <Key>
+            <PropertyRef Name="EthnicityID" />
+          </Key>
+          <Property Name="EthnicityID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="GenderID" />
+          </Key>
+          <Property Name="GenderID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AttachmentType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AttachmentType1" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BirthGender">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HospitalService">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MaritalStatu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Race">
+          <Key>
+            <PropertyRef Name="RaceID" />
+          </Key>
+          <Property Name="RaceID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1635,6 +1770,7 @@ warning 6002: The table/view 'PatientPreRegistration_TEST.dbo.VW_PatientDemosGri
           <EntitySetMapping Name="AccidentTypes">
             <EntityTypeMapping TypeName="PatientPreRegistrationModel.AccidentType">
               <MappingFragment StoreEntitySet="AccidentType">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="AccidentTypeID" ColumnName="AccidentTypeID" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
@@ -1667,6 +1803,7 @@ warning 6002: The table/view 'PatientPreRegistration_TEST.dbo.VW_PatientDemosGri
           <EntitySetMapping Name="Hospitals">
             <EntityTypeMapping TypeName="PatientPreRegistrationModel.Hospital">
               <MappingFragment StoreEntitySet="Hospital">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="HospitalID" ColumnName="HospitalID" />
                 <ScalarProperty Name="HospitalName" ColumnName="HospitalName" />
               </MappingFragment>
@@ -1804,6 +1941,7 @@ warning 6002: The table/view 'PatientPreRegistration_TEST.dbo.VW_PatientDemosGri
           <EntitySetMapping Name="ResponsibleParties">
             <EntityTypeMapping TypeName="PatientPreRegistrationModel.ResponsibleParty">
               <MappingFragment StoreEntitySet="ResponsibleParty">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="ResponsiblePartyID" ColumnName="ResponsiblePartyID" />
                 <ScalarProperty Name="ResponsiblePartyDescription" ColumnName="ResponsiblePartyDescription" />
               </MappingFragment>
@@ -1853,6 +1991,7 @@ warning 6002: The table/view 'PatientPreRegistration_TEST.dbo.VW_PatientDemosGri
           <EntitySetMapping Name="States">
             <EntityTypeMapping TypeName="PatientPreRegistrationModel.State">
               <MappingFragment StoreEntitySet="States">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="StateID" ColumnName="StateID" />
                 <ScalarProperty Name="StateName" ColumnName="StateName" />
               </MappingFragment>
@@ -2170,6 +2309,69 @@ warning 6002: The table/view 'PatientPreRegistration_TEST.dbo.VW_PatientDemosGri
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="usp_UpdatePatientAccessHasProcessed" FunctionName="PatientPreRegistrationModel.Store.usp_UpdatePatientAccessHasProcessed" />
+          <EntitySetMapping Name="Ethnicities">
+            <EntityTypeMapping TypeName="PatientPreRegistrationModel.Ethnicity">
+              <MappingFragment StoreEntitySet="Ethnicity">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="EthnicityID" ColumnName="EthnicityID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genders">
+            <EntityTypeMapping TypeName="PatientPreRegistrationModel.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="GenderID" ColumnName="GenderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AttachmentTypes">
+            <EntityTypeMapping TypeName="PatientPreRegistrationModel.AttachmentType">
+              <MappingFragment StoreEntitySet="AttachmentTypes">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="AttachmentType1" ColumnName="AttachmentType" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BirthGenders">
+            <EntityTypeMapping TypeName="PatientPreRegistrationModel.BirthGender">
+              <MappingFragment StoreEntitySet="BirthGender">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HospitalServices">
+            <EntityTypeMapping TypeName="PatientPreRegistrationModel.HospitalService">
+              <MappingFragment StoreEntitySet="HospitalService">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaritalStatus">
+            <EntityTypeMapping TypeName="PatientPreRegistrationModel.MaritalStatu">
+              <MappingFragment StoreEntitySet="MaritalStatus">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Races">
+            <EntityTypeMapping TypeName="PatientPreRegistrationModel.Race">
+              <MappingFragment StoreEntitySet="Race">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="RaceID" ColumnName="RaceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

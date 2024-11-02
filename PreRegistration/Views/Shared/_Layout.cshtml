@@ -29,16 +29,36 @@
                 </button>
                 <a href="/">
                     <a href="/">
-                        @*<img src="~/images/centra_LogoPreReg.png" height="55px" />*@
-                        <img src="~/images/centra_LogoPreReg.jpg" height="65px" style="margin-left:-14px" />
+                        @*<img src="~/images/centra_LogoPreReg.png"  height="55px" />*@
+                        @*<img src="~/images/centra_LogoPreReg.jpg" height="65px" style="margin-left:-14px" />*@
+                        @*<img src="~/images/CentraLogo_Hor_CMYK.svg" height="65px" style="margin-left:-14px" />*@
+                        <img src="~/images/CentraLogo_Hor_CMYK_REV.svg" height="65px" style="margin-left:-14px" />
                     </a>
                 </a>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav" style="margin-left:21px">
+                <ul class="nav navbar-nav" style="margin-left:21px;margin-top:7px">
                     @*<li> @Html.ActionLink("Pre Registration", "LandingPage", "PreRegistration", new { area = "" }, new { @class = "navbar-brand" })</li>*@
                     <li>
-                       
+
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav" style="margin-left:21px;margin-top:7px">
+                    <li class="dropdown">
+                        <a id="hrdd" href="#" class="dropdown-toggle navbar-brand" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Admin<span class="caret"></span></a>
+                        <ul class="dropdown-menu" aria-labelledby="lbmdd">
+                            <li>@Html.ActionLink("View Patients", "PatientList", "PreRegistration")</li>
+                            <li>@Html.ActionLink("States Maintenance", "StateMaint", "Admin")</li>
+                            <li>@Html.ActionLink("Responsible Party Maintenance", "ResponsiblePartyMaint", "Admin")</li>
+                            <li>@Html.ActionLink("Hospital Maintenance", "HospitalMaint", "Admin")</li>
+                            <li>@Html.ActionLink("Accident Type Maintenance", "AccidentTypeMaint", "Admin")</li>
+                            <li>@Html.ActionLink("Ethnicity Maintenance", "EthnicityMaint", "Admin")</li>
+                            <li>@Html.ActionLink("Currently Identify As Maintenance", "GenderMaint", "Admin")</li>
+                            <li>@Html.ActionLink("Race Maintenance", "RaceMaint", "Admin")</li>
+                            <li>@Html.ActionLink("MaritalStatus Maintenance", "MaritalStatusMaint", "Admin")</li>
+                            <li>@Html.ActionLink("HospitalService Maintenance", "HospitalServiceMaint", "Admin")</li>
+                            <li>@Html.ActionLink("Birth Gender Maintenance", "BirthGenderMaint", "Admin")</li>
+                        </ul>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

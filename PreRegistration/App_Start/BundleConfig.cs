@@ -10,6 +10,7 @@ namespace PreRegistration
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/DataTables/jquery.dataTables.js",
+                         "~/Scripts/jquery-ui.js",
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -44,6 +45,7 @@ namespace PreRegistration
                       "~/Content/bootstrap-datetimepicker.css",
                       "~/Content/DataTables/css/buttons.dataTables.css",
                       "~/Content/jquery.pnotify.css",
+                       "~/Content/jquery-ui.css",
                       "~/Content/font-awesome.css",
                       "~/Content/font-awesome.min.css",
                       "~/Content/site.css"));

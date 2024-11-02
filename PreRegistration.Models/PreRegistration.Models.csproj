@@ -66,10 +66,22 @@
     <Compile Include="AccidentType.cs">
       <DependentUpon>PatientPreRegistrationModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="AttachmentType.cs">
+      <DependentUpon>PatientPreRegistrationModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BirthGender.cs">
+      <DependentUpon>PatientPreRegistrationModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EmergencyContact.cs">
       <DependentUpon>PatientPreRegistrationModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ethnicity.cs">
+      <DependentUpon>PatientPreRegistrationModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="FormSection.cs">
+      <DependentUpon>PatientPreRegistrationModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Gender.cs">
       <DependentUpon>PatientPreRegistrationModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Helpers\EmailHelper.cs" />
@@ -79,7 +91,13 @@
     <Compile Include="Hospital.cs">
       <DependentUpon>PatientPreRegistrationModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="HospitalService.cs">
+      <DependentUpon>PatientPreRegistrationModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="InsuranceInformation.cs">
+      <DependentUpon>PatientPreRegistrationModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MaritalStatu.cs">
       <DependentUpon>PatientPreRegistrationModel.tt</DependentUpon>
     </Compile>
     <Compile Include="MinorInformation.cs">
@@ -104,6 +122,9 @@
       <DependentUpon>PatientPreRegistrationModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Race.cs">
+      <DependentUpon>PatientPreRegistrationModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ResponsibleParty.cs">
       <DependentUpon>PatientPreRegistrationModel.tt</DependentUpon>
     </Compile>
@@ -122,6 +143,13 @@
     <Compile Include="sysdiagram.cs">
       <DependentUpon>PatientPreRegistrationModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="UI\AccidentDetailModel.cs" />
+    <Compile Include="UI\EmergencyContactModel.cs" />
+    <Compile Include="UI\InsuranceInformationModel.cs" />
+    <Compile Include="UI\MinorInformationModel.cs" />
+    <Compile Include="UI\PatientDemographicsModel.cs" />
+    <Compile Include="UI\PatientModel.cs" />
+    <Compile Include="UI\SpouseInformationModel.cs" />
     <Compile Include="usp_FindByID_Accident_Result.cs">
       <DependentUpon>PatientPreRegistrationModel.tt</DependentUpon>
     </Compile>
@@ -153,15 +181,25 @@
       <DependentUpon>PatientPreRegistrationModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AccidentDetailViewModel.cs" />
+    <Compile Include="ViewModels\AccidentTypeViewModel.cs" />
+    <Compile Include="ViewModels\BirthGenderViewModel.cs" />
     <Compile Include="ViewModels\CentraPeopleViewModel.cs" />
     <Compile Include="ViewModels\EmergencyContactViewModel.cs" />
+    <Compile Include="ViewModels\EthnicityViewModel.cs" />
+    <Compile Include="ViewModels\GenderViewModel.cs" />
+    <Compile Include="ViewModels\HospitalServiceViewModel.cs" />
+    <Compile Include="ViewModels\HospitalViewModel.cs" />
     <Compile Include="ViewModels\InsuranceInformationViewModel.cs" />
     <Compile Include="ViewModels\IViewModel.cs" />
     <Compile Include="ViewModels\MailViewModel.cs" />
+    <Compile Include="ViewModels\MaritalStatusViewModel.cs" />
     <Compile Include="ViewModels\MinorInformationViewModel.cs" />
     <Compile Include="ViewModels\PatientDemographicsViewModel.cs" />
     <Compile Include="ViewModels\PatientViewModel.cs" />
+    <Compile Include="ViewModels\RaceViewModel.cs" />
+    <Compile Include="ViewModels\ResponsiblePartyViewModel.cs" />
     <Compile Include="ViewModels\SpouseInformationViewModel.cs" />
+    <Compile Include="ViewModels\StateViewModel.cs" />
     <Compile Include="VW_PatientDemosGridView.cs">
       <DependentUpon>PatientPreRegistrationModel.tt</DependentUpon>
     </Compile>
@@ -194,5 +232,6 @@
       <LastGenOutput>PatientPreRegistrationModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

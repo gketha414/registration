@@ -16,5 +16,6 @@ namespace PreRegistration.Models
     {
         public string StateID { get; set; }
         public string StateName { get; set; }
+        public bool IsActive { get; set; }
     }
 }

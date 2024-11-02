@@ -21,6 +21,7 @@ namespace PreRegistration.Models.ViewModels
         public string StateProvince { get; set; }
         [Required, Display(Name = "Zip Code")]
         public Nullable<long> ZipCode { get; set; }
+        [DataType(DataType.Date)]
         [Required, Display(Name = "Date of Birth")]
         public Nullable<System.DateTime> BirthDate { get; set; }
         public string Race { get; set; }

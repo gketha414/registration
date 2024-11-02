@@ -20,6 +20,7 @@
     <Property Name="AccidentTypeID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Description" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="AccidentDetails" Relationship="Self.FK_AccidentDetails_AccidentType" FromRole="AccidentType" ToRole="AccidentDetails" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="EmergencyContact">
     <Key>
@@ -52,6 +53,7 @@
     <Property Name="HospitalID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="HospitalName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="PatientDemographics" Relationship="Self.FK_PatientDemographics_Hospital" FromRole="Hospital" ToRole="PatientDemographics" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="InsuranceInformation">
     <Key>
@@ -196,6 +198,7 @@
     <Property Name="ResponsiblePartyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ResponsiblePartyDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="MinorInformations" Relationship="Self.FK_MinorInformation_ResponsibleParty" FromRole="ResponsibleParty" ToRole="MinorInformation" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="SpouseInformation">
     <Key>
@@ -240,10 +243,11 @@
   <EntityType Name="State">
     <Key>
       <PropertyRef Name="StateID" />
-      <PropertyRef Name="StateName" />
+      <PropertyRef Name="IsActive" />
     </Key>
     <Property Name="StateID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="StateName" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="VW_PatientDemosGridView">
     <Key>
@@ -674,6 +678,13 @@
     <FunctionImport Name="usp_UpdatePatientAccessHasProcessed">
       <Parameter Name="PersonID" Mode="In" Type="Int32" />
     </FunctionImport>
+    <EntitySet Name="Ethnicities" EntityType="PatientPreRegistrationModel.Ethnicity" />
+    <EntitySet Name="Genders" EntityType="PatientPreRegistrationModel.Gender" />
+    <EntitySet Name="AttachmentTypes" EntityType="PatientPreRegistrationModel.AttachmentType" />
+    <EntitySet Name="BirthGenders" EntityType="PatientPreRegistrationModel.BirthGender" />
+    <EntitySet Name="HospitalServices" EntityType="PatientPreRegistrationModel.HospitalService" />
+    <EntitySet Name="MaritalStatus" EntityType="PatientPreRegistrationModel.MaritalStatu" />
+    <EntitySet Name="Races" EntityType="PatientPreRegistrationModel.Race" />
   </EntityContainer>
   <ComplexType Name="sp_helpdiagramdefinition_Result">
     <Property Type="Int32" Name="version" Nullable="true" />
@@ -903,4 +914,60 @@
     <Property Type="Boolean" Name="HasEmergContact" Nullable="true" />
     <Property Type="Boolean" Name="HadAccident" Nullable="true" />
   </ComplexType>
+  <EntityType Name="Ethnicity">
+    <Key>
+      <PropertyRef Name="EthnicityID" />
+    </Key>
+    <Property Name="EthnicityID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Gender">
+    <Key>
+      <PropertyRef Name="GenderID" />
+    </Key>
+    <Property Name="GenderID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AttachmentType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AttachmentType1" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BirthGender">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HospitalService">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MaritalStatu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Race">
+    <Key>
+      <PropertyRef Name="RaceID" />
+    </Key>
+    <Property Name="RaceID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+  </EntityType>
 </Schema>

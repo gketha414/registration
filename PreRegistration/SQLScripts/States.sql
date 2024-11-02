@@ -1,7 +1,11 @@
-CREATE TABLE [dbo].States (
-    StateID VARCHAR(5) not null,
-    StateName varchar(70) not null
+/****** Script for SelectTopNRows command from SSMS  ******/
+CREATE TABLE [PatientPreRegistration_TEST].[dbo].[States] (
+   	[StateID] [varchar](5) NOT NULL,
+	[StateName] [varchar](70) NOT NULL,
+	[IsActive] [bit] NOT NULL default(1),
 );
+
+
 
 INSERT INTO
     [dbo].States (StateID, StateName)
@@ -64,4 +68,4 @@ VALUES
 			('WA' , 'WASHINGTON'),
 			('WV' , 'WEST VIRGINIA'),
 			('WI' , 'WISCONSIN'),
-			('WY' , 'WYOMING')
+			('WY' , 'WYOMING');

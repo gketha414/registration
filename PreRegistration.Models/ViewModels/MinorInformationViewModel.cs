@@ -5,9 +5,14 @@ namespace PreRegistration.Models.ViewModels
 {
     public class MinorInformationViewModel
     {
+        public MinorViewModel MontherMinorInformation { get; set; }
+        public MinorViewModel FatherMinorInformation { get; set; }
+    }
+    public class MinorViewModel
+    {
         public int PersonID { get; set; }
         public int ResponsiblePartyID { get; set; }
-        [Required, Display(Name = "Mother's First Name")]
+        [Required, Display(Name = "First Name")]
         public string First_Name { get; set; }
         [Required, Display(Name = "Middle Name")]
         public string Middle_Init { get; set; }
@@ -22,8 +27,9 @@ namespace PreRegistration.Models.ViewModels
         public string StateProvince { get; set; }
         [Required, Display(Name = "Zip Code")]
         public Nullable<long> ZipCode { get; set; }
+        [DataType(DataType.Date)]
         [Required, Display(Name = "Date Of Birth")]
-        public Nullable<System.DateTime> Dob { get; set; }
+        public System.DateTime Dob { get; set; }
         public string Race { get; set; }
         [Display(Name = "Marital Status")]
         public string Marital_Status { get; set; }

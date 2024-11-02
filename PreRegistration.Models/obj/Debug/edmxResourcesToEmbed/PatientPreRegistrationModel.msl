@@ -16,6 +16,7 @@
     <EntitySetMapping Name="AccidentTypes">
       <EntityTypeMapping TypeName="PatientPreRegistrationModel.AccidentType">
         <MappingFragment StoreEntitySet="AccidentType">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="AccidentTypeID" ColumnName="AccidentTypeID" />
           <ScalarProperty Name="Description" ColumnName="Description" />
         </MappingFragment>
@@ -48,6 +49,7 @@
     <EntitySetMapping Name="Hospitals">
       <EntityTypeMapping TypeName="PatientPreRegistrationModel.Hospital">
         <MappingFragment StoreEntitySet="Hospital">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="HospitalID" ColumnName="HospitalID" />
           <ScalarProperty Name="HospitalName" ColumnName="HospitalName" />
         </MappingFragment>
@@ -185,6 +187,7 @@
     <EntitySetMapping Name="ResponsibleParties">
       <EntityTypeMapping TypeName="PatientPreRegistrationModel.ResponsibleParty">
         <MappingFragment StoreEntitySet="ResponsibleParty">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="ResponsiblePartyID" ColumnName="ResponsiblePartyID" />
           <ScalarProperty Name="ResponsiblePartyDescription" ColumnName="ResponsiblePartyDescription" />
         </MappingFragment>
@@ -234,6 +237,7 @@
     <EntitySetMapping Name="States">
       <EntityTypeMapping TypeName="PatientPreRegistrationModel.State">
         <MappingFragment StoreEntitySet="States">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="StateID" ColumnName="StateID" />
           <ScalarProperty Name="StateName" ColumnName="StateName" />
         </MappingFragment>
@@ -551,5 +555,68 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="usp_UpdatePatientAccessHasProcessed" FunctionName="PatientPreRegistrationModel.Store.usp_UpdatePatientAccessHasProcessed" />
+    <EntitySetMapping Name="Ethnicities">
+      <EntityTypeMapping TypeName="PatientPreRegistrationModel.Ethnicity">
+        <MappingFragment StoreEntitySet="Ethnicity">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="EthnicityID" ColumnName="EthnicityID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Genders">
+      <EntityTypeMapping TypeName="PatientPreRegistrationModel.Gender">
+        <MappingFragment StoreEntitySet="Gender">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="GenderID" ColumnName="GenderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AttachmentTypes">
+      <EntityTypeMapping TypeName="PatientPreRegistrationModel.AttachmentType">
+        <MappingFragment StoreEntitySet="AttachmentTypes">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="AttachmentType1" ColumnName="AttachmentType" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BirthGenders">
+      <EntityTypeMapping TypeName="PatientPreRegistrationModel.BirthGender">
+        <MappingFragment StoreEntitySet="BirthGender">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HospitalServices">
+      <EntityTypeMapping TypeName="PatientPreRegistrationModel.HospitalService">
+        <MappingFragment StoreEntitySet="HospitalService">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MaritalStatus">
+      <EntityTypeMapping TypeName="PatientPreRegistrationModel.MaritalStatu">
+        <MappingFragment StoreEntitySet="MaritalStatus">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Races">
+      <EntityTypeMapping TypeName="PatientPreRegistrationModel.Race">
+        <MappingFragment StoreEntitySet="Race">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="RaceID" ColumnName="RaceID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

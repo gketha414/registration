@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
 namespace PreRegistration.Models.ViewModels
@@ -22,6 +23,11 @@ namespace PreRegistration.Models.ViewModels
             InsuranceInformation = new InsuranceInformationViewModel();
             AccidentDetail = new AccidentDetailViewModel();
             AccidentTypes = new List<string>();
+            PateintDisplayViewData = new List<SelectListItem>();
+            AttachmentTypes = new List<SelectListItem>();
+            Ethincities = new List<SelectListItem>();
+            CurrentlyIdentifyAs = new List<SelectListItem>();
+            FilteredGuarantors = new List<SelectListItem>();
         }
         public PatientDemographicsViewModel PatientDemographicsViewModel { get; set; }
         public string UserGroup { get; set; }
@@ -32,13 +38,19 @@ namespace PreRegistration.Models.ViewModels
         public List<string> YesNo { get; set; }
         public List<string> HospitalService { get; set; }
         public List<string> Gender { get; set; }
+        public List<SelectListItem> CurrentlyIdentifyAs { get; set; }
         public List<SelectListItem> Guarantors { get; set; }
+        public List<SelectListItem> FilteredGuarantors { get; set; }
         public List<string> AccidentTypes { get; set; }
+        public List<SelectListItem> AttachmentTypes { get; set; }
+        public List<SelectListItem> Ethincities { get; set; }
 
         public SpouseInformationViewModel SpouseInformation { get; set; }
         public MinorInformationViewModel MinorInformation { get; set; }
         public EmergencyContactViewModel EmergencyContact { get; set; }
         public InsuranceInformationViewModel InsuranceInformation { get; set; }
         public AccidentDetailViewModel AccidentDetail { get; set; }
+
+        public List<SelectListItem> PateintDisplayViewData { get; set; }
     }
 }

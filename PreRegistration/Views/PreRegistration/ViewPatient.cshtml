@@ -1,0 +1,760 @@
+﻿@model PreRegistration.Models.UI.PatientModel
+@{
+                /**/
+
+                ViewBag.Title = "ViewPatient";
+}
+
+<style>
+    .btnsave, .btnsave-large, .btnsave-flat {
+        border: none;
+        border-radius: 2px !important;
+        display: inline-block;
+        height: 28px !important;
+        line-height: 28px !important;
+        padding: 0 8px !important;
+        text-transform: uppercase !important;
+        vertical-align: middle !important;
+        -webkit-tap-highlight-color: transparent
+    }
+
+    .btn.disabled, .disabled.btn-large, .btn-floating.disabled, .btn-large.disabled, .btn-flat.disabled, .btn:disabled, .btn-large:disabled, .btn-floating:disabled, .btn-large:disabled, .btn-flat:disabled, .btn[disabled], [disabled].btn-large, .btn-floating[disabled], .btn-large[disabled], .btn-flat[disabled] {
+        pointer-events: none;
+        background-color: #e0e0e0 !important;
+        box-shadow: none;
+        color: #6e6e6e !important;
+        cursor: default
+    }
+
+        .btn.disabled:hover, .disabled.btn-large:hover, .btn-floating.disabled:hover, .btn-large.disabled:hover, .btn-flat.disabled:hover, .btn:disabled:hover, .btn-large:disabled:hover, .btn-floating:disabled:hover, .btn-large:disabled:hover, .btn-flat:disabled:hover, .btn[disabled]:hover, [disabled].btn-large:hover, .btn-floating[disabled]:hover, .btn-large[disabled]:hover, .btn-flat[disabled]:hover {
+            background-color: #e0e0e0 !important;
+            color: #6e6e6e !important
+        }
+
+    .btnsave, .btnsave-large, .btnsave-floating, .btnsave-large, .btnsave-flat {
+        font-size: 13px;
+        outline: 0
+    }
+
+    .btn i, .btn-large i, .btn-floating i, .btn-large i, .btn-flat i {
+        font-size: 20.8px;
+        line-height: inherit
+    }
+
+    .btn:focus, .btn-large:focus, .btn-floating:focus {
+        background-color: #0c7cd5
+    }
+
+    .btnsave, .btnsave-large {
+        text-decoration: none;
+        color: #fff;
+        font-weight: 700 !important;
+        font-style: normal !important;
+        background-color: #2196f3;
+        text-align: center;
+        letter-spacing: .5px;
+        transition: .2s ease-out;
+        cursor: pointer
+    }
+
+        .btnsave:hover, .btnsave-large:hover {
+            background-color: #39a1f4
+        }
+
+    .btnsave-floating {
+        display: inline-block;
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        padding: 0;
+        background-color: #2196f3;
+        border-radius: 50%;
+        transition: .3s;
+        cursor: pointer;
+        vertical-align: middle
+    }
+
+    .btn-floating:hover {
+        background-color: #2196f3
+    }
+
+    .btn-floating:before {
+        border-radius: 0
+    }
+
+    .btn-floating.btn-large {
+        width: 56px;
+        height: 56px
+    }
+
+        .btn-floating.btn-large.halfway-fab {
+            bottom: -28px
+        }
+
+        .btn-floating.btn-large i {
+            line-height: 56px
+        }
+
+    .btn-floating.halfway-fab {
+        position: absolute;
+        right: 24px;
+        bottom: -20px
+    }
+
+        .btn-floating.halfway-fab.left {
+            right: auto;
+            left: 24px
+        }
+
+    .btn-floating i {
+        width: inherit;
+        display: inline-block;
+        text-align: center;
+        color: #fff;
+        font-size: 1.6rem;
+        line-height: 40px
+    }
+
+    button.btn-floating {
+        border: none
+    }
+
+    .formScreeningInfo {
+        /*  width: 775px;  */
+        display: block;
+        float: left;
+        font-weight: bold;
+        color: #007bff;
+    }
+
+    .panel-heading .accordion-toggle:after {
+        /* symbol for "opening" panels */
+        font-family: 'Glyphicons Halflings'; /* essential for enabling glyphicon */
+        content: "\e114"; /* adjust as needed, taken from bootstrap.css */
+        float: right; /* adjust as needed */
+        color: grey; /* adjust as needed */
+    }
+
+    .panel-heading .accordion-toggle.collapsed:after {
+        /* symbol for "collapsed" panels */
+        content: "\e080"; /* adjust as needed, taken from bootstrap.css */
+    }
+
+    .panel-heading {
+        background-color: lightblue !important;
+    }
+
+    .custom-loader-color {
+        color: #2196f3 !important;
+        font-size: 40px !important;
+        margin-left: 200px;
+    }
+
+    input:not([type]), input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default), input[type=url]:not(.browser-default), input[type=time]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=number]:not(.browser-default), input[type=search]:not(.browser-default), textarea.materialize-textarea {
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid #9e9e9e;
+        border-radius: 0;
+        outline: none;
+        height: 24px;
+        width: 90%;
+        font-size: 14px;
+        margin: 0 0 6px 0;
+        padding: 0;
+        box-shadow: none;
+        box-sizing: content-box;
+        transition: all 0.3s
+    }
+
+        input:not([type]):disabled, input:not([type])[readonly="readonly"], input[type=text]:not(.browser-default):disabled, input[type=text]:not(.browser-default)[readonly="readonly"], input[type=password]:not(.browser-default):disabled, input[type=password]:not(.browser-default)[readonly="readonly"], input[type=email]:not(.browser-default):disabled, input[type=email]:not(.browser-default)[readonly="readonly"], input[type=url]:not(.browser-default):disabled, input[type=url]:not(.browser-default)[readonly="readonly"], input[type=time]:not(.browser-default):disabled, input[type=time]:not(.browser-default)[readonly="readonly"], input[type=tel]:not(.browser-default):disabled, input[type=tel]:not(.browser-default)[readonly="readonly"], input[type=number]:not(.browser-default):disabled, input[type=number]:not(.browser-default)[readonly="readonly"], input[type=search]:not(.browser-default):disabled, input[type=search]:not(.browser-default)[readonly="readonly"], textarea.materialize-textarea:disabled, textarea.materialize-textarea[readonly="readonly"] {
+            color: rgba(0,0,0,0.42);
+            border-bottom: 1px dotted rgba(0,0,0,0.42)
+        }
+
+            input:not([type]):disabled + label, input:not([type])[readonly="readonly"] + label, input[type=text]:not(.browser-default):disabled + label, input[type=text]:not(.browser-default)[readonly="readonly"] + label, input[type=password]:not(.browser-default):disabled + label, input[type=password]:not(.browser-default)[readonly="readonly"] + label, input[type=email]:not(.browser-default):disabled + label, input[type=email]:not(.browser-default)[readonly="readonly"] + label, input[type=url]:not(.browser-default):disabled + label, input[type=url]:not(.browser-default)[readonly="readonly"] + label, input[type=time]:not(.browser-default):disabled + label, input[type=time]:not(.browser-default)[readonly="readonly"] + label, input[type=tel]:not(.browser-default):disabled + label, input[type=tel]:not(.browser-default)[readonly="readonly"] + label, input[type=number]:not(.browser-default):disabled + label, input[type=number]:not(.browser-default)[readonly="readonly"] + label, input[type=search]:not(.browser-default):disabled + label, input[type=search]:not(.browser-default)[readonly="readonly"] + label, textarea.materialize-textarea:disabled + label, textarea.materialize-textarea[readonly="readonly"] + label {
+                color: rgba(0,0,0,0.42)
+            }
+
+        input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):focus:not([readonly]), input[type=password]:not(.browser-default):focus:not([readonly]), input[type=email]:not(.browser-default):focus:not([readonly]), input[type=url]:not(.browser-default):focus:not([readonly]), input[type=time]:not(.browser-default):focus:not([readonly]), input[type=tel]:not(.browser-default):focus:not([readonly]), input[type=number]:not(.browser-default):focus:not([readonly]), input[type=search]:not(.browser-default):focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
+            border-bottom: 1px solid #2196f3;
+            box-shadow: 0 1px 0 0 #2196f3
+        }
+
+            input:not([type]):focus:not([readonly]) + label, input[type=text]:not(.browser-default):focus:not([readonly]) + label, input[type=password]:not(.browser-default):focus:not([readonly]) + label, input[type=email]:not(.browser-default):focus:not([readonly]) + label, input[type=url]:not(.browser-default):focus:not([readonly]) + label, input[type=time]:not(.browser-default):focus:not([readonly]) + label, input[type=tel]:not(.browser-default):focus:not([readonly]) + label, input[type=number]:not(.browser-default):focus:not([readonly]) + label, input[type=search]:not(.browser-default):focus:not([readonly]) + label, textarea.materialize-textarea:focus:not([readonly]) + label {
+                color: #2196f3
+            }
+
+        input:not([type]).validate + label, input[type=text]:not(.browser-default).validate + label, input[type=password]:not(.browser-default).validate + label, input[type=email]:not(.browser-default).validate + label, input[type=url]:not(.browser-default).validate + label, input[type=time]:not(.browser-default).validate + label, input[type=tel]:not(.browser-default).validate + label, input[type=number]:not(.browser-default).validate + label, input[type=search]:not(.browser-default).validate + label, textarea.materialize-textarea.validate + label {
+            width: 100%
+        }
+
+        input:not([type]).invalid + label:after, input:not([type]).valid + label:after, input[type=text]:not(.browser-default).invalid + label:after, input[type=text]:not(.browser-default).valid + label:after, input[type=password]:not(.browser-default).invalid + label:after, input[type=password]:not(.browser-default).valid + label:after, input[type=email]:not(.browser-default).invalid + label:after, input[type=email]:not(.browser-default).valid + label:after, input[type=url]:not(.browser-default).invalid + label:after, input[type=url]:not(.browser-default).valid + label:after, input[type=time]:not(.browser-default).invalid + label:after, input[type=time]:not(.browser-default).valid + label:after, input[type=tel]:not(.browser-default).invalid + label:after, input[type=tel]:not(.browser-default).valid + label:after, input[type=number]:not(.browser-default).invalid + label:after, input[type=number]:not(.browser-default).valid + label:after, input[type=search]:not(.browser-default).invalid + label:after, input[type=search]:not(.browser-default).valid + label:after, textarea.materialize-textarea.invalid + label:after, textarea.materialize-textarea.valid + label:after {
+            display: none
+        }
+
+        input:not([type]).invalid + label.active:after, input:not([type]).valid + label.active:after, input[type=text]:not(.browser-default).invalid + label.active:after, input[type=text]:not(.browser-default).valid + label.active:after, input[type=password]:not(.browser-default).invalid + label.active:after, input[type=password]:not(.browser-default).valid + label.active:after, input[type=email]:not(.browser-default).invalid + label.active:after, input[type=email]:not(.browser-default).valid + label.active:after, input[type=url]:not(.browser-default).invalid + label.active:after, input[type=url]:not(.browser-default).valid + label.active:after, input[type=time]:not(.browser-default).invalid + label.active:after, input[type=time]:not(.browser-default).valid + label.active:after, input[type=tel]:not(.browser-default).invalid + label.active:after, input[type=tel]:not(.browser-default).valid + label.active:after, input[type=number]:not(.browser-default).invalid + label.active:after, input[type=number]:not(.browser-default).valid + label.active:after, input[type=search]:not(.browser-default).invalid + label.active:after, input[type=search]:not(.browser-default).valid + label.active:after, textarea.materialize-textarea.invalid + label.active:after, textarea.materialize-textarea.valid + label.active:after {
+            display: block
+        }
+
+        input.valid:not([type]), input.valid:not([type]):focus, input[type=text].valid:not(.browser-default), input[type=text].valid:not(.browser-default):focus, input[type=password].valid:not(.browser-default), input[type=password].valid:not(.browser-default):focus, input[type=email].valid:not(.browser-default), input[type=email].valid:not(.browser-default):focus, input[type=url].valid:not(.browser-default), input[type=url].valid:not(.browser-default):focus, input[type=time].valid:not(.browser-default), input[type=time].valid:not(.browser-default):focus, input[type=tel].valid:not(.browser-default), input[type=tel].valid:not(.browser-default):focus, input[type=number].valid:not(.browser-default), input[type=number].valid:not(.browser-default):focus, input[type=search].valid:not(.browser-default), input[type=search].valid:not(.browser-default):focus, textarea.materialize-textarea.valid, textarea.materialize-textarea.valid:focus, .select-wrapper.valid > input.select-dropdown {
+            border-bottom: 1px solid #4CAF50;
+            box-shadow: 0 1px 0 0 #4CAF50
+        }
+
+        input.invalid:not([type]), input.invalid:not([type]):focus, input[type=text].invalid:not(.browser-default), input[type=text].invalid:not(.browser-default):focus, input[type=password].invalid:not(.browser-default), input[type=password].invalid:not(.browser-default):focus, input[type=email].invalid:not(.browser-default), input[type=email].invalid:not(.browser-default):focus, input[type=url].invalid:not(.browser-default), input[type=url].invalid:not(.browser-default):focus, input[type=time].invalid:not(.browser-default), input[type=time].invalid:not(.browser-default):focus, input[type=tel].invalid:not(.browser-default), input[type=tel].invalid:not(.browser-default):focus, input[type=number].invalid:not(.browser-default), input[type=number].invalid:not(.browser-default):focus, input[type=search].invalid:not(.browser-default), input[type=search].invalid:not(.browser-default):focus, textarea.materialize-textarea.invalid, textarea.materialize-textarea.invalid:focus, .select-wrapper.invalid > input.select-dropdown {
+            border-bottom: 1px solid #f15e47;
+            box-shadow: 0 1px 0 0 #f15e47
+        }
+
+        input:not([type]).valid + label:after, input:not([type]):focus.valid + label:after, input[type=text]:not(.browser-default).valid + label:after, input[type=text]:not(.browser-default):focus.valid + label:after, input[type=password]:not(.browser-default).valid + label:after, input[type=password]:not(.browser-default):focus.valid + label:after, input[type=email]:not(.browser-default).valid + label:after, input[type=email]:not(.browser-default):focus.valid + label:after, input[type=url]:not(.browser-default).valid + label:after, input[type=url]:not(.browser-default):focus.valid + label:after, input[type=time]:not(.browser-default).valid + label:after, input[type=time]:not(.browser-default):focus.valid + label:after, input[type=tel]:not(.browser-default).valid + label:after, input[type=tel]:not(.browser-default):focus.valid + label:after, input[type=number]:not(.browser-default).valid + label:after, input[type=number]:not(.browser-default):focus.valid + label:after, input[type=search]:not(.browser-default).valid + label:after, input[type=search]:not(.browser-default):focus.valid + label:after, textarea.materialize-textarea.valid + label:after, textarea.materialize-textarea:focus.valid + label:after, .select-wrapper.valid + label:after {
+            content: attr(data-success);
+            color: #4CAF50;
+            opacity: 1;
+            transform: translateY(9px)
+        }
+
+        input:not([type]).invalid + label:after, input:not([type]):focus.invalid + label:after, input[type=text]:not(.browser-default).invalid + label:after, input[type=text]:not(.browser-default):focus.invalid + label:after, input[type=password]:not(.browser-default).invalid + label:after, input[type=password]:not(.browser-default):focus.invalid + label:after, input[type=email]:not(.browser-default).invalid + label:after, input[type=email]:not(.browser-default):focus.invalid + label:after, input[type=url]:not(.browser-default).invalid + label:after, input[type=url]:not(.browser-default):focus.invalid + label:after, input[type=time]:not(.browser-default).invalid + label:after, input[type=time]:not(.browser-default):focus.invalid + label:after, input[type=tel]:not(.browser-default).invalid + label:after, input[type=tel]:not(.browser-default):focus.invalid + label:after, input[type=number]:not(.browser-default).invalid + label:after, input[type=number]:not(.browser-default):focus.invalid + label:after, input[type=search]:not(.browser-default).invalid + label:after, input[type=search]:not(.browser-default):focus.invalid + label:after, textarea.materialize-textarea.invalid + label:after, textarea.materialize-textarea:focus.invalid + label:after, .select-wrapper.invalid + label:after {
+            content: attr(data-error);
+            color: #f15e47;
+            opacity: 1;
+            transform: translateY(9px)
+        }
+
+        input:not([type]) + label:after, input[type=text]:not(.browser-default) + label:after, input[type=password]:not(.browser-default) + label:after, input[type=email]:not(.browser-default) + label:after, input[type=url]:not(.browser-default) + label:after, input[type=time]:not(.browser-default) + label:after, input[type=tel]:not(.browser-default) + label:after, input[type=number]:not(.browser-default) + label:after, input[type=search]:not(.browser-default) + label:after, textarea.materialize-textarea + label:after, .select-wrapper + label:after {
+            display: block;
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 0;
+            opacity: 0;
+            transition: .2s opacity ease-out, .2s color ease-out
+        }
+
+    .input-field {
+        position: relative;
+        margin-top: 1rem
+    }
+
+        .input-field.inline {
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 5px
+        }
+
+            .input-field.inline input, .input-field.inline .select-dropdown {
+                margin-bottom: 1rem
+            }
+
+        .input-field.col label {
+            left: .75rem
+        }
+
+        .input-field.col .prefix ~ label, .input-field.col .prefix ~ .validate ~ label {
+            width: calc(100% - 3rem - 1.5rem)
+        }
+
+        .input-field label {
+            color: #212121;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            font-size: 1rem;
+            cursor: text;
+            transition: transform .2s ease-out;
+            transform-origin: 0% 100%;
+            text-align: initial;
+            transform: translateY(12px);
+            pointer-events: none
+        }
+
+            .input-field label:not(.label-icon).active {
+                transform: translateY(-14px) scale(0.8);
+                transform-origin: 0 0
+            }
+
+        .input-field .prefix {
+            position: absolute;
+            width: 24px;
+            font-size: 2rem;
+            transition: color .2s
+        }
+
+            .input-field .prefix.active {
+                color: #2196f3
+            }
+
+            .input-field .prefix ~ input, .input-field .prefix ~ textarea, .input-field .prefix ~ label, .input-field .prefix ~ .validate ~ label, .input-field .prefix ~ .autocomplete-content {
+                margin-left: 3rem;
+                width: 92%;
+                width: calc(100% - 3rem)
+            }
+
+            .input-field .prefix ~ label {
+                margin-left: 3rem
+            }
+</style>
+<br />
+<br />
+<form id="ehform">
+    <br /><br />
+    @*<div class="form-group col-md-12 box-shadow--8dp" style="background-color:white">*@
+    <br />
+    @Html.HiddenFor(m => m.PatientDemographicsModel.PersonID)
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                        Patient Details
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <div class="form-group col-md-12 box-shadow--8dp" style="background-color:white">
+                        <br />
+                        <div class="row">
+                            <div class="col-lg-4">
+                                @Html.LabelFor(m => m.PatientDemographicsModel.Hospital)
+                                @Html.TextBoxFor(m => m.PatientDemographicsModel.Hospital, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                            </div>
+                            <div class="col-lg-4">
+                                @Html.LabelFor(m => m.PatientDemographicsModel.In_Hospital_Directory)
+                                @Html.TextBoxFor(m => m.PatientDemographicsModel.In_Hospital_Directory, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                            </div>
+                            <div class="col-lg-4">
+                                @Html.LabelFor(m => m.PatientDemographicsModel.HospitalService)
+                                @Html.TextBoxFor(m => m.PatientDemographicsModel.HospitalService, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                @Html.LabelFor(m => m.PatientDemographicsModel.AdmitDate)
+                                @Html.TextBoxFor(m => m.PatientDemographicsModel.AdmitDate, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                            </div>
+                            <div class="col-lg-4">
+                                @Html.LabelFor(m => m.PatientDemographicsModel.PrimaryCarePhys)
+                                @Html.TextBoxFor(m => m.PatientDemographicsModel.PrimaryCarePhys, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                            </div>
+                            <div class="col-lg-4">
+                                @Html.LabelFor(m => m.PatientDemographicsModel.PatientHereBefore)
+                                @Html.TextBoxFor(m => m.PatientDemographicsModel.PatientHereBefore, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                @Html.LabelFor(m => m.PatientDemographicsModel.Full_Name)
+                                @Html.TextBoxFor(m => m.PatientDemographicsModel.Full_Name, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                            </div>
+                            <div class="col-lg-4">
+                                @Html.LabelFor(m => m.PatientDemographicsModel.Address)
+                                @Html.TextBoxFor(m => m.PatientDemographicsModel.Address, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                            </div>
+                            <div class="col-lg-4">
+                                @Html.LabelFor(m => m.PatientDemographicsModel.BirthDate)
+                                @Html.TextBoxFor(m => m.PatientDemographicsModel.BirthDate, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                @Html.LabelFor(m => m.PatientDemographicsModel.Gender)
+                                @Html.TextBoxFor(m => m.PatientDemographicsModel.Gender, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                            </div>
+                            <div class="col-lg-4">
+                                @Html.LabelFor(m => m.PatientDemographicsModel.Race)
+                                @Html.TextBoxFor(m => m.PatientDemographicsModel.Race, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                            </div>
+                            <div class="col-lg-4">
+                                @Html.LabelFor(m => m.PatientDemographicsModel.Marital_Status)
+                                @Html.TextBoxFor(m => m.PatientDemographicsModel.Marital_Status, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                @Html.LabelFor(m => m.PatientDemographicsModel.SSN)
+                                @Html.TextBoxFor(m => m.PatientDemographicsModel.SSN, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                            </div>
+                            <div class="col-lg-4">
+                                @Html.LabelFor(m => m.PatientDemographicsModel.Home_Phone)
+                                @Html.TextBoxFor(m => m.PatientDemographicsModel.Home_Phone, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                            </div>
+                            <div class="col-lg-4">
+                                @Html.LabelFor(m => m.PatientDemographicsModel.Cell_Phone)
+                                @Html.TextBoxFor(m => m.PatientDemographicsModel.Cell_Phone, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                @Html.LabelFor(m => m.PatientDemographicsModel.Email_Address)
+                                @Html.TextBoxFor(m => m.PatientDemographicsModel.Email_Address, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                            </div>
+                            <div class="col-lg-4">
+                                @Html.LabelFor(m => m.PatientDemographicsModel.Church_Choice)
+                                @Html.TextBoxFor(m => m.PatientDemographicsModel.Church_Choice, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                            </div>
+                            <div class="col-lg-4">
+                                @Html.LabelFor(m => m.PatientDemographicsModel.ResponsibleParty)
+                                @Html.TextBoxFor(m => m.PatientDemographicsModel.ResponsibleParty, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                @Html.LabelFor(m => m.PatientDemographicsModel.Bill_Address)
+                                @Html.TextBoxFor(m => m.PatientDemographicsModel.Bill_Address, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                            </div>
+                            <div class="col-lg-4">
+                                @Html.LabelFor(m => m.PatientDemographicsModel.Mailing_Address)
+                                @Html.TextBoxFor(m => m.PatientDemographicsModel.Mailing_Address, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                            </div>
+                            <div class="col-lg-4">
+                                @Html.LabelFor(m => m.PatientDemographicsModel.E911Address)
+                                @Html.TextBoxFor(m => m.PatientDemographicsModel.E911Address, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                @Html.LabelFor(m => m.PatientDemographicsModel.Employer)
+                                @Html.TextBoxFor(m => m.PatientDemographicsModel.Employer, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                            </div>
+                            <div class="col-lg-4">
+                                @Html.LabelFor(m => m.PatientDemographicsModel.Job_Title)
+                                @Html.TextBoxFor(m => m.PatientDemographicsModel.Job_Title, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                            </div>
+                            <div class="col-lg-4">
+                                @Html.LabelFor(m => m.PatientDemographicsModel.EmployerAddress)
+                                @Html.TextBoxFor(m => m.PatientDemographicsModel.EmployerAddress, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                @Html.LabelFor(m => m.PatientDemographicsModel.EmployerPhone)
+                                @Html.TextBoxFor(m => m.PatientDemographicsModel.EmployerPhone, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @if (Model.SpouseInformationModel != null)
+        {
+            <br />
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                            Spouse Details
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="form-group col-md-12 box-shadow--8dp btn-" style="background-color:white">
+                            <br />
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.SpouseInformationModel.Full_Name)
+                                    @Html.TextBoxFor(m => m.SpouseInformationModel.Full_Name, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.SpouseInformationModel.Address)
+                                    @Html.TextBoxFor(m => m.SpouseInformationModel.Address, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.SpouseInformationModel.BirthDate)
+                                    @Html.TextBoxFor(m => m.SpouseInformationModel.BirthDate, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.SpouseInformationModel.Race)
+                                    @Html.TextBoxFor(m => m.SpouseInformationModel.Race, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.SpouseInformationModel.Marital_Status)
+                                    @Html.TextBoxFor(m => m.SpouseInformationModel.Marital_Status, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.SpouseInformationModel.SSN)
+                                    @Html.TextBoxFor(m => m.SpouseInformationModel.SSN, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.SpouseInformationModel.Home_Phone)
+                                    @Html.TextBoxFor(m => m.SpouseInformationModel.Home_Phone, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.SpouseInformationModel.Cell_Phone)
+                                    @Html.TextBoxFor(m => m.SpouseInformationModel.Cell_Phone, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.SpouseInformationModel.Employer)
+                                    @Html.TextBoxFor(m => m.SpouseInformationModel.Employer, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.SpouseInformationModel.Job_Title)
+                                    @Html.TextBoxFor(m => m.SpouseInformationModel.Job_Title, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.SpouseInformationModel.EmployerAddress)
+                                    @Html.TextBoxFor(m => m.SpouseInformationModel.EmployerAddress, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.SpouseInformationModel.Employer_Phone)
+                                    @Html.TextBoxFor(m => m.SpouseInformationModel.Employer_Phone, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+        @if (Model.MinorInformationModel != null)
+        {
+            <br />
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                            Minor Details
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="form-group col-md-12 box-shadow--8dp btn-" style="background-color:white">
+                            <br />
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.MinorInformationModel.Full_Name)
+                                    @Html.TextBoxFor(m => m.MinorInformationModel.Full_Name, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.MinorInformationModel.Address)
+                                    @Html.TextBoxFor(m => m.MinorInformationModel.Address, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.MinorInformationModel.Dob)
+                                    @Html.TextBoxFor(m => m.MinorInformationModel.Dob, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.MinorInformationModel.Race)
+                                    @Html.TextBoxFor(m => m.MinorInformationModel.Race, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.MinorInformationModel.Marital_Status)
+                                    @Html.TextBoxFor(m => m.MinorInformationModel.Marital_Status, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.MinorInformationModel.SSN)
+                                    @Html.TextBoxFor(m => m.MinorInformationModel.SSN, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.MinorInformationModel.HomePhone)
+                                    @Html.TextBoxFor(m => m.MinorInformationModel.HomePhone, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.MinorInformationModel.Cell_Phone)
+                                    @Html.TextBoxFor(m => m.MinorInformationModel.Cell_Phone, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.MinorInformationModel.MailAddress)
+                                    @Html.TextBoxFor(m => m.MinorInformationModel.MailAddress, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.MinorInformationModel.E911Address)
+                                    @Html.TextBoxFor(m => m.MinorInformationModel.E911Address, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.MinorInformationModel.BillAddress)
+                                    @Html.TextBoxFor(m => m.MinorInformationModel.BillAddress, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.MinorInformationModel.EmployerAddress)
+                                    @Html.TextBoxFor(m => m.MinorInformationModel.EmployerAddress, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.MinorInformationModel.Employer)
+                                    @Html.TextBoxFor(m => m.MinorInformationModel.Employer, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.MinorInformationModel.Job_Title)
+                                    @Html.TextBoxFor(m => m.MinorInformationModel.Job_Title, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.MinorInformationModel.EmployerPhone)
+                                    @Html.TextBoxFor(m => m.MinorInformationModel.EmployerPhone, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+        @if (Model.EmergencyContactModel != null)
+        {
+            <br />
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                            Emergency Contact Details
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseFour" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="form-group col-md-12 box-shadow--8dp btn-" style="background-color:white">
+                            <br />
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.EmergencyContactModel.Nearest_Relative_Name)
+                                    @Html.TextBoxFor(m => m.EmergencyContactModel.Nearest_Relative_Name, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.EmergencyContactModel.Relationship)
+                                    @Html.TextBoxFor(m => m.EmergencyContactModel.Relationship, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.EmergencyContactModel.Address)
+                                    @Html.TextBoxFor(m => m.EmergencyContactModel.Address, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.EmergencyContactModel.Contact_Phone)
+                                    @Html.TextBoxFor(m => m.EmergencyContactModel.Contact_Phone, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+        @if (Model.InsuranceInformationModel != null)
+        {
+            <br />
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+                            Insurance Details
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseFive" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="form-group col-md-12 box-shadow--8dp btn-" style="background-color:white">
+                            <br />
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.InsuranceInformationModel.InsPlanName)
+                                    @Html.TextBoxFor(m => m.InsuranceInformationModel.InsPlanName, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.InsuranceInformationModel.Subscriber_Name)
+                                    @Html.TextBoxFor(m => m.InsuranceInformationModel.Subscriber_Name, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.InsuranceInformationModel.Rel_PolicyHolder_To_Patient)
+                                    @Html.TextBoxFor(m => m.InsuranceInformationModel.Rel_PolicyHolder_To_Patient, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.InsuranceInformationModel.Policy_Number)
+                                    @Html.TextBoxFor(m => m.InsuranceInformationModel.Policy_Number, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.InsuranceInformationModel.Group_Number)
+                                    @Html.TextBoxFor(m => m.InsuranceInformationModel.Group_Number, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.InsuranceInformationModel.PlanCode)
+                                    @Html.TextBoxFor(m => m.InsuranceInformationModel.PlanCode, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.InsuranceInformationModel.InsAddress)
+                                    @Html.TextBoxFor(m => m.InsuranceInformationModel.InsAddress, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.InsuranceInformationModel.InsPhone)
+                                    @Html.TextBoxFor(m => m.InsuranceInformationModel.InsPhone, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+        @if (Model.AccidentDetailModel != null)
+        {
+            <br />
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseSix">
+                            Accident Details
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseSix" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="form-group col-md-12 box-shadow--8dp btn-" style="background-color:white">
+                            <br />
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.AccidentDetailModel.AccidentType)
+                                    @Html.TextBoxFor(m => m.AccidentDetailModel.AccidentType, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.AccidentDetailModel.Location)
+                                    @Html.TextBoxFor(m => m.AccidentDetailModel.Location, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.AccidentDetailModel.DateOfAccident)
+                                    @Html.TextBoxFor(m => m.AccidentDetailModel.DateOfAccident, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.AccidentDetailModel.TimeOfAccident)
+                                    @Html.TextBoxFor(m => m.AccidentDetailModel.TimeOfAccident, new { @class = "form-control requiredField", required = "required", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>                     
+    <br />
+</form>
+

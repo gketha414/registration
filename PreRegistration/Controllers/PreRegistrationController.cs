@@ -1,12 +1,15 @@
 ﻿using Newtonsoft.Json;
 using PreRegistration.Models.Helpers;
+using PreRegistration.Models.UI;
 using PreRegistration.Models.ViewModels;
 using RespiratoryProtectionProgram.BL;
 using System;
 using System.Configuration;
+using System.IO;
 using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 
 namespace PreRegistration.Controllers
@@ -188,6 +191,89 @@ namespace PreRegistration.Controllers
             bool successSubmit = await _preRegistrationBL.SubmitPreRegistrationForm(patientViewModel);
 
             return Json(successSubmit, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult PatientList()
+        {
+            PatientViewModel patientModel = new PatientViewModel();
+            string userId = string.Empty;
+
+            patientModel = _preRegistrationBL.GetPatientModel().Result;
+
+            return View(patientModel);
+        }
+
+        public JsonResult GetPatientsByHospital(int hospitalId, int displayId)
+        {
+            var patientDemographics = _preRegistrationBL.GetPatientsByHospital(hospitalId, displayId).Result;
+
+            return new JsonResult()
+            {
+                Data = patientDemographics,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                MaxJsonLength = int.MaxValue
+            };
+        }
+
+        public ActionResult ViewPatient(int personId)
+        {
+            PatientModel model = new PatientModel();
+            model = _preRegistrationBL.GetPatientById(personId).Result;
+
+            return View(model);
+        }
+
+        public JsonResult Upload()
+        {
+            try
+            {
+                if (Request.Files.Count < 1)
+                {
+                    throw new HttpException(500, "No file to upload");
+                }
+                else
+                {
+                    Guid fileGuid = Guid.NewGuid();
+                    for (int i = 0; i < Request.Files.Count; i++)
+                    {
+                        HttpPostedFileBase file = Request.Files[i]; //Uploaded file
+                        //HttpPostedFileBase file = Request.Files[0]; //Uploaded file
+                        //Use the following properties to get file's name, size and MIMEType
+                        int fileSize = file.ContentLength;
+                        string fileName = file.FileName;
+                        string mimeType = file.ContentType;
+                        System.IO.Stream fileContent = file.InputStream;
+                        string getFileName = Path.GetFileName(file.FileName);
+                        //To save file, use SaveAs method
+                        System.IO.Directory.CreateDirectory(Server.MapPath("../AttachedFiles/" + fileGuid + "/"));
+                        file.SaveAs(Server.MapPath("../AttachedFiles/" + fileGuid + "/") + getFileName); //File will be saved in application root
+                    }
+                    return Json(fileGuid);
+                }
+            }
+            catch
+            {
+                var error = "Error";
+                return Json(error);
+            }
+        }
+
+        public JsonResult DeleteFile(string fileId, int bridgeId)
+        {
+            var root = Server.MapPath("../AttachedFiles/" + fileId);
+
+            if (System.IO.File.Exists(root))
+            {
+                // If file found, delete it    
+                System.IO.File.Delete(root);
+               // _mgr.DeleteUnitAttachment(bridgeId);
+            }
+            else
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
     }
 }

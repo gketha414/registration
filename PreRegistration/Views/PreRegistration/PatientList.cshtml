@@ -1,0 +1,228 @@
+﻿@model PreRegistration.Models.ViewModels.PatientViewModel
+@{
+    ViewBag.Title = "PatientList";
+}
+
+<br />
+<br />
+<br /><br />
+<br /><br />
+<form id="ConfidentialityAccessForm">
+
+    <div class="form-group col-md-12 box-shadow--8dp" style="background-color:white">
+        <br /><br />
+        <div class="row">
+            <div class="form-group col-md-6" id="divHospitalId">
+                @Html.LabelFor(m => m.PatientDemographicsViewModel.SelectedHospitalID, new { @class = "formScreeningInfo required control-label" })
+                @Html.DropDownListFor(x => Model.PatientDemographicsViewModel.SelectedHospitalID, new SelectList(Model.Hospitals, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "hospitalId" })
+            </div>
+            <div class="form-group col-md-6" id="divHospitalId">
+                @Html.LabelFor(m => m.PatientDemographicsViewModel.PateintDisplayView, new { @class = "formScreeningInfo required control-label" })
+                @Html.DropDownListFor(x => Model.PatientDemographicsViewModel.PateintDisplayView, new SelectList(Model.PateintDisplayViewData, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "displayId" })
+            </div>
+        </div>
+
+        <div class="panel panel-primary setup-content" id="patient">
+            <div class="panel-heading">
+                <h3 class="panel-title">Patient Information</h3>
+            </div>
+        </div>
+
+        <div class="form-group col-md-12 box-shadow--8dp" style="background-color:white">
+            <div class="row headertext">
+                <div class="col-md-12">
+                    <h4><b>Patient Access -Display of Submitted Online Registrations, Not Processed</b></h4>
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                @*<div class="row">
+                        <div class="col-xs-4">
+                            @Html.LabelFor(m => Model.GODate, new { @class = "required showTextArea" })
+                            @Html.DropDownListFor(modelItem => Model.GODate, Model.GoDates, new { @class = "form-control requiredField", required = "required" })
+                        </div>
+                    </div>*@
+                <div class="row">
+                    <div class="col-xs-12" id="divPatientList">
+                        <table class="table table-hover dataTable box-shadow--8dp" style="background-color:#add8e6" id="tblPatientList">
+                            <thead>
+                                <tr>
+                                    @*<th></th>*@
+                                    <th>View Patient</th>
+                                    <th>First Name</th>
+                                    <th>Middle Name</th>
+                                    <th>Last Name</th>
+                                    <th>DOB</th>
+                                    <th>Hospital Service</th>
+                                    <th>Admin Date</th>
+                                    <th>Patient Here Before</th>
+                                </tr>
+                            </thead>
+                            <tbody style="font-weight: bold;"></tbody>
+                            <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th>First Name</th>
+                                    <th>Middle Name</th>
+                                    <th>Last Name</th>
+                                    <th>DOB</th>
+                                    <th>Hospital Service</th>
+                                    <th>Admin Date</th>
+                                    <th>Patient Here Before</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    $(document).ready(function () {
+        $("#tblPatientList").dataTable().fnDraw();
+        $("#hospitalId").on("change", function () {
+            $("#tblPatientList").dataTable().fnDraw();
+            if ($(this).val() !== '0' && $('#displayId').val() !== '0') {
+                getPatients($(this).val(), $('#displayId').val());
+            }
+            
+        });
+
+
+        $("#displayId").on("change", function () {
+            $("#tblPatientList").dataTable().fnDraw();
+            if ($(this).val() !== '0' && $('#hospitalId').val() !== '0') {
+                getPatients($('#hospitalId').val(), $(this).val());
+            }
+
+        });
+
+        function getPatients(hospId, displayId) {
+        $('#tblPatientList tfoot th').each(function () {
+            var title = $(this).text();
+            if (title != "") {
+                $(this).html('<input type="text" placeholder="' + title + '" />');
+            }
+        });
+
+        var tblPatientList = $('#tblPatientList').DataTable({
+             "ajax": {
+                            "url": '@Url.Action("GetPatientsByHospital", "PreRegistration")',
+                            "type": 'POST',
+                 "dataSrc": "",
+                 data: { hospitalId: hospId, displayId: displayId },
+            },
+            //"deferLoading": 0,
+            dom: 'lBfrtip',
+            "order": [[0, "desc"]],
+            "scrollX": true,
+            "sScrollXInner": "100%",
+            scrollX: true,
+            "bDestroy": true,
+            "language":
+            {
+                "processing": "<div class='overlay custom-loader-background'><i class='fa fa-cog fa-spin custom-loader-color'></i></div>"
+            },
+            "processing": true, // for show progress bar
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    //  className: 'fa fa-file-excel-o',
+                    title: 'Excel',
+                    text: ' Export to excel',
+                    //Columns to export
+                    exportOptions: {
+                        columns: [1, 2, 3, 4, 5, 6, 8,9,10,11,12,13,14,15,16]
+                    }
+                },
+                {
+                    text: 'Clear filters',
+                    action: function (e, dt, node, config) {
+                        tblLive.search('').columns('').search('').draw();
+                        $('input[type=text]').val('');
+                    }
+                }
+            ],
+            initComplete: function () {
+                var btns = $('.dt-button');
+                btns.addClass('btn btn-primary');
+                btns.removeClass('dt-button');
+                var dropdown = $('#tblPatientList_length');
+                dropdown.removeClass('dataTables_length');
+            },
+             "columnDefs": [
+                {
+                     "aTargets": [0],
+                     "name": "PersonID",
+                     "data": "PersonID",
+                     "defaultContent": "-", //"targets": "_all",
+                    "mRender": function (data, type, full) {
+                        return '<a class="btn waves-effect waves-light" target="_blank" href=' + '@Url.Action("ViewPatient", "PreRegistration")?personid=' + full.PersonID+'>View Patient</a>';
+                     },
+
+                    "sClass": "alignCenter"
+                },
+                {
+                    "name": "First_Name",
+                    "data": "First_Name",
+                    "targets": [1]
+                },
+                {
+                    "name": "Middle_Name",
+                    "data": "Middle_Name",
+                    "targets": [2]
+                },
+                {
+                    "name": "Last_Name",
+                    "data": "Last_Name",
+                    "targets": [3]
+                },
+                {
+                    "name": "BirthDate",
+                    "data": "BirthDate",
+                    "targets": [4],
+                    "mRender": function (data, type, full) {
+                        return moment(data).format('MM/DD/YYYY') == "Invalid date" ? "" : moment(data).format('MM/DD/YYYY');
+                    }
+                },
+                {
+                    "name": "HospitalService",
+                    "data": "HospitalService",
+                    "targets": [5]
+                },
+                {
+                    "name": "AdmitDate",
+                    "data": "AdmitDate",
+                    "targets": [6],
+                    "mRender": function (data, type, full) {
+                        return moment(data).format('MM/DD/YYYY') == "Invalid date" ? "" : moment(data).format('MM/DD/YYYY');
+                    }
+                },
+                {
+                    "name": "PatientHereBefore",
+                    "data": "PatientHereBefore",
+                    "targets": [7],
+                 },
+            ]
+        });
+
+        tblPatientList.columns().every(function () {
+            var dataTableColumn = this;
+            $(this.footer()).find('input').on('keyup change', function () {
+                dataTableColumn.search(this.value).draw();
+            });
+        });
+
+        $('#btnClear').bind('click', function () {
+            $('#divPatientList input').val('');
+            tblPatientList.columns().search(this.value).draw();
+        })
+
+    }
+
+    });
+
+</script>
+

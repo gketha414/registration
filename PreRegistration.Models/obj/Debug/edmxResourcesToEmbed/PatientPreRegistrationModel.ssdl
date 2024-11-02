@@ -17,6 +17,23 @@
     </Key>
     <Property Name="AccidentTypeID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Description" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AttachmentTypes">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AttachmentType" Type="varchar" MaxLength="75" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BirthGender">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="EmergencyContact">
     <Key>
@@ -33,6 +50,14 @@
     <Property Name="ZipCode" Type="bigint" />
     <Property Name="Contact_Phone" Type="bigint" />
   </EntityType>
+  <EntityType Name="Ethnicity">
+    <Key>
+      <PropertyRef Name="EthnicityID" />
+    </Key>
+    <Property Name="EthnicityID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
   <EntityType Name="FormSection">
     <Key>
       <PropertyRef Name="SectionID" />
@@ -40,12 +65,29 @@
     <Property Name="SectionID" Type="smallint" Nullable="false" />
     <Property Name="SectionName" Type="varchar" MaxLength="30" Nullable="false" />
   </EntityType>
+  <EntityType Name="Gender">
+    <Key>
+      <PropertyRef Name="GenderID" />
+    </Key>
+    <Property Name="GenderID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
   <EntityType Name="Hospital">
     <Key>
       <PropertyRef Name="HospitalID" />
     </Key>
     <Property Name="HospitalID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="HospitalName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HospitalService">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="InsuranceInformation">
     <Key>
@@ -66,6 +108,14 @@
     <Property Name="InsState" Type="char" MaxLength="2" />
     <Property Name="InsZip" Type="bigint" />
     <Property Name="InsPhone" Type="bigint" />
+  </EntityType>
+  <EntityType Name="MaritalStatus">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="MinorInformation">
     <Key>
@@ -173,12 +223,21 @@
     <Property Name="ModifiedBy" Type="varchar" MaxLength="25" />
     <Property Name="ProcessDate" Type="datetime" />
   </EntityType>
+  <EntityType Name="Race">
+    <Key>
+      <PropertyRef Name="RaceID" />
+    </Key>
+    <Property Name="RaceID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
   <EntityType Name="ResponsibleParty">
     <Key>
       <PropertyRef Name="ResponsiblePartyID" />
     </Key>
     <Property Name="ResponsiblePartyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ResponsiblePartyDescription" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="SpouseInformation">
     <Key>
@@ -214,10 +273,11 @@ warning 6002: The table/view 'PatientPreRegistration_TEST.dbo.States' does not h
   <EntityType Name="States">
     <Key>
       <PropertyRef Name="StateID" />
-      <PropertyRef Name="StateName" />
+      <PropertyRef Name="IsActive" />
     </Key>
     <Property Name="StateID" Type="varchar" MaxLength="5" Nullable="false" />
     <Property Name="StateName" Type="varchar" MaxLength="70" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -629,19 +689,27 @@ warning 6002: The table/view 'PatientPreRegistration_TEST.dbo.VW_PatientDemosGri
   <EntityContainer Name="PatientPreRegistrationModelStoreContainer">
     <EntitySet Name="AccidentDetails" EntityType="Self.AccidentDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AccidentType" EntityType="Self.AccidentType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AttachmentTypes" EntityType="Self.AttachmentTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BirthGender" EntityType="Self.BirthGender" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EmergencyContact" EntityType="Self.EmergencyContact" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ethnicity" EntityType="Self.Ethnicity" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FormSection" EntityType="Self.FormSection" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Hospital" EntityType="Self.Hospital" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HospitalService" EntityType="Self.HospitalService" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InsuranceInformation" EntityType="Self.InsuranceInformation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MaritalStatus" EntityType="Self.MaritalStatus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MinorInformation" EntityType="Self.MinorInformation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PatientDemographics" EntityType="Self.PatientDemographics" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Race" EntityType="Self.Race" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ResponsibleParty" EntityType="Self.ResponsibleParty" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SpouseInformation" EntityType="Self.SpouseInformation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="States" EntityType="Self.States" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [States].[StateID] AS [StateID], 
-    [States].[StateName] AS [StateName]
+    [States].[StateName] AS [StateName], 
+    [States].[IsActive] AS [IsActive]
     FROM [dbo].[States] AS [States]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="VW_PatientDemosGridView" EntityType="Self.VW_PatientDemosGridView" store:Type="Views" store:Schema="dbo">

@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\win 10\Downloads\registration-main (1)\PreRegistration.Models\PatientPreRegistrationModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\CentraApps\PreRegistrationApp\trunk\PreRegistration\PreRegistration.Models\PatientPreRegistrationModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

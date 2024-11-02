@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace PreRegistration.Models.ViewModels
 {
@@ -28,8 +30,10 @@ namespace PreRegistration.Models.ViewModels
         [Required, Display(Name = "Legal Last Name")]
         public string Last_Name { get; set; }
         public string Entitlement { get; set; }
-        [Required]
+        [Required, Display(Name = "Birth Gender")]
         public string Gender { get; set; }
+        [Required, Display(Name = "Currently Identify As")]
+        public string CurrentlyIdentifyAs { get; set; }
         [Display(Name = "Permanent Street Address Line 1")]
         public string Address1 { get; set; }
         [Display(Name = "Permanent Street Address Line 2")]
@@ -43,12 +47,13 @@ namespace PreRegistration.Models.ViewModels
         [DataType(DataType.Date)]
         public System.DateTime BirthDate { get; set; }
         public string Race { get; set; }
+        public int Ethincity { get; set; }
         [Display(Name = "Marital Status")]
         public string Marital_Status { get; set; }
         [Display(Name = "Social Security Number")]
         public string SSN { get; set; }
-        [Required, Display(Name = "Home Phone Number")]
-        public long Home_Phone { get; set; }
+        [Required, Display(Name = "Preferred Phone Number")]
+        public long? Home_Phone { get; set; }
         [ Display(Name = "Cell Phone Number")]
         public Nullable<long> Cell_Phone { get; set; }
         [Display(Name = "Email Address")]
@@ -115,5 +120,15 @@ namespace PreRegistration.Models.ViewModels
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ProcessDate { get; set; }
         public string UserGroup { get; set; }
+
+        [Required, Display(Name = "Select Hospital To View")]
+        public short SelectedHospitalID { get; set; }
+
+        [Display(Name = "Select Patient Display View")]
+        public short PateintDisplayView { get; set; }
+
+        public string Hospital { get; set; }
+        public int Age { get; set; }
+        public int IsMarried { get; set; }
     }
 }

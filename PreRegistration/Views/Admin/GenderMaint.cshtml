@@ -1,0 +1,303 @@
+﻿@model PreRegistration.Models.ViewModels.GenderViewModel
+@{
+    ViewBag.Title = "Gender Maintenance";
+}
+<style>
+    .formBulletList {
+        text-align: left;
+        font-weight: bold;
+        color: #333333;
+    }
+
+    ul {
+        list-style-image: url('../../images/blackCheck.gif');
+    }
+
+    .imageFirstPage {
+        float: right;
+        margin-top: -85px;
+    }
+
+    .btn, .btn-large {
+        text-decoration: none;
+        color: #fff;
+        font-weight: 700 !important;
+        font-style: normal !important;
+        background-color: #2196f3;
+        text-align: center;
+        letter-spacing: .5px;
+        transition: .2s ease-out;
+        cursor: pointer;
+    }
+
+    .btn, .btn-large, .btn-floating, .btn-large, .btn-flat {
+        font-size: 13px;
+        outline: 0;
+    }
+
+    .btn, .btn-large, .btn-flat {
+        border: none;
+        border-radius: 2px !important;
+        display: inline-block;
+        height: 28px !important;
+        line-height: 28px !important;
+        padding: 0 8px !important;
+        text-transform: uppercase !important;
+        vertical-align: middle !important;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .btn, .btn-large {
+        min-width: 120px;
+    }
+
+    .btn-flat {
+        box-shadow: none;
+        background-color: transparent;
+        color: #2196f3;
+        cursor: pointer;
+        transition: background-color .2s;
+        font-weight: 700
+    }
+
+        .btn-flat:focus, .btn-flat:hover {
+            box-shadow: 2px 3px 8px 2px rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12) !important;
+            background-color: #fff
+        }
+
+        .btn-flat:focus {
+            background-color: rgba(0,0,0,0.1)
+        }
+
+        .btn-flat.disabled {
+            background-color: transparent !important;
+            color: #b3b3b3 !important;
+            cursor: default
+        }
+
+    .btn-large {
+        height: 42px;
+        line-height: 42px
+    }
+
+        .btn-large i {
+            font-size: 1.6rem
+        }
+
+    .btn-block {
+        display: block
+    }
+
+
+    fieldset.group {
+        margin: 0;
+        padding: 0;
+        margin-bottom: 1.25em;
+        padding: .125em;
+    }
+
+        fieldset.group legend {
+            margin: 0;
+            padding: 0;
+            font-weight: bold;
+            margin-left: 20px;
+            font-size: 100%;
+            color: black;
+        }
+</style>
+<br /><br /><br /><br />
+@using (@Html.BeginForm("CreateGender", "Admin"))
+{
+    @Html.HiddenFor(m => m.Success)
+    <br />
+    <br />
+
+    <div class="form-group col-md-12 box-shadow--8dp" style="background-color:white">
+        <div class="row headertext">
+            <div class="col-md-8">
+                <h4><b>Gender Maintenance</b></h4>
+            </div>
+        </div>
+        <table class="table table-hover dataTable" style="background-color:#add8e6" id="genders">
+            <thead>
+                <tr>
+                    <th>Edit</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>IsActive?</th>
+                </tr>
+            </thead>
+            <tbody style="font-weight: bold;">
+                @foreach (var item in Model.AllGenders)
+                {
+                    <tr>
+                        <td><button type="button" class="btn btn-info box-shadow--8dp" id="editGender">Edit</button></td>
+                        <td>@item.GenderID</td>
+                        <td>@item.Name</td>
+                        <td>@item.IsActive</td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+        <br /><br />
+        <h4>Create a new Gender, enter Gender then click Add button</h4>
+
+        <div class="form-group">
+
+            <div class="row">
+                <div class="col-xs-4">
+                    @Html.LabelFor(m => m.Name, new { @class = "required" })
+                    @Html.TextBoxFor(m => m.NewName, new { @class = "form-control box-shadow--8dp" })
+                </div>
+            </div>
+            <br />
+            <input class="btn btn-primary col-offset-6" type="submit" value="Click to add new Gender" id="submitBtn">
+        </div>
+    </div>
+}
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content form-group col-md-12 box-shadow--8dp">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Edit Gender</h4>
+            </div>
+            <div class="modal-body">
+                <div class="" style="background-color:white">
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">Gender</legend>
+                        <div class="form-group col-md-12 form-inline">
+                            @Html.HiddenFor(m => m.GenderID)
+
+                            <div id="modalDisplayName">
+                                <div class="row">
+                                    <br />
+                                    @Html.LabelFor(m => m.Name, new { @class = "required" })
+                                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                                    <br />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <br />
+                                @Html.LabelFor(m => m.IsActive)
+                                @Html.CheckBoxFor(m => m.IsActive)
+                                @Html.HiddenFor(m => m.IsActive)
+                                <br />
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-flat btn-back waves-effect" data-dismiss="modal" id="modalClose">Close</button>
+                <button type="button" class="btn btn-primary" id="saveItem">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+
+        var rowToUpdate;
+
+        if ($('#Success').val() == 'True') {
+            new PNotify({
+                title: 'Success!',
+                text: "The Gender record was created",
+                type: 'success'
+            });
+        }
+
+
+        var displayTable = $('#genders').DataTable(
+            {
+                "columnDefs": [
+                {
+                    "aTargets": [0],    //Edit column
+                    "mData": 0,
+                    "mRender": function (data, type, full) {
+
+                        return '<button type="button" class="btn btn-info box-shadow--8dp" id="editGender" data-toggle="modal" data-target="#myModal">Edit</button>';
+
+                    },
+                    "sClass": "alignCenter" ,
+                    "fnCreatedCell": function (cell) {
+                        $('#editGender', cell)
+                            .button({
+                                text: true,
+                                icons: {
+                                    primary: "ui-icon-circle-minus"
+                                }
+                            })
+                             .click(function (event) {
+                                 event.preventDefault();
+                                 var selected = displayTable.row($(this).parents('tr')).data();
+                                 rowToUpdate = $(this).closest('tr');
+                                 $('#GenderID').val(selected[1]);
+                                 $('#Name').val(selected[2]);
+                                 $('#IsActive').val(selected[3]);
+
+                                 if (selected[3] == "True" || selected[3] == "true") {
+                                     $('#IsActive').prop("checked", true);
+                                 }
+                                 else {
+                                     $('#IsActive').prop("checked", false);
+                                 }
+
+                             });
+                    }
+                }
+                ]
+            });
+
+
+        $("#saveItem").click(function (request) {
+            $("#saveItem").attr("disabled", true);
+            $(this).toggleClass('active');
+            var ptdesctemp = { desct: $('#Name').val() }
+            if (ptdesctemp.desct === "") {
+                alert("Enter Name. This is required!");
+                $("#saveItem").attr("disabled", false);
+                $(this).toggleClass('active');
+            }
+            else {
+                $.ajax({
+                    url: '@Url.Action("UpdateGender", "Admin")',
+                    cache: false,
+                    data: { id: $('#GenderID').val(), name: $('#Name').val(), active: $('#IsActive').val() },
+
+                    success: function (html) {
+                        displayTable.cell(rowToUpdate, 2).data($('#Name').val());
+                        displayTable.cell(rowToUpdate, 3).data($('#IsActive').val());
+                        $('#myModal').modal('toggle');
+                        $("#saveItem").attr("disabled", false);
+                        new PNotify({
+                            title: 'Success!',
+                            text: "Gender record was updated",
+                            type: 'success'
+                        });
+                        @*window.location.href = '@Url.Action("ConditionMaintenance", "Admin", new { success = true })';*@
+                    }
+                });
+                return false;
+            }
+        });
+
+
+        $('#IsActive').change(function () {
+            if ($(this).is(":checked")) {
+                $('#IsActive').val(true);
+            }
+            else {
+                $('#IsActive').val(false);
+            }
+        });
+
+    });  // end document.ready
+
+</script>
+

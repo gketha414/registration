@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using PreRegistration.Models.ViewModels;
+using PreRegistration.Models.UI;
 
 namespace RespiratoryProtectionProgram.BL
 {
@@ -33,5 +34,14 @@ namespace RespiratoryProtectionProgram.BL
             return await _preRegistrationDAL.SubmitPreRegistrationForm(patientViewModel);
         }
 
+        public async Task<List<PatientDemographicsViewModel>> GetPatientsByHospital(int hospitalId, int processed)
+        {
+            return await _preRegistrationDAL.GetPatientsByHospital(hospitalId, processed);
+        }
+
+        public async Task<PatientModel> GetPatientById(int personId)
+        {
+            return await _preRegistrationDAL.GetPatientById(personId);
+        }
     }
 }
