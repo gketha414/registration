@@ -29,7 +29,7 @@ namespace PreRegistration.Models.ViewModels
         public Nullable<long> ZipCode { get; set; }
         [DataType(DataType.Date)]
         [Required, Display(Name = "Date Of Birth")]
-        public System.DateTime Dob { get; set; }
+        public Nullable<System.DateTime> Dob { get; set; }
         public string Race { get; set; }
         [Display(Name = "Marital Status")]
         public string Marital_Status { get; set; }

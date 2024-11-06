@@ -20,9 +20,9 @@ namespace PreRegistration.Models.ViewModels
             SpouseInformation = new SpouseInformationViewModel();
             MinorInformation = new MinorInformationViewModel();
             EmergencyContact = new EmergencyContactViewModel();
-            InsuranceInformation = new InsuranceInformationViewModel();
+            InsuranceInformation = new InsuranceMultipleViewModel();
             AccidentDetail = new AccidentDetailViewModel();
-            AccidentTypes = new List<string>();
+            AccidentTypes = new Dictionary<int, string>();
             PateintDisplayViewData = new List<SelectListItem>();
             AttachmentTypes = new List<SelectListItem>();
             Ethincities = new List<SelectListItem>();
@@ -41,14 +41,14 @@ namespace PreRegistration.Models.ViewModels
         public List<SelectListItem> CurrentlyIdentifyAs { get; set; }
         public List<SelectListItem> Guarantors { get; set; }
         public List<SelectListItem> FilteredGuarantors { get; set; }
-        public List<string> AccidentTypes { get; set; }
+        public Dictionary<int, string> AccidentTypes { get; set; }
         public List<SelectListItem> AttachmentTypes { get; set; }
         public List<SelectListItem> Ethincities { get; set; }
 
         public SpouseInformationViewModel SpouseInformation { get; set; }
         public MinorInformationViewModel MinorInformation { get; set; }
         public EmergencyContactViewModel EmergencyContact { get; set; }
-        public InsuranceInformationViewModel InsuranceInformation { get; set; }
+        public InsuranceMultipleViewModel InsuranceInformation { get; set; }
         public AccidentDetailViewModel AccidentDetail { get; set; }
 
         public List<SelectListItem> PateintDisplayViewData { get; set; }

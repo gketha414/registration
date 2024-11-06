@@ -2,7 +2,13 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace PreRegistration.Models.ViewModels
-{
+{   
+    public class InsuranceMultipleViewModel
+    {
+        public InsuranceInformationViewModel InsuranceOne { get; set; }
+        public InsuranceInformationViewModel InsuranceTwo { get; set; }
+        public InsuranceInformationViewModel InsuranceThree { get; set; }
+    }
     public class InsuranceInformationViewModel
     {
         public int PersonID { get; set; }

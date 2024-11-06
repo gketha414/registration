@@ -23,64 +23,76 @@ namespace PreRegistration.Models
             this.MinorInformations = new HashSet<MinorInformation>();
             this.SpouseInformations = new HashSet<SpouseInformation>();
         }
-    
         public int PersonID { get; set; }
         public short SectionID { get; set; }
         public short HospitalID { get; set; }
-        public Nullable<bool> In_Hospital_Directory { get; set; }
+
+        public bool? In_Hospital_Directory { get; set; }
         public string HospitalService { get; set; }
         public string PrimaryCarePhys { get; set; }
-        public System.DateTime AdmitDate { get; set; }
-        public Nullable<bool> PatientHereBefore { get; set; }
+        public DateTime AdmitDate { get; set; } = new DateTime(1753, 1, 1);
+        public bool? PatientHereBefore { get; set; }
+
         public string First_Name { get; set; }
         public string Middle_Name { get; set; }
         public string Last_Name { get; set; }
         public string Entitlement { get; set; }
+
         public string Gender { get; set; }
         public string Address1 { get; set; }
         public string Address2 { get; set; }
         public string City { get; set; }
         public string StateProvince { get; set; }
-        public Nullable<long> ZipCode { get; set; }
-        public System.DateTime BirthDate { get; set; }
+        public long? ZipCode { get; set; }
+
+        public DateTime BirthDate { get; set; } = new DateTime(1753, 1, 1);
         public string Race { get; set; }
         public string Marital_Status { get; set; }
         public string SSN { get; set; }
+
         public long Home_Phone { get; set; }
-        public Nullable<long> Cell_Phone { get; set; }
+        public long? Cell_Phone { get; set; }
         public string Email_Address { get; set; }
         public string Church_Choice { get; set; }
+
         public string Mailing_Address1 { get; set; }
         public string Mailing_Address2 { get; set; }
         public string MailingCity { get; set; }
         public string MailingState { get; set; }
-        public Nullable<long> MailingZip { get; set; }
+        public long? MailingZip { get; set; }
+
         public string E911Address1 { get; set; }
         public string E911Address2 { get; set; }
         public string E911City { get; set; }
         public string E911State { get; set; }
-        public Nullable<long> E911Zip { get; set; }
+        public long? E911Zip { get; set; }
+
         public int ResponsiblePartyID { get; set; }
         public string GuarNameIfOther { get; set; }
+
         public string Bill_Address1 { get; set; }
         public string Bill_Address2 { get; set; }
         public string Bill_City { get; set; }
         public string Bill_State { get; set; }
-        public Nullable<long> Bill_ZipCode { get; set; }
+        public long? Bill_ZipCode { get; set; }
+
         public string Employer { get; set; }
         public string Job_Title { get; set; }
         public string EmployerAddress1 { get; set; }
         public string EmployerAddress2 { get; set; }
         public string EmployerCity { get; set; }
         public string EmployerState { get; set; }
-        public Nullable<long> EmployerZip { get; set; }
-        public Nullable<long> EmployerPhone { get; set; }
+        public long? EmployerZip { get; set; }
+        public long? EmployerPhone { get; set; }
+
         public string Status { get; set; }
-        public System.DateTime Created { get; set; }
-        public System.DateTime Modified { get; set; }
+        public DateTime Created { get; set; } = new DateTime(1753, 1, 1);
+        public DateTime Modified { get; set; } = new DateTime(1753, 1, 1);
         public string ModifiedBy { get; set; }
-        public Nullable<System.DateTime> ProcessDate { get; set; }
-    
+        public DateTime? ProcessDate { get; set; } = new DateTime(1753, 1, 1);
+        public string CurrentlyIdentifyAs { get; set; }
+       
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AccidentDetail> AccidentDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

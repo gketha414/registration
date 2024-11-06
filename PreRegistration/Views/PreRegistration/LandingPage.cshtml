@@ -199,7 +199,7 @@
                 <p><small>Accident Information</small></p>
             </div>
             <div class="stepwizard-step col-xs-1">
-                <a href="#step-7" type="button" id="verifyStep" class="btn btn-default btn-circle disableButton">7</a>
+                <a href="#step7" type="button" id="verifyStep" class="btn btn-default btn-circle disableButton">7</a>
                 <p><small>Verify Information</small></p>
             </div>
             <div class="stepwizard-step col-xs-1"></div>
@@ -225,10 +225,13 @@
                         <div>
                             @for (int i = 0; i < Model.YesNo.Count; i++)
                             {
-                                <span>
-                                    @Model.YesNo[i]
-                                    @Html.RadioButtonFor(m => m.PatientDemographicsViewModel.In_Hospital_Directory, @Model.YesNo[i]) &nbsp;
-                                </span>
+                               <span>
+                                   @Model.YesNo[i]
+                                   @{
+                                       bool value = Model.YesNo[i] == "Yes";
+                                   }
+                                   @Html.RadioButtonFor(m => m.PatientDemographicsViewModel.In_Hospital_Directory, value) &nbsp;
+                               </span>
                             }
                         </div>
                     </div>
@@ -266,7 +269,10 @@
                             {
                                 <span>
                                     @Model.YesNo[i]
-                                    @Html.RadioButtonFor(m => m.PatientDemographicsViewModel.PatientHereBefore, @Model.YesNo[i]) &nbsp;
+                                    @{
+                                        bool value = Model.YesNo[i] == "Yes"; 
+                                    }
+                                    @Html.RadioButtonFor(m => m.PatientDemographicsViewModel.PatientHereBefore, value) &nbsp;
                                 </span>
                             }
                         </div>
@@ -309,16 +315,16 @@
                         @Html.LabelFor(m => m.PatientDemographicsViewModel.CurrentlyIdentifyAs, new { @class = "formScreeningInfo" })
                         @Html.DropDownListFor(x => Model.PatientDemographicsViewModel.CurrentlyIdentifyAs, new SelectList(Model.CurrentlyIdentifyAs, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "currentlyIdentifyAs" })
                         @*<div>
-                            @for (int i = 0; i < Model.CurrentlyIdentifyAs.Count; i++)
-                            {
-                                <span>
-                                    @Model.CurrentlyIdentifyAs[i]
-                                    @Html.RadioButtonFor(m => m.PatientDemographicsViewModel.CurrentlyIdentifyAs, @Model.CurrentlyIdentifyAs[i]) &nbsp;
-                                </span>
-                            }
-                        </div>*@
+                                @for (int i = 0; i < Model.CurrentlyIdentifyAs.Count; i++)
+                                {
+                                    <span>
+                                        @Model.CurrentlyIdentifyAs[i]
+                                        @Html.RadioButtonFor(m => m.PatientDemographicsViewModel.CurrentlyIdentifyAs, @Model.CurrentlyIdentifyAs[i]) &nbsp;
+                                    </span>
+                                }
+                            </div>*@
                     </div>
-                   
+
                 </div>
 
                 <div class="row">
@@ -326,7 +332,7 @@
                         @Html.LabelFor(m => m.PatientDemographicsViewModel.BirthDate, new { @class = "formScreeningInfo required" })
                         @Html.EditorFor(m => m.PatientDemographicsViewModel.BirthDate, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
-                    
+
                     <div class="form-group col-md-4">
                         @Html.LabelFor(m => m.PatientDemographicsViewModel.Marital_Status, new { @class = "formScreeningInfo required control-label" })
                         @Html.DropDownListFor(x => Model.PatientDemographicsViewModel.Marital_Status, new SelectList(Model.MaritalStatus, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "maritalstatus" })
@@ -392,9 +398,9 @@
                                     @Html.TextBoxFor(m => m.PatientDemographicsViewModel.Home_Phone, new { @class = "form-control requiredField", @placeholder = "(Enter Area Code, Exchange & Number)" })
                                 </div>
                                 @*<div class="form-group col-md-3">
-                                    @Html.LabelFor(m => m.PatientDemographicsViewModel.Cell_Phone, new { @class = "formScreeningInfo" })
-                                    @Html.TextBoxFor(m => m.PatientDemographicsViewModel.Cell_Phone, new { @class = "form-control requiredField", @placeholder = "(Enter Area Code, Exchange & Number)" })
-                                </div>*@
+                                        @Html.LabelFor(m => m.PatientDemographicsViewModel.Cell_Phone, new { @class = "formScreeningInfo" })
+                                        @Html.TextBoxFor(m => m.PatientDemographicsViewModel.Cell_Phone, new { @class = "form-control requiredField", @placeholder = "(Enter Area Code, Exchange & Number)" })
+                                    </div>*@
                                 <div class="form-group col-md-4">
                                     @Html.LabelFor(m => m.PatientDemographicsViewModel.Email_Address, new { @class = "formScreeningInfo control-label required" })
                                     @Html.TextBoxFor(m => m.PatientDemographicsViewModel.Email_Address, new { @class = "form-control requiredField" })
@@ -415,17 +421,25 @@
                             <div class="row">
                                 <div class="form-group col-lg-6" id="PatientDemographics">
                                     @Html.LabelFor(m => m.PatientDemographicsViewModel.ResponsiblePartyID, new { @class = "formScreeningInfo required" })
-                                    @Html.DropDownListFor(x => Model.Guarantors, new SelectList(Model.Guarantors, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "guarantor" })
-                                    @*<div>
-                                        @for (int i = 0; i < Model.Guarantors.Count; i++)
-                                        {
-                                            <span>
-                                                @Model.Guarantors[i].Text
-                                                @Html.RadioButtonFor(m => m.PatientDemographicsViewModel.ResponsiblePartyID, @Model.Guarantors[i].Value) &nbsp;
-                                            </span>
-                                        }
-                                    </div>*@
+                                    @Html.DropDownListFor(
+                                        m => m.PatientDemographicsViewModel.ResponsiblePartyID, // Bind to ResponsiblePartyID
+                                        new SelectList(Model.Guarantors, "Value", "Text"),
+                                        htmlAttributes: new { @class = "form-control", id = "guarantor" }
+                                    )
                                 </div>
+                                @*<div class="form-group col-lg-6" id="PatientDemographics">
+                                    @Html.LabelFor(m => m.PatientDemographicsViewModel.ResponsiblePartyID, new { @class = "formScreeningInfo required" })
+                                    @Html.DropDownListFor(x => Model.Guarantors, new SelectList(Model.Guarantors, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "guarantor" })
+                                    <div>
+                                            @for (int i = 0; i < Model.Guarantors.Count; i++)
+                                            {
+                                                <span>
+                                                    @Model.Guarantors[i].Text
+                                                    @Html.RadioButtonFor(m => m.PatientDemographicsViewModel.ResponsiblePartyID, @Model.Guarantors[i].Value) &nbsp;
+                                                </span>
+                                            }
+                                        </div>
+                                </div>*@
                                 <div class="form-group col-md-6" id="divGuarNameIfOther" style="display:none">
                                     @Html.LabelFor(m => m.PatientDemographicsViewModel.GuarNameIfOther, new { @class = "formScreeningInfo" })
                                     @Html.TextBoxFor(m => m.PatientDemographicsViewModel.GuarNameIfOther, new { @class = "form-control requiredField" })
@@ -743,503 +757,504 @@
                         </div>
                     </div>
                 </div>
-                    <button class="btn1 btn-primary nextBtn pull-right" onclick="onSpouseClick()" type="button">Next</button>
-                </div>
+                <button class="btn1 btn-primary nextBtn pull-right" onclick="onSpouseClick()" type="button">Next</button>
             </div>
+        </div>
 
-            <div class="panel panel-primary setup-content" id="minor">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Minor Information - Complete This Section Only If Patient Is A Minor</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="form-group col-md-4">
-                        </div>
-                        <div class="form-group col-lg-6">
-                            <input data-val="true" id="notMinor" name="notMinor" type="checkbox">
-                            &nbsp;<label for="AllExceptions_Permissible">Not Applicable - Click Here If Patient Is Not A Minor</label>
-                        </div>
+        <div class="panel panel-primary setup-content" id="minor">
+            <div class="panel-heading">
+                <h3 class="panel-title">Minor Information - Complete This Section Only If Patient Is A Minor</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="form-group col-md-4">
                     </div>
-                    <div class="row">
-                        @*<div class="form-group col-md-4">
-            </div>*@
-                        <div class="form-group col-lg-6" style="display:block" id="chooseGurantor">
-                            <label class="formScreeningInfo" for="PatientDemographicsViewModel_ResponsiblePartyID">Choose Guarantor to complete this section?</label>
-                            @Html.DropDownListFor(x => Model.FilteredGuarantors, new SelectList(Model.FilteredGuarantors, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "choosegurantor" })
-                            @*<div>
-                    @for (int i = 0; i < Model.Guarantors.Count; i++)
-                    {
-                        <span>
-                            @Model.Guarantors[i].Text
-                            @Html.RadioButtonFor(m => m.PatientDemographicsViewModel.ResponsiblePartyID, @Model.Guarantors[i].Value) &nbsp;
-                        </span>
-                    }
-                </div>*@
-                        </div>
-                    </div>
-                    <div id="divMinorMother" style="display:none">
-                        <fieldset class="scheduler-border">
-                            <legend class="scheduler-border">Minor:  Mother Section</legend>
-                            <div class="control-group">
-                                <div class="controls">
-                                    <div class="row">
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.First_Name, new { @class = "formScreeningInfo required control-label" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.First_Name, new { @class = "form-control requiredField", required = "required" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.Middle_Init, new { @class = "formScreeningInfo" })
-                                            @Html.EditorFor(m => m.MinorInformation.MontherMinorInformation.Middle_Init, new { htmlAttributes = new { @class = "form-control" } })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.Last_Name, new { @class = "formScreeningInfo required control-label" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.Last_Name, new { @class = "form-control requiredField", required = "required" })
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.Race, new { @class = "formScreeningInfo required control-label" })
-                                            @Html.DropDownListFor(x => Model.MinorInformation.MontherMinorInformation.Race, new SelectList(Model.Race, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "minor-mother-race" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.Dob, new { @class = "formScreeningInfo required" })
-                                            @Html.EditorFor(m => m.MinorInformation.MontherMinorInformation.Dob, new { htmlAttributes = new { @class = "form-control" } })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.Marital_Status, new { @class = "formScreeningInfo required control-label" })
-                                            @Html.DropDownListFor(x => Model.MinorInformation.MontherMinorInformation.Marital_Status, new SelectList(Model.MaritalStatus, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "minor-mother-marital-status" })
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.HomePhone, new { @class = "formScreeningInfo control-label required" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.HomePhone, new { @class = "form-control requiredField", @placeholder = "(Enter Area Code, Exchange & Number)" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.Cell_Phone, new { @class = "formScreeningInfo" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.Cell_Phone, new { @class = "form-control requiredField", @placeholder = "(Enter Area Code, Exchange & Number)" })
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-                        <fieldset class="scheduler-border">
-                            <legend class="scheduler-border">Permanent Street Address</legend>
-                            <div class="control-group">
-                                <div class="controls">
-                                    <div class="row">
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.Address1, new { @class = "formScreeningInfo control-label" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.Address1, new { @class = "form-control requiredField" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.Address2, new { @class = "formScreeningInfo" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.Address2, new { @class = "form-control requiredField" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.City, new { @class = "formScreeningInfo control-label" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.City, new { @class = "form-control requiredField" })
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.StateProvince, new { @class = "formScreeningInfo control-label" })
-                                            @Html.DropDownListFor(x => Model.MinorInformation.MontherMinorInformation.StateProvince, new SelectList(Model.States, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "minormotherstate" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.ZipCode, new { @class = "formScreeningInfo" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.ZipCode, new { @class = "form-control requiredField", @placeholder = "(Entry Format: 99999-9999, or 99999 and leave 4 digit zip code extension blank)" })
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-                        <fieldset class="scheduler-border">
-                            <legend class="scheduler-border">Minor: Mother Billing Address</legend>
-                            <div class="control-group">
-                                <div class="controls">
-                                    <div class="row">
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.BillAddress1, new { @class = "formScreeningInfo control-label" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.BillAddress1, new { @class = "form-control requiredField" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.BillAddress2, new { @class = "formScreeningInfo" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.BillAddress2, new { @class = "form-control requiredField" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.BillCity, new { @class = "formScreeningInfo control-label" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.BillCity, new { @class = "form-control requiredField" })
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.BillState, new { @class = "formScreeningInfo control-label" })
-                                            @Html.DropDownListFor(x => Model.MinorInformation.MontherMinorInformation.BillState, new SelectList(Model.States, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "minormothebillstate" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.BillZip, new { @class = "formScreeningInfo" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.BillZip, new { @class = "form-control requiredField", @placeholder = "(Entry Format: 99999-9999, or 99999 and leave 4 digit zip code extension blank)" })
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-
-                        <fieldset class="scheduler-border">
-                            <legend class="scheduler-border">Minor: Mother Mailing Address</legend>
-                            <div class="control-group">
-                                <div class="controls">
-                                    <div class="row">
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.MailAddress1, new { @class = "formScreeningInfo control-label" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.MailAddress1, new { @class = "form-control requiredField" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.MailAddress2, new { @class = "formScreeningInfo" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.MailAddress2, new { @class = "form-control requiredField" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.MailCity, new { @class = "formScreeningInfo control-label" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.MailCity, new { @class = "form-control requiredField" })
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.MailState, new { @class = "formScreeningInfo control-label" })
-                                            @Html.DropDownListFor(x => Model.MinorInformation.MontherMinorInformation.MailState, new SelectList(Model.States, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "minormothermailstate" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.MailZip, new { @class = "formScreeningInfo" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.MailZip, new { @class = "form-control requiredField", @placeholder = "(Entry Format: 99999-9999, or 99999 and leave 4 digit zip code extension blank)" })
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-                        <fieldset class="scheduler-border">
-                            <legend class="scheduler-border">Minor: Mother 911 Address</legend>
-                            <div class="control-group">
-                                <div class="controls">
-                                    <div class="row">
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.E911Address1, new { @class = "formScreeningInfo control-label" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.E911Address1, new { @class = "form-control requiredField" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.E911Address2, new { @class = "formScreeningInfo" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.E911Address2, new { @class = "form-control requiredField" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.E911City, new { @class = "formScreeningInfo control-label" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.E911City, new { @class = "form-control requiredField" })
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.E911State, new { @class = "formScreeningInfo control-label" })
-                                            @Html.DropDownListFor(x => Model.MinorInformation.MontherMinorInformation.E911State, new SelectList(Model.States, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "minormothere911state" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.E911Zip, new { @class = "formScreeningInfo" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.E911Zip, new { @class = "form-control requiredField", @placeholder = "(Entry Format: 99999-9999, or 99999 and leave 4 digit zip code extension blank)" })
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-
-                        <fieldset class="scheduler-border">
-                            <legend class="scheduler-border">Minor: Mother Employer Section</legend>
-                            <div class="control-group">
-                                <div class="controls">
-                                    <div class="row">
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.Employer, new { @class = "formScreeningInfo control-label" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.Employer, new { @class = "form-control requiredField" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.Job_Title, new { @class = "formScreeningInfo" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.Job_Title, new { @class = "form-control requiredField" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.EmployerPhone, new { @class = "formScreeningInfo control-label" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.EmployerPhone, new { @class = "form-control requiredField", @placeholder = "(Enter Area Code, Exchange & Number)" })
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.EmployerAddress1, new { @class = "formScreeningInfo control-label" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.EmployerAddress1, new { @class = "form-control requiredField" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.EmployerAddress2, new { @class = "formScreeningInfo" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.EmployerAddress2, new { @class = "form-control requiredField" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.EmployerCity, new { @class = "formScreeningInfo control-label" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.EmployerCity, new { @class = "form-control requiredField" })
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.EmployerState, new { @class = "formScreeningInfo control-label" })
-                                            @Html.DropDownListFor(x => Model.MinorInformation.MontherMinorInformation.EmployerState, new SelectList(Model.States, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "minormothempstate" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.EmployerZip, new { @class = "formScreeningInfo" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.EmployerZip, new { @class = "form-control requiredField", @placeholder = "(Entry Format: 99999-9999, or 99999 and leave 4 digit zip code extension blank)" })
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-                        @*<div class="row">
-                <div class="col-xs-12">
-                    <div id="minorErrors" style="color: red; font-weight: bold;">
-
+                    <div class="form-group col-lg-6">
+                        <input data-val="true" id="notMinor" name="notMinor" type="checkbox">
+                        &nbsp;<label for="AllExceptions_Permissible">Not Applicable - Click Here If Patient Is Not A Minor</label>
                     </div>
                 </div>
-                <div class="alert alert-danger" style="display:none" id="errorAlert">
-                    <strong>Something went wrong!</strong> Your record was not able to save.
-                    <div id="ErrorMessage"></div>
+                <div class="row">
+                    @*<div class="form-group col-md-4">
+                        </div>*@
+                    <div class="form-group col-lg-6" style="display:block" id="chooseGurantor">
+                       
+                        <label class="formScreeningInfo" for="MinorInformation_ResponsiblePartyID">Choose Guarantor to complete this section?</label>
+                        @Html.DropDownListFor(m => m.MinorInformation.MontherMinorInformation.ResponsiblePartyID, new SelectList(Model.FilteredGuarantors, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "choosegurantor", name = "MinorInformationViewModel_ResponsiblePartyID", @disabled = "disabled" })
+                        @*<div>
+            @for (int i = 0; i < Model.Guarantors.Count; i++)
+            {
+                <span>
+                    @Model.Guarantors[i].Text
+                    @Html.RadioButtonFor(m => m.PatientDemographicsViewModel.ResponsiblePartyID, @Model.Guarantors[i].Value) &nbsp;
+                </span>
+            }
+        </div>*@
+                    </div>
                 </div>
-            </div>*@
-                    </div>
-
-                    <div id="divMinorFather" style="display:none">
-                        <fieldset class="scheduler-border">
-                            <legend class="scheduler-border">Minor:  Father Section</legend>
-                            <div class="control-group">
-                                <div class="controls">
-                                    <div class="row">
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.First_Name, new { @class = "formScreeningInfo required control-label" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.First_Name, new { @class = "form-control requiredField", required = "required" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.Middle_Init, new { @class = "formScreeningInfo" })
-                                            @Html.EditorFor(m => m.MinorInformation.FatherMinorInformation.Middle_Init, new { htmlAttributes = new { @class = "form-control" } })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.Last_Name, new { @class = "formScreeningInfo required control-label" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.Last_Name, new { @class = "form-control requiredField", required = "required" })
-                                        </div>
+                <div id="divMinorMother" style="display:none">
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">Minor:  Mother Section</legend>
+                        <div class="control-group">
+                            <div class="controls">
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.First_Name, new { @class = "formScreeningInfo required control-label" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.First_Name, new { @class = "form-control requiredField", required = "required" })
                                     </div>
-                                    <div class="row">
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.Race, new { @class = "formScreeningInfo required control-label" })
-                                            @Html.DropDownListFor(x => Model.MinorInformation.FatherMinorInformation.Race, new SelectList(Model.Race, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "minor-father-race" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.Dob, new { @class = "formScreeningInfo required" })
-                                            @Html.EditorFor(m => m.MinorInformation.FatherMinorInformation.Dob, new { htmlAttributes = new { @class = "form-control" } })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.Marital_Status, new { @class = "formScreeningInfo required control-label" })
-                                            @Html.DropDownListFor(x => Model.MinorInformation.FatherMinorInformation.Marital_Status, new SelectList(Model.MaritalStatus, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "minor-father-marital-status" })
-                                        </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.Middle_Init, new { @class = "formScreeningInfo" })
+                                        @Html.EditorFor(m => m.MinorInformation.MontherMinorInformation.Middle_Init, new { htmlAttributes = new { @class = "form-control" } })
                                     </div>
-                                    <div class="row">
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.HomePhone, new { @class = "formScreeningInfo control-label required" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.HomePhone, new { @class = "form-control requiredField", @placeholder = "(Enter Area Code, Exchange & Number)" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.Cell_Phone, new { @class = "formScreeningInfo" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.Cell_Phone, new { @class = "form-control requiredField", @placeholder = "(Enter Area Code, Exchange & Number)" })
-                                        </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.Last_Name, new { @class = "formScreeningInfo required control-label" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.Last_Name, new { @class = "form-control requiredField", required = "required" })
                                     </div>
                                 </div>
-                            </div>
-                        </fieldset>
-                        <fieldset class="scheduler-border">
-                            <legend class="scheduler-border">Permanent Street Address</legend>
-                            <div class="control-group">
-                                <div class="controls">
-                                    <div class="row">
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.Address1, new { @class = "formScreeningInfo control-label" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.Address1, new { @class = "form-control requiredField" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.Address2, new { @class = "formScreeningInfo" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.Address2, new { @class = "form-control requiredField" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.City, new { @class = "formScreeningInfo control-label" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.City, new { @class = "form-control requiredField" })
-                                        </div>
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.Race, new { @class = "formScreeningInfo required control-label" })
+                                        @Html.DropDownListFor(x => Model.MinorInformation.MontherMinorInformation.Race, new SelectList(Model.Race, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "minor-mother-race" })
                                     </div>
-                                    <div class="row">
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.StateProvince, new { @class = "formScreeningInfo control-label" })
-                                            @Html.DropDownListFor(x => Model.MinorInformation.FatherMinorInformation.StateProvince, new SelectList(Model.States, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "minorfatherstate" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.ZipCode, new { @class = "formScreeningInfo" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.ZipCode, new { @class = "form-control requiredField", @placeholder = "(Entry Format: 99999-9999, or 99999 and leave 4 digit zip code extension blank)" })
-                                        </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.Dob, new { @class = "formScreeningInfo required" })
+                                        @Html.EditorFor(m => m.MinorInformation.MontherMinorInformation.Dob, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.Marital_Status, new { @class = "formScreeningInfo required control-label" })
+                                        @Html.DropDownListFor(x => Model.MinorInformation.MontherMinorInformation.Marital_Status, new SelectList(Model.MaritalStatus, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "minor-mother-marital-status" })
                                     </div>
                                 </div>
-                            </div>
-                        </fieldset>
-                        <fieldset class="scheduler-border">
-                            <legend class="scheduler-border">Minor: Father Billing Address</legend>
-                            <div class="control-group">
-                                <div class="controls">
-                                    <div class="row">
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.BillAddress1, new { @class = "formScreeningInfo control-label" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.BillAddress1, new { @class = "form-control requiredField" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.BillAddress2, new { @class = "formScreeningInfo" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.BillAddress2, new { @class = "form-control requiredField" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.BillCity, new { @class = "formScreeningInfo control-label" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.BillCity, new { @class = "form-control requiredField" })
-                                        </div>
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.HomePhone, new { @class = "formScreeningInfo control-label required" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.HomePhone, new { @class = "form-control requiredField", @placeholder = "(Enter Area Code, Exchange & Number)" })
                                     </div>
-                                    <div class="row">
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.BillState, new { @class = "formScreeningInfo control-label" })
-                                            @Html.DropDownListFor(x => Model.MinorInformation.FatherMinorInformation.BillState, new SelectList(Model.States, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "minormotherbillstate" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.BillZip, new { @class = "formScreeningInfo" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.BillZip, new { @class = "form-control requiredField", @placeholder = "(Entry Format: 99999-9999, or 99999 and leave 4 digit zip code extension blank)" })
-                                        </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.Cell_Phone, new { @class = "formScreeningInfo" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.Cell_Phone, new { @class = "form-control requiredField", @placeholder = "(Enter Area Code, Exchange & Number)" })
                                     </div>
                                 </div>
-                            </div>
-                        </fieldset>
-
-                        <fieldset class="scheduler-border">
-                            <legend class="scheduler-border">Minor: Father Mailing Address</legend>
-                            <div class="control-group">
-                                <div class="controls">
-                                    <div class="row">
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.MailAddress1, new { @class = "formScreeningInfo control-label" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.MailAddress1, new { @class = "form-control requiredField" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.MailAddress2, new { @class = "formScreeningInfo" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.MailAddress2, new { @class = "form-control requiredField" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.MailCity, new { @class = "formScreeningInfo control-label" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.MailCity, new { @class = "form-control requiredField" })
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.MailState, new { @class = "formScreeningInfo control-label" })
-                                            @Html.DropDownListFor(x => Model.MinorInformation.FatherMinorInformation.MailState, new SelectList(Model.States, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "minorfathermailstate" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.MailZip, new { @class = "formScreeningInfo" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.MailZip, new { @class = "form-control requiredField", @placeholder = "(Entry Format: 99999-9999, or 99999 and leave 4 digit zip code extension blank)" })
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-                        <fieldset class="scheduler-border">
-                            <legend class="scheduler-border">Minor: Father 911 Address</legend>
-                            <div class="control-group">
-                                <div class="controls">
-                                    <div class="row">
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.E911Address1, new { @class = "formScreeningInfo control-label" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.E911Address1, new { @class = "form-control requiredField" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.E911Address2, new { @class = "formScreeningInfo" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.E911Address2, new { @class = "form-control requiredField" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.E911City, new { @class = "formScreeningInfo control-label" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.E911City, new { @class = "form-control requiredField" })
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.E911State, new { @class = "formScreeningInfo control-label" })
-                                            @Html.DropDownListFor(x => Model.MinorInformation.FatherMinorInformation.E911State, new SelectList(Model.States, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "minorfather911state" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.E911Zip, new { @class = "formScreeningInfo" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.E911Zip, new { @class = "form-control requiredField", @placeholder = "(Entry Format: 99999-9999, or 99999 and leave 4 digit zip code extension blank)" })
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-
-                        <fieldset class="scheduler-border">
-                            <legend class="scheduler-border">Minor: Father Employer Section</legend>
-                            <div class="control-group">
-                                <div class="controls">
-                                    <div class="row">
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.Employer, new { @class = "formScreeningInfo control-label" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.Employer, new { @class = "form-control requiredField" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.Job_Title, new { @class = "formScreeningInfo" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.Job_Title, new { @class = "form-control requiredField" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.EmployerPhone, new { @class = "formScreeningInfo control-label" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.EmployerPhone, new { @class = "form-control requiredField", @placeholder = "(Enter Area Code, Exchange & Number)" })
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.EmployerAddress1, new { @class = "formScreeningInfo control-label" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.EmployerAddress1, new { @class = "form-control requiredField" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.EmployerAddress2, new { @class = "formScreeningInfo" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.EmployerAddress2, new { @class = "form-control requiredField" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.EmployerCity, new { @class = "formScreeningInfo control-label" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.EmployerCity, new { @class = "form-control requiredField" })
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.EmployerState, new { @class = "formScreeningInfo control-label" })
-                                            @Html.DropDownListFor(x => Model.MinorInformation.FatherMinorInformation.EmployerState, new SelectList(Model.States, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "minorfatherempstate" })
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.EmployerZip, new { @class = "formScreeningInfo" })
-                                            @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.EmployerZip, new { @class = "form-control requiredField", @placeholder = "(Entry Format: 99999-9999, or 99999 and leave 4 digit zip code extension blank)" })
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div id="minorErrors" style="color: red; font-weight: bold;">
-
                             </div>
                         </div>
-                        <div class="alert alert-danger" style="display:none" id="errorAlert">
-                            <strong>Something went wrong!</strong> Your record was not able to save.
-                            <div id="ErrorMessage"></div>
+                    </fieldset>
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">Permanent Street Address</legend>
+                        <div class="control-group">
+                            <div class="controls">
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.Address1, new { @class = "formScreeningInfo control-label" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.Address1, new { @class = "form-control requiredField" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.Address2, new { @class = "formScreeningInfo" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.Address2, new { @class = "form-control requiredField" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.City, new { @class = "formScreeningInfo control-label" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.City, new { @class = "form-control requiredField" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.StateProvince, new { @class = "formScreeningInfo control-label" })
+                                        @Html.DropDownListFor(x => Model.MinorInformation.MontherMinorInformation.StateProvince, new SelectList(Model.States, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "minormotherstate" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.ZipCode, new { @class = "formScreeningInfo" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.ZipCode, new { @class = "form-control requiredField", @placeholder = "(Entry Format: 99999-9999, or 99999 and leave 4 digit zip code extension blank)" })
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>             
-                    <button class="btn1 btn-primary nextBtn pull-right" onclick="onMinorClick()" type="button">Next</button>
+                    </fieldset>
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">Minor: Mother Billing Address</legend>
+                        <div class="control-group">
+                            <div class="controls">
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.BillAddress1, new { @class = "formScreeningInfo control-label" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.BillAddress1, new { @class = "form-control requiredField" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.BillAddress2, new { @class = "formScreeningInfo" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.BillAddress2, new { @class = "form-control requiredField" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.BillCity, new { @class = "formScreeningInfo control-label" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.BillCity, new { @class = "form-control requiredField" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.BillState, new { @class = "formScreeningInfo control-label" })
+                                        @Html.DropDownListFor(x => Model.MinorInformation.MontherMinorInformation.BillState, new SelectList(Model.States, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "minormothebillstate" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.BillZip, new { @class = "formScreeningInfo" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.BillZip, new { @class = "form-control requiredField", @placeholder = "(Entry Format: 99999-9999, or 99999 and leave 4 digit zip code extension blank)" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">Minor: Mother Mailing Address</legend>
+                        <div class="control-group">
+                            <div class="controls">
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.MailAddress1, new { @class = "formScreeningInfo control-label" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.MailAddress1, new { @class = "form-control requiredField" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.MailAddress2, new { @class = "formScreeningInfo" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.MailAddress2, new { @class = "form-control requiredField" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.MailCity, new { @class = "formScreeningInfo control-label" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.MailCity, new { @class = "form-control requiredField" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.MailState, new { @class = "formScreeningInfo control-label" })
+                                        @Html.DropDownListFor(x => Model.MinorInformation.MontherMinorInformation.MailState, new SelectList(Model.States, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "minormothermailstate" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.MailZip, new { @class = "formScreeningInfo" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.MailZip, new { @class = "form-control requiredField", @placeholder = "(Entry Format: 99999-9999, or 99999 and leave 4 digit zip code extension blank)" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">Minor: Mother 911 Address</legend>
+                        <div class="control-group">
+                            <div class="controls">
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.E911Address1, new { @class = "formScreeningInfo control-label" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.E911Address1, new { @class = "form-control requiredField" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.E911Address2, new { @class = "formScreeningInfo" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.E911Address2, new { @class = "form-control requiredField" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.E911City, new { @class = "formScreeningInfo control-label" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.E911City, new { @class = "form-control requiredField" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.E911State, new { @class = "formScreeningInfo control-label" })
+                                        @Html.DropDownListFor(x => Model.MinorInformation.MontherMinorInformation.E911State, new SelectList(Model.States, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "minormothere911state" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.E911Zip, new { @class = "formScreeningInfo" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.E911Zip, new { @class = "form-control requiredField", @placeholder = "(Entry Format: 99999-9999, or 99999 and leave 4 digit zip code extension blank)" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">Minor: Mother Employer Section</legend>
+                        <div class="control-group">
+                            <div class="controls">
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.Employer, new { @class = "formScreeningInfo control-label" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.Employer, new { @class = "form-control requiredField" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.Job_Title, new { @class = "formScreeningInfo" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.Job_Title, new { @class = "form-control requiredField" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.EmployerPhone, new { @class = "formScreeningInfo control-label" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.EmployerPhone, new { @class = "form-control requiredField", @placeholder = "(Enter Area Code, Exchange & Number)" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.EmployerAddress1, new { @class = "formScreeningInfo control-label" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.EmployerAddress1, new { @class = "form-control requiredField" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.EmployerAddress2, new { @class = "formScreeningInfo" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.EmployerAddress2, new { @class = "form-control requiredField" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.EmployerCity, new { @class = "formScreeningInfo control-label" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.EmployerCity, new { @class = "form-control requiredField" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.EmployerState, new { @class = "formScreeningInfo control-label" })
+                                        @Html.DropDownListFor(x => Model.MinorInformation.MontherMinorInformation.EmployerState, new SelectList(Model.States, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "minormothempstate" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.MontherMinorInformation.EmployerZip, new { @class = "formScreeningInfo" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.MontherMinorInformation.EmployerZip, new { @class = "form-control requiredField", @placeholder = "(Entry Format: 99999-9999, or 99999 and leave 4 digit zip code extension blank)" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    @*<div class="row">
+                            <div class="col-xs-12">
+                                <div id="minorErrors" style="color: red; font-weight: bold;">
+
+                                </div>
+                            </div>
+                            <div class="alert alert-danger" style="display:none" id="errorAlert">
+                                <strong>Something went wrong!</strong> Your record was not able to save.
+                                <div id="ErrorMessage"></div>
+                            </div>
+                        </div>*@
                 </div>
+
+                <div id="divMinorFather" style="display:none">
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">Minor:  Father Section</legend>
+                        <div class="control-group">
+                            <div class="controls">
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.First_Name, new { @class = "formScreeningInfo required control-label" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.First_Name, new { @class = "form-control requiredField", required = "required" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.Middle_Init, new { @class = "formScreeningInfo" })
+                                        @Html.EditorFor(m => m.MinorInformation.FatherMinorInformation.Middle_Init, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.Last_Name, new { @class = "formScreeningInfo required control-label" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.Last_Name, new { @class = "form-control requiredField", required = "required" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.Race, new { @class = "formScreeningInfo required control-label" })
+                                        @Html.DropDownListFor(x => Model.MinorInformation.FatherMinorInformation.Race, new SelectList(Model.Race, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "minor-father-race" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.Dob, new { @class = "formScreeningInfo required" })
+                                        @Html.EditorFor(m => m.MinorInformation.FatherMinorInformation.Dob, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.Marital_Status, new { @class = "formScreeningInfo required control-label" })
+                                        @Html.DropDownListFor(x => Model.MinorInformation.FatherMinorInformation.Marital_Status, new SelectList(Model.MaritalStatus, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "minor-father-marital-status" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.HomePhone, new { @class = "formScreeningInfo control-label required" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.HomePhone, new { @class = "form-control requiredField", @placeholder = "(Enter Area Code, Exchange & Number)" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.Cell_Phone, new { @class = "formScreeningInfo" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.Cell_Phone, new { @class = "form-control requiredField", @placeholder = "(Enter Area Code, Exchange & Number)" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">Permanent Street Address</legend>
+                        <div class="control-group">
+                            <div class="controls">
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.Address1, new { @class = "formScreeningInfo control-label" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.Address1, new { @class = "form-control requiredField" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.Address2, new { @class = "formScreeningInfo" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.Address2, new { @class = "form-control requiredField" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.City, new { @class = "formScreeningInfo control-label" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.City, new { @class = "form-control requiredField" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.StateProvince, new { @class = "formScreeningInfo control-label" })
+                                        @Html.DropDownListFor(x => Model.MinorInformation.FatherMinorInformation.StateProvince, new SelectList(Model.States, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "minorfatherstate" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.ZipCode, new { @class = "formScreeningInfo" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.ZipCode, new { @class = "form-control requiredField", @placeholder = "(Entry Format: 99999-9999, or 99999 and leave 4 digit zip code extension blank)" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">Minor: Father Billing Address</legend>
+                        <div class="control-group">
+                            <div class="controls">
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.BillAddress1, new { @class = "formScreeningInfo control-label" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.BillAddress1, new { @class = "form-control requiredField" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.BillAddress2, new { @class = "formScreeningInfo" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.BillAddress2, new { @class = "form-control requiredField" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.BillCity, new { @class = "formScreeningInfo control-label" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.BillCity, new { @class = "form-control requiredField" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.BillState, new { @class = "formScreeningInfo control-label" })
+                                        @Html.DropDownListFor(x => Model.MinorInformation.FatherMinorInformation.BillState, new SelectList(Model.States, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "minormotherbillstate" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.BillZip, new { @class = "formScreeningInfo" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.BillZip, new { @class = "form-control requiredField", @placeholder = "(Entry Format: 99999-9999, or 99999 and leave 4 digit zip code extension blank)" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">Minor: Father Mailing Address</legend>
+                        <div class="control-group">
+                            <div class="controls">
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.MailAddress1, new { @class = "formScreeningInfo control-label" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.MailAddress1, new { @class = "form-control requiredField" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.MailAddress2, new { @class = "formScreeningInfo" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.MailAddress2, new { @class = "form-control requiredField" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.MailCity, new { @class = "formScreeningInfo control-label" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.MailCity, new { @class = "form-control requiredField" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.MailState, new { @class = "formScreeningInfo control-label" })
+                                        @Html.DropDownListFor(x => Model.MinorInformation.FatherMinorInformation.MailState, new SelectList(Model.States, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "minorfathermailstate" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.MailZip, new { @class = "formScreeningInfo" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.MailZip, new { @class = "form-control requiredField", @placeholder = "(Entry Format: 99999-9999, or 99999 and leave 4 digit zip code extension blank)" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">Minor: Father 911 Address</legend>
+                        <div class="control-group">
+                            <div class="controls">
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.E911Address1, new { @class = "formScreeningInfo control-label" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.E911Address1, new { @class = "form-control requiredField" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.E911Address2, new { @class = "formScreeningInfo" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.E911Address2, new { @class = "form-control requiredField" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.E911City, new { @class = "formScreeningInfo control-label" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.E911City, new { @class = "form-control requiredField" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.E911State, new { @class = "formScreeningInfo control-label" })
+                                        @Html.DropDownListFor(x => Model.MinorInformation.FatherMinorInformation.E911State, new SelectList(Model.States, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "minorfather911state" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.E911Zip, new { @class = "formScreeningInfo" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.E911Zip, new { @class = "form-control requiredField", @placeholder = "(Entry Format: 99999-9999, or 99999 and leave 4 digit zip code extension blank)" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">Minor: Father Employer Section</legend>
+                        <div class="control-group">
+                            <div class="controls">
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.Employer, new { @class = "formScreeningInfo control-label" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.Employer, new { @class = "form-control requiredField" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.Job_Title, new { @class = "formScreeningInfo" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.Job_Title, new { @class = "form-control requiredField" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.EmployerPhone, new { @class = "formScreeningInfo control-label" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.EmployerPhone, new { @class = "form-control requiredField", @placeholder = "(Enter Area Code, Exchange & Number)" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.EmployerAddress1, new { @class = "formScreeningInfo control-label" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.EmployerAddress1, new { @class = "form-control requiredField" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.EmployerAddress2, new { @class = "formScreeningInfo" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.EmployerAddress2, new { @class = "form-control requiredField" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.EmployerCity, new { @class = "formScreeningInfo control-label" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.EmployerCity, new { @class = "form-control requiredField" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.EmployerState, new { @class = "formScreeningInfo control-label" })
+                                        @Html.DropDownListFor(x => Model.MinorInformation.FatherMinorInformation.EmployerState, new SelectList(Model.States, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "minorfatherempstate" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.MinorInformation.FatherMinorInformation.EmployerZip, new { @class = "formScreeningInfo" })
+                                        @Html.TextBoxFor(m => m.MinorInformation.FatherMinorInformation.EmployerZip, new { @class = "form-control requiredField", @placeholder = "(Entry Format: 99999-9999, or 99999 and leave 4 digit zip code extension blank)" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
                 </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div id="minorErrors" style="color: red; font-weight: bold;">
+
+                        </div>
+                    </div>
+                    <div class="alert alert-danger" style="display:none" id="errorAlert">
+                        <strong>Something went wrong!</strong> Your record was not able to save.
+                        <div id="ErrorMessage"></div>
+                    </div>
+                </div>
+                <button class="btn1 btn-primary nextBtn pull-right" onclick="onMinorClick()" type="button">Next</button>
+            </div>
+        </div>
 
         <div class="panel panel-primary setup-content" id="emergency">
             <div class="panel-heading">
@@ -1255,14 +1270,14 @@
                     </div>
                 </div>
 
-                <div class="row" style="display:none" id="divSpouseEmergency">
+                <div class="row"  id="divSpouseEmergency">
                     <div class="form-group col-lg-6">
                         <input data-val="true" id="spouseemergency" name="spouseemergency" type="checkbox">
                         &nbsp;<label for="AllExceptions_Permissible">Do you want to have your spouse as an emergency contact?</label>
                     </div>
                 </div>
 
-                <div id="divEmergencyOne" style="display:none">
+                <div id="divEmergencyOne" >
                     <div class="row">
                         <div class="form-group col-md-6">
                             @Html.LabelFor(m => m.EmergencyContact.EmergencyContactOne.Nearest_Relative_Name, new { @class = "formScreeningInfo required control-label" })
@@ -1405,6 +1420,7 @@
                         </div>
                     </fieldset>
                 </div>
+                <button class="btn1 btn-primary nextBtn" onclick="AddEmergencyCont()" id="EmergencyAddBtn" type="button">Add</button>
                 <div class="row">
                     <div class="col-xs-12">
                         <div id="emergencyErrors" style="color: red; font-weight: bold;">
@@ -1419,7 +1435,7 @@
                 <button class="btn1 btn-primary nextBtn pull-right" onclick="onEmergencyClick()" type="button">Next</button>
 
             </div>
-            </div>
+        </div>
 
         <div class="panel panel-primary setup-content" id="insurance">
             <div class="panel-heading">
@@ -1434,112 +1450,335 @@
                         &nbsp;<label for="insurance">Check This Box If You Do Not Have Health Insurance</label>
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="form-group col-md-4">
-                        @Html.LabelFor(m => m.InsuranceInformation.InsRank, new { @class = "formScreeningInfo required control-label" })
-                        @Html.TextBoxFor(m => m.InsuranceInformation.InsRank, new { @class = "form-control requiredField", required = "required" })
+                <div id="InsuranceOnePremium" >
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsRank, new { @class = "formScreeningInfo required control-label" })
+                            @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceOne.InsRank, new { @class = "form-control requiredField", required = "required" })
+                        </div>
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsPlanName, new { @class = "formScreeningInfo" })
+                            @Html.EditorFor(m => m.InsuranceInformation.InsuranceOne.InsPlanName, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.Subscriber_Name, new { @class = "formScreeningInfo" })
+                            @Html.EditorFor(m => m.InsuranceInformation.InsuranceOne.Subscriber_Name, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
                     </div>
-                    <div class="form-group col-md-4">
-                        @Html.LabelFor(m => m.InsuranceInformation.InsPlanName, new { @class = "formScreeningInfo" })
-                        @Html.EditorFor(m => m.InsuranceInformation.InsPlanName, new { htmlAttributes = new { @class = "form-control" } })
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.Policy_Number, new { @class = "formScreeningInfo required control-label" })
+                            @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceOne.Policy_Number, new { @class = "form-control requiredField", required = "required" })
+                        </div>
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.Group_Number, new { @class = "formScreeningInfo" })
+                            @Html.EditorFor(m => m.InsuranceInformation.InsuranceOne.Group_Number, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.PlanCode, new { @class = "formScreeningInfo" })
+                            @Html.EditorFor(m => m.InsuranceInformation.InsuranceOne.PlanCode, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
                     </div>
-                    <div class="form-group col-md-4">
-                        @Html.LabelFor(m => m.InsuranceInformation.Subscriber_Name, new { @class = "formScreeningInfo" })
-                        @Html.EditorFor(m => m.InsuranceInformation.Subscriber_Name, new { htmlAttributes = new { @class = "form-control" } })
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-4">
-                        @Html.LabelFor(m => m.InsuranceInformation.Policy_Number, new { @class = "formScreeningInfo required control-label" })
-                        @Html.TextBoxFor(m => m.InsuranceInformation.Policy_Number, new { @class = "form-control requiredField", required = "required" })
-                    </div>
-                    <div class="form-group col-md-4">
-                        @Html.LabelFor(m => m.InsuranceInformation.Group_Number, new { @class = "formScreeningInfo" })
-                        @Html.EditorFor(m => m.InsuranceInformation.Group_Number, new { htmlAttributes = new { @class = "form-control" } })
-                    </div>
-                    <div class="form-group col-md-4">
-                        @Html.LabelFor(m => m.InsuranceInformation.PlanCode, new { @class = "formScreeningInfo" })
-                        @Html.EditorFor(m => m.InsuranceInformation.PlanCode, new { htmlAttributes = new { @class = "form-control" } })
-                    </div>
-                </div>
-                <fieldset class="scheduler-border">
-                    <legend class="scheduler-border">Insurance Address</legend>
-                    <div class="control-group">
-                        <div class="controls">
-                            <div class="row">
-                                <div class="form-group col-md-4">
-                                    @Html.LabelFor(m => m.InsuranceInformation.InsAddress1, new { @class = "formScreeningInfo control-label" })
-                                    @Html.TextBoxFor(m => m.InsuranceInformation.InsAddress1, new { @class = "form-control requiredField" })
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">Insurance Address</legend>
+                        <div class="control-group">
+                            <div class="controls">
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsAddress1, new { @class = "formScreeningInfo control-label" })
+                                        @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceOne.InsAddress1, new { @class = "form-control requiredField" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsAddress2, new { @class = "formScreeningInfo" })
+                                        @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceOne.InsAddress2, new { @class = "form-control requiredField" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsCity, new { @class = "formScreeningInfo control-label" })
+                                        @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceOne.InsCity, new { @class = "form-control requiredField" })
+                                    </div>
                                 </div>
-                                <div class="form-group col-md-4">
-                                    @Html.LabelFor(m => m.InsuranceInformation.InsAddress2, new { @class = "formScreeningInfo" })
-                                    @Html.TextBoxFor(m => m.InsuranceInformation.InsAddress2, new { @class = "form-control requiredField" })
-                                </div>
-                                <div class="form-group col-md-4">
-                                    @Html.LabelFor(m => m.InsuranceInformation.InsCity, new { @class = "formScreeningInfo control-label" })
-                                    @Html.TextBoxFor(m => m.InsuranceInformation.InsCity, new { @class = "form-control requiredField" })
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-4">
-                                    @Html.LabelFor(m => m.InsuranceInformation.InsState, new { @class = "formScreeningInfo control-label" })
-                                    @Html.DropDownListFor(x => Model.InsuranceInformation.InsState, new SelectList(Model.States, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "instate" })
-                                </div>
-                                <div class="form-group col-md-4">
-                                    @Html.LabelFor(m => m.InsuranceInformation.InsZip, new { @class = "formScreeningInfo" })
-                                    @Html.TextBoxFor(m => m.InsuranceInformation.InsZip, new { @class = "form-control requiredField", @placeholder = "(Entry Format: 99999-9999, or 99999 and leave 4 digit zip code extension blank)" })
-                                </div>
-                                <div class="form-group col-md-4">
-                                    @Html.LabelFor(m => m.InsuranceInformation.InsPhone, new { @class = "formScreeningInfo" })
-                                    @Html.TextBoxFor(m => m.InsuranceInformation.InsPhone, new { @class = "form-control requiredField", @placeholder = "(Enter Area Code, Exchange & Number)" })
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsState, new { @class = "formScreeningInfo control-label" })
+                                        @Html.DropDownListFor(x => Model.InsuranceInformation.InsuranceOne.InsState, new SelectList(Model.States, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "instate" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsZip, new { @class = "formScreeningInfo" })
+                                        @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceOne.InsZip, new { @class = "form-control requiredField", @placeholder = "(Entry Format: 99999-9999, or 99999 and leave 4 digit zip code extension blank)" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsPhone, new { @class = "formScreeningInfo" })
+                                        @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceOne.InsPhone, new { @class = "form-control requiredField", @placeholder = "(Enter Area Code, Exchange & Number)" })
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </fieldset>
-                <fieldset class="scheduler-border">
-                    <legend class="scheduler-border">Attachments</legend>
-                    <div class="control-group">
-                        <div class="controls">
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    @Html.LabelFor(m => m.InsuranceInformation.AttachmentType, new { @class = "formScreeningInfo control-label" })
-                                    @Html.DropDownListFor(x => Model.InsuranceInformation.AttachmentType, new SelectList(Model.AttachmentTypes, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "attachmentId" })
+                    </fieldset>
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">Attachments</legend>
+                        <div class="control-group">
+                            <div class="controls">
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.AttachmentType, new { @class = "formScreeningInfo control-label" })
+                                        @Html.DropDownListFor(x => Model.InsuranceInformation.InsuranceOne.AttachmentType, new SelectList(Model.AttachmentTypes, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "attachmentId" })
 
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="formScreeningInfo control-label" for="InsuranceInformation_AttachmentType">Upload</label>
-                                    <div class="input-group">
-                                        <span class="input-group-btn">
-                                            <span class="btn btn-primary btn-file">
-                                                <input id="fileInput" type="file" style="width:400px">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="formScreeningInfo control-label" for="InsuranceInformation_AttachmentType">Upload</label>
+                                        <div class="input-group">
+                                            <span class="input-group-btn">
+                                                <span class="btn btn-primary btn-file">
+                                                    <input id="fileInput" type="file" style="width:400px">
+                                                </span>
                                             </span>
-                                        </span>
-                                        <input type="submit" value="Upload file" id="attachFile" class="btn1 btn-primary" style="float: left;" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Processing" />
+                                            <input type="submit" value="Upload file" id="attachFile" class="btn1 btn-primary" style="float: left;" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Processing" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-12">
+                                            <div id="attached" style="color: red; font-weight: bold;"> <br /></div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-12">
-                                        <div id="attached" style="color: red; font-weight: bold;"> <br /></div>
+                            </div>
+                            <div class="form-group row">
+                                <table class="table table-hover dataTable box-shadow--8dp" style="background-color:#add8e6" id="uploads">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>File Name</th>
+                                            <th>Remove</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody style="font-weight: bold;"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </fieldset>
+
+
+                </div>
+                <div id="InsuranceTwoPremium" style="display:none">
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(m => m.InsuranceInformation.InsuranceTwo.InsRank, new { @class = "formScreeningInfo required control-label" })
+                            @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceTwo.InsRank, new { @class = "form-control requiredField", required = "required" })
+                        </div>
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(m => m.InsuranceInformation.InsuranceTwo.InsPlanName, new { @class = "formScreeningInfo" })
+                            @Html.EditorFor(m => m.InsuranceInformation.InsuranceTwo.InsPlanName, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(m => m.InsuranceInformation.InsuranceTwo.Subscriber_Name, new { @class = "formScreeningInfo" })
+                            @Html.EditorFor(m => m.InsuranceInformation.InsuranceTwo.Subscriber_Name, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(m => m.InsuranceInformation.InsuranceTwo.Policy_Number, new { @class = "formScreeningInfo required control-label" })
+                            @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceTwo.Policy_Number, new { @class = "form-control requiredField", required = "required" })
+                        </div>
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(m => m.InsuranceInformation.InsuranceTwo.Group_Number, new { @class = "formScreeningInfo" })
+                            @Html.EditorFor(m => m.InsuranceInformation.InsuranceTwo.Group_Number, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(m => m.InsuranceInformation.InsuranceTwo.PlanCode, new { @class = "formScreeningInfo" })
+                            @Html.EditorFor(m => m.InsuranceInformation.InsuranceTwo.PlanCode, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">Insurance Address</legend>
+                        <div class="control-group">
+                            <div class="controls">
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceTwo.InsAddress1, new { @class = "formScreeningInfo control-label" })
+                                        @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceTwo.InsAddress1, new { @class = "form-control requiredField" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceTwo.InsAddress2, new { @class = "formScreeningInfo" })
+                                        @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceTwo.InsAddress2, new { @class = "form-control requiredField" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceTwo.InsCity, new { @class = "formScreeningInfo control-label" })
+                                        @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceTwo.InsCity, new { @class = "form-control requiredField" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceTwo.InsState, new { @class = "formScreeningInfo control-label" })
+                                        @Html.DropDownListFor(x => Model.InsuranceInformation.InsuranceTwo.InsState, new SelectList(Model.States, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "instate" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceTwo.InsZip, new { @class = "formScreeningInfo" })
+                                        @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceTwo.InsZip, new { @class = "form-control requiredField", @placeholder = "(Entry Format: 99999-9999, or 99999 and leave 4 digit zip code extension blank)" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceTwo.InsPhone, new { @class = "formScreeningInfo" })
+                                        @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceTwo.InsPhone, new { @class = "form-control requiredField", @placeholder = "(Enter Area Code, Exchange & Number)" })
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <table class="table table-hover dataTable box-shadow--8dp" style="background-color:#add8e6" id="uploads">
-                                <thead>
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>File Name</th>
-                                        <th>Remove</th>
-                                    </tr>
-                                </thead>
-                                <tbody style="font-weight: bold;"></tbody>
-                            </table>
+                    </fieldset>
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">Attachments</legend>
+                        <div class="control-group">
+                            <div class="controls">
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceTwo.AttachmentType, new { @class = "formScreeningInfo control-label" })
+                                        @Html.DropDownListFor(x => Model.InsuranceInformation.InsuranceTwo.AttachmentType, new SelectList(Model.AttachmentTypes, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "attachmentId" })
+
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="formScreeningInfo control-label" for="InsuranceInformation_AttachmentType">Upload</label>
+                                        <div class="input-group">
+                                            <span class="input-group-btn">
+                                                <span class="btn btn-primary btn-file">
+                                                    <input id="fileInput" type="file" style="width:400px">
+                                                </span>
+                                            </span>
+                                            <input type="submit" value="Upload file" id="attachFile" class="btn1 btn-primary" style="float: left;" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Processing" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-12">
+                                            <div id="attached" style="color: red; font-weight: bold;"> <br /></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <table class="table table-hover dataTable box-shadow--8dp" style="background-color:#add8e6" id="uploads">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>File Name</th>
+                                            <th>Remove</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody style="font-weight: bold;"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </fieldset>
+
+
+                </div>
+                <div id="InsuranceThreePremium" style="display:none">
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(m => m.InsuranceInformation.InsuranceThree.InsRank, new { @class = "formScreeningInfo required control-label" })
+                            @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceThree.InsRank, new { @class = "form-control requiredField", required = "required" })
+                        </div>
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(m => m.InsuranceInformation.InsuranceThree.InsPlanName, new { @class = "formScreeningInfo" })
+                            @Html.EditorFor(m => m.InsuranceInformation.InsuranceThree.InsPlanName, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(m => m.InsuranceInformation.InsuranceThree.Subscriber_Name, new { @class = "formScreeningInfo" })
+                            @Html.EditorFor(m => m.InsuranceInformation.InsuranceThree.Subscriber_Name, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
                     </div>
-                </fieldset>
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(m => m.InsuranceInformation.InsuranceThree.Policy_Number, new { @class = "formScreeningInfo required control-label" })
+                            @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceThree.Policy_Number, new { @class = "form-control requiredField", required = "required" })
+                        </div>
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(m => m.InsuranceInformation.InsuranceThree.Group_Number, new { @class = "formScreeningInfo" })
+                            @Html.EditorFor(m => m.InsuranceInformation.InsuranceThree.Group_Number, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(m => m.InsuranceInformation.InsuranceThree.PlanCode, new { @class = "formScreeningInfo" })
+                            @Html.EditorFor(m => m.InsuranceInformation.InsuranceThree.PlanCode, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">Insurance Address</legend>
+                        <div class="control-group">
+                            <div class="controls">
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceThree.InsAddress1, new { @class = "formScreeningInfo control-label" })
+                                        @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceThree.InsAddress1, new { @class = "form-control requiredField" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceThree.InsAddress2, new { @class = "formScreeningInfo" })
+                                        @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceThree.InsAddress2, new { @class = "form-control requiredField" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceThree.InsCity, new { @class = "formScreeningInfo control-label" })
+                                        @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceThree.InsCity, new { @class = "form-control requiredField" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceThree.InsState, new { @class = "formScreeningInfo control-label" })
+                                        @Html.DropDownListFor(x => Model.InsuranceInformation.InsuranceThree.InsState, new SelectList(Model.States, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "instate" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceThree.InsZip, new { @class = "formScreeningInfo" })
+                                        @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceThree.InsZip, new { @class = "form-control requiredField", @placeholder = "(Entry Format: 99999-9999, or 99999 and leave 4 digit zip code extension blank)" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceThree.InsPhone, new { @class = "formScreeningInfo" })
+                                        @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceThree.InsPhone, new { @class = "form-control requiredField", @placeholder = "(Enter Area Code, Exchange & Number)" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">Attachments</legend>
+                        <div class="control-group">
+                            <div class="controls">
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceThree.AttachmentType, new { @class = "formScreeningInfo control-label" })
+                                        @Html.DropDownListFor(x => Model.InsuranceInformation.InsuranceThree.AttachmentType, new SelectList(Model.AttachmentTypes, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "attachmentId" })
+
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="formScreeningInfo control-label" for="InsuranceInformation_AttachmentType">Upload</label>
+                                        <div class="input-group">
+                                            <span class="input-group-btn">
+                                                <span class="btn btn-primary btn-file">
+                                                    <input id="fileInput" type="file" style="width:400px">
+                                                </span>
+                                            </span>
+                                            <input type="submit" value="Upload file" id="attachFile" class="btn1 btn-primary" style="float: left;" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Processing" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-12">
+                                            <div id="attached" style="color: red; font-weight: bold;"> <br /></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <table class="table table-hover dataTable box-shadow--8dp" style="background-color:#add8e6" id="uploads">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>File Name</th>
+                                            <th>Remove</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody style="font-weight: bold;"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </fieldset>
+
+
+                </div>
+                <button class="btn1 btn-primary nextBtn" onclick="AddInsuranceCont()" id="EmergencyAddBtn" type="button">Add</button>
+
                 <div class="row">
                     <div class="col-xs-12">
                         <div id="insuranceErrors" style="color: red; font-weight: bold;">
@@ -1565,11 +1804,11 @@
                     <div class="form-group col-lg-12" id="divac">
                         @Html.LabelFor(m => m.AccidentDetail.AccidentTypeID, new { @class = "formScreeningInfo required" })
                         <div>
-                            @for (int i = 0; i < Model.AccidentTypes.Count; i++)
+                            @foreach (var accidentType in Model.AccidentTypes)
                             {
                                 <span>
-                                    @Model.AccidentTypes[i]
-                                    @Html.RadioButtonFor(m => m.AccidentDetail.AccidentTypeID, @Model.AccidentTypes[i]) &nbsp;
+                                    @accidentType.Value 
+                                    @Html.RadioButtonFor(m => m.AccidentDetail.AccidentTypeID, accidentType.Key) &nbsp;
                                 </span>
                             }
                         </div>
@@ -1578,30 +1817,30 @@
 
                 <div class="row">
                     <div class="form-group col-md-4">
-                        @Html.LabelFor(m => m.InsuranceInformation.InsRank, new { @class = "formScreeningInfo required control-label" })
-                        @Html.TextBoxFor(m => m.InsuranceInformation.InsRank, new { @class = "form-control requiredField", required = "required", @id = "AccentInformationInsRank" })
+                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsRank, new { @class = "formScreeningInfo required control-label" })
+                        @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceOne.InsRank, new { @class = "form-control requiredField", required = "required", @id = "AccentInformationInsRank" })
                     </div>
                     <div class="form-group col-md-4">
-                        @Html.LabelFor(m => m.InsuranceInformation.InsPlanName, new { @class = "formScreeningInfo" })
-                        @Html.EditorFor(m => m.InsuranceInformation.InsPlanName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsPlanName, new { @class = "formScreeningInfo" })
+                        @Html.EditorFor(m => m.InsuranceInformation.InsuranceOne.InsPlanName, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                     <div class="form-group col-md-4">
-                        @Html.LabelFor(m => m.InsuranceInformation.Subscriber_Name, new { @class = "formScreeningInfo" })
-                        @Html.EditorFor(m => m.InsuranceInformation.Subscriber_Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.Subscriber_Name, new { @class = "formScreeningInfo" })
+                        @Html.EditorFor(m => m.InsuranceInformation.InsuranceOne.Subscriber_Name, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-4">
-                        @Html.LabelFor(m => m.InsuranceInformation.Policy_Number, new { @class = "formScreeningInfo required control-label" })
-                        @Html.TextBoxFor(m => m.InsuranceInformation.Policy_Number, new { @class = "form-control requiredField", required = "required", @id = "AccentInformationPolicyNumber" })
+                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.Policy_Number, new { @class = "formScreeningInfo required control-label" })
+                        @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceOne.Policy_Number, new { @class = "form-control requiredField", required = "required", @id = "AccentInformationPolicyNumber" })
                     </div>
                     <div class="form-group col-md-4">
-                        @Html.LabelFor(m => m.InsuranceInformation.Group_Number, new { @class = "formScreeningInfo" })
-                        @Html.EditorFor(m => m.InsuranceInformation.Group_Number, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.Group_Number, new { @class = "formScreeningInfo" })
+                        @Html.EditorFor(m => m.InsuranceInformation.InsuranceOne.Group_Number, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                     <div class="form-group col-md-4">
-                        @Html.LabelFor(m => m.InsuranceInformation.PlanCode, new { @class = "formScreeningInfo" })
-                        @Html.EditorFor(m => m.InsuranceInformation.PlanCode, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.PlanCode, new { @class = "formScreeningInfo" })
+                        @Html.EditorFor(m => m.InsuranceInformation.InsuranceOne.PlanCode, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                 </div>
                 <fieldset class="scheduler-border">
@@ -1610,30 +1849,30 @@
                         <div class="controls">
                             <div class="row">
                                 <div class="form-group col-md-4">
-                                    @Html.LabelFor(m => m.InsuranceInformation.InsAddress1, new { @class = "formScreeningInfo control-label" })
-                                    @Html.TextBoxFor(m => m.InsuranceInformation.InsAddress1, new { @class = "form-control requiredField" })
+                                    @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsAddress1, new { @class = "formScreeningInfo control-label" })
+                                    @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceOne.InsAddress1, new { @class = "form-control requiredField" })
                                 </div>
                                 <div class="form-group col-md-4">
-                                    @Html.LabelFor(m => m.InsuranceInformation.InsAddress2, new { @class = "formScreeningInfo" })
-                                    @Html.TextBoxFor(m => m.InsuranceInformation.InsAddress2, new { @class = "form-control requiredField" })
+                                    @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsAddress2, new { @class = "formScreeningInfo" })
+                                    @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceOne.InsAddress2, new { @class = "form-control requiredField" })
                                 </div>
                                 <div class="form-group col-md-4">
-                                    @Html.LabelFor(m => m.InsuranceInformation.InsCity, new { @class = "formScreeningInfo control-label" })
-                                    @Html.TextBoxFor(m => m.InsuranceInformation.InsCity, new { @class = "form-control requiredField" })
+                                    @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsCity, new { @class = "formScreeningInfo control-label" })
+                                    @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceOne.InsCity, new { @class = "form-control requiredField" })
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-4">
-                                    @Html.LabelFor(m => m.InsuranceInformation.InsState, new { @class = "formScreeningInfo control-label" })
-                                    @Html.DropDownListFor(x => Model.InsuranceInformation.InsState, new SelectList(Model.States, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "insurancestate" })
+                                    @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsState, new { @class = "formScreeningInfo control-label" })
+                                    @Html.DropDownListFor(x => Model.InsuranceInformation.InsuranceOne.InsState, new SelectList(Model.States, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "insurancestate" })
                                 </div>
                                 <div class="form-group col-md-4">
-                                    @Html.LabelFor(m => m.InsuranceInformation.InsZip, new { @class = "formScreeningInfo" })
-                                    @Html.TextBoxFor(m => m.InsuranceInformation.InsZip, new { @class = "form-control requiredField", @placeholder = "(Entry Format: 99999-9999, or 99999 and leave 4 digit zip code extension blank)" })
+                                    @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsZip, new { @class = "formScreeningInfo" })
+                                    @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceOne.InsZip, new { @class = "form-control requiredField", @placeholder = "(Entry Format: 99999-9999, or 99999 and leave 4 digit zip code extension blank)" })
                                 </div>
                                 <div class="form-group col-md-4">
-                                    @Html.LabelFor(m => m.InsuranceInformation.InsPhone, new { @class = "formScreeningInfo" })
-                                    @Html.TextBoxFor(m => m.InsuranceInformation.InsPhone, new { @class = "form-control requiredField", @placeholder = "(Enter Area Code, Exchange & Number)" })
+                                    @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsPhone, new { @class = "formScreeningInfo" })
+                                    @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceOne.InsPhone, new { @class = "form-control requiredField", @placeholder = "(Enter Area Code, Exchange & Number)" })
                                 </div>
                             </div>
                         </div>
@@ -1650,13 +1889,537 @@
                         <div id="ErrorMessages"></div>
                     </div>
                 </div>
-                <button class="btn1 btn-primary nextBtn pull-right" onclick="onAccidentClick()" type="submit">Finish!</button>
+                <button class="btn1 btn-primary nextBtn pull-right" onclick="onAccidentClick()" type="submit">Next</button>
             </div>
         </div>
+
+
+        <div class="panel panel-primary setup-content" id="step7">
+
+            <div class="panel-heading">
+                <h3 class="panel-title">Verify Patient Information</h3>
+            </div>
+            <div class="panel-body">
+                <div id="PatientSection">
+
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label>First Name:</label>
+                            <span id="firstName"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Last Name:</label>
+                            <span id="lastName"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Gender Identity:</label>
+                            <span id="BirthGender"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label>Date of Birth:</label>
+                            <span id="dateOfBirth"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Ethnicity:</label>
+                            <span id="ethnicityValue"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Race:</label>
+                            <span id="raceValue"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label>Marital Status:</label>
+                            <span id="maritalStatusValue"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Preferred Phone Number:</label>
+                            <span id="preferredPhone"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Email Address:</label>
+                            <span id="emailAddress"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label>Primary Care Provider:</label>
+                            <span id="primaryCareProvider"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Service Location:</label>
+                            <span id="serviceLocation"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Registered Service:</label>
+                            <span id="RegisteerService"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label>Guarantor:</label>
+                            <span id="guarantorValue"></span>
+                        </div>
+                    </div>
+
+                    <!-- Continue for other fields as needed... -->
+
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <button class="btn btn-primary pull-right" type="button" onclick="EditInformation(1)">Edit Information</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-heading">
+                <h3>spouse Information</h3>
+            </div>
+            <div class="panel-body">
+                <div id="spouse-Section">
+
+
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label>First Name:</label>
+                            <span id="spouseFirstName"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Last Name:</label>
+                            <span id="spouseLastName"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Birth Date:</label>
+                            <span id="spouseBirthDate"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label>Race:</label>
+                            <span id="spouseRace"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Home Phone:</label>
+                            <span id="spouseHomePhone"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <button class="btn btn-primary pull-right" type="button" onclick="EditInformation(2)">Edit Information</button>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="panel-heading">
+                <h3>Minor Information</h3>
+            </div>
+            <div class="panel-body">
+                <div id="minor-Section">
+                    <div id="FatherSection">
+                        <center> <h3 style="font-weight:bold;">Father Information</h3></center>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label>Father First Name:</label>
+                                <span id="fatherFirstName"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Father Last Name:</label>
+                                <span id="fatherLastName"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Father Birth Date:</label>
+                                <span id="fatherBirthDate"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label>Father Race:</label>
+                                <span id="fatherRace"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Father Home Phone:</label>
+                                <span id="fatherHomePhone"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="MotherSection">
+
+                        <center> <h3 style="font-weight:bold;">Mother Information</h3></center>
+
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label>Mother First Name:</label>
+                                <span id="motherFirstName"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Mother Last Name:</label>
+                                <span id="motherLastName"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Mother Birth Date:</label>
+                                <span id="motherBirthDate"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label>Mother Race:</label>
+                                <span id="motherRace"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Mother Home Phone:</label>
+                                <span id="motherHomePhone"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <button class="btn btn-primary pull-right" type="button" onclick="EditInformation(3)">Edit Information</button>
+                    </div>
+
+                </div>
+            </div>
+            <div class="panel-heading">
+                <h3>Emergency Contact Information</h3>
+            </div>
+            <div class="panel-body">
+                <div id="emergency-Section">
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label>Nearest Relative Name:</label>
+                            <span id="EmergencyNearestRelativeName"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <button class="btn btn-primary pull-right" type="button" onclick="EditInformation(4)">Edit Information</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="panel-heading">
+                <h3>Insurance Information</h3>
+            </div>
+
+            <div class="panel-body">
+                <div id="insurance-section">
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label>InsRank:</label>
+                            <span id="insuranceInsRank"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Policy Number:</label>
+                            <span id="insurancePolicyNumber"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <button class="btn btn-primary pull-right" type="button" onclick="EditInformation(5)">Edit Information</button>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="panel-heading">
+                <h3>Accident Information</h3>
+            </div>
+            <div class="panel-body">
+
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label>Accident Type:</label>
+                        <span id="AccidentType"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Insurance Rank:</label>
+                        <span id="AccidentInsuranceRank"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Policy Number:</label>
+                        <span id="AccidentPolicyNumber"></span>
+                    </div>
+
+
+
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <button class="btn btn-primary pull-right" type="button" onclick="EditInformation(6)">Edit Information</button>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+        <div class="row" id="saveButtonForm" style=" display:none;margin-right:20px">
+            <div class="form-group col-md-12">
+                <button class="btn btn-primary pull-right" type="submit" style="width:100px" onclick="submitInformation()">Save</button>
+            </div>
+        </div>
+       
+
+
 
     </form>
 </div>
 <script>
+
+    function AddEmergencyCont() {
+        if ($('#divEmergencyTwo').css('display') === 'none') {
+            $('#divEmergencyTwo').css('display', 'block');
+
+        } else {
+            $('#divEmergencyThree').css('display', 'block');
+        }
+       
+        
+    } 
+    function     AddInsuranceCont(){
+        
+        if ($('#InsuranceTwoPremium').css('display') === 'none') {
+            $('#InsuranceTwoPremium').css('display', 'block');
+
+        } else {
+            $('#InsuranceThreePremium').css('display', 'block');
+        }
+    }
+    function EditInformation(positionVal) {
+        $('#step7').hide();
+        document.getElementById('saveButtonForm').style.display = "none";
+        switch (positionVal) {
+            case 1:
+                $('#patient').show();
+                enableNextStep('patient');
+
+                break;
+            case 2:
+                $('#spouse').show();
+                enableNextStep('spouse');
+                break;
+            case 3:
+                $('#minor').show();
+                enableNextStep('minor');
+                break;
+            case 4:
+                $('#emergency').show();
+                enableNextStep('emergency');
+                break;
+            case 5:
+                $('#insurance').show();
+                enableNextStep('insurance');
+
+                break;
+            case 6:
+                $('#accident').show();
+                enableNextStep('accident');
+                break;
+            default:
+                console.log("Value is not between 1 and 6");
+        }
+    }
+
+    function InsertValueToStep7(data) {
+        data.forEach(pair => {
+            const sourceElement = document.getElementById(pair.sourceId);
+            const targetElement = document.getElementById(pair.targetId);
+
+            if (targetElement) {
+                sourceElement.textContent = targetElement.value;
+            } else {
+                sourceElement.textContent = '';
+            }
+        });
+
+    }
+    //function InserValueofDropdown(data) {
+
+    //}
+    function createNotApplicableElement() {
+        const centerEl = document.createElement('center');
+        const h4 = document.createElement('h4');
+        h4.innerHTML = "Not Applicable";
+        h4.style.fontWeight = "bold";
+        centerEl.appendChild(h4);
+        return centerEl;
+    }
+    function InsertValue() {
+        document.getElementById('saveButtonForm').style.display = "block";
+        const centerEl = document.createElement('center');
+        const h4 = document.createElement('h4');
+        h4.innerHTML = "Not Applicable";
+        h4.style = "font-weight:bold";
+        centerEl.appendChild(h4);
+        const spouseCheckbox = document.getElementById('notmarried');
+        const minor = document.getElementById('notMinor');
+        const emergency = document.getElementById('chkEmergecny');
+        const insurance = document.getElementById('insuranceCheckBox');
+        debugger;
+
+        if (spouseCheckbox.checked) {
+
+            const spouseEl = document.getElementById('spouse-Section');
+            spouseEl.replaceChildren(createNotApplicableElement());
+
+
+
+        }
+        else {
+            const spouseElement = [{ sourceId: 'spouseFirstName', targetId: 'SpouseInformation_First_Name' },
+                { sourceId: 'spouseLastName', targetId: 'SpouseInformation_Last_Name' },
+                { sourceId: 'spouseBirthDate', targetId: 'SpouseInformation_BirthDate' },
+                { sourceId: 'spouseHomePhone', targetId: 'SpouseInformation_Home_Phone' }];
+            const raceValue = document.getElementById('spouse-race');
+            document.getElementById('spouseRace').innerHTML = raceValue.options[raceValue.selectedIndex].text;
+           InsertValueToStep7(spouseElement);
+
+
+        }
+        if (minor.checked) {
+            const minrElement = document.getElementById('minor-Section');
+            minrElement.replaceChildren(createNotApplicableElement());
+
+
+        } else {
+            const value = document.getElementById('choosegurantor').value;
+            if (value === "1") {
+                document.getElementById('MotherSection').style = "display:block";
+                document.getElementById('FatherSection').style = "display:none";
+                const motherElement = [
+                    { sourceId: 'motherFirstName', targetId: 'MinorInformation_MontherMinorInformation_First_Name' },
+                    { sourceId: 'motherLastName', targetId: 'MinorInformation_MontherMinorInformation_Last_Name' },
+                    { sourceId: 'motherBirthDate', targetId: 'MinorInformation_MontherMinorInformation_Dob' },
+                    { sourceId: 'motherRace', targetId: 'minor-mother-race' },
+                    { sourceId: 'motherHomePhone', targetId: 'MinorInformation_MontherMinorInformation_HomePhone' }
+                ];
+                const raceValue = document.getElementById('minor-mother-race');
+                document.getElementById('motherRace').innerHTML = raceValue.options[raceValue.selectedIndex].text;
+                const dropdown =
+                InsertValueToStep7(motherElement);
+
+
+            } else if (value === "2") {
+                document.getElementById('FatherSection').style = "display:block";
+                document.getElementById('MotherSection').style = "display:none";
+                const fatherElement = [
+                    { sourceId: 'fatherFirstName', targetId: 'MinorInformation_FatherMinorInformation_First_Name' },
+                    { sourceId: 'fatherLastName', targetId: 'MinorInformation_FatherMinorInformation_Last_Name' },
+                    { sourceId: 'fatherBirthDate', targetId: 'MinorInformation_FatherMinorInformation_Dob' },
+
+                    { sourceId: 'fatherHomePhone', targetId: 'MinorInformation_FatherMinorInformation_HomePhone' }
+                ];
+                const raceValue = document.getElementById('minor-father-race');
+                document.getElementById('fatherRace').innerHTML = raceValue.options[raceValue.selectedIndex].text;
+                InsertValueToStep7(fatherElement);
+
+            } else if (value === "3") {
+                document.getElementById('MotherSection').style = "display:block";
+                document.getElementById('FatherSection').style = "display:block";
+                const BothFatMot = [
+                    { sourceId: 'fatherFirstName', targetId: 'MinorInformation_FatherMinorInformation_First_Name' },
+                    { sourceId: 'fatherLastName', targetId: 'MinorInformation_FatherMinorInformation_Last_Name' },
+                    { sourceId: 'fatherBirthDate', targetId: 'MinorInformation_FatherMinorInformation_Dob' },
+
+                    { sourceId: 'fatherHomePhone', targetId: 'MinorInformation_FatherMinorInformation_HomePhone' },
+                    { sourceId: 'motherFirstName', targetId: 'MinorInformation_MontherMinorInformation_First_Name' },
+                    { sourceId: 'motherLastName', targetId: 'MinorInformation_MontherMinorInformation_Last_Name' },
+                    { sourceId: 'motherBirthDate', targetId: 'MinorInformation_MontherMinorInformation_Dob' },
+                    { sourceId: 'motherHomePhone', targetId: 'MinorInformation_MontherMinorInformation_HomePhone' }
+                ];
+                const raceValue1 = document.getElementById('minor-mother-race');
+                document.getElementById('motherRace').innerHTML = raceValue1.options[raceValue1.selectedIndex].text;
+                const raceValue2 = document.getElementById('minor-father-race');
+                document.getElementById('fatherRace').innerHTML = raceValue2.options[raceValue2.selectedIndex].text;
+                InsertValueToStep7(BothFatMot);
+
+
+            } else {
+                const minrElement = document.getElementById('minor-Section');
+                minrElement.replaceChildren(createNotApplicableElement());
+}
+        }
+
+        if (emergency.checked) {
+            const emrgncy = document.getElementById('emergency-Section');
+            emrgncy.replaceChildren(createNotApplicableElement());
+
+        } else {
+            const emrgncyEl = [{ sourceId: "EmergencyNearestRelativeName", targetId: 'EmergencyContact_EmergencyContactOne_Nearest_Relative_Name' },
+];
+            InsertValueToStep7(emrgncyEl);
+        }
+        if (insurance.checked) {
+            const insurelement = document.getElementById('insurance-section');
+            insurelement.replaceChildren(createNotApplicableElement());
+
+        } else {
+            const insEl = [{ sourceId: "insuranceInsRank", targetId: 'InsuranceInformation_InsRank' },
+                { sourceId: "insurancePolicyNumber", targetId: 'InsuranceInformation_Policy_Number' },];
+            InsertValueToStep7(insEl);
+
+        }
+        const elements = [
+            { sourceId: 'firstName', targetId: 'PatientDemographicsViewModel_First_Name' },
+            { sourceId: 'lastName', targetId: 'PatientDemographicsViewModel_Last_Name' },
+            { sourceId: 'dateOfBirth', targetId: 'PatientDemographicsViewModel_BirthDate' },
+            { sourceId: 'preferredPhone', targetId: 'PatientDemographicsViewModel_Home_Phone' },
+            { sourceId: 'emailAddress', targetId: 'PatientDemographicsViewModel_Email_Address' },
+            { sourceId: 'primaryCareProvider', targetId: 'PatientDemographicsViewModel_PrimaryCarePhys' },
+
+            { sourceId: "AccidentPolicyNumber", targetId: 'AccentInformationPolicyNumber' },
+            { sourceId: "AccidentInsuranceRank", targetId: 'AccentInformationInsRank' },
+
+        ];
+        const raceSelect = document.getElementById("race");
+        document.getElementById('raceValue').innerHTML = raceSelect.options[raceSelect.selectedIndex].text;
+        const hospitalLoc = document.getElementById('hospitalId');
+        document.getElementById('serviceLocation').innerHTML = hospitalLoc.options[hospitalLoc.selectedIndex].text;
+        const Guarantor = document.getElementById('guarantor');
+        document.getElementById('guarantorValue').innerHTML = Guarantor.options[Guarantor.selectedIndex].text;
+        const Ethnicity = document.getElementById('ethincity');
+        document.getElementById('ethnicityValue').innerHTML = Ethnicity.options[Ethnicity.selectedIndex].text;
+        const marritual = document.getElementById('maritalstatus');
+        document.getElementById('maritalStatusValue').innerHTML = marritual.options[marritual.selectedIndex].text;
+        InsertValueToStep7(elements);
+
+        const dropdownElement = [
+            { sourceId: "RegisteerService", targetId: document.querySelector('input[name="PatientDemographicsViewModel.HospitalService"]:checked') },
+            { sourceId: "BirthGender", targetId: document.querySelector('input[name="PatientDemographicsViewModel.Gender"]:checked') },
+            { sourceId: "AccidentType", targetId: document.querySelector('input[name="AccidentDetail.AccidentTypeID"]:checked') }
+        ];
+
+        dropdownElement.forEach(item => {
+
+            const sourceElement = document.getElementById(item.sourceId);
+            if (item.targetId) {
+                sourceElement.textContent = item.targetId.value;
+            } else {
+                sourceElement.textContent = '';
+            }
+        });
+    }
+
+
+        // Call the function to populate the sources from the spans
+
+
 
     $(document).ready(function () {
       //  $("#PatientDemographicsViewModel_AdmitDate").datepicker({ minDate: new Date() });

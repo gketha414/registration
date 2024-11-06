@@ -1,4 +1,5 @@
-﻿using PreRegistration.Models;
+﻿using AutoMapper;
+using PreRegistration.Models;
 using PreRegistration.Models.Helpers;
 using PreRegistration.Models.UI;
 using PreRegistration.Models.ViewModels;
@@ -45,7 +46,7 @@ namespace PreRegistration.DAL
                 patientModel.YesNo.Add("Yes");
                 patientModel.YesNo.Add("No");
 
-                foreach(var service in _context.HospitalServices)
+                foreach (var service in _context.HospitalServices)
                 {
                     patientModel.HospitalService.Add(service.Description);
                 }
@@ -62,12 +63,12 @@ namespace PreRegistration.DAL
                 patientModel.Guarantors.AddRange(_context.ResponsibleParties.Select(x => new SelectListItem { Text = x.ResponsiblePartyDescription, Value = x.ResponsiblePartyID.ToString() }).ToList());
 
                 patientModel.FilteredGuarantors.Add(new SelectListItem { Text = "-- Select Guarantor --", Value = "0" });
-                patientModel.FilteredGuarantors.AddRange(_context.ResponsibleParties.Where(a=>a.ResponsiblePartyID !=4 && a.ResponsiblePartyID !=5).Select(x => new SelectListItem { Text = x.ResponsiblePartyDescription, Value = x.ResponsiblePartyID.ToString() }).ToList());
+                patientModel.FilteredGuarantors.AddRange(_context.ResponsibleParties.Where(a => a.ResponsiblePartyID != 4 && a.ResponsiblePartyID != 5).Select(x => new SelectListItem { Text = x.ResponsiblePartyDescription, Value = x.ResponsiblePartyID.ToString() }).ToList());
 
                 var accidentTypes = _context.AccidentTypes.ToList();
-                foreach(var type in accidentTypes)
+                foreach (var type in accidentTypes)
                 {
-                    patientModel.AccidentTypes.Add(type.Description);
+                    patientModel.AccidentTypes.Add(type.AccidentTypeID, type.Description);
                 }
 
                 List<SelectListItem> display = new List<SelectListItem>
@@ -166,13 +167,12 @@ namespace PreRegistration.DAL
         {
             try
             {
-                SendEmails sendEmails = new SendEmails();
+                //SendEmails sendEmails = new SendEmails();
                 int patientId = 0;
                 if (patientViewModel.PatientDemographicsViewModel != null)
                 {
                     PatientDemographic patientDemographic = new PatientDemographic
                     {
-
                         HospitalID = patientViewModel.PatientDemographicsViewModel.HospitalID,
                         In_Hospital_Directory = patientViewModel.PatientDemographicsViewModel.In_Hospital_Directory,
                         HospitalService = patientViewModel.PatientDemographicsViewModel.HospitalService,
@@ -193,7 +193,7 @@ namespace PreRegistration.DAL
                         Race = patientViewModel.PatientDemographicsViewModel.Race,
                         Marital_Status = patientViewModel.PatientDemographicsViewModel.Marital_Status,
                         SSN = patientViewModel.PatientDemographicsViewModel.SSN,
-                        Home_Phone =  patientViewModel.PatientDemographicsViewModel.Home_Phone != null ? (long)patientViewModel.PatientDemographicsViewModel.Home_Phone:0,
+                        Home_Phone = patientViewModel.PatientDemographicsViewModel.Home_Phone != null ? (long)patientViewModel.PatientDemographicsViewModel.Home_Phone : 0,
                         Cell_Phone = patientViewModel.PatientDemographicsViewModel.Cell_Phone,
                         Email_Address = patientViewModel.PatientDemographicsViewModel.Email_Address,
                         Church_Choice = patientViewModel.PatientDemographicsViewModel.Church_Choice,
@@ -204,8 +204,8 @@ namespace PreRegistration.DAL
                         MailingState = patientViewModel.PatientDemographicsViewModel.MailingState,
                         MailingZip = patientViewModel.PatientDemographicsViewModel.MailingZip,
 
-                        E911Address1 = patientViewModel.PatientDemographicsViewModel.E911Address2,
-                        E911Address2 = patientViewModel.PatientDemographicsViewModel.Mailing_Address1,
+                        E911Address1 = patientViewModel.PatientDemographicsViewModel.E911Address1,
+                        E911Address2 = patientViewModel.PatientDemographicsViewModel.E911Address2,
                         E911City = patientViewModel.PatientDemographicsViewModel.E911City,
                         E911State = patientViewModel.PatientDemographicsViewModel.E911State,
                         E911Zip = patientViewModel.PatientDemographicsViewModel.E911Zip,
@@ -215,7 +215,7 @@ namespace PreRegistration.DAL
 
                         Bill_Address1 = patientViewModel.PatientDemographicsViewModel.Bill_Address1,
                         Bill_Address2 = patientViewModel.PatientDemographicsViewModel.Bill_Address2,
-                        Bill_City = patientViewModel.PatientDemographicsViewModel.E911State,
+                        Bill_City = patientViewModel.PatientDemographicsViewModel.Bill_City, // Corrected
                         Bill_State = patientViewModel.PatientDemographicsViewModel.Bill_State,
                         Bill_ZipCode = patientViewModel.PatientDemographicsViewModel.Bill_ZipCode,
 
@@ -227,7 +227,9 @@ namespace PreRegistration.DAL
                         EmployerState = patientViewModel.PatientDemographicsViewModel.EmployerState,
                         EmployerZip = patientViewModel.PatientDemographicsViewModel.EmployerZip,
                         EmployerPhone = patientViewModel.PatientDemographicsViewModel.EmployerPhone,
-                        //       Status = patientViewModel.PatientDemographicsViewModel.Status,
+
+
+                        Status = "Processed",
 
                         SectionID = 1,
                         Created = DateTime.Now,
@@ -238,8 +240,8 @@ namespace PreRegistration.DAL
 
                     patientId = patientDemographic.PersonID;
 
-                    _emailHelper.SendEmailToAdmin(patientViewModel.PatientDemographicsViewModel, patientId);
-                    _emailHelper.SendEmailToPatient(patientViewModel.PatientDemographicsViewModel, patientId);
+                    //_emailHelper.SendEmailToAdmin(patientViewModel.PatientDemographicsViewModel, patientId);
+                    //_emailHelper.SendEmailToPatient(patientViewModel.PatientDemographicsViewModel, patientId);
 
                     if (patientViewModel.SpouseInformation != null)
                     {
@@ -250,18 +252,25 @@ namespace PreRegistration.DAL
                     if (patientViewModel.MinorInformation != null)
                     {
                         patientViewModel.MinorInformation.FatherMinorInformation.PersonID = patientId;
+                        patientViewModel.MinorInformation.MontherMinorInformation.PersonID = patientId;
+                        patientViewModel.MinorInformation.FatherMinorInformation.PersonID = patientViewModel.MinorInformation.MontherMinorInformation.PersonID;
                         await SubmitMinorInfo(patientViewModel.MinorInformation);
                     }
 
                     if (patientViewModel.EmergencyContact != null)
                     {
                         patientViewModel.EmergencyContact.EmergencyContactOne.PersonID = patientId;
+                        patientViewModel.EmergencyContact.EmergencyContactTwo.PersonID = patientId;
+                        patientViewModel.EmergencyContact.EmergencyContactThree.PersonID = patientId;
                         await SubmitEmergencyContact(patientViewModel.EmergencyContact);
                     }
 
                     if (patientViewModel.InsuranceInformation != null)
                     {
-                        patientViewModel.InsuranceInformation.PersonID = patientId;
+                        patientViewModel.InsuranceInformation.InsuranceOne.PersonID = patientId;
+                        patientViewModel.InsuranceInformation.InsuranceTwo.PersonID = patientId;
+                        patientViewModel.InsuranceInformation.InsuranceThree.PersonID = patientId;
+
                         await SubmitInsuranceInfo(patientViewModel.InsuranceInformation);
                     }
 
@@ -353,11 +362,21 @@ namespace PreRegistration.DAL
         {
             try
             {
-                MinorInformation model = new MinorInformation();
-                AutoMapper.Mapper.CreateMap<MinorInformation, MinorInformationViewModel>();
-                model = AutoMapper.Mapper.Map<MinorInformationViewModel, MinorInformation>(minorInformation);
 
-                _context.MinorInformations.Add(model);
+
+                var config = new AutoMapper.MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<MinorViewModel, MinorInformation>();
+                });
+                var mapper = config.CreateMapper();
+
+
+                var motherModel = mapper.Map<MinorViewModel, MinorInformation>(minorInformation.MontherMinorInformation);
+                var fatherModel = mapper.Map<MinorViewModel, MinorInformation>(minorInformation.MontherMinorInformation);
+
+
+                _context.MinorInformations.Add(motherModel);
+                _context.MinorInformations.Add(fatherModel);
                 await _context.SaveChangesAsync();
 
                 return true;
@@ -385,11 +404,14 @@ namespace PreRegistration.DAL
         {
             try
             {
-                EmergencyContact model = new EmergencyContact();
-                AutoMapper.Mapper.CreateMap<EmergencyContact, EmergencyContactViewModel>();
-                model = AutoMapper.Mapper.Map<EmergencyContactViewModel, EmergencyContact>(emergencyContact);
+                if (emergencyContact.EmergencyContactOne != null) { 
+                    _context.EmergencyContacts.Add(emergencyContact.EmergencyContactOne); }
+                if (emergencyContact.EmergencyContactTwo != null) {
+                    _context.EmergencyContacts.Add(emergencyContact.EmergencyContactTwo); }
+                if (emergencyContact.EmergencyContactThree != null) { 
+                    _context.EmergencyContacts.Add(emergencyContact.EmergencyContactThree); }
 
-                _context.EmergencyContacts.Add(model);
+
                 await _context.SaveChangesAsync();
 
                 return true;
@@ -414,15 +436,40 @@ namespace PreRegistration.DAL
         }
 
 
-        public async Task<bool> SubmitInsuranceInfo(InsuranceInformationViewModel insuranceInformation)
+        public async Task<bool> SubmitInsuranceInfo(InsuranceMultipleViewModel insuranceInformation)
         {
             try
             {
                 InsuranceInformation model = new InsuranceInformation();
-                AutoMapper.Mapper.CreateMap<InsuranceInformation, InsuranceInformationViewModel>();
-                model = AutoMapper.Mapper.Map<InsuranceInformationViewModel, InsuranceInformation>(insuranceInformation);
 
-                _context.InsuranceInformations.Add(model);
+
+                var config = new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<InsuranceInformationViewModel, InsuranceInformation>();
+                });
+                var mapper = config.CreateMapper();
+                if (insuranceInformation.InsuranceOne.InsRank != 0)
+                {
+                    model = mapper.Map<InsuranceInformation>(insuranceInformation.InsuranceOne);
+                    _context.InsuranceInformations.Add(model);
+
+
+                }
+                if (insuranceInformation.InsuranceTwo.InsRank != 0)
+                {
+                    model = mapper.Map<InsuranceInformation>(insuranceInformation.InsuranceTwo);
+                    _context.InsuranceInformations.Add(model);
+
+
+                }
+                if (insuranceInformation.InsuranceThree.InsRank != 0)
+                {
+                    model = mapper.Map<InsuranceInformation>(insuranceInformation.InsuranceThree);
+                    _context.InsuranceInformations.Add(model);
+
+                }
+
+
                 await _context.SaveChangesAsync();
 
                 return true;
@@ -451,8 +498,13 @@ namespace PreRegistration.DAL
             try
             {
                 AccidentDetail model = new AccidentDetail();
-                AutoMapper.Mapper.CreateMap<AccidentDetail, AccidentDetailViewModel>();
-                model = AutoMapper.Mapper.Map<AccidentDetailViewModel, AccidentDetail>(accidentDetailViewModel);
+                var config = new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<AccidentDetailViewModel, AccidentDetail>();
+                });
+
+                var mapper = config.CreateMapper();
+                model = mapper.Map<AccidentDetail>(accidentDetailViewModel);
 
                 _context.AccidentDetails.Add(model);
                 await _context.SaveChangesAsync();
@@ -492,7 +544,7 @@ namespace PreRegistration.DAL
                 {
                     patients = _context.PatientDemographics.Where(p => p.HospitalID == hospitalId && p.ProcessDate != null).ToList();
                 }
-                   
+
                 AutoMapper.Mapper.CreateMap<PatientDemographicsViewModel, PatientDemographic>();
                 patientDemographics = AutoMapper.Mapper.Map<List<PatientDemographic>, List<PatientDemographicsViewModel>>(patients);
                 return patientDemographics;
@@ -512,7 +564,7 @@ namespace PreRegistration.DAL
             {
                 var patient = _context.PatientDemographics.Where(a => a.PersonID == personId).FirstOrDefault();
 
-                if(patient != null)
+                if (patient != null)
                 {
                     patientModel.PatientDemographicsModel = new PatientDemographicsModel
                     {
@@ -542,7 +594,7 @@ namespace PreRegistration.DAL
                         //  ResponsibleParty = _context.ResponsibleParties.FirstOrDefault(a => a.ResponsiblePartyID == patient.ResponsiblePartyID).ResponsiblePartyDescription,
                     };
 
-                    if(patient.ResponsiblePartyID == 4)
+                    if (patient.ResponsiblePartyID == 4)
                     {
                         patientModel.PatientDemographicsModel.ResponsibleParty = patient.GuarNameIfOther;
                     }
@@ -571,7 +623,7 @@ namespace PreRegistration.DAL
                     }
 
                 }
-             
+
                 //AutoMapper.Mapper.CreateMap<PatientDemographicsViewModel, PatientDemographic>();
                 //var patientDemographicsViewModel = AutoMapper.Mapper.Map<PatientDemographic, PatientDemographicsViewModel>(patient);
                 //patientViewModel.PatientDemographicsViewModel = patientDemographicsViewModel;
