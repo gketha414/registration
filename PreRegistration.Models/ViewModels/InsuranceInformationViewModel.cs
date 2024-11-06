@@ -1,10 +1,13 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PreRegistration.Models.ViewModels
 {   
     public class InsuranceMultipleViewModel
     {
+        [NotMapped]
+        public bool InsuranceSkip { get; set; }
         public InsuranceInformationViewModel InsuranceOne { get; set; }
         public InsuranceInformationViewModel InsuranceTwo { get; set; }
         public InsuranceInformationViewModel InsuranceThree { get; set; }

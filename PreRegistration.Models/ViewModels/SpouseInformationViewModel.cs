@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PreRegistration.Models.ViewModels
 {
@@ -47,5 +48,7 @@ namespace PreRegistration.Models.ViewModels
         public Nullable<long> EmployerZip { get; set; }
         [Display(Name = "Employer Phone Number")]
         public Nullable<long> Employer_Phone { get; set; }
+        [NotMapped]
+        public bool SpouseSkip { get; set; }
     }
 }

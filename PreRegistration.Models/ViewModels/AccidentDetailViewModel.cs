@@ -1,9 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Globalization;
 
 namespace PreRegistration.Models.ViewModels
 {
     public class AccidentDetailViewModel
     {
+        [NotMapped]
+        public bool AccidentSkip { get; set; }
         public int PersonID { get; set; }
         [Display(Name = "Accident Type")]
         public short AccidentTypeID { get; set; }

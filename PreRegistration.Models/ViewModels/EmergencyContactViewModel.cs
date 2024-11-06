@@ -1,10 +1,13 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PreRegistration.Models.ViewModels
 {
     public class EmergencyContactViewModel
-    {     
+    {
+        [NotMapped]
+        public bool EmergencySkip { get; set; }
         public EmergencyContact EmergencyContactOne { get; set; }
         public EmergencyContact EmergencyContactTwo { get; set; }
         public EmergencyContact EmergencyContactThree { get; set; }

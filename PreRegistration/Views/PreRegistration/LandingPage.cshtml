@@ -225,13 +225,13 @@
                         <div>
                             @for (int i = 0; i < Model.YesNo.Count; i++)
                             {
-                               <span>
-                                   @Model.YesNo[i]
-                                   @{
-                                       bool value = Model.YesNo[i] == "Yes";
-                                   }
-                                   @Html.RadioButtonFor(m => m.PatientDemographicsViewModel.In_Hospital_Directory, value) &nbsp;
-                               </span>
+                                <span>
+                                    @Model.YesNo[i]
+                                    @{
+                                        bool value = Model.YesNo[i] == "Yes";
+                                    }
+                                    @Html.RadioButtonFor(m => m.PatientDemographicsViewModel.In_Hospital_Directory, value) &nbsp;
+                                </span>
                             }
                         </div>
                     </div>
@@ -270,7 +270,7 @@
                                 <span>
                                     @Model.YesNo[i]
                                     @{
-                                        bool value = Model.YesNo[i] == "Yes"; 
+                                        bool value = Model.YesNo[i] == "Yes";
                                     }
                                     @Html.RadioButtonFor(m => m.PatientDemographicsViewModel.PatientHereBefore, value) &nbsp;
                                 </span>
@@ -428,18 +428,18 @@
                                     )
                                 </div>
                                 @*<div class="form-group col-lg-6" id="PatientDemographics">
-                                    @Html.LabelFor(m => m.PatientDemographicsViewModel.ResponsiblePartyID, new { @class = "formScreeningInfo required" })
-                                    @Html.DropDownListFor(x => Model.Guarantors, new SelectList(Model.Guarantors, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "guarantor" })
-                                    <div>
-                                            @for (int i = 0; i < Model.Guarantors.Count; i++)
-                                            {
-                                                <span>
-                                                    @Model.Guarantors[i].Text
-                                                    @Html.RadioButtonFor(m => m.PatientDemographicsViewModel.ResponsiblePartyID, @Model.Guarantors[i].Value) &nbsp;
-                                                </span>
-                                            }
-                                        </div>
-                                </div>*@
+                                        @Html.LabelFor(m => m.PatientDemographicsViewModel.ResponsiblePartyID, new { @class = "formScreeningInfo required" })
+                                        @Html.DropDownListFor(x => Model.Guarantors, new SelectList(Model.Guarantors, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "guarantor" })
+                                        <div>
+                                                @for (int i = 0; i < Model.Guarantors.Count; i++)
+                                                {
+                                                    <span>
+                                                        @Model.Guarantors[i].Text
+                                                        @Html.RadioButtonFor(m => m.PatientDemographicsViewModel.ResponsiblePartyID, @Model.Guarantors[i].Value) &nbsp;
+                                                    </span>
+                                                }
+                                            </div>
+                                    </div>*@
                                 <div class="form-group col-md-6" id="divGuarNameIfOther" style="display:none">
                                     @Html.LabelFor(m => m.PatientDemographicsViewModel.GuarNameIfOther, new { @class = "formScreeningInfo" })
                                     @Html.TextBoxFor(m => m.PatientDemographicsViewModel.GuarNameIfOther, new { @class = "form-control requiredField" })
@@ -621,8 +621,8 @@
                     <div class="form-group col-md-4">
                     </div>
                     <div class="form-group col-lg-4">
-                        <input data-val="true" id="notmarried" name="notmarried" type="checkbox">
-                        &nbsp;<label for="AllExceptions_Permissible">Not Applicable - Click Here If You Are Not Married</label>
+                        @Html.CheckBoxFor(m => m.SpouseInformation.SpouseSkip, new { id = "notmarried" })
+                        &nbsp;<label for="notmarried">Not Applicable - Click Here If You Are Not Married</label>
                     </div>
                 </div>
                 <div id="divSpouse" style="display:block">
@@ -770,26 +770,21 @@
                     <div class="form-group col-md-4">
                     </div>
                     <div class="form-group col-lg-6">
-                        <input data-val="true" id="notMinor" name="notMinor" type="checkbox">
-                        &nbsp;<label for="AllExceptions_Permissible">Not Applicable - Click Here If Patient Is Not A Minor</label>
+                        @Html.CheckBoxFor(m => m.MinorInformation.MinorSKip, new { id = "notMinor" })
+                        &nbsp;<label for="notMinor">Not Applicable - Click Here If Patient Is Not A Minor</label>
                     </div>
                 </div>
                 <div class="row">
                     @*<div class="form-group col-md-4">
                         </div>*@
                     <div class="form-group col-lg-6" style="display:block" id="chooseGurantor">
-                       
+
                         <label class="formScreeningInfo" for="MinorInformation_ResponsiblePartyID">Choose Guarantor to complete this section?</label>
-                        @Html.DropDownListFor(m => m.MinorInformation.MontherMinorInformation.ResponsiblePartyID, new SelectList(Model.FilteredGuarantors, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "choosegurantor", name = "MinorInformationViewModel_ResponsiblePartyID", @disabled = "disabled" })
-                        @*<div>
-            @for (int i = 0; i < Model.Guarantors.Count; i++)
-            {
-                <span>
-                    @Model.Guarantors[i].Text
-                    @Html.RadioButtonFor(m => m.PatientDemographicsViewModel.ResponsiblePartyID, @Model.Guarantors[i].Value) &nbsp;
-                </span>
-            }
-        </div>*@
+                        @Html.DropDownListFor(m => m.MinorInformation.MontherMinorInformation.ResponsiblePartyID,
+                            new SelectList(Model.FilteredGuarantors, "Value", "Text"),
+                            htmlAttributes: new { @class = "form-control", id = "choosegurantor", @disabled = "disabled" })
+
+                        @Html.HiddenFor(m => m.MinorInformation.MontherMinorInformation.ResponsiblePartyID)
                     </div>
                 </div>
                 <div id="divMinorMother" style="display:none">
@@ -1265,19 +1260,20 @@
                     <div class="form-group col-md-4">
                     </div>
                     <div class="form-group col-lg-6">
-                        <input data-val="true" id="chkEmergecny" name="chkEmergecny" type="checkbox">
-                        &nbsp;<label for="emergency">Check This Box If You Do Not Have An Emergency Contact</label>
+                        @Html.CheckBoxFor(m => m.EmergencyContact.EmergencySkip, new { id = "chkEmergecny" })
+                        &nbsp;<label for="chkEmergecny">Check This Box If You Do Not Have An Emergency Contact</label>
                     </div>
+
                 </div>
 
-                <div class="row"  id="divSpouseEmergency">
+                <div class="row" id="divSpouseEmergency">
                     <div class="form-group col-lg-6">
                         <input data-val="true" id="spouseemergency" name="spouseemergency" type="checkbox">
                         &nbsp;<label for="AllExceptions_Permissible">Do you want to have your spouse as an emergency contact?</label>
                     </div>
                 </div>
 
-                <div id="divEmergencyOne" >
+                <div id="divEmergencyOne">
                     <div class="row">
                         <div class="form-group col-md-6">
                             @Html.LabelFor(m => m.EmergencyContact.EmergencyContactOne.Nearest_Relative_Name, new { @class = "formScreeningInfo required control-label" })
@@ -1446,11 +1442,11 @@
                     <div class="form-group col-md-4">
                     </div>
                     <div class="form-group col-lg-6">
-                        <input data-val="true" id="insuranceCheckBox" name="insurance" type="checkbox" value="true">
-                        &nbsp;<label for="insurance">Check This Box If You Do Not Have Health Insurance</label>
+                        @Html.CheckBoxFor(m => m.InsuranceInformation.InsuranceSkip, new { id = "insuranceCheckBox" })
+                        &nbsp;<label for="insuranceCheckBox">Check This Box If You Do Not Have Health Insurance</label>
                     </div>
                 </div>
-                <div id="InsuranceOnePremium" >
+                <div id="InsuranceOnePremium">
                     <div class="row">
                         <div class="form-group col-md-4">
                             @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsRank, new { @class = "formScreeningInfo required control-label" })
@@ -1801,92 +1797,102 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="form-group col-lg-12" id="divac">
-                        @Html.LabelFor(m => m.AccidentDetail.AccidentTypeID, new { @class = "formScreeningInfo required" })
-                        <div>
-                            @foreach (var accidentType in Model.AccidentTypes)
-                            {
-                                <span>
-                                    @accidentType.Value 
-                                    @Html.RadioButtonFor(m => m.AccidentDetail.AccidentTypeID, accidentType.Key) &nbsp;
-                                </span>
-                            }
-                        </div>
+                    <div class="form-group col-md-4">
+                    </div>
+                    <div class="form-group col-lg-6">
+                        @Html.CheckBoxFor(m => m.AccidentDetail.AccidentSkip, new { id = "AccidentCheckBox" })
+                        &nbsp;<label for="insuranceCheckBox">Not Related To Accident</label>
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="form-group col-md-4">
-                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsRank, new { @class = "formScreeningInfo required control-label" })
-                        @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceOne.InsRank, new { @class = "form-control requiredField", required = "required", @id = "AccentInformationInsRank" })
-                    </div>
-                    <div class="form-group col-md-4">
-                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsPlanName, new { @class = "formScreeningInfo" })
-                        @Html.EditorFor(m => m.InsuranceInformation.InsuranceOne.InsPlanName, new { htmlAttributes = new { @class = "form-control" } })
-                    </div>
-                    <div class="form-group col-md-4">
-                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.Subscriber_Name, new { @class = "formScreeningInfo" })
-                        @Html.EditorFor(m => m.InsuranceInformation.InsuranceOne.Subscriber_Name, new { htmlAttributes = new { @class = "form-control" } })
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-4">
-                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.Policy_Number, new { @class = "formScreeningInfo required control-label" })
-                        @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceOne.Policy_Number, new { @class = "form-control requiredField", required = "required", @id = "AccentInformationPolicyNumber" })
-                    </div>
-                    <div class="form-group col-md-4">
-                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.Group_Number, new { @class = "formScreeningInfo" })
-                        @Html.EditorFor(m => m.InsuranceInformation.InsuranceOne.Group_Number, new { htmlAttributes = new { @class = "form-control" } })
-                    </div>
-                    <div class="form-group col-md-4">
-                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.PlanCode, new { @class = "formScreeningInfo" })
-                        @Html.EditorFor(m => m.InsuranceInformation.InsuranceOne.PlanCode, new { htmlAttributes = new { @class = "form-control" } })
-                    </div>
-                </div>
-                <fieldset class="scheduler-border">
-                    <legend class="scheduler-border">Insurance Address</legend>
-                    <div class="control-group">
-                        <div class="controls">
-                            <div class="row">
-                                <div class="form-group col-md-4">
-                                    @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsAddress1, new { @class = "formScreeningInfo control-label" })
-                                    @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceOne.InsAddress1, new { @class = "form-control requiredField" })
-                                </div>
-                                <div class="form-group col-md-4">
-                                    @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsAddress2, new { @class = "formScreeningInfo" })
-                                    @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceOne.InsAddress2, new { @class = "form-control requiredField" })
-                                </div>
-                                <div class="form-group col-md-4">
-                                    @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsCity, new { @class = "formScreeningInfo control-label" })
-                                    @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceOne.InsCity, new { @class = "form-control requiredField" })
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-4">
-                                    @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsState, new { @class = "formScreeningInfo control-label" })
-                                    @Html.DropDownListFor(x => Model.InsuranceInformation.InsuranceOne.InsState, new SelectList(Model.States, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "insurancestate" })
-                                </div>
-                                <div class="form-group col-md-4">
-                                    @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsZip, new { @class = "formScreeningInfo" })
-                                    @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceOne.InsZip, new { @class = "form-control requiredField", @placeholder = "(Entry Format: 99999-9999, or 99999 and leave 4 digit zip code extension blank)" })
-                                </div>
-                                <div class="form-group col-md-4">
-                                    @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsPhone, new { @class = "formScreeningInfo" })
-                                    @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceOne.InsPhone, new { @class = "form-control requiredField", @placeholder = "(Enter Area Code, Exchange & Number)" })
-                                </div>
+                <div id="AccidentBody">
+                    <div class="row">
+                        <div class="form-group col-lg-12" id="divac">
+                            @Html.LabelFor(m => m.AccidentDetail.AccidentTypeID, new { @class = "formScreeningInfo required" })
+                            <div>
+                                @foreach (var accidentType in Model.AccidentTypes)
+                                {
+                                    <span>
+                                        @accidentType.Value
+                                        @Html.RadioButtonFor(m => m.AccidentDetail.AccidentTypeID, accidentType.Key) &nbsp;
+                                    </span>
+                                }
                             </div>
                         </div>
                     </div>
-                </fieldset>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div id="accidentErrors" style="color: red; font-weight: bold;">
 
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsRank, new { @class = "formScreeningInfo required control-label" })
+                            @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceOne.InsRank, new { @class = "form-control requiredField", required = "required", @id = "AccentInformationInsRank" })
+                        </div>
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsPlanName, new { @class = "formScreeningInfo" })
+                            @Html.EditorFor(m => m.InsuranceInformation.InsuranceOne.InsPlanName, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.Subscriber_Name, new { @class = "formScreeningInfo" })
+                            @Html.EditorFor(m => m.InsuranceInformation.InsuranceOne.Subscriber_Name, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
                     </div>
-                    <div class="alert alert-danger" style="display:none" id="errorAlert">
-                        <strong>Something went wrong!</strong> Your record was not able to save.
-                        <div id="ErrorMessages"></div>
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.Policy_Number, new { @class = "formScreeningInfo required control-label" })
+                            @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceOne.Policy_Number, new { @class = "form-control requiredField", required = "required", @id = "AccentInformationPolicyNumber" })
+                        </div>
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.Group_Number, new { @class = "formScreeningInfo" })
+                            @Html.EditorFor(m => m.InsuranceInformation.InsuranceOne.Group_Number, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        <div class="form-group col-md-4">
+                            @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.PlanCode, new { @class = "formScreeningInfo" })
+                            @Html.EditorFor(m => m.InsuranceInformation.InsuranceOne.PlanCode, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">Insurance Address</legend>
+                        <div class="control-group">
+                            <div class="controls">
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsAddress1, new { @class = "formScreeningInfo control-label" })
+                                        @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceOne.InsAddress1, new { @class = "form-control requiredField" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsAddress2, new { @class = "formScreeningInfo" })
+                                        @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceOne.InsAddress2, new { @class = "form-control requiredField" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsCity, new { @class = "formScreeningInfo control-label" })
+                                        @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceOne.InsCity, new { @class = "form-control requiredField" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsState, new { @class = "formScreeningInfo control-label" })
+                                        @Html.DropDownListFor(x => Model.InsuranceInformation.InsuranceOne.InsState, new SelectList(Model.States, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "insurancestate" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsZip, new { @class = "formScreeningInfo" })
+                                        @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceOne.InsZip, new { @class = "form-control requiredField", @placeholder = "(Entry Format: 99999-9999, or 99999 and leave 4 digit zip code extension blank)" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsPhone, new { @class = "formScreeningInfo" })
+                                        @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceOne.InsPhone, new { @class = "form-control requiredField", @placeholder = "(Enter Area Code, Exchange & Number)" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div id="accidentErrors" style="color: red; font-weight: bold;">
+
+                            </div>
+                        </div>
+                        <div class="alert alert-danger" style="display:none" id="errorAlert">
+                            <strong>Something went wrong!</strong> Your record was not able to save.
+                            <div id="ErrorMessages"></div>
+                        </div>
                     </div>
                 </div>
                 <button class="btn1 btn-primary nextBtn pull-right" onclick="onAccidentClick()" type="submit">Next</button>
@@ -2094,11 +2100,29 @@
                 <h3>Emergency Contact Information</h3>
             </div>
             <div class="panel-body">
-                <div id="emergency-Section">
-                    <div class="row">
-                        <div class="form-group col-md-4">
-                            <label>Nearest Relative Name:</label>
-                            <span id="EmergencyNearestRelativeName"></span>
+                <div id="emergency-section">
+                    <div id="emergency-Section1">
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label>Nearest Relative Name:</label>
+                                <span id="EmergencyNearestRelativeName"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="emergencySection2" style="display:none">
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label>Nearest Relative Name:</label>
+                                <span id="EmergencyNearestRelativeName2"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="emergencySection3" style="display:none">
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label>Nearest Relative Name:</label>
+                                <span id="EmergencyNearestRelativeName3"></span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2116,14 +2140,40 @@
 
             <div class="panel-body">
                 <div id="insurance-section">
-                    <div class="row">
-                        <div class="form-group col-md-4">
-                            <label>InsRank:</label>
-                            <span id="insuranceInsRank"></span>
+                    <div id="insurance-section1">
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label>InsRank:</label>
+                                <span id="insuranceInsRank1"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Policy Number:</label>
+                                <span id="insurancePolicyNumber1"></span>
+                            </div>
                         </div>
-                        <div class="form-group col-md-4">
-                            <label>Policy Number:</label>
-                            <span id="insurancePolicyNumber"></span>
+                    </div>
+                    <div id="insurance-section2" style="display:none">
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label>InsRank:</label>
+                                <span id="insuranceInsRank2"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Policy Number:</label>
+                                <span id="insurancePolicyNumber2"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="insurance-section3" style="display:none">
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label>InsRank:</label>
+                                <span id="insuranceInsRank3"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Policy Number:</label>
+                                <span id="insurancePolicyNumber3"></span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2174,7 +2224,7 @@
                 <button class="btn btn-primary pull-right" type="submit" style="width:100px" onclick="submitInformation()">Save</button>
             </div>
         </div>
-       
+
 
 
 
@@ -2189,11 +2239,11 @@
         } else {
             $('#divEmergencyThree').css('display', 'block');
         }
-       
-        
-    } 
-    function     AddInsuranceCont(){
-        
+
+
+    }
+    function  AddInsuranceCont(){
+
         if ($('#InsuranceTwoPremium').css('display') === 'none') {
             $('#InsuranceTwoPremium').css('display', 'block');
 
@@ -2262,46 +2312,41 @@
     }
     function InsertValue() {
         document.getElementById('saveButtonForm').style.display = "block";
+
         const centerEl = document.createElement('center');
         const h4 = document.createElement('h4');
-        h4.innerHTML = "Not Applicable";
-        h4.style = "font-weight:bold";
+        h4.textContent = "Not Applicable";
+        h4.style.fontWeight = "bold";
         centerEl.appendChild(h4);
+
         const spouseCheckbox = document.getElementById('notmarried');
         const minor = document.getElementById('notMinor');
         const emergency = document.getElementById('chkEmergecny');
         const insurance = document.getElementById('insuranceCheckBox');
-        debugger;
 
         if (spouseCheckbox.checked) {
-
             const spouseEl = document.getElementById('spouse-Section');
             spouseEl.replaceChildren(createNotApplicableElement());
-
-
-
-        }
-        else {
-            const spouseElement = [{ sourceId: 'spouseFirstName', targetId: 'SpouseInformation_First_Name' },
+        } else {
+            const spouseElement = [
+                { sourceId: 'spouseFirstName', targetId: 'SpouseInformation_First_Name' },
                 { sourceId: 'spouseLastName', targetId: 'SpouseInformation_Last_Name' },
                 { sourceId: 'spouseBirthDate', targetId: 'SpouseInformation_BirthDate' },
-                { sourceId: 'spouseHomePhone', targetId: 'SpouseInformation_Home_Phone' }];
+                { sourceId: 'spouseHomePhone', targetId: 'SpouseInformation_Home_Phone' }
+            ];
             const raceValue = document.getElementById('spouse-race');
-            document.getElementById('spouseRace').innerHTML = raceValue.options[raceValue.selectedIndex].text;
-           InsertValueToStep7(spouseElement);
-
-
+            document.getElementById('spouseRace').textContent = raceValue.options[raceValue.selectedIndex].text;
+            InsertValueToStep7(spouseElement);
         }
+
         if (minor.checked) {
             const minrElement = document.getElementById('minor-Section');
             minrElement.replaceChildren(createNotApplicableElement());
-
-
         } else {
             const value = document.getElementById('choosegurantor').value;
             if (value === "1") {
-                document.getElementById('MotherSection').style = "display:block";
-                document.getElementById('FatherSection').style = "display:none";
+                document.getElementById('MotherSection').style.display = "block";
+                document.getElementById('FatherSection').style.display = "none";
                 const motherElement = [
                     { sourceId: 'motherFirstName', targetId: 'MinorInformation_MontherMinorInformation_First_Name' },
                     { sourceId: 'motherLastName', targetId: 'MinorInformation_MontherMinorInformation_Last_Name' },
@@ -2310,33 +2355,27 @@
                     { sourceId: 'motherHomePhone', targetId: 'MinorInformation_MontherMinorInformation_HomePhone' }
                 ];
                 const raceValue = document.getElementById('minor-mother-race');
-                document.getElementById('motherRace').innerHTML = raceValue.options[raceValue.selectedIndex].text;
-                const dropdown =
+                document.getElementById('motherRace').textContent = raceValue.options[raceValue.selectedIndex].text;
                 InsertValueToStep7(motherElement);
-
-
             } else if (value === "2") {
-                document.getElementById('FatherSection').style = "display:block";
-                document.getElementById('MotherSection').style = "display:none";
+                document.getElementById('FatherSection').style.display = "block";
+                document.getElementById('MotherSection').style.display = "none";
                 const fatherElement = [
                     { sourceId: 'fatherFirstName', targetId: 'MinorInformation_FatherMinorInformation_First_Name' },
                     { sourceId: 'fatherLastName', targetId: 'MinorInformation_FatherMinorInformation_Last_Name' },
                     { sourceId: 'fatherBirthDate', targetId: 'MinorInformation_FatherMinorInformation_Dob' },
-
                     { sourceId: 'fatherHomePhone', targetId: 'MinorInformation_FatherMinorInformation_HomePhone' }
                 ];
                 const raceValue = document.getElementById('minor-father-race');
-                document.getElementById('fatherRace').innerHTML = raceValue.options[raceValue.selectedIndex].text;
+                document.getElementById('fatherRace').textContent = raceValue.options[raceValue.selectedIndex].text;
                 InsertValueToStep7(fatherElement);
-
             } else if (value === "3") {
-                document.getElementById('MotherSection').style = "display:block";
-                document.getElementById('FatherSection').style = "display:block";
+                document.getElementById('MotherSection').style.display = "block";
+                document.getElementById('FatherSection').style.display = "block";
                 const BothFatMot = [
                     { sourceId: 'fatherFirstName', targetId: 'MinorInformation_FatherMinorInformation_First_Name' },
                     { sourceId: 'fatherLastName', targetId: 'MinorInformation_FatherMinorInformation_Last_Name' },
                     { sourceId: 'fatherBirthDate', targetId: 'MinorInformation_FatherMinorInformation_Dob' },
-
                     { sourceId: 'fatherHomePhone', targetId: 'MinorInformation_FatherMinorInformation_HomePhone' },
                     { sourceId: 'motherFirstName', targetId: 'MinorInformation_MontherMinorInformation_First_Name' },
                     { sourceId: 'motherLastName', targetId: 'MinorInformation_MontherMinorInformation_Last_Name' },
@@ -2344,37 +2383,57 @@
                     { sourceId: 'motherHomePhone', targetId: 'MinorInformation_MontherMinorInformation_HomePhone' }
                 ];
                 const raceValue1 = document.getElementById('minor-mother-race');
-                document.getElementById('motherRace').innerHTML = raceValue1.options[raceValue1.selectedIndex].text;
+                document.getElementById('motherRace').textContent = raceValue1.options[raceValue1.selectedIndex].text;
                 const raceValue2 = document.getElementById('minor-father-race');
-                document.getElementById('fatherRace').innerHTML = raceValue2.options[raceValue2.selectedIndex].text;
+                document.getElementById('fatherRace').textContent = raceValue2.options[raceValue2.selectedIndex].text;
                 InsertValueToStep7(BothFatMot);
-
-
             } else {
                 const minrElement = document.getElementById('minor-Section');
                 minrElement.replaceChildren(createNotApplicableElement());
-}
+            }
         }
 
         if (emergency.checked) {
             const emrgncy = document.getElementById('emergency-Section');
             emrgncy.replaceChildren(createNotApplicableElement());
-
         } else {
-            const emrgncyEl = [{ sourceId: "EmergencyNearestRelativeName", targetId: 'EmergencyContact_EmergencyContactOne_Nearest_Relative_Name' },
-];
+            const emrgncyEl = [
+                { sourceId: "EmergencyNearestRelativeName", targetId: 'EmergencyContact_EmergencyContactOne_Nearest_Relative_Name' },
+                { sourceId: "EmergencyNearestRelativeName2", targetId: 'EmergencyContact_EmergencyContactTwo_Nearest_Relative_Name' },
+                { sourceId: "EmergencyNearestRelativeName3", targetId: 'EmergencyContact_EmergencyContactThree_Nearest_Relative_Name' }
+            ];
             InsertValueToStep7(emrgncyEl);
+
+            if (document.getElementById('divEmergencyTwo').style.display === 'block') {
+                document.getElementById('emergencySection2').style.display = 'block';
+            }
+            if (document.getElementById('divEmergencyThree').style.display === 'block') {
+                document.getElementById('emergencySection3').style.display = 'block';
+            }
         }
+
         if (insurance.checked) {
             const insurelement = document.getElementById('insurance-section');
             insurelement.replaceChildren(createNotApplicableElement());
-
         } else {
-            const insEl = [{ sourceId: "insuranceInsRank", targetId: 'InsuranceInformation_InsRank' },
-                { sourceId: "insurancePolicyNumber", targetId: 'InsuranceInformation_Policy_Number' },];
+            const insEl = [
+                { sourceId: "insuranceInsRank1", targetId: 'InsuranceInformation_InsuranceOne_InsRank' },
+                { sourceId: "insurancePolicyNumber1", targetId: 'InsuranceInformation_InsuranceOne_Policy_Number' },
+                { sourceId: "insuranceInsRank2", targetId: 'InsuranceInformation_InsuranceTwo_InsRank' },
+                { sourceId: "insurancePolicyNumber2", targetId: 'InsuranceInformation_InsuranceTwo_Policy_Number' },
+                { sourceId: "insuranceInsRank3", targetId: 'InsuranceInformation_InsuranceThree_InsRank' },
+                { sourceId: "insurancePolicyNumber3", targetId: 'InsuranceInformation_InsuranceThree_Policy_Number' }
+            ];
             InsertValueToStep7(insEl);
 
+            if (document.getElementById('InsuranceTwoPremium').style.display === 'block') {
+                document.getElementById('insurance-section2').style.display = 'block';
+            }
+            if (document.getElementById('InsuranceThreePremium').style.display === 'block') {
+                document.getElementById('insurance-section3').style.display = 'block';
+            }
         }
+
         const elements = [
             { sourceId: 'firstName', targetId: 'PatientDemographicsViewModel_First_Name' },
             { sourceId: 'lastName', targetId: 'PatientDemographicsViewModel_Last_Name' },
@@ -2382,21 +2441,25 @@
             { sourceId: 'preferredPhone', targetId: 'PatientDemographicsViewModel_Home_Phone' },
             { sourceId: 'emailAddress', targetId: 'PatientDemographicsViewModel_Email_Address' },
             { sourceId: 'primaryCareProvider', targetId: 'PatientDemographicsViewModel_PrimaryCarePhys' },
-
             { sourceId: "AccidentPolicyNumber", targetId: 'AccentInformationPolicyNumber' },
-            { sourceId: "AccidentInsuranceRank", targetId: 'AccentInformationInsRank' },
-
+            { sourceId: "AccidentInsuranceRank", targetId: 'AccentInformationInsRank' }
         ];
+
         const raceSelect = document.getElementById("race");
-        document.getElementById('raceValue').innerHTML = raceSelect.options[raceSelect.selectedIndex].text;
+        document.getElementById('raceValue').textContent = raceSelect.options[raceSelect.selectedIndex].text;
+
         const hospitalLoc = document.getElementById('hospitalId');
-        document.getElementById('serviceLocation').innerHTML = hospitalLoc.options[hospitalLoc.selectedIndex].text;
+        document.getElementById('serviceLocation').textContent = hospitalLoc.options[hospitalLoc.selectedIndex].text;
+
         const Guarantor = document.getElementById('guarantor');
-        document.getElementById('guarantorValue').innerHTML = Guarantor.options[Guarantor.selectedIndex].text;
+        document.getElementById('guarantorValue').textContent = Guarantor.options[Guarantor.selectedIndex].text;
+
         const Ethnicity = document.getElementById('ethincity');
-        document.getElementById('ethnicityValue').innerHTML = Ethnicity.options[Ethnicity.selectedIndex].text;
-        const marritual = document.getElementById('maritalstatus');
-        document.getElementById('maritalStatusValue').innerHTML = marritual.options[marritual.selectedIndex].text;
+        document.getElementById('ethnicityValue').textContent = Ethnicity.options[Ethnicity.selectedIndex].text;
+
+        const marital = document.getElementById('maritalstatus');
+        document.getElementById('maritalStatusValue').textContent = marital.options[marital.selectedIndex].text;
+
         InsertValueToStep7(elements);
 
         const dropdownElement = [
@@ -2406,7 +2469,6 @@
         ];
 
         dropdownElement.forEach(item => {
-
             const sourceElement = document.getElementById(item.sourceId);
             if (item.targetId) {
                 sourceElement.textContent = item.targetId.value;
@@ -2417,6 +2479,8 @@
     }
 
 
+
+    
         // Call the function to populate the sources from the spans
 
 

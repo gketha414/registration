@@ -227,8 +227,6 @@ namespace PreRegistration.DAL
                         EmployerState = patientViewModel.PatientDemographicsViewModel.EmployerState,
                         EmployerZip = patientViewModel.PatientDemographicsViewModel.EmployerZip,
                         EmployerPhone = patientViewModel.PatientDemographicsViewModel.EmployerPhone,
-
-
                         Status = "Processed",
 
                         SectionID = 1,
@@ -243,21 +241,23 @@ namespace PreRegistration.DAL
                     //_emailHelper.SendEmailToAdmin(patientViewModel.PatientDemographicsViewModel, patientId);
                     //_emailHelper.SendEmailToPatient(patientViewModel.PatientDemographicsViewModel, patientId);
 
-                    if (patientViewModel.SpouseInformation != null)
+                    if (!patientViewModel.SpouseInformation.SpouseSkip)
                     {
                         patientViewModel.SpouseInformation.PersonID = patientId;
                         await SubmitSpouseInfo(patientViewModel.SpouseInformation);
                     }
 
-                    if (patientViewModel.MinorInformation != null)
-                    {
+                    if (!patientViewModel.MinorInformation.MinorSKip )
+                    {    
                         patientViewModel.MinorInformation.FatherMinorInformation.PersonID = patientId;
                         patientViewModel.MinorInformation.MontherMinorInformation.PersonID = patientId;
-                        patientViewModel.MinorInformation.FatherMinorInformation.PersonID = patientViewModel.MinorInformation.MontherMinorInformation.PersonID;
+                        patientViewModel.MinorInformation.FatherMinorInformation.ResponsiblePartyID = patientViewModel.MinorInformation.MontherMinorInformation.ResponsiblePartyID;
+
+                        
                         await SubmitMinorInfo(patientViewModel.MinorInformation);
                     }
 
-                    if (patientViewModel.EmergencyContact != null)
+                    if (!patientViewModel.EmergencyContact.EmergencySkip)
                     {
                         patientViewModel.EmergencyContact.EmergencyContactOne.PersonID = patientId;
                         patientViewModel.EmergencyContact.EmergencyContactTwo.PersonID = patientId;
@@ -265,7 +265,7 @@ namespace PreRegistration.DAL
                         await SubmitEmergencyContact(patientViewModel.EmergencyContact);
                     }
 
-                    if (patientViewModel.InsuranceInformation != null)
+                    if (!patientViewModel.InsuranceInformation.InsuranceSkip)
                     {
                         patientViewModel.InsuranceInformation.InsuranceOne.PersonID = patientId;
                         patientViewModel.InsuranceInformation.InsuranceTwo.PersonID = patientId;
@@ -274,7 +274,7 @@ namespace PreRegistration.DAL
                         await SubmitInsuranceInfo(patientViewModel.InsuranceInformation);
                     }
 
-                    if (patientViewModel.AccidentDetail != null)
+                    if (!patientViewModel.AccidentDetail.AccidentSkip)
                     {
                         patientViewModel.AccidentDetail.PersonID = patientId;
                         await SubmitAccidentDetail(patientViewModel.AccidentDetail);
@@ -374,9 +374,11 @@ namespace PreRegistration.DAL
                 var motherModel = mapper.Map<MinorViewModel, MinorInformation>(minorInformation.MontherMinorInformation);
                 var fatherModel = mapper.Map<MinorViewModel, MinorInformation>(minorInformation.MontherMinorInformation);
 
+                if (motherModel.First_Name != null) { _context.MinorInformations.Add(motherModel); } else
+                {
+                    _context.MinorInformations.Add(fatherModel);
+                }
 
-                _context.MinorInformations.Add(motherModel);
-                _context.MinorInformations.Add(fatherModel);
                 await _context.SaveChangesAsync();
 
                 return true;
@@ -404,11 +406,11 @@ namespace PreRegistration.DAL
         {
             try
             {
-                if (emergencyContact.EmergencyContactOne != null) { 
+                if (emergencyContact.EmergencyContactOne.Nearest_Relative_Name != null) { 
                     _context.EmergencyContacts.Add(emergencyContact.EmergencyContactOne); }
-                if (emergencyContact.EmergencyContactTwo != null) {
+                if (emergencyContact.EmergencyContactTwo.Nearest_Relative_Name != null) {
                     _context.EmergencyContacts.Add(emergencyContact.EmergencyContactTwo); }
-                if (emergencyContact.EmergencyContactThree != null) { 
+                if (emergencyContact.EmergencyContactThree.Nearest_Relative_Name != null) { 
                     _context.EmergencyContacts.Add(emergencyContact.EmergencyContactThree); }
 
 

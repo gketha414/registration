@@ -1,10 +1,13 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PreRegistration.Models.ViewModels
 {
     public class MinorInformationViewModel
     {
+        [NotMapped]
+        public bool MinorSKip { get; set; }
         public MinorViewModel MontherMinorInformation { get; set; }
         public MinorViewModel FatherMinorInformation { get; set; }
     }
