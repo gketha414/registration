@@ -17,7 +17,7 @@ namespace PreRegistration.Models
         public int InsId { get; set; }
         public int PersonID { get; set; }
         public short InsRank { get; set; }
-        public string InsPlanName { get; set; } = "";
+        public string InsPlanName { get; set; }
         public string Subscriber_Name { get; set; }
         public string Rel_PolicyHolder_To_Patient { get; set; }
         public string Policy_Number { get; set; }

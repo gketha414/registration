@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using PreRegistration.Models;
 using PreRegistration.Models.Helpers;
 using PreRegistration.Models.UI;
@@ -6,6 +7,7 @@ using PreRegistration.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -437,7 +439,37 @@ namespace PreRegistration.DAL
             }
         }
 
+        public async Task<string> SaveFileAndReturnUrlAsync(IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+                return "nl";
 
+            // Define the folder path
+            string uploadsFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Uploads");
+
+            if (!Directory.Exists(uploadsFolder))
+            {
+                Directory.CreateDirectory(uploadsFolder);
+            }
+
+            // Create a unique file name
+            string uniqueFileName = $"{Guid.NewGuid()}_{Path.GetFileName(file.FileName)}";
+            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+            // Save the file to the server
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(fileStream);
+            }
+
+            // Generate a URL to access the file
+            string fileUrl = $"{uploadsFolder}/{uniqueFileName}";
+
+            // Save the URL to the database
+
+
+            return fileUrl;
+        }
         public async Task<bool> SubmitInsuranceInfo(InsuranceMultipleViewModel insuranceInformation)
         {
             try
@@ -454,21 +486,44 @@ namespace PreRegistration.DAL
                 {
                     model = mapper.Map<InsuranceInformation>(insuranceInformation.InsuranceOne);
                     _context.InsuranceInformations.Add(model);
+                    if (insuranceInformation.InsuranceOne.Attachment != null)
+                    {
+                        InsuranceAttachment fone = new InsuranceAttachment();
+                        fone.InsId = model.InsId;
+                        fone.PersonId = model.PersonID;
+                        fone.FileName = insuranceInformation.InsuranceOne.Attachment;//await SaveFileAndReturnUrlAsync(insuranceInformation.InsuranceOne.Attachment);
+                        _context.InsuranceAttachments.Add(fone);
 
-
+                    }
                 }
                 if (insuranceInformation.InsuranceTwo.InsRank != 0)
                 {
                     model = mapper.Map<InsuranceInformation>(insuranceInformation.InsuranceTwo);
                     _context.InsuranceInformations.Add(model);
+                    if (insuranceInformation.InsuranceTwo.Attachment != null)
+                    {
+                        InsuranceAttachment fone = new InsuranceAttachment();
+                        fone.InsId = model.InsId;
+                        fone.PersonId = model.PersonID;
+                        fone.FileName = insuranceInformation.InsuranceTwo.Attachment; ;// await SaveFileAndReturnUrlAsync(insuranceInformation.InsuranceTwo.Attachment);
+                        _context.InsuranceAttachments.Add(fone);
 
+                    }
 
                 }
                 if (insuranceInformation.InsuranceThree.InsRank != 0)
                 {
                     model = mapper.Map<InsuranceInformation>(insuranceInformation.InsuranceThree);
                     _context.InsuranceInformations.Add(model);
+                    if (insuranceInformation.InsuranceThree.Attachment != null)
+                    {
+                        InsuranceAttachment fone = new InsuranceAttachment();
+                        fone.InsId = model.InsId;
+                        fone.PersonId = model.PersonID;
+                        fone.FileName = insuranceInformation.InsuranceThree.Attachment; ;// await SaveFileAndReturnUrlAsync(insuranceInformation.InsuranceThree.Attachment);
+                        _context.InsuranceAttachments.Add(fone);
 
+                    }
                 }
 
 
@@ -571,7 +626,7 @@ namespace PreRegistration.DAL
                     patientModel.PatientDemographicsModel = new PatientDemographicsModel
                     {
                         Hospital = _context.Hospitals.FirstOrDefault(a => a.HospitalID == patient.HospitalID).HospitalName,
-                        AdmitDate = patient.AdmitDate.ToString("MM/dd/yyyy"),
+                        AdmitDate = patient.AdmitDate.Value.ToString("MM/dd/yyyy"),
                         PrimaryCarePhys = patient.PrimaryCarePhys,
                         Full_Name = patient.First_Name + " " + patient.Middle_Name + " " + patient.Last_Name,
                         Address = patient.Address1 + " " + patient.Address2 + " " + patient.City + " " + patient.StateProvince + " " + patient.ZipCode,

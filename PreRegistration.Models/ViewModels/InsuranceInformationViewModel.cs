@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -16,7 +17,7 @@ namespace PreRegistration.Models.ViewModels
     {
         public int PersonID { get; set; }
         [Display(Name = "Insurance Rank")]
-        public short InsRank { get; set; }
+        public int InsRank { get; set; }
         [Display(Name = "Insurance Plan Name")]
         public string InsPlanName { get; set; }
         [Display(Name = "Insurance Subscriber Name")]
@@ -43,5 +44,6 @@ namespace PreRegistration.Models.ViewModels
         public Nullable<long> InsPhone { get; set; }
         [Display(Name = "Attachment Type")]
         public int AttachmentType { get; set; }
+        public string Attachment { get; set; }
     }
 }

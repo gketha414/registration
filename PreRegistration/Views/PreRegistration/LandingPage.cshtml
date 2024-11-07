@@ -207,7 +207,7 @@
         </div>
     </div>
 
-    <form role="form" id="myForm">
+    <form role="form" id="myForm" enctype="multipart/form-data">
         @*//Patient Information1*@
         <div class="panel panel-primary setup-content" id="patient">
             <div class="panel-heading">
@@ -1450,15 +1450,15 @@
                     <div class="row">
                         <div class="form-group col-md-4">
                             @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsRank, new { @class = "formScreeningInfo required control-label" })
-                            @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceOne.InsRank, new { @class = "form-control requiredField", required = "required" })
+                            @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceOne.InsRank, new { @type = "number", @class = "form-control requiredField", required = "required"})
                         </div>
                         <div class="form-group col-md-4">
-                            @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsPlanName, new { @class = "formScreeningInfo" })
-                            @Html.EditorFor(m => m.InsuranceInformation.InsuranceOne.InsPlanName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsPlanName, new { @class = "formScreeningInfo required" })
+                            @Html.EditorFor(m => m.InsuranceInformation.InsuranceOne.InsPlanName, new { htmlAttributes = new { @class = "form-control requiredField", required = "required" } })
                         </div>
                         <div class="form-group col-md-4">
-                            @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.Subscriber_Name, new { @class = "formScreeningInfo" })
-                            @Html.EditorFor(m => m.InsuranceInformation.InsuranceOne.Subscriber_Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.Subscriber_Name, new { @class = "formScreeningInfo required" })
+                            @Html.EditorFor(m => m.InsuranceInformation.InsuranceOne.Subscriber_Name, new { htmlAttributes = new { @class = "form-control requiredField", required = "required" } })
                         </div>
                     </div>
                     <div class="row">
@@ -1525,10 +1525,12 @@
                                         <div class="input-group">
                                             <span class="input-group-btn">
                                                 <span class="btn btn-primary btn-file">
-                                                    <input id="fileInput" type="file" style="width:400px">
+                                                    <input id="fileInput" type="file"  style="width:400px">
+                                                    <input name="InsuranceInformation.InsuranceOne.Attachment" id="Attachment-11" type="hidden" />
+                                                    @*@Html.TextBoxFor(m => m.InsuranceInformation.InsuranceOne.Attachment, new { type = "file" })*@
                                                 </span>
                                             </span>
-                                            <input type="submit" value="Upload file" id="attachFile" class="btn1 btn-primary" style="float: left;" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Processing" />
+                                            <input type="submit" value="Upload file" data-atta="Attachment-11" id="attachFile" class="btn1 btn-primary" style="float: left;" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Processing" />
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -1559,15 +1561,15 @@
                     <div class="row">
                         <div class="form-group col-md-4">
                             @Html.LabelFor(m => m.InsuranceInformation.InsuranceTwo.InsRank, new { @class = "formScreeningInfo required control-label" })
-                            @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceTwo.InsRank, new { @class = "form-control requiredField", required = "required" })
+                            @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceTwo.InsRank, new { @type = "number",@class = "form-control requiredField", required = "required" })
                         </div>
                         <div class="form-group col-md-4">
-                            @Html.LabelFor(m => m.InsuranceInformation.InsuranceTwo.InsPlanName, new { @class = "formScreeningInfo" })
-                            @Html.EditorFor(m => m.InsuranceInformation.InsuranceTwo.InsPlanName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.LabelFor(m => m.InsuranceInformation.InsuranceTwo.InsPlanName, new { @class = "formScreeningInfo required control-label" })
+                            @Html.EditorFor(m => m.InsuranceInformation.InsuranceTwo.InsPlanName, new { htmlAttributes = new { @class = "form-control requiredField", required = "required" } })
                         </div>
                         <div class="form-group col-md-4">
                             @Html.LabelFor(m => m.InsuranceInformation.InsuranceTwo.Subscriber_Name, new { @class = "formScreeningInfo" })
-                            @Html.EditorFor(m => m.InsuranceInformation.InsuranceTwo.Subscriber_Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(m => m.InsuranceInformation.InsuranceTwo.Subscriber_Name, new { htmlAttributes = new { @class = "form-control requiredField", required = "required" } })
                         </div>
                     </div>
                     <div class="row">
@@ -1634,10 +1636,11 @@
                                         <div class="input-group">
                                             <span class="input-group-btn">
                                                 <span class="btn btn-primary btn-file">
-                                                    <input id="fileInput" type="file" style="width:400px">
+                                                    <input id="fileInput" type="file"   style="width:400px">
+                                                    <input name="InsuranceInformation.InsuranceTwo.Attachment" id="Attachment-22" type="hidden"/>
                                                 </span>
                                             </span>
-                                            <input type="submit" value="Upload file" id="attachFile" class="btn1 btn-primary" style="float: left;" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Processing" />
+                                            <input type="submit" value="Upload file" data-atta="Attachment-22" id="attachFile" class="btn1 btn-primary" style="float: left;" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Processing" />
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -1668,15 +1671,15 @@
                     <div class="row">
                         <div class="form-group col-md-4">
                             @Html.LabelFor(m => m.InsuranceInformation.InsuranceThree.InsRank, new { @class = "formScreeningInfo required control-label" })
-                            @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceThree.InsRank, new { @class = "form-control requiredField", required = "required" })
+                            @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceThree.InsRank, new { @type = "number", @class = "form-control requiredField", required = "required" })
                         </div>
                         <div class="form-group col-md-4">
-                            @Html.LabelFor(m => m.InsuranceInformation.InsuranceThree.InsPlanName, new { @class = "formScreeningInfo" })
-                            @Html.EditorFor(m => m.InsuranceInformation.InsuranceThree.InsPlanName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.LabelFor(m => m.InsuranceInformation.InsuranceThree.InsPlanName, new { @class = "formScreeningInfo required" })
+                            @Html.EditorFor(m => m.InsuranceInformation.InsuranceThree.InsPlanName, new { htmlAttributes = new { @class = "form-control requiredField", required = "required" } })
                         </div>
                         <div class="form-group col-md-4">
-                            @Html.LabelFor(m => m.InsuranceInformation.InsuranceThree.Subscriber_Name, new { @class = "formScreeningInfo" })
-                            @Html.EditorFor(m => m.InsuranceInformation.InsuranceThree.Subscriber_Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.LabelFor(m => m.InsuranceInformation.InsuranceThree.Subscriber_Name, new { @class = "formScreeningInfo required" })
+                            @Html.EditorFor(m => m.InsuranceInformation.InsuranceThree.Subscriber_Name, new { htmlAttributes = new { @class = "form-control requiredField", required = "required" } })
                         </div>
                     </div>
                     <div class="row">
@@ -1743,10 +1746,11 @@
                                         <div class="input-group">
                                             <span class="input-group-btn">
                                                 <span class="btn btn-primary btn-file">
-                                                    <input id="fileInput" type="file" style="width:400px">
+                                                    <input id="fileInput" type="file"  style="width:400px">
+                                                    <input name="InsuranceInformation.InsuranceThree.Attachment" id="Attachment-33" type="hidden" />
                                                 </span>
                                             </span>
-                                            <input type="submit" value="Upload file" id="attachFile" class="btn1 btn-primary" style="float: left;" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Processing" />
+                                            <input type="submit" value="Upload file" data-atta="Attachment-33" id="attachFile" class="btn1 btn-primary" style="float: left;" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Processing" />
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -1823,7 +1827,7 @@
                     <div class="row">
                         <div class="form-group col-md-4">
                             @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsRank, new { @class = "formScreeningInfo required control-label" })
-                            @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceOne.InsRank, new { @class = "form-control requiredField", required = "required", @id = "AccentInformationInsRank" })
+                            @Html.TextBoxFor(m => m.InsuranceInformation.InsuranceOne.InsRank, new { @type = "number", @class = "form-control requiredField", required = "required", @id = "AccentInformationInsRank" })
                         </div>
                         <div class="form-group col-md-4">
                             @Html.LabelFor(m => m.InsuranceInformation.InsuranceOne.InsPlanName, new { @class = "formScreeningInfo" })
@@ -2395,7 +2399,9 @@
 
         if (emergency.checked) {
             const emrgncy = document.getElementById('emergency-Section');
-            emrgncy.replaceChildren(createNotApplicableElement());
+            if (emrgncy != null && emrgncy != undefined) {
+                emrgncy.replaceChildren(createNotApplicableElement());
+            }
         } else {
             const emrgncyEl = [
                 { sourceId: "EmergencyNearestRelativeName", targetId: 'EmergencyContact_EmergencyContactOne_Nearest_Relative_Name' },
@@ -2480,7 +2486,7 @@
 
 
 
-    
+
         // Call the function to populate the sources from the spans
 
 
@@ -2510,7 +2516,7 @@
                 e.preventDefault();
                 var formdata = new FormData(); //FormData object
                 var fileInput = document.getElementById('fileInput');
-
+                var hiddenEl = "#" + $(this).data("atta");
                 if (fileInput.files.length < 1) {
                     $("#attached").html("Please attach a file before uploading");
                     $("#attached").show();
@@ -2539,10 +2545,11 @@
                                     attachmentName,
                                     null
                                 ]).draw();
+                                $(hiddenEl).val(xhr.responseText.replace(/['"]+/g, '') + "/" + attachmentName);
                                 $("#attached").html("File successfully uploaded")
                                 $("#attached").show();
                                 document.getElementById("fileInput").value = "";
-                                $errorDiv.hide();
+                               // $errorDiv.hide();
                             } else {
                                 $("#attached").html(xhr.responseText);
                                 $("#attached").show();
