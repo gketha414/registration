@@ -5,35 +5,35 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="a3bab0ae0c504b76ac6c4bf4829a5b40" Name="Diagram1">
-        <EntityTypeShape EntityType="PatientPreRegistrationModel.AccidentDetail" Width="1.5" PointX="8.25" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatientPreRegistrationModel.AccidentType" Width="1.5" PointX="6" PointY="9.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatientPreRegistrationModel.EmergencyContact" Width="1.5" PointX="5.25" PointY="12.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatientPreRegistrationModel.FormSection" Width="1.5" PointX="0.75" PointY="15.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatientPreRegistrationModel.Hospital" Width="1.5" PointX="0.75" PointY="12.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatientPreRegistrationModel.InsuranceInformation" Width="1.5" PointX="5.25" PointY="16" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatientPreRegistrationModel.MinorInformation" Width="1.5" PointX="11.25" PointY="11.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatientPreRegistrationModel.PatientDemographic" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatientPreRegistrationModel.ResponsibleParty" Width="1.5" PointX="9" PointY="12.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatientPreRegistrationModel.SpouseInformation" Width="1.5" PointX="5.25" PointY="30.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatientPreRegistrationModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatientPreRegistrationModel.State" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PatientPreRegistrationModel.VW_PatientDemosGridView" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <AssociationConnector Association="PatientPreRegistrationModel.FK_AccidentDetails_AccidentType" ManuallyRouted="false" />
-        <AssociationConnector Association="PatientPreRegistrationModel.FK_AccidentDetails_PatientDemographics" ManuallyRouted="false" />
-        <AssociationConnector Association="PatientPreRegistrationModel.FK_EmergencyContact_PatientDemographics" ManuallyRouted="false" />
-        <AssociationConnector Association="PatientPreRegistrationModel.FK_PatientDemographics_FormSection" ManuallyRouted="false" />
-        <AssociationConnector Association="PatientPreRegistrationModel.FK_PatientDemographics_Hospital" ManuallyRouted="false" />
-        <AssociationConnector Association="PatientPreRegistrationModel.FK_InsuranceInformation_PatientDemographics" ManuallyRouted="false" />
-        <AssociationConnector Association="PatientPreRegistrationModel.FK_MinorInformation_PatientDemographics" ManuallyRouted="false" />
-        <AssociationConnector Association="PatientPreRegistrationModel.FK_MinorInformation_ResponsibleParty" ManuallyRouted="false" />
-        <AssociationConnector Association="PatientPreRegistrationModel.FK_SpouseInformation_PatientDemographics1" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="PatientPreRegistrationModel.Ethnicity" Width="1.5" PointX="3.375" PointY="3.75" />
-        <EntityTypeShape EntityType="PatientPreRegistrationModel.Gender" Width="1.5" PointX="5.375" PointY="0.75" />
-        <EntityTypeShape EntityType="PatientPreRegistrationModel.AttachmentType" Width="1.5" PointX="5.375" PointY="3.75" />
-        <EntityTypeShape EntityType="PatientPreRegistrationModel.BirthGender" Width="1.5" PointX="3.375" PointY="6.75" />
-        <EntityTypeShape EntityType="PatientPreRegistrationModel.HospitalService" Width="1.5" PointX="5.375" PointY="6.75" />
-        <EntityTypeShape EntityType="PatientPreRegistrationModel.MaritalStatu" Width="1.5" PointX="7.375" PointY="0.75" />
-        <EntityTypeShape EntityType="PatientPreRegistrationModel.Race" Width="1.5" PointX="7.375" PointY="3.75" />
+        <EntityTypeShape EntityType="PatientPreRegistrationModel.AccidentDetail" Width="1.5" PointX="5.25" PointY="14.75" />
+        <EntityTypeShape EntityType="PatientPreRegistrationModel.AccidentType" Width="1.5" PointX="3" PointY="6.125" />
+        <EntityTypeShape EntityType="PatientPreRegistrationModel.AttachmentType" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="PatientPreRegistrationModel.BirthGender" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="PatientPreRegistrationModel.EmergencyContact" Width="1.5" PointX="5.25" PointY="8.75" />
+        <EntityTypeShape EntityType="PatientPreRegistrationModel.Ethnicity" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="PatientPreRegistrationModel.FormSection" Width="1.5" PointX="0.75" PointY="12.25" />
+        <EntityTypeShape EntityType="PatientPreRegistrationModel.Gender" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="PatientPreRegistrationModel.Hospital" Width="1.5" PointX="0.75" PointY="15.125" />
+        <EntityTypeShape EntityType="PatientPreRegistrationModel.HospitalService" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="PatientPreRegistrationModel.InsuranceAttachment" Width="1.5" PointX="5.75" PointY="3.75" />
+        <EntityTypeShape EntityType="PatientPreRegistrationModel.InsuranceInformation" Width="1.5" PointX="5.25" PointY="25.875" />
+        <EntityTypeShape EntityType="PatientPreRegistrationModel.MaritalStatu" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="PatientPreRegistrationModel.MinorInformation" Width="1.5" PointX="8.25" PointY="11.5" />
+        <EntityTypeShape EntityType="PatientPreRegistrationModel.PatientDemographic" Width="1.5" PointX="3" PointY="9.375" />
+        <EntityTypeShape EntityType="PatientPreRegistrationModel.Race" Width="1.5" PointX="7.75" PointY="3.75" />
+        <EntityTypeShape EntityType="PatientPreRegistrationModel.ResponsibleParty" Width="1.5" PointX="6" PointY="18.125" />
+        <EntityTypeShape EntityType="PatientPreRegistrationModel.SpouseInformation" Width="1.5" PointX="5.25" PointY="30.625" />
+        <EntityTypeShape EntityType="PatientPreRegistrationModel.State" Width="1.5" PointX="7.75" PointY="6.75" />
+        <EntityTypeShape EntityType="PatientPreRegistrationModel.VW_PatientDemosGridView" Width="1.5" PointX="9.75" PointY="0.75" />
+        <AssociationConnector Association="PatientPreRegistrationModel.FK_AccidentDetails_AccidentType" />
+        <AssociationConnector Association="PatientPreRegistrationModel.FK_AccidentDetails_PatientDemographics" />
+        <AssociationConnector Association="PatientPreRegistrationModel.FK_EmergencyContact_PatientDemographics" />
+        <AssociationConnector Association="PatientPreRegistrationModel.FK_PatientDemographics_FormSection" />
+        <AssociationConnector Association="PatientPreRegistrationModel.FK_PatientDemographics_Hospital" />
+        <AssociationConnector Association="PatientPreRegistrationModel.FK_InsuranceInformation_PatientDemographics" />
+        <AssociationConnector Association="PatientPreRegistrationModel.FK_MinorInformation_PatientDemographics" />
+        <AssociationConnector Association="PatientPreRegistrationModel.FK_MinorInformation_ResponsibleParty" />
+        <AssociationConnector Association="PatientPreRegistrationModel.FK_SpouseInformation_PatientDemographics1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

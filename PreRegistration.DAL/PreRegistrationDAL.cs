@@ -486,6 +486,7 @@ namespace PreRegistration.DAL
                 {
                     model = mapper.Map<InsuranceInformation>(insuranceInformation.InsuranceOne);
                     _context.InsuranceInformations.Add(model);
+                    await _context.SaveChangesAsync();
                     if (insuranceInformation.InsuranceOne.Attachment != null)
                     {
                         InsuranceAttachment fone = new InsuranceAttachment();
@@ -493,13 +494,14 @@ namespace PreRegistration.DAL
                         fone.PersonId = model.PersonID;
                         fone.FileName = insuranceInformation.InsuranceOne.Attachment;//await SaveFileAndReturnUrlAsync(insuranceInformation.InsuranceOne.Attachment);
                         _context.InsuranceAttachments.Add(fone);
-
+                        await _context.SaveChangesAsync();
                     }
                 }
                 if (insuranceInformation.InsuranceTwo.InsRank != 0)
                 {
                     model = mapper.Map<InsuranceInformation>(insuranceInformation.InsuranceTwo);
                     _context.InsuranceInformations.Add(model);
+                    await _context.SaveChangesAsync();
                     if (insuranceInformation.InsuranceTwo.Attachment != null)
                     {
                         InsuranceAttachment fone = new InsuranceAttachment();
@@ -507,7 +509,7 @@ namespace PreRegistration.DAL
                         fone.PersonId = model.PersonID;
                         fone.FileName = insuranceInformation.InsuranceTwo.Attachment; ;// await SaveFileAndReturnUrlAsync(insuranceInformation.InsuranceTwo.Attachment);
                         _context.InsuranceAttachments.Add(fone);
-
+                        await _context.SaveChangesAsync();
                     }
 
                 }
@@ -515,6 +517,7 @@ namespace PreRegistration.DAL
                 {
                     model = mapper.Map<InsuranceInformation>(insuranceInformation.InsuranceThree);
                     _context.InsuranceInformations.Add(model);
+                    await _context.SaveChangesAsync();
                     if (insuranceInformation.InsuranceThree.Attachment != null)
                     {
                         InsuranceAttachment fone = new InsuranceAttachment();
@@ -522,7 +525,7 @@ namespace PreRegistration.DAL
                         fone.PersonId = model.PersonID;
                         fone.FileName = insuranceInformation.InsuranceThree.Attachment; ;// await SaveFileAndReturnUrlAsync(insuranceInformation.InsuranceThree.Attachment);
                         _context.InsuranceAttachments.Add(fone);
-
+                        await _context.SaveChangesAsync();
                     }
                 }
 
