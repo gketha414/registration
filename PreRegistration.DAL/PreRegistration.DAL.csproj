@@ -90,7 +90,6 @@
   <ItemGroup>
     <Compile Include="AdminDAL.cs" />
     <Compile Include="CentraPeople\CentraPeople.cs" />
-    <Compile Include="FileServices.cs" />
     <Compile Include="PreRegistrationDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
