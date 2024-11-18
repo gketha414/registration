@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using PreRegistration.Models;
 using PreRegistration.Models.Helpers;
@@ -6,6 +6,9 @@ using PreRegistration.Models.UI;
 using PreRegistration.Models.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Migrations;
 using System.Data.Entity.Validation;
 using System.IO;
 using System.Linq;
@@ -165,125 +168,235 @@ namespace PreRegistration.DAL
         //    return respiratoryProtectionFormViewModel;
         //}
 
-        public async Task<bool> SubmitPreRegistrationForm(PatientViewModel patientViewModel)
+        //public async Task<bool> SubmitPreRegistrationForm(PatientViewModel patientViewModel)
+        //{
+        //    try
+        //    {
+        //        //SendEmails sendEmails = new SendEmails();
+        //        int patientId = 0;
+        //        if (patientViewModel.PatientDemographicsViewModel != null)
+        //        {
+        //            PatientDemographic patientDemographic = new PatientDemographic
+        //            {
+        //                HospitalID = patientViewModel.PatientDemographicsViewModel.HospitalID,
+        //                In_Hospital_Directory = patientViewModel.PatientDemographicsViewModel.In_Hospital_Directory,
+        //                HospitalService = patientViewModel.PatientDemographicsViewModel.HospitalService,
+        //                PrimaryCarePhys = patientViewModel.PatientDemographicsViewModel.PrimaryCarePhys,
+        //                AdmitDate = Convert.ToDateTime(patientViewModel.PatientDemographicsViewModel.AdmitDate),
+        //                PatientHereBefore = patientViewModel.PatientDemographicsViewModel.PatientHereBefore,
+        //                First_Name = patientViewModel.PatientDemographicsViewModel.First_Name,
+        //                Middle_Name = patientViewModel.PatientDemographicsViewModel.Middle_Name,
+        //                Last_Name = patientViewModel.PatientDemographicsViewModel.Last_Name,
+        //                Entitlement = patientViewModel.PatientDemographicsViewModel.Entitlement,
+        //                Gender = patientViewModel.PatientDemographicsViewModel.Gender,
+        //                Address1 = patientViewModel.PatientDemographicsViewModel.Address1,
+        //                Address2 = patientViewModel.PatientDemographicsViewModel.Address2,
+        //                City = patientViewModel.PatientDemographicsViewModel.City,
+        //                StateProvince = patientViewModel.PatientDemographicsViewModel.StateProvince,
+        //                ZipCode = patientViewModel.PatientDemographicsViewModel.ZipCode,
+        //                BirthDate = patientViewModel.PatientDemographicsViewModel.BirthDate,
+        //                Race = patientViewModel.PatientDemographicsViewModel.Race,
+        //                Marital_Status = patientViewModel.PatientDemographicsViewModel.Marital_Status,
+        //                SSN = patientViewModel.PatientDemographicsViewModel.SSN,
+        //                Home_Phone = patientViewModel.PatientDemographicsViewModel.Home_Phone != null ? (long)patientViewModel.PatientDemographicsViewModel.Home_Phone : 0,
+        //                Cell_Phone = patientViewModel.PatientDemographicsViewModel.Cell_Phone,
+        //                Email_Address = patientViewModel.PatientDemographicsViewModel.Email_Address,
+        //                Church_Choice = patientViewModel.PatientDemographicsViewModel.Church_Choice,
+
+        //                Mailing_Address1 = patientViewModel.PatientDemographicsViewModel.Mailing_Address1,
+        //                Mailing_Address2 = patientViewModel.PatientDemographicsViewModel.Mailing_Address2,
+        //                MailingCity = patientViewModel.PatientDemographicsViewModel.MailingCity,
+        //                MailingState = patientViewModel.PatientDemographicsViewModel.MailingState,
+        //                MailingZip = patientViewModel.PatientDemographicsViewModel.MailingZip,
+
+        //                E911Address1 = patientViewModel.PatientDemographicsViewModel.E911Address1,
+        //                E911Address2 = patientViewModel.PatientDemographicsViewModel.E911Address2,
+        //                E911City = patientViewModel.PatientDemographicsViewModel.E911City,
+        //                E911State = patientViewModel.PatientDemographicsViewModel.E911State,
+        //                E911Zip = patientViewModel.PatientDemographicsViewModel.E911Zip,
+
+        //                ResponsiblePartyID = patientViewModel.PatientDemographicsViewModel.ResponsiblePartyID,
+        //                GuarNameIfOther = patientViewModel.PatientDemographicsViewModel.GuarNameIfOther,
+
+        //                Bill_Address1 = patientViewModel.PatientDemographicsViewModel.Bill_Address1,
+        //                Bill_Address2 = patientViewModel.PatientDemographicsViewModel.Bill_Address2,
+        //                Bill_City = patientViewModel.PatientDemographicsViewModel.Bill_City, // Corrected
+        //                Bill_State = patientViewModel.PatientDemographicsViewModel.Bill_State,
+        //                Bill_ZipCode = patientViewModel.PatientDemographicsViewModel.Bill_ZipCode,
+
+        //                Employer = patientViewModel.PatientDemographicsViewModel.Employer,
+        //                Job_Title = patientViewModel.PatientDemographicsViewModel.Job_Title,
+        //                EmployerAddress1 = patientViewModel.PatientDemographicsViewModel.EmployerAddress1,
+        //                EmployerAddress2 = patientViewModel.PatientDemographicsViewModel.EmployerAddress2,
+        //                EmployerCity = patientViewModel.PatientDemographicsViewModel.EmployerCity,
+        //                EmployerState = patientViewModel.PatientDemographicsViewModel.EmployerState,
+        //                EmployerZip = patientViewModel.PatientDemographicsViewModel.EmployerZip,
+        //                EmployerPhone = patientViewModel.PatientDemographicsViewModel.EmployerPhone,
+        //                Status = "Processed",
+
+        //                SectionID = 1,
+        //                Created = DateTime.Now,
+        //            };
+
+        //            _context.PatientDemographics.Add(patientDemographic);
+        //            await _context.SaveChangesAsync();
+
+        //            patientId = patientDemographic.PersonID;
+
+        //            //_emailHelper.SendEmailToAdmin(patientViewModel.PatientDemographicsViewModel, patientId);
+        //            //_emailHelper.SendEmailToPatient(patientViewModel.PatientDemographicsViewModel, patientId);
+
+        //            if (!patientViewModel.SpouseInformation.SpouseSkip)
+        //            {
+        //                patientViewModel.SpouseInformation.PersonID = patientId;
+        //                await SubmitSpouseInfo(patientViewModel.SpouseInformation);
+        //            }
+
+        //            if (!patientViewModel.MinorInformation.MinorSKip )
+        //            {    
+        //                patientViewModel.MinorInformation.FatherMinorInformation.PersonID = patientId;
+        //                patientViewModel.MinorInformation.MontherMinorInformation.PersonID = patientId;
+        //                patientViewModel.MinorInformation.FatherMinorInformation.ResponsiblePartyID = patientViewModel.MinorInformation.MontherMinorInformation.ResponsiblePartyID;
+
+                        
+        //                await SubmitMinorInfo(patientViewModel.MinorInformation);
+        //            }
+
+        //            if (!patientViewModel.EmergencyContact.EmergencySkip)
+        //            {
+        //                patientViewModel.EmergencyContact.EmergencyContactOne.PersonID = patientId;
+        //                patientViewModel.EmergencyContact.EmergencyContactTwo.PersonID = patientId;
+        //                patientViewModel.EmergencyContact.EmergencyContactThree.PersonID = patientId;
+        //                await SubmitEmergencyContact(patientViewModel.EmergencyContact);
+        //            }
+
+        //            if (!patientViewModel.InsuranceInformation.InsuranceSkip)
+        //            {
+        //                patientViewModel.InsuranceInformation.InsuranceOne.PersonID = patientId;
+        //                patientViewModel.InsuranceInformation.InsuranceTwo.PersonID = patientId;
+        //                patientViewModel.InsuranceInformation.InsuranceThree.PersonID = patientId;
+
+        //                await SubmitInsuranceInfo(patientViewModel.InsuranceInformation);
+        //            }
+
+        //            if (!patientViewModel.AccidentDetail.AccidentSkip)
+        //            {
+        //                patientViewModel.AccidentDetail.PersonID = patientId;
+        //                await SubmitAccidentDetail(patientViewModel.AccidentDetail);
+        //            }
+        //        }
+
+        //        return true;
+        //    }
+        //    catch (DbEntityValidationException dbEx)
+        //    {
+        //        foreach (var validationErrors in dbEx.EntityValidationErrors)
+        //        {
+        //            foreach (var validationError in validationErrors.ValidationErrors)
+        //            {
+        //                _log.Log("Validation error on SubmitPreRegistrationForm function in PreRegistrationDAL: " + validationError.PropertyName + ". " + validationError.ErrorMessage);
+        //            }
+        //        }
+        //        return false;
+        //        throw new Exception("Unable to Submit form. If this problem continues please contact your system admin.");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _log.Log("Failed to get SubmitPreRegistrationForm: " + ex);
+        //        return false;
+        //    }
+        //}
+
+        public async Task<int> SubmitPatientDetail(PatientViewModel patientViewModel, int personId)
         {
             try
             {
-                //SendEmails sendEmails = new SendEmails();
-                int patientId = 0;
-                if (patientViewModel.PatientDemographicsViewModel != null)
+                // Get the existing patient if the personId is not 0
+                PatientDemographic patientDemographic = personId == 0
+                    ? new PatientDemographic()
+                    : await _context.PatientDemographics.FirstOrDefaultAsync(p => p.PersonID == personId);
+
+                // If the patient doesn't exist and personId isn't 0, throw an exception
+                if (personId != 0 && patientDemographic == null)
                 {
-                    PatientDemographic patientDemographic = new PatientDemographic
-                    {
-                        HospitalID = patientViewModel.PatientDemographicsViewModel.HospitalID,
-                        In_Hospital_Directory = patientViewModel.PatientDemographicsViewModel.In_Hospital_Directory,
-                        HospitalService = patientViewModel.PatientDemographicsViewModel.HospitalService,
-                        PrimaryCarePhys = patientViewModel.PatientDemographicsViewModel.PrimaryCarePhys,
-                        AdmitDate = Convert.ToDateTime(patientViewModel.PatientDemographicsViewModel.AdmitDate),
-                        PatientHereBefore = patientViewModel.PatientDemographicsViewModel.PatientHereBefore,
-                        First_Name = patientViewModel.PatientDemographicsViewModel.First_Name,
-                        Middle_Name = patientViewModel.PatientDemographicsViewModel.Middle_Name,
-                        Last_Name = patientViewModel.PatientDemographicsViewModel.Last_Name,
-                        Entitlement = patientViewModel.PatientDemographicsViewModel.Entitlement,
-                        Gender = patientViewModel.PatientDemographicsViewModel.Gender,
-                        Address1 = patientViewModel.PatientDemographicsViewModel.Address1,
-                        Address2 = patientViewModel.PatientDemographicsViewModel.Address2,
-                        City = patientViewModel.PatientDemographicsViewModel.City,
-                        StateProvince = patientViewModel.PatientDemographicsViewModel.StateProvince,
-                        ZipCode = patientViewModel.PatientDemographicsViewModel.ZipCode,
-                        BirthDate = patientViewModel.PatientDemographicsViewModel.BirthDate,
-                        Race = patientViewModel.PatientDemographicsViewModel.Race,
-                        Marital_Status = patientViewModel.PatientDemographicsViewModel.Marital_Status,
-                        SSN = patientViewModel.PatientDemographicsViewModel.SSN,
-                        Home_Phone = patientViewModel.PatientDemographicsViewModel.Home_Phone != null ? (long)patientViewModel.PatientDemographicsViewModel.Home_Phone : 0,
-                        Cell_Phone = patientViewModel.PatientDemographicsViewModel.Cell_Phone,
-                        Email_Address = patientViewModel.PatientDemographicsViewModel.Email_Address,
-                        Church_Choice = patientViewModel.PatientDemographicsViewModel.Church_Choice,
-
-                        Mailing_Address1 = patientViewModel.PatientDemographicsViewModel.Mailing_Address1,
-                        Mailing_Address2 = patientViewModel.PatientDemographicsViewModel.Mailing_Address2,
-                        MailingCity = patientViewModel.PatientDemographicsViewModel.MailingCity,
-                        MailingState = patientViewModel.PatientDemographicsViewModel.MailingState,
-                        MailingZip = patientViewModel.PatientDemographicsViewModel.MailingZip,
-
-                        E911Address1 = patientViewModel.PatientDemographicsViewModel.E911Address1,
-                        E911Address2 = patientViewModel.PatientDemographicsViewModel.E911Address2,
-                        E911City = patientViewModel.PatientDemographicsViewModel.E911City,
-                        E911State = patientViewModel.PatientDemographicsViewModel.E911State,
-                        E911Zip = patientViewModel.PatientDemographicsViewModel.E911Zip,
-
-                        ResponsiblePartyID = patientViewModel.PatientDemographicsViewModel.ResponsiblePartyID,
-                        GuarNameIfOther = patientViewModel.PatientDemographicsViewModel.GuarNameIfOther,
-
-                        Bill_Address1 = patientViewModel.PatientDemographicsViewModel.Bill_Address1,
-                        Bill_Address2 = patientViewModel.PatientDemographicsViewModel.Bill_Address2,
-                        Bill_City = patientViewModel.PatientDemographicsViewModel.Bill_City, // Corrected
-                        Bill_State = patientViewModel.PatientDemographicsViewModel.Bill_State,
-                        Bill_ZipCode = patientViewModel.PatientDemographicsViewModel.Bill_ZipCode,
-
-                        Employer = patientViewModel.PatientDemographicsViewModel.Employer,
-                        Job_Title = patientViewModel.PatientDemographicsViewModel.Job_Title,
-                        EmployerAddress1 = patientViewModel.PatientDemographicsViewModel.EmployerAddress1,
-                        EmployerAddress2 = patientViewModel.PatientDemographicsViewModel.EmployerAddress2,
-                        EmployerCity = patientViewModel.PatientDemographicsViewModel.EmployerCity,
-                        EmployerState = patientViewModel.PatientDemographicsViewModel.EmployerState,
-                        EmployerZip = patientViewModel.PatientDemographicsViewModel.EmployerZip,
-                        EmployerPhone = patientViewModel.PatientDemographicsViewModel.EmployerPhone,
-                        Status = "Processed",
-
-                        SectionID = 1,
-                        Created = DateTime.Now,
-                    };
-
-                    _context.PatientDemographics.Add(patientDemographic);
-                    await _context.SaveChangesAsync();
-
-                    patientId = patientDemographic.PersonID;
-
-                    //_emailHelper.SendEmailToAdmin(patientViewModel.PatientDemographicsViewModel, patientId);
-                    //_emailHelper.SendEmailToPatient(patientViewModel.PatientDemographicsViewModel, patientId);
-
-                    if (!patientViewModel.SpouseInformation.SpouseSkip)
-                    {
-                        patientViewModel.SpouseInformation.PersonID = patientId;
-                        await SubmitSpouseInfo(patientViewModel.SpouseInformation);
-                    }
-
-                    if (!patientViewModel.MinorInformation.MinorSKip )
-                    {    
-                        patientViewModel.MinorInformation.FatherMinorInformation.PersonID = patientId;
-                        patientViewModel.MinorInformation.MontherMinorInformation.PersonID = patientId;
-                        patientViewModel.MinorInformation.FatherMinorInformation.ResponsiblePartyID = patientViewModel.MinorInformation.MontherMinorInformation.ResponsiblePartyID;
-
-                        
-                        await SubmitMinorInfo(patientViewModel.MinorInformation);
-                    }
-
-                    if (!patientViewModel.EmergencyContact.EmergencySkip)
-                    {
-                        patientViewModel.EmergencyContact.EmergencyContactOne.PersonID = patientId;
-                        patientViewModel.EmergencyContact.EmergencyContactTwo.PersonID = patientId;
-                        patientViewModel.EmergencyContact.EmergencyContactThree.PersonID = patientId;
-                        await SubmitEmergencyContact(patientViewModel.EmergencyContact);
-                    }
-
-                    if (!patientViewModel.InsuranceInformation.InsuranceSkip)
-                    {
-                        patientViewModel.InsuranceInformation.InsuranceOne.PersonID = patientId;
-                        patientViewModel.InsuranceInformation.InsuranceTwo.PersonID = patientId;
-                        patientViewModel.InsuranceInformation.InsuranceThree.PersonID = patientId;
-
-                        await SubmitInsuranceInfo(patientViewModel.InsuranceInformation);
-                    }
-
-                    if (!patientViewModel.AccidentDetail.AccidentSkip)
-                    {
-                        patientViewModel.AccidentDetail.PersonID = patientId;
-                        await SubmitAccidentDetail(patientViewModel.AccidentDetail);
-                    }
+                    throw new Exception("Patient not found");
                 }
 
-                return true;
+                // Populate patientDemographic fields
+                patientDemographic.HospitalID = patientViewModel.PatientDemographicsViewModel.HospitalID;
+                patientDemographic.In_Hospital_Directory = patientViewModel.PatientDemographicsViewModel.In_Hospital_Directory;
+                patientDemographic.HospitalService = patientViewModel.PatientDemographicsViewModel.HospitalService;
+                patientDemographic.PrimaryCarePhys = patientViewModel.PatientDemographicsViewModel.PrimaryCarePhys;
+                patientDemographic.AdmitDate = Convert.ToDateTime(patientViewModel.PatientDemographicsViewModel.AdmitDate);
+                patientDemographic.PatientHereBefore = patientViewModel.PatientDemographicsViewModel.PatientHereBefore;
+                patientDemographic.First_Name = patientViewModel.PatientDemographicsViewModel.First_Name;
+                patientDemographic.Middle_Name = patientViewModel.PatientDemographicsViewModel.Middle_Name;
+                patientDemographic.Last_Name = patientViewModel.PatientDemographicsViewModel.Last_Name;
+                patientDemographic.Entitlement = patientViewModel.PatientDemographicsViewModel.Entitlement;
+                patientDemographic.Gender = patientViewModel.PatientDemographicsViewModel.Gender;
+                patientDemographic.Address1 = patientViewModel.PatientDemographicsViewModel.Address1;
+                patientDemographic.Address2 = patientViewModel.PatientDemographicsViewModel.Address2;
+                patientDemographic.City = patientViewModel.PatientDemographicsViewModel.City;
+                patientDemographic.StateProvince = patientViewModel.PatientDemographicsViewModel.StateProvince;
+                patientDemographic.ZipCode = patientViewModel.PatientDemographicsViewModel.ZipCode;
+                patientDemographic.BirthDate = patientViewModel.PatientDemographicsViewModel.BirthDate;
+                patientDemographic.Race = patientViewModel.PatientDemographicsViewModel.Race;
+                patientDemographic.Marital_Status = patientViewModel.PatientDemographicsViewModel.Marital_Status;
+                patientDemographic.SSN = patientViewModel.PatientDemographicsViewModel.SSN;
+                patientDemographic.Home_Phone = patientViewModel.PatientDemographicsViewModel.Home_Phone != null ? (long)patientViewModel.PatientDemographicsViewModel.Home_Phone : 0;
+                patientDemographic.Cell_Phone = patientViewModel.PatientDemographicsViewModel.Cell_Phone;
+                patientDemographic.Email_Address = patientViewModel.PatientDemographicsViewModel.Email_Address;
+                patientDemographic.Church_Choice = patientViewModel.PatientDemographicsViewModel.Church_Choice;
+
+                patientDemographic.Mailing_Address1 = patientViewModel.PatientDemographicsViewModel.Mailing_Address1;
+                patientDemographic.Mailing_Address2 = patientViewModel.PatientDemographicsViewModel.Mailing_Address2;
+                patientDemographic.MailingCity = patientViewModel.PatientDemographicsViewModel.MailingCity;
+                patientDemographic.MailingState = patientViewModel.PatientDemographicsViewModel.MailingState;
+                patientDemographic.MailingZip = patientViewModel.PatientDemographicsViewModel.MailingZip;
+
+                patientDemographic.E911Address1 = patientViewModel.PatientDemographicsViewModel.E911Address1;
+                patientDemographic.E911Address2 = patientViewModel.PatientDemographicsViewModel.E911Address2;
+                patientDemographic.E911City = patientViewModel.PatientDemographicsViewModel.E911City;
+                patientDemographic.E911State = patientViewModel.PatientDemographicsViewModel.E911State;
+                patientDemographic.E911Zip = patientViewModel.PatientDemographicsViewModel.E911Zip;
+
+                patientDemographic.ResponsiblePartyID = patientViewModel.PatientDemographicsViewModel.ResponsiblePartyID;
+                patientDemographic.GuarNameIfOther = patientViewModel.PatientDemographicsViewModel.GuarNameIfOther;
+
+                patientDemographic.Bill_Address1 = patientViewModel.PatientDemographicsViewModel.Bill_Address1;
+                patientDemographic.Bill_Address2 = patientViewModel.PatientDemographicsViewModel.Bill_Address2;
+                patientDemographic.Bill_City = patientViewModel.PatientDemographicsViewModel.Bill_City;
+                patientDemographic.Bill_State = patientViewModel.PatientDemographicsViewModel.Bill_State;
+                patientDemographic.Bill_ZipCode = patientViewModel.PatientDemographicsViewModel.Bill_ZipCode;
+
+                patientDemographic.Employer = patientViewModel.PatientDemographicsViewModel.Employer;
+                patientDemographic.Job_Title = patientViewModel.PatientDemographicsViewModel.Job_Title;
+                patientDemographic.EmployerAddress1 = patientViewModel.PatientDemographicsViewModel.EmployerAddress1;
+                patientDemographic.EmployerAddress2 = patientViewModel.PatientDemographicsViewModel.EmployerAddress2;
+                patientDemographic.EmployerCity = patientViewModel.PatientDemographicsViewModel.EmployerCity;
+                patientDemographic.EmployerState = patientViewModel.PatientDemographicsViewModel.EmployerState;
+                patientDemographic.EmployerZip = patientViewModel.PatientDemographicsViewModel.EmployerZip;
+                patientDemographic.EmployerPhone = patientViewModel.PatientDemographicsViewModel.EmployerPhone;
+                patientDemographic.Status = "Processed";
+                patientDemographic.Modified = DateTime.Now;
+
+                patientDemographic.SectionID = 1;
+                patientDemographic.Created = DateTime.Now;
+
+                // Add new record or update the existing one
+                if (personId == 0)
+                {
+                    _context.PatientDemographics.Add(patientDemographic);
+                }
+                else
+                {
+                    
+                    _context.PatientDemographics.AddOrUpdate(patientDemographic);
+                }
+
+                await _context.SaveChangesAsync();
+
+                return patientDemographic.PersonID;
             }
             catch (DbEntityValidationException dbEx)
             {
@@ -294,52 +407,87 @@ namespace PreRegistration.DAL
                         _log.Log("Validation error on SubmitPreRegistrationForm function in PreRegistrationDAL: " + validationError.PropertyName + ". " + validationError.ErrorMessage);
                     }
                 }
-                return false;
+                return 0;
                 throw new Exception("Unable to Submit form. If this problem continues please contact your system admin.");
             }
             catch (Exception ex)
             {
                 _log.Log("Failed to get SubmitPreRegistrationForm: " + ex);
-                return false;
+                return 0;
             }
         }
 
-        public async Task<bool> SubmitSpouseInfo(SpouseInformationViewModel spouseInformation)
+        public async Task<int> SubmitSpouseInfo(SpouseInformationViewModel spouseInformation, int updateId)
         {
             try
             {
-                SpouseInformation spouse = new SpouseInformation()
+                // Check if SpouseSkip is true
+                if (spouseInformation.SpouseSkip)
                 {
-                    PersonID = spouseInformation.PersonID,
+                    // If updateId is not zero, delete the existing record
+                    if (updateId != 0)
+                    {
+                        var spousedetail = await _context.SpouseInformations.FindAsync(updateId);
+                        if (spousedetail != null)
+                        {
+                            _context.SpouseInformations.Remove(spousedetail);
+                            await _context.SaveChangesAsync();
+                        }
+                    }
+                    // If SpouseSkip is true and updateId is zero, just return 0
+                    return 0;
+                }
 
-                    First_Name = spouseInformation.First_Name,
-                    Middle_Name = spouseInformation.Middle_Name,
-                    Last_Name = spouseInformation.Last_Name,
-                    Address1 = spouseInformation.Address1,
-                    Address2 = spouseInformation.Address2,
-                    City = spouseInformation.City,
-                    StateProvince = spouseInformation.StateProvince,
-                    ZipCode = spouseInformation.ZipCode,
-                    BirthDate = spouseInformation.BirthDate,
-                    Race = spouseInformation.Race,
-                    Marital_Status = spouseInformation.Marital_Status,
-                    SSN = spouseInformation.SSN,
-                    Home_Phone = spouseInformation.Home_Phone,
-                    Cell_Phone = spouseInformation.Cell_Phone,
-                    Employer = spouseInformation.Employer,
-                    Job_Title = spouseInformation.Job_Title,
-                    EmployerAddress1 = spouseInformation.EmployerAddress1,
-                    EmployerAddress2 = spouseInformation.EmployerAddress2,
-                    EmployerCity = spouseInformation.EmployerCity,
-                    EmployerState = spouseInformation.EmployerState,
-                    EmployerZip = spouseInformation.EmployerZip,
-                    Employer_Phone = spouseInformation.Employer_Phone,
-                };
+                // Proceed with normal logic if SpouseSkip is false
 
-                _context.SpouseInformations.Add(spouse);
+                SpouseInformation spouse;
+
+                if (updateId != 0)
+                {
+                    // Update existing record
+                    spouse = await _context.SpouseInformations.FindAsync(updateId);
+
+                    if (spouse == null)
+                    {
+                        throw new Exception("Spouse record not found.");
+                    }
+                }
+                else
+                {
+                    // Insert new record
+                    spouse = new SpouseInformation();
+                    _context.SpouseInformations.Add(spouse);
+                }
+
+                // Populate properties
+                spouse.First_Name = spouseInformation.First_Name;
+                spouse.Middle_Name = spouseInformation.Middle_Name;
+                spouse.Last_Name = spouseInformation.Last_Name;
+                spouse.Address1 = spouseInformation.Address1;
+                spouse.Address2 = spouseInformation.Address2;
+                spouse.City = spouseInformation.City;
+                spouse.StateProvince = spouseInformation.StateProvince;
+                spouse.ZipCode = spouseInformation.ZipCode;
+                spouse.BirthDate = spouseInformation.BirthDate;
+                spouse.Race = spouseInformation.Race;
+                spouse.Marital_Status = spouseInformation.Marital_Status;
+                spouse.SSN = spouseInformation.SSN;
+                spouse.Home_Phone = spouseInformation.Home_Phone;
+                spouse.Cell_Phone = spouseInformation.Cell_Phone;
+                spouse.Employer = spouseInformation.Employer;
+                spouse.Job_Title = spouseInformation.Job_Title;
+                spouse.EmployerAddress1 = spouseInformation.EmployerAddress1;
+                spouse.EmployerAddress2 = spouseInformation.EmployerAddress2;
+                spouse.EmployerCity = spouseInformation.EmployerCity;
+                spouse.EmployerState = spouseInformation.EmployerState;
+                spouse.EmployerZip = spouseInformation.EmployerZip;
+                spouse.Employer_Phone = spouseInformation.Employer_Phone;
+                spouse.PersonID = spouseInformation.PersonID;
+
                 await _context.SaveChangesAsync();
 
-                return true;
+                // Return the newly created Id or the updateId
+                return updateId != 0 ? updateId : spouse.SpouseID;
             }
             catch (DbEntityValidationException dbEx)
             {
@@ -350,40 +498,128 @@ namespace PreRegistration.DAL
                         _log.Log("Validation error on SubmitSpouseInfo function in PreRegistrationDAL: " + validationError.PropertyName + ". " + validationError.ErrorMessage);
                     }
                 }
-                return false;
-                throw new Exception("Unable to Submit form. If this problem continues please contact your system admin.");
+                return 0;
             }
             catch (Exception ex)
             {
                 _log.Log("Failed to get SubmitSpouseInfo: " + ex);
-                return false;
+                return 0;
             }
         }
 
-        public async Task<bool> SubmitMinorInfo(MinorInformationViewModel minorInformation)
+        public async Task<Dictionary<string, int>> SubmitMinorInfo(MinorInformationViewModel minorInformation, int motherId, int fatherId)
         {
             try
             {
-
-
                 var config = new AutoMapper.MapperConfiguration(cfg =>
                 {
                     cfg.CreateMap<MinorViewModel, MinorInformation>();
                 });
                 var mapper = config.CreateMapper();
 
+                MinorInformation motherModel = null;
+                MinorInformation fatherModel = null;
+                bool motherCreated = false;
+                bool fatherCreated = false;
 
-                var motherModel = mapper.Map<MinorViewModel, MinorInformation>(minorInformation.MontherMinorInformation);
-                var fatherModel = mapper.Map<MinorViewModel, MinorInformation>(minorInformation.MontherMinorInformation);
-
-                if (motherModel.First_Name != null) { _context.MinorInformations.Add(motherModel); } else
+                // Check if MinorSkip is true
+                if (minorInformation.MinorSKip)
                 {
+                    // If any minor record ID is not zero, delete the corresponding record
+                    if (motherId != 0)
+                    {
+                        var contactMother = await _context.MinorInformations.FindAsync(motherId);
+                        if (contactMother != null)
+                        {
+                            _context.MinorInformations.Remove(contactMother);
+                        }
+                    }
+                    if (fatherId != 0)
+                    {
+                        var contactFather = await _context.MinorInformations.FindAsync(fatherId);
+                        if (contactFather != null)
+                        {
+                            _context.MinorInformations.Remove(contactFather);
+                        }
+                    }
+
+                    // Save changes to delete records
+                    await _context.SaveChangesAsync();
+
+                    // Return result with zeroed IDs after deletion
+                    return new Dictionary<string, int> { { "MotherId", 0 }, { "FatherId", 0 } };
+                }
+
+                // Proceed with normal logic if MinorSkip is false
+
+                // Check and handle mother record
+                if (motherId != 0)
+                {
+                    // Find existing mother record
+                    motherModel = await _context.MinorInformations.FindAsync(motherId);
+                    if (motherModel == null)
+                    {
+                        throw new Exception("Mother record not found.");
+                    }
+
+                    if (string.IsNullOrEmpty(minorInformation.MontherMinorInformation.First_Name))
+                    {
+                        // Delete if First_Name is null or empty
+                        _context.MinorInformations.Remove(motherModel);
+                    }
+                    else
+                    {
+                        // Update if First_Name is present
+                        mapper.Map(minorInformation.MontherMinorInformation, motherModel);
+                    }
+                }
+                else if (!string.IsNullOrEmpty(minorInformation.MontherMinorInformation.First_Name))
+                {
+                    // Create new mother record if necessary
+                    motherModel = mapper.Map<MinorViewModel, MinorInformation>(minorInformation.MontherMinorInformation);
+                    _context.MinorInformations.Add(motherModel);
+                    motherCreated = true;
+                }
+
+                // Check and handle father record
+                if (fatherId != 0)
+                {
+                    // Find existing father record
+                    fatherModel = await _context.MinorInformations.FindAsync(fatherId);
+                    if (fatherModel == null)
+                    {
+                        throw new Exception("Father record not found.");
+                    }
+
+                    if (string.IsNullOrEmpty(minorInformation.FatherMinorInformation.First_Name))
+                    {
+                        // Delete if First_Name is null or empty
+                        _context.MinorInformations.Remove(fatherModel);
+                    }
+                    else
+                    {
+                        // Update if First_Name is present
+                        mapper.Map(minorInformation.FatherMinorInformation, fatherModel);
+                    }
+                }
+                else if (!string.IsNullOrEmpty(minorInformation.FatherMinorInformation.First_Name))
+                {
+                    // Create new father record if necessary
+                    fatherModel = mapper.Map<MinorViewModel, MinorInformation>(minorInformation.FatherMinorInformation);
                     _context.MinorInformations.Add(fatherModel);
+                    fatherCreated = true;
                 }
 
                 await _context.SaveChangesAsync();
 
-                return true;
+                // Prepare return dictionary with IDs of mother and father
+                var result = new Dictionary<string, int>
+        {
+            { "MotherId", motherCreated ? motherModel.MinorID : (motherId != 0 ? motherId : 0) },
+            { "FatherId", fatherCreated ? fatherModel.MinorID : (fatherId != 0 ? fatherId : 0) }
+        };
+
+                return result;
             }
             catch (DbEntityValidationException dbEx)
             {
@@ -394,31 +630,156 @@ namespace PreRegistration.DAL
                         _log.Log("Validation error on SubmitMinorInfo function in PreRegistrationDAL: " + validationError.PropertyName + ". " + validationError.ErrorMessage);
                     }
                 }
-                return false;
-                throw new Exception("Unable to Submit form. If this problem continues please contact your system admin.");
+                return new Dictionary<string, int> { { "MotherId", 0 }, { "FatherId", 0 } };
             }
             catch (Exception ex)
             {
                 _log.Log("Failed to get SubmitMinorInfo: " + ex);
-                return false;
+                return new Dictionary<string, int> { { "MotherId", 0 }, { "FatherId", 0 } };
             }
         }
 
-        public async Task<bool> SubmitEmergencyContact(EmergencyContactViewModel emergencyContact)
+        public async Task<Dictionary<string, int>> SubmitEmergencyContact(
+     EmergencyContactViewModel emergencyContact,
+     int emergencyContactOneId,
+     int emergencyContactTwoId,
+     int emergencyContactThreeId)
         {
             try
             {
-                if (emergencyContact.EmergencyContactOne.Nearest_Relative_Name != null) { 
-                    _context.EmergencyContacts.Add(emergencyContact.EmergencyContactOne); }
-                if (emergencyContact.EmergencyContactTwo.Nearest_Relative_Name != null) {
-                    _context.EmergencyContacts.Add(emergencyContact.EmergencyContactTwo); }
-                if (emergencyContact.EmergencyContactThree.Nearest_Relative_Name != null) { 
-                    _context.EmergencyContacts.Add(emergencyContact.EmergencyContactThree); }
+                // Initialize result dictionary to store EmergContactID after operation
+                var result = new Dictionary<string, int>
+        {
+            { "EmergencyContactOneEmergContactID", 0 },
+            { "EmergencyContactTwoEmergContactID", 0 },
+            { "EmergencyContactThreeEmergContactID", 0 }
+        };
 
+                // Check if EmergencySkip is true
+                if (emergencyContact.EmergencySkip)
+                {
+                    // If any emergency contact ID is not zero, delete the corresponding record
+                    if (emergencyContactOneId != 0)
+                    {
+                        var contactOne = await _context.EmergencyContacts.FindAsync(emergencyContactOneId);
+                        if (contactOne != null)
+                        {
+                            _context.EmergencyContacts.Remove(contactOne);
+                        }
+                    }
+                    if (emergencyContactTwoId != 0)
+                    {
+                        var contactTwo = await _context.EmergencyContacts.FindAsync(emergencyContactTwoId);
+                        if (contactTwo != null)
+                        {
+                            _context.EmergencyContacts.Remove(contactTwo);
+                        }
+                    }
+                    if (emergencyContactThreeId != 0)
+                    {
+                        var contactThree = await _context.EmergencyContacts.FindAsync(emergencyContactThreeId);
+                        if (contactThree != null)
+                        {
+                            _context.EmergencyContacts.Remove(contactThree);
+                        }
+                    }
 
-                await _context.SaveChangesAsync();
+                    // Save changes to remove records from the database
+                    await _context.SaveChangesAsync();
 
-                return true;
+                    // Return result IDs with 0s after deletion
+                    return result; // No further processing required, return early
+                }
+
+                // Proceed with existing logic if EmergencySkip is false
+
+                // Process EmergencyContactOne
+                if (emergencyContactOneId != 0)
+                {
+                    var contactOne = await _context.EmergencyContacts.FindAsync(emergencyContactOneId);
+                    if (contactOne == null)
+                        throw new Exception("EmergencyContactOne record not found.");
+
+                    if (string.IsNullOrEmpty(emergencyContact.EmergencyContactOne.Nearest_Relative_Name))
+                    {
+                        // Delete if Nearest_Relative_Name is empty
+                        _context.EmergencyContacts.Remove(contactOne);
+                    }
+                    else
+                    {
+                        // Update if Nearest_Relative_Name is present
+                        emergencyContact.EmergencyContactOne.EmergContactID = contactOne.EmergContactID;
+                        contactOne = emergencyContact.EmergencyContactOne;
+                        result["EmergencyContactOneEmergContactID"] = contactOne.EmergContactID; // Use EmergContactID after update
+                    }
+                }
+                else if (!string.IsNullOrEmpty(emergencyContact.EmergencyContactOne.Nearest_Relative_Name))
+                {
+                    // Create new contact if necessary
+                    _context.EmergencyContacts.Add(emergencyContact.EmergencyContactOne);
+                    await _context.SaveChangesAsync(); // Save to get new EmergContactID
+                    result["EmergencyContactOneEmergContactID"] = emergencyContact.EmergencyContactOne.EmergContactID; // Get new EmergContactID after save
+                }
+
+                // Process EmergencyContactTwo
+                if (emergencyContactTwoId != 0)
+                {
+                    var contactTwo = await _context.EmergencyContacts.FindAsync(emergencyContactTwoId);
+                    if (contactTwo == null)
+                        throw new Exception("EmergencyContactTwo record not found.");
+
+                    if (string.IsNullOrEmpty(emergencyContact.EmergencyContactTwo.Nearest_Relative_Name))
+                    {
+                        // Delete if Nearest_Relative_Name is empty
+                        _context.EmergencyContacts.Remove(contactTwo);
+                    }
+                    else
+                    {
+                        // Update if Nearest_Relative_Name is present
+                        emergencyContact.EmergencyContactTwo.EmergContactID = contactTwo.EmergContactID;
+                        contactTwo = emergencyContact.EmergencyContactTwo;
+                        result["EmergencyContactTwoEmergContactID"] = contactTwo.EmergContactID; // Use EmergContactID after update
+                    }
+                }
+                else if (!string.IsNullOrEmpty(emergencyContact.EmergencyContactTwo.Nearest_Relative_Name))
+                {
+                    // Create new contact if necessary
+                    _context.EmergencyContacts.Add(emergencyContact.EmergencyContactTwo);
+                    await _context.SaveChangesAsync(); // Save to get new EmergContactID
+                    result["EmergencyContactTwoEmergContactID"] = emergencyContact.EmergencyContactTwo.EmergContactID; // Get new EmergContactID after save
+                }
+
+                // Process EmergencyContactThree
+                if (emergencyContactThreeId != 0)
+                {
+                    var contactThree = await _context.EmergencyContacts.FindAsync(emergencyContactThreeId);
+                    if (contactThree == null)
+                        throw new Exception("EmergencyContactThree record not found.");
+
+                    if (string.IsNullOrEmpty(emergencyContact.EmergencyContactThree.Nearest_Relative_Name))
+                    {
+                        // Delete if Nearest_Relative_Name is empty
+                        _context.EmergencyContacts.Remove(contactThree);
+                    }
+                    else
+                    {
+                        // Update if Nearest_Relative_Name is present
+                        emergencyContact.EmergencyContactThree.EmergContactID = contactThree.EmergContactID;
+                        contactThree = emergencyContact.EmergencyContactThree;
+                        result["EmergencyContactThreeEmergContactID"] = contactThree.EmergContactID; // Use EmergContactID after update
+                    }
+                }
+                else if (!string.IsNullOrEmpty(emergencyContact.EmergencyContactThree.Nearest_Relative_Name))
+                {
+                    // Create new contact if necessary
+                    _context.EmergencyContacts.Add(emergencyContact.EmergencyContactThree);
+                    await _context.SaveChangesAsync(); // Save to get new EmergContactID
+                    result["EmergencyContactThreeEmergContactID"] = emergencyContact.EmergencyContactThree.EmergContactID; // Get new EmergContactID after save
+                }
+
+                await _context.SaveChangesAsync(); // Final save after all operations
+
+                return result;
             }
             catch (DbEntityValidationException dbEx)
             {
@@ -429,15 +790,15 @@ namespace PreRegistration.DAL
                         _log.Log("Validation error on SubmitEmergencyContact function in PreRegistrationDAL: " + validationError.PropertyName + ". " + validationError.ErrorMessage);
                     }
                 }
-                return false;
-                throw new Exception("Unable to Submit form. If this problem continues please contact your system admin.");
+                return new Dictionary<string, int> { { "EmergencyContactOneEmergContactID", 0 }, { "EmergencyContactTwoEmergContactID", 0 }, { "EmergencyContactThreeEmergContactID", 0 } };
             }
             catch (Exception ex)
             {
                 _log.Log("Failed to get SubmitEmergencyContact: " + ex);
-                return false;
+                return new Dictionary<string, int> { { "EmergencyContactOneEmergContactID", 0 }, { "EmergencyContactTwoEmergContactID", 0 }, { "EmergencyContactThreeEmergContactID", 0 } };
             }
         }
+
 
         public async Task<string> SaveFileAndReturnUrlAsync(IFormFile file)
         {
@@ -470,69 +831,100 @@ namespace PreRegistration.DAL
 
             return fileUrl;
         }
-        public async Task<bool> SubmitInsuranceInfo(InsuranceMultipleViewModel insuranceInformation)
+        public async Task<Dictionary<string, int>> SubmitInsuranceInfo(InsuranceMultipleViewModel insuranceInformation, int insuranceid1, int insuranceid2, int insuranceid3)
         {
             try
             {
-                InsuranceInformation model = new InsuranceInformation();
+                var resultIds = new Dictionary<string, int> { { "InsId1", 0 }, { "InsId2", 0 }, { "InsId3", 0 } };
 
-
-                var config = new MapperConfiguration(cfg =>
+                if (insuranceInformation.InsuranceSkip)
                 {
-                    cfg.CreateMap<InsuranceInformationViewModel, InsuranceInformation>();
-                });
+                    if (insuranceid1 != 0)
+                    {
+                        var record1 = await _context.InsuranceInformations.FindAsync(insuranceid1);
+                        if (record1 != null)
+                            _context.InsuranceInformations.Remove(record1);
+                    }
+
+                    if (insuranceid2 != 0)
+                    {
+                        var record2 = await _context.InsuranceInformations.FindAsync(insuranceid2);
+                        if (record2 != null)
+                            _context.InsuranceInformations.Remove(record2);
+                    }
+
+                    if (insuranceid3 != 0)
+                    {
+                        var record3 = await _context.InsuranceInformations.FindAsync(insuranceid3);
+                        if (record3 != null)
+                            _context.InsuranceInformations.Remove(record3);
+                    }
+
+                    await _context.SaveChangesAsync();
+                    return resultIds;
+                }
+
+                var config = new MapperConfiguration(cfg => cfg.CreateMap<InsuranceInformationViewModel, InsuranceInformation>());
                 var mapper = config.CreateMapper();
-                if (insuranceInformation.InsuranceOne.InsRank != 0)
+
+                async Task ProcessInsurance(InsuranceInformationViewModel insuranceViewModel, int insuranceId, string insIdKey)
                 {
-                    model = mapper.Map<InsuranceInformation>(insuranceInformation.InsuranceOne);
-                    _context.InsuranceInformations.Add(model);
-                    await _context.SaveChangesAsync();
-                    if (insuranceInformation.InsuranceOne.Attachment != null)
+                    InsuranceInformation model = new InsuranceInformation();
+
+                    if (insuranceId != 0)
                     {
-                        InsuranceAttachment fone = new InsuranceAttachment();
-                        fone.InsId = model.InsId;
-                        fone.PersonId = model.PersonID;
-                        fone.FileName = insuranceInformation.InsuranceOne.Attachment;//await SaveFileAndReturnUrlAsync(insuranceInformation.InsuranceOne.Attachment);
-                        _context.InsuranceAttachments.Add(fone);
+                        model = await _context.InsuranceInformations.FindAsync(insuranceId);
+                        if (insuranceViewModel.InsRank == 0)
+                        {
+                            if (model != null)
+                            {
+                                _context.InsuranceInformations.Remove(model);
+                                await _context.SaveChangesAsync();
+                            }
+                            return;
+                        }
+
+                        if (model != null)
+                        {
+                            model = mapper.Map(insuranceViewModel, model);
+                            _context.InsuranceInformations.AddOrUpdate(model);
+                            await _context.SaveChangesAsync();
+                            resultIds[insIdKey] = model.InsId;
+                        }
+                        else
+                        {
+                            model = mapper.Map<InsuranceInformation>(insuranceViewModel);
+                            _context.InsuranceInformations.Add(model);
+                            await _context.SaveChangesAsync();
+                            resultIds[insIdKey] = model.InsId;
+                        }
+                    }
+                    else if (insuranceViewModel.InsRank != 0)
+                    {
+                        model = mapper.Map<InsuranceInformation>(insuranceViewModel);
+                        _context.InsuranceInformations.Add(model);
+                        await _context.SaveChangesAsync();
+                        resultIds[insIdKey] = model.InsId;
+                    }
+
+                    if (insuranceViewModel.Attachment != null && model.InsId != 0)
+                    {
+                        var attachment = new InsuranceAttachment
+                        {
+                            InsId = model.InsId,
+                            PersonId = model.PersonID,
+                            FileName = insuranceViewModel.Attachment
+                        };
+                        _context.InsuranceAttachments.Add(attachment);
                         await _context.SaveChangesAsync();
                     }
                 }
-                if (insuranceInformation.InsuranceTwo.InsRank != 0)
-                {
-                    model = mapper.Map<InsuranceInformation>(insuranceInformation.InsuranceTwo);
-                    _context.InsuranceInformations.Add(model);
-                    await _context.SaveChangesAsync();
-                    if (insuranceInformation.InsuranceTwo.Attachment != null)
-                    {
-                        InsuranceAttachment fone = new InsuranceAttachment();
-                        fone.InsId = model.InsId;
-                        fone.PersonId = model.PersonID;
-                        fone.FileName = insuranceInformation.InsuranceTwo.Attachment; ;// await SaveFileAndReturnUrlAsync(insuranceInformation.InsuranceTwo.Attachment);
-                        _context.InsuranceAttachments.Add(fone);
-                        await _context.SaveChangesAsync();
-                    }
 
-                }
-                if (insuranceInformation.InsuranceThree.InsRank != 0)
-                {
-                    model = mapper.Map<InsuranceInformation>(insuranceInformation.InsuranceThree);
-                    _context.InsuranceInformations.Add(model);
-                    await _context.SaveChangesAsync();
-                    if (insuranceInformation.InsuranceThree.Attachment != null)
-                    {
-                        InsuranceAttachment fone = new InsuranceAttachment();
-                        fone.InsId = model.InsId;
-                        fone.PersonId = model.PersonID;
-                        fone.FileName = insuranceInformation.InsuranceThree.Attachment; ;// await SaveFileAndReturnUrlAsync(insuranceInformation.InsuranceThree.Attachment);
-                        _context.InsuranceAttachments.Add(fone);
-                        await _context.SaveChangesAsync();
-                    }
-                }
+                await ProcessInsurance(insuranceInformation.InsuranceOne, insuranceid1, "InsId1");
+                await ProcessInsurance(insuranceInformation.InsuranceTwo, insuranceid2, "InsId2");
+                await ProcessInsurance(insuranceInformation.InsuranceThree, insuranceid3, "InsId3");
 
-
-                await _context.SaveChangesAsync();
-
-                return true;
+                return resultIds;
             }
             catch (DbEntityValidationException dbEx)
             {
@@ -543,50 +935,86 @@ namespace PreRegistration.DAL
                         _log.Log("Validation error on SubmitInsuranceInfo function in PreRegistrationDAL: " + validationError.PropertyName + ". " + validationError.ErrorMessage);
                     }
                 }
-                return false;
-                throw new Exception("Unable to Submit form. If this problem continues please contact your system admin.");
+                return new Dictionary<string, int> { { "InsId1", 0 }, { "InsId2", 0 }, { "InsId3", 0 } };
             }
             catch (Exception ex)
             {
                 _log.Log("Failed to get SubmitInsuranceInfo: " + ex);
-                return false;
+                return new Dictionary<string, int> { { "InsId1", 0 }, { "InsId2", 0 }, { "InsId3", 0 } };
             }
         }
 
-        public async Task<bool> SubmitAccidentDetail(AccidentDetailViewModel accidentDetailViewModel)
+        public async Task<int> SubmitAccidentDetail(AccidentDetailViewModel accidentDetailViewModel, int updateId)
         {
+            if (accidentDetailViewModel == null)
+            {
+                _log.Log("SubmitAccidentDetailAsync: Provided AccidentDetailViewModel is null.");
+                return 0;
+            }
+
             try
             {
-                AccidentDetail model = new AccidentDetail();
-                var config = new MapperConfiguration(cfg =>
-                {
-                    cfg.CreateMap<AccidentDetailViewModel, AccidentDetail>();
-                });
-
+                // Map the ViewModel to a new instance of AccidentDetail
+                var config = new MapperConfiguration(cfg => cfg.CreateMap<AccidentDetailViewModel, AccidentDetail>());
                 var mapper = config.CreateMapper();
-                model = mapper.Map<AccidentDetail>(accidentDetailViewModel);
+                var model = mapper.Map<AccidentDetail>(accidentDetailViewModel);
 
-                _context.AccidentDetails.Add(model);
-                await _context.SaveChangesAsync();
-
-                return true;
-            }
-            catch (DbEntityValidationException dbEx)
-            {
-                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                // 1. Check if AccidentSkip is true and updateId is not zero, delete and return 0
+                if (accidentDetailViewModel.AccidentSkip && updateId != 0)
                 {
-                    foreach (var validationError in validationErrors.ValidationErrors)
+                    var existingModel = await _context.AccidentDetails.FindAsync(updateId);
+                    if (existingModel != null)
                     {
-                        _log.Log("Validation error on SubmitAccidentDetail function in PreRegistrationDAL: " + validationError.PropertyName + ". " + validationError.ErrorMessage);
+                        _context.AccidentDetails.Remove(existingModel);
+                        await _context.SaveChangesAsync();
+                        _log.Log("Record deleted due to AccidentSkip flag being true for updateId: " + updateId);
                     }
+                    return 0;
                 }
-                return false;
-                throw new Exception("Unable to Submit form. If this problem continues please contact your system admin.");
+
+                // 2. Check if AccidentSkip is true and updateId is zero, return 0
+                if (accidentDetailViewModel.AccidentSkip && updateId == 0)
+                {
+                    _log.Log("AccidentSkip is true and updateId is 0, returning without saving.");
+                    return 0;
+                }
+
+                // 3. Check if AccidentSkip is false and updateId is not zero, update the record
+                if (!accidentDetailViewModel.AccidentSkip && updateId != 0)
+                {
+                    var existingModel = await _context.AccidentDetails.FindAsync(updateId);
+                    if (existingModel == null)
+                    {
+                        _log.Log("AccidentDetail record not found for updateId: " + updateId);
+                        return 0;
+                    }
+
+                    // Map updated properties from the ViewModel to the existing model
+                    mapper.Map(accidentDetailViewModel, existingModel);
+                    _context.Entry(existingModel).State = EntityState.Modified;
+                    await _context.SaveChangesAsync();
+                    return existingModel.AccidentDetailID;
+                }
+
+                // 4. Check if AccidentSkip is false and updateId is zero, create a new record
+                if (!accidentDetailViewModel.AccidentSkip && updateId == 0)
+                {
+                     _context.AccidentDetails.Add(model);
+                    await _context.SaveChangesAsync();
+                    return model.AccidentDetailID;
+                }
+
+                return 0; // Fallback, should never reach here
+            }
+            catch (DbUpdateException dbEx)
+            {
+                _log.Log("Database update error in SubmitAccidentDetailAsync: " + dbEx.Message);
+                return 0;
             }
             catch (Exception ex)
             {
-                _log.Log("Failed to get SubmitAccidentDetail: " + ex);
-                return false;
+                _log.Log("Unexpected error in SubmitAccidentDetailAsync: " + ex);
+                return 0;
             }
         }
 

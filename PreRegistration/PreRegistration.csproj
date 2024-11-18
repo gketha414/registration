@@ -327,6 +327,7 @@
     <Content Include="images\centra_3d_web_transp.gif" />
     <Content Include="images\centra_logo.png" />
     <Content Include="images\centra_LogoPreReg.jpg" />
+    <Content Include="images\closeIcon.png" />
     <Content Include="images\details_close.png" />
     <Content Include="images\details_open.png" />
     <Content Include="images\patient_reg.png" />
