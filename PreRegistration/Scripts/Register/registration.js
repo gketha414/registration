@@ -68,10 +68,10 @@ $(document).ready(function () {
         var $target = $($(this).attr('href')),
             $item = $(this);
         if ($target.selector === "#step7") {
-           // document.getElementById('saveButtonForm').style = "display:block";
+            // document.getElementById('saveButtonForm').style = "display:block";
 
         } else {
-          //  document.getElementById('saveButtonForm').style = "display:none";
+            //  document.getElementById('saveButtonForm').style = "display:none";
         }
         if (!$item.hasClass('disabled')) {
             navListItems.removeClass('btn-success').addClass('btn-default');
@@ -176,7 +176,7 @@ $(document).ready(function () {
 //    $('#choosegurantor').prop('disabled', true);
 //    document.getElementById("MinorInformation_MontherMinorInformation_ResponsiblePartyID").value = value;
 
-    
+
 //    if (value === '1') {
 //        $('#divMinorMother').show();
 //        $('#divMinorFather').hide();
@@ -209,9 +209,9 @@ let accidentUpdateId = 0;
 function onResponsiblePartyChange() {
 
     $('#divMinorFather input[type="text"], #divMinorFather input[type="tel"], #divMinorFather select').val('');
-    $('#divMinorFather select').prop('selectedIndex', 0); 
+    $('#divMinorFather select').prop('selectedIndex', 0);
 
-  
+
     $('#divMinorMother input[type="text"], #divMinorMother input[type="tel"], #divMinorMother select').val('');
     $('#divMinorMother select').prop('selectedIndex', 0);
 }
@@ -222,14 +222,14 @@ function onPatientClick() {
 
     if (canUserSubmit) {
         PhoneNoClean();
-        var PatientData = document.getElementById('patient');      
+        var PatientData = document.getElementById('patient');
         var formData = new FormData(PatientData);
         var updateId = PersonId;
-        formData.append('updateId', updateId); 
+        formData.append('updateId', updateId);
         var submitPatientDataUrl = document.getElementById("Url1").value;
-       
 
-       
+
+
         $.ajax({
             url: submitPatientDataUrl,
             type: 'POST',
@@ -237,7 +237,7 @@ function onPatientClick() {
             contentType: false,  // Required for FormData
             processData: false,  // Required for FormData
             dataType: 'json',
-            success: function (response) {    
+            success: function (response) {
                 if (response > 0) {
                     PersonId = response;
                     $('#patient').hide();
@@ -249,7 +249,7 @@ function onPatientClick() {
                 console.log('Error: ' + error);
             }
         });
-        
+
     }
 }
 function onSpouseClick() {
@@ -264,20 +264,20 @@ function onSpouseClick() {
     var canUserSubmit = validateSpouseData();
     if (canUserSubmit) {
         var spouseData = document.getElementById('spouse');
-        
+
         var formData = new FormData(spouseData);
         var updateId = PersonId;
 
-        formData.append('personId', updateId); 
+        formData.append('personId', updateId);
         formData.append('updateId', UpateIdSpouse);
         var submitSpouseDataUrl = document.getElementById("Url2").value;
-        
+
         $.ajax({
             url: submitSpouseDataUrl,
             type: 'POST',
-            data:  formData,
-            contentType: false,  
-            processData: false,  
+            data: formData,
+            contentType: false,
+            processData: false,
             dataType: 'json',
             success: function (response) {
                 console.log(response);
@@ -291,7 +291,7 @@ function onSpouseClick() {
             }
         });
 
-      
+
     }
 }
 
@@ -313,7 +313,7 @@ function onMinorClick() {
         formData.append('fatherId', fatherId);
         formData.append('motherId', motherId);
         var submitMinorDataUrl = document.getElementById("Url3").value;
-        
+
         $.ajax({
             url: submitMinorDataUrl,
             type: 'POST',
@@ -334,7 +334,7 @@ function onMinorClick() {
                 console.log('Error: ' + error);
             }
         });
-       
+
     }
 }
 
@@ -350,10 +350,10 @@ function onEmergencyClick() {
     if (canUserSubmit) {
         var emergencyData = document.getElementById('emergency');
         var formData = new FormData(emergencyData);
-        formData.append('personId', PersonId); 
-        formData.append('emgId1', emergencyId1); 
-        formData.append('emgId2', emergencyId2); 
-        formData.append('emgId3', emergencyId3); 
+        formData.append('personId', PersonId);
+        formData.append('emgId1', emergencyId1);
+        formData.append('emgId2', emergencyId2);
+        formData.append('emgId3', emergencyId3);
         var submitEmergencyDataUrl = document.getElementById("Url4").value;
 
 
@@ -377,7 +377,7 @@ function onEmergencyClick() {
                 console.log('Error: ' + error);
             }
         });
-      
+
     }
 }
 
@@ -422,7 +422,7 @@ function onInsuranceClick() {
                 console.log('Error: ' + error);
             }
         });
-       
+
     }
 }
 function onAccidentClick() {
@@ -431,7 +431,7 @@ function onAccidentClick() {
         var accidentData = document.getElementById('accident');
         var formData = new FormData(accidentData);
         formData.append('personId', PersonId);
-        formData.append('updateId', accidentUpdateId);        
+        formData.append('updateId', accidentUpdateId);
         var submitAccidentDataUrl = document.getElementById("Url6").value;
         $.ajax({
             url: submitAccidentDataUrl,
@@ -449,7 +449,7 @@ function onAccidentClick() {
             }
         });
         $('#accident').hide();
-       // document.getElementById('saveButtonForm').style = "display:block";
+        // document.getElementById('saveButtonForm').style = "display:block";
 
         $('#step7').show();
         enableNextStep('step7');
@@ -459,7 +459,13 @@ function onAccidentClick() {
 }
 //Step 6 Validation
 function validateAccidentData() {
+
+
     var selectedHSVal = "";
+    var accidentCheckbox = $("#AccidentCheckBox").is(":checked");
+    if (accidentCheckbox) {
+        return true;
+    }
     var selected = $("input[type='radio'][name='AccidentDetail.AccidentTypeID']:checked");
     if (selected.length > 0) {
         selectedHSVal = selected.val();
@@ -473,7 +479,7 @@ function validateAccidentData() {
     // Validate InsRank
 
     var LocationInput = $("#AccidentDetail_Location").val().trim();
-    if (LocationInput === '0') {
+    if (LocationInput === '') {
         canSubmit = false;
         $("#AccidentDetail_Location").css({ "background-color": "pink" });
         errorMessages += "<ul><li>InsRank field is required.</li></ul>";
@@ -482,7 +488,7 @@ function validateAccidentData() {
     }
 
 
-   
+
     var AccidentDate = $("#AccidentDetail_DateOfAccident").val().trim();
     if (AccidentDate === '') {
         canSubmit = false;
@@ -490,6 +496,14 @@ function validateAccidentData() {
         errorMessages += "<ul><li>Policy Number field is required.</li></ul>";
     } else {
         $("#AccidentDetail_DateOfAccident").css({ "background-color": "" });
+    }
+    var AccidentTime = $("#AccidentDetail_TimeOfAccident").val().trim();
+    if (AccidentTime === '') {
+        canSubmit = false;
+        $("#AccidentDetail_TimeOfAccident").css({ "background-color": "pink" });
+        errorMessages += "<ul><li>AccidentTime Number field is required.</li></ul>";
+    } else {
+        $("#AccidentDetail_TimeOfAccident").css({ "background-color": "" });
     }
 
     if ($("input[name='AccidentDetail.AccidentTypeID']:checked").val() === undefined) {
@@ -529,6 +543,8 @@ function validateInsuranceData() {
     if (insuranceCheckBox) {
         return true;
     }
+
+
 
     // Validate InsRank
     var InsRank1 = $("#InsuranceInformation_InsuranceOne_InsRank").val().trim();
