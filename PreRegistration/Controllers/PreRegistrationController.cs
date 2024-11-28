@@ -6,6 +6,7 @@ using RespiratoryProtectionProgram.BL;
 using System;
 using System.Configuration;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -288,6 +289,28 @@ namespace PreRegistration.Controllers
         [HttpPost]
         public async Task<JsonResult> submitInsuranceData(PatientViewModel patientViewModel, int personId, int insId1, int insId2, int insId3)
         {
+
+            if (patientViewModel.InsuranceInformation.InsuranceOne.Attachment != null)
+            {
+                var attachmentList = patientViewModel.InsuranceInformation.InsuranceOne.Attachment.ToString().Split(',').ToList();
+                patientViewModel.InsuranceInformation.InsuranceOne.AttachmentList = attachmentList;
+            }
+
+            if (patientViewModel.InsuranceInformation.InsuranceTwo.Attachment != null)
+            {
+
+                var attachmentList2 = patientViewModel.InsuranceInformation.InsuranceTwo.Attachment.ToString().Split(',').ToList();
+                patientViewModel.InsuranceInformation.InsuranceTwo.AttachmentList = attachmentList2;
+
+            }
+
+
+            if (patientViewModel.InsuranceInformation.InsuranceThree.Attachment != null)
+            {
+                var attachmentList3 = patientViewModel.InsuranceInformation.InsuranceThree.Attachment.ToString().Split(',').ToList();
+                patientViewModel.InsuranceInformation.InsuranceThree.AttachmentList = attachmentList3;
+            }
+
             string userId = System.Web.HttpContext.Current.User.Identity.Name.ToString();
             userId = userId.Substring(userId.IndexOf("\\") + 1);
             if (ModelState.IsValid)

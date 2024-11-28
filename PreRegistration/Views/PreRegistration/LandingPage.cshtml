@@ -1,4 +1,4 @@
-﻿@model PreRegistration.Models.ViewModels.PatientViewModel
+@model PreRegistration.Models.ViewModels.PatientViewModel
 @{
     ViewBag.Title = "LandingPage";
     //  Layout = @Model.GetLayout();
@@ -431,10 +431,10 @@
                                 <div class="form-group col-lg-6" id="PatientDemographics">
                                     @Html.LabelFor(m => m.PatientDemographicsViewModel.ResponsiblePartyID, new { @class = "formScreeningInfo required" })
                                     @Html.DropDownListFor(
-                                        m => m.PatientDemographicsViewModel.ResponsiblePartyID, // Bind to ResponsiblePartyID
-                                        new SelectList(Model.Guarantors, "Value", "Text"),
-                                        htmlAttributes: new { @class = "form-control", id = "guarantor" }
-                                    )
+                                                            m => m.PatientDemographicsViewModel.ResponsiblePartyID, // Bind to ResponsiblePartyID
+                                                            new SelectList(Model.Guarantors, "Value", "Text"),
+                                                            htmlAttributes: new { @class = "form-control", id = "guarantor" }
+                                                        )
                                 </div>
                                 @*<div class="form-group col-lg-6" id="PatientDemographics">
                                         @Html.LabelFor(m => m.PatientDemographicsViewModel.ResponsiblePartyID, new { @class = "formScreeningInfo required" })
@@ -790,8 +790,8 @@
 
                         <label class="formScreeningInfo" for="MinorInformation_ResponsiblePartyID">Choose Guarantor to complete this section?</label>
                         @Html.DropDownListFor(m => m.MinorInformation.MontherMinorInformation.ResponsiblePartyID,
-                            new SelectList(Model.FilteredGuarantors, "Value", "Text"),
-                            htmlAttributes: new { @class = "form-control", id = "choosegurantor", onchange = "onResponsiblePartyChange()" })
+                                                new SelectList(Model.FilteredGuarantors, "Value", "Text"),
+                                                htmlAttributes: new { @class = "form-control", id = "choosegurantor", onchange = "onResponsiblePartyChange()" })
 
                         @Html.HiddenFor(m => m.MinorInformation.MontherMinorInformation.ResponsiblePartyID)
                     </div>
@@ -1545,7 +1545,7 @@
                                         <div class="input-group">
                                             <span class="input-group-btn">
                                                 <span class="btn btn-primary btn-file">
-                                                    <input id="fileInput" type="file" style="width:400px">
+                                                    <input id="fileInput11" type="file" style="width:400px">
                                                     <input name="InsuranceInformation.InsuranceOne.Attachment" id="Attachment-11" type="hidden" />
                                                     @*@Html.TextBoxFor(m => m.InsuranceInformation.InsuranceOne.Attachment, new { type = "file" })*@
                                                 </span>
@@ -1555,13 +1555,13 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-12">
-                                            <div id="attached" style="color: red; font-weight: bold;"> <br /></div>
+                                            <div id="attached11" style="color: red; font-weight: bold;"> <br /></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <table class="table table-hover dataTable box-shadow--8dp" style="background-color:#add8e6" id="uploads">
+                                <table class="table table-hover dataTable box-shadow--8dp" style="background-color:#add8e6" id="uploads11" name="Attachment-11">
                                     <thead>
                                         <tr>
                                             <th>Id</th>
@@ -1661,7 +1661,7 @@
                                         <div class="input-group">
                                             <span class="input-group-btn">
                                                 <span class="btn btn-primary btn-file">
-                                                    <input id="fileInput" type="file" style="width:400px">
+                                                    <input id="fileInput22" type="file" style="width:400px">
                                                     <input name="InsuranceInformation.InsuranceTwo.Attachment" id="Attachment-22" type="hidden" />
                                                 </span>
                                             </span>
@@ -1670,13 +1670,13 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-12">
-                                            <div id="attached" style="color: red; font-weight: bold;"> <br /></div>
+                                            <div id="attached22" style="color: red; font-weight: bold;"> <br /></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <table class="table table-hover dataTable box-shadow--8dp" style="background-color:#add8e6" id="uploads">
+                                <table class="table table-hover dataTable box-shadow--8dp" style="background-color:#add8e6" name="Attachment-22" id="uploads22">
                                     <thead>
                                         <tr>
                                             <th>Id</th>
@@ -1776,7 +1776,7 @@
                                         <div class="input-group">
                                             <span class="input-group-btn">
                                                 <span class="btn btn-primary btn-file">
-                                                    <input id="fileInput" type="file" style="width:400px">
+                                                    <input id="fileInput33" type="file" style="width:400px">
                                                     <input name="InsuranceInformation.InsuranceThree.Attachment" id="Attachment-33" type="hidden" />
                                                 </span>
                                             </span>
@@ -1785,13 +1785,13 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-12">
-                                            <div id="attached" style="color: red; font-weight: bold;"> <br /></div>
+                                            <div id="attached33" style="color: red; font-weight: bold;"> <br /></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <table class="table table-hover dataTable box-shadow--8dp" style="background-color:#add8e6" id="uploads">
+                                <table class="table table-hover dataTable box-shadow--8dp" style="background-color:#add8e6" name="Attachment-33" id="uploads33">
                                     <thead>
                                         <tr>
                                             <th>Id</th>
@@ -1824,7 +1824,6 @@
 
             </div>
         </form>
-
         <form class="panel panel-primary setup-content" id="accident">
             <div class="panel-heading">
                 <h3 class="panel-title">Accident Information</h3>
@@ -2256,12 +2255,25 @@
                     input.value = ""; // Reset other input types
                 }
             });
-
+            if (id === 'InsuranceOnePremium') {
+                const attachmentTable = insurance.querySelector("#uploads11 tbody");
+                if (attachmentTable) {
+                    attachmentTable.innerHTML = ""; // Clear attached files table
+                }
+}
+            else if (id === 'InsuranceTwoPremium') {
+                const attachmentTable = insurance.querySelector("#uploads22 tbody");
+                if (attachmentTable) {
+                    attachmentTable.innerHTML = ""; // Clear attached files table
+                } }
+            else {
+                const attachmentTable = insurance.querySelector("#uploads33 tbody");
+                if (attachmentTable) {
+                    attachmentTable.innerHTML = ""; // Clear attached files table
+                }
+}
             // Clear dynamically generated content like the attachment list
-            const attachmentTable = insurance.querySelector("#uploads tbody");
-            if (attachmentTable) {
-                attachmentTable.innerHTML = ""; // Clear attached files table
-            }
+           
         }
     }
 
@@ -2538,8 +2550,331 @@
 
         $('#divMinorMother').hide();
         $('#divMinorFather').hide();
+        // Centralized file upload arrays
+var uploadToAdd = {
+    "Attachment-11": [],
+    "Attachment-22": [],
+    "Attachment-33": []
+};
 
-        var uploadToAdd = [];
+// Attach event listeners to upload buttons
+document.querySelectorAll('input[data-atta]').forEach(button => {
+    button.addEventListener('click', function (e) {
+        e.preventDefault();
+        var imageName = $(this).data("atta");
+        var fileInput = document.getElementById("fileInput" + imageName.split('-')[1]);
+        var attachedDiv = $("#attached" + imageName.split('-')[1]);
+
+        attachedDiv.hide();
+
+        if (!fileInput || fileInput.files.length < 1) {
+            attachedDiv.html("Please attach a file before uploading").show();
+            return;
+        }
+
+        $(this).prop("disabled", true).val("Processing...");
+        var formdata = new FormData();
+        for (let file of fileInput.files) {
+            formdata.append(file.name, file);
+        }
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '@Url.Action("Upload", "PreRegistration")');
+        xhr.send(formdata);
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200 && xhr.responseText !== "\"Error\"") {
+                    handleFileSuccess(xhr.responseText, imageName, fileInput);
+                } else {
+                    attachedDiv.html(xhr.responseText).show();
+                }
+                $(button).prop("disabled", false).val("Upload file");
+            }
+        };
+    });
+});
+
+// Handle successful upload
+function handleFileSuccess(responseText, imageName, fileInput) {
+    var fileGuid = responseText.replace(/['"]+/g, '');
+    var attachmentName = fileInput.files[0].name;
+
+    uploadToAdd[imageName].push(`${fileGuid}/${attachmentName}`);
+    document.getElementById(imageName).value = uploadToAdd[imageName].join(",");
+
+    var table = $('#uploads' + imageName.split('-')[1]).DataTable();
+    table.row.add([fileGuid, attachmentName, null]).draw();
+
+    $("#attached" + imageName.split('-')[1]).html("File successfully uploaded").show();
+    fileInput.value = "";
+}
+
+// Initialize DataTables for each attachment
+['11', '22', '33'].forEach(id => {
+    $('#uploads' + id).DataTable({
+        "bLengthChange": false,
+        "bFilter": false,
+        "columnDefs": [
+            {
+                "aTargets": [2],
+                "mData": 0,
+                "mRender": function () {
+                    return '<button type="button" class="btn1 btn-primary box-shadow--8dp" id="uploaddeletebtn">X</button>';
+                },
+                "sClass": "alignCenter",
+                "fnCreatedCell": function (cell) {
+                    $('#uploaddeletebtn', cell)
+                        .button({
+                            text: true,
+                            icons: { primary: "ui-icon-circle-minus" }
+                        })
+                        .click(function (event) {
+                            event.preventDefault();
+                            handleFileDelete($(this).closest('table').attr('name'), cell);
+                        });
+                }
+            }
+        ]
+    });
+});
+
+// Handle file deletion
+function handleFileDelete(imageName, cell) {
+    var dtUploads = $('#uploads' + imageName.split('-')[1]).DataTable();
+    var row = dtUploads.row($(cell).parents('tr')).data();
+    var fileGuid = row[0];
+    var rowIndex = dtUploads.row($(cell).parents('tr')).index();
+
+    $.ajax({
+        url: '@Url.Action("DeleteFile", "PreRegistration")',
+        cache: false,
+        data: { fileId: fileGuid, bridgeId: 0 },
+        success: function () {
+            uploadToAdd[imageName].splice(rowIndex, 1);
+            document.getElementById(imageName).value = uploadToAdd[imageName].join(",");
+            dtUploads.row(rowIndex).remove().draw();
+            $("#attached" + imageName.split('-')[1]).hide();
+        }
+    });
+}
+
+           @*var uploadToAdd1 = [];
+   var uploadToAdd2 = [];
+   var uploadToAdd3 = [];
+           if ($("#attachFile").length > 0) {
+       //it doesn't exist
+
+               /* document.getElementById('attachFile').onclick = function (e) {*/
+             document.querySelectorAll('input[data-atta]').forEach(button => {
+    button.addEventListener('click', function (e) {
+        e.preventDefault();
+        $("#attached").hide();
+
+        var formdata = new FormData(); // FormData object
+        var fileInput = "";
+
+        var imageName = $(this).data("atta");
+        if (imageName === "Attachment-11") {
+
+             fileInput = document.getElementById('fileInput11');
+
+
+
+
+
+        }
+        else if (imageName === "Attachment-22") {
+            fileInput = document.getElementById('fileInput22');
+
+        }
+        else if (imageName === "Attachment-33") {
+            fileInput = document.getElementById('fileInput33');
+
+
+        }
+
+        if (fileInput.files.length < 1) {
+            $("#attached").html("Please attach a file before uploading");
+            $("#attached").show();
+        } else {
+            $(this).prop("disabled", true).val("Processing...");
+            var attachmentName = fileInput.files[0].name;
+
+            // Append each file to FormData object
+            for (let i = 0; i < fileInput.files.length; i++) {
+                formdata.append(fileInput.files[i].name, fileInput.files[i]);
+            }
+
+            // Create and send XMLHttpRequest
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '@Url.Action("Upload", "PreRegistration")');
+            xhr.send(formdata);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    if (xhr.responseText != "\"Error\"") {
+                        $("#UploadedFileGuid").val(xhr.responseText.replace(/['"]+/g, ''));
+
+                        // Handle specific attachment logic
+                        const uploadToAdd = {
+                            "Attachment-11": uploadToAdd1,
+                            "Attachment-22": uploadToAdd2,
+                            "Attachment-33": uploadToAdd3
+                        };
+
+                        uploadToAdd[imageName].push(xhr.responseText.replace(/['"]+/g, '') + "/" + attachmentName);
+                        document.getElementById(imageName).value = uploadToAdd[imageName].join(",");
+
+                        if (imageName === "Attachment-11") {
+
+
+
+                            var table = $('#uploads11').DataTable();
+                            table.row.add([
+                                xhr.responseText.replace(/['"]+/g, ''),
+                                attachmentName,
+                                null
+                            ]).draw();
+
+                            $("#attached11").html("File successfully uploaded");
+                            $("#attached11").show();
+                            document.getElementById("fileInput11").value = "";
+
+
+
+                        }
+                        else if (imageName === "Attachment-22") {
+
+                            var table = $('#uploads22').DataTable();
+                            table.row.add([
+                                xhr.responseText.replace(/['"]+/g, ''),
+                                attachmentName,
+                                null
+                            ]).draw();
+
+                            $("#attached22").html("File successfully uploaded");
+                            $("#attached22").show();
+                            document.getElementById("fileInput22").value = "";
+
+                        }
+                        else if (imageName === "Attachment-33") {
+
+                            var table = $('#uploads33').DataTable();
+                            table.row.add([
+                                xhr.responseText.replace(/['"]+/g, ''),
+                                attachmentName,
+                                null
+                            ]).draw();
+
+                            $("#attached33").html("File successfully uploaded");
+                            $("#attached33").show();
+                            document.getElementById("fileInput33").value = "";
+
+
+                        }
+
+
+                    } else {
+
+                        if (imageName === "Attachment-11") {
+
+                            $("#attached11").html(xhr.responseText);
+                            $("#attached11").show();
+
+
+
+
+
+                        }
+                        else if (imageName === "Attachment-22") {
+                            $("#attached22").html(xhr.responseText);
+                            $("#attached22").show();
+
+                        }
+                        else if (imageName === "Attachment-33") {
+                            $("#attached33").html(xhr.responseText);
+                            $("#attached33").show();
+
+
+                        }
+
+                    }
+                }
+            };
+
+            $(this).prop("disabled", false).val("Upload file");
+        }
+    });
+});
+
+   }
+
+           var dtUploads = $('#uploads').DataTable({
+       "bLengthChange": false,
+       "bFilter": false,
+       "columnDefs": [
+           {
+               "aTargets": [2],
+               "mData": 0,
+               "mRender": function (data, type, full) {
+                   return '<button type="button" class="btn1 btn-primary box-shadow--8dp" id="uploaddeletebtn">X</button>';
+               },
+               "sClass": "alignCenter",
+               "fnCreatedCell": function (cell) {
+                   $('#uploaddeletebtn', cell)
+                       .button({
+                           text: true,
+                           icons: {
+                               primary: "ui-icon-circle-minus"
+                           }
+                       })
+                       .click(function (event) {
+                           event.preventDefault();
+                           var row = dtUploads.row($(this).parents('tr')).data();
+                           var rowdata = row[0];
+                           var rowToRemove = dtUploads.row($(this).parents('tr'))[0];
+                           debugger;
+                           var table = $(this).closest('table');
+                           var imageName = table.attr('name');
+                           $.ajax({
+                               url: '@Url.Action("DeleteFile", "PreRegistration")',
+                               cache: false,
+                               data: { fileId: rowdata, bridgeId: 0},
+                               success: function (html) {
+
+                                   if (imageName === "Attachment-11") {
+
+
+                                       uploadToAdd1.splice(rowToRemove, 1);
+                                       const hiddenInput = document.getElementById("Attachment-11");
+                                       hiddenInput.value = uploadToAdd1.join(",");
+
+
+
+                                   }
+                                   else if (imageName === "Attachment-22") {
+                                       uploadToAdd2.splice(rowToRemove, 1);
+                                       const hiddenInput = document.getElementById("Attachment-22");
+                                       hiddenInput.value = uploadToAdd2.join(",");
+}
+                                   else if (imageName === "Attachment-33") {
+                                       uploadToAdd3.splice(rowToRemove, 1);
+                                       const hiddenInput = document.getElementById("Attachment-33");
+                                       hiddenInput.value = uploadToAdd3.join(",");
+
+                                   }
+
+                                   dtUploads.row(rowToRemove).remove().draw();
+                                   $("#attached").hide();
+                               }
+                           });
+
+                       });
+               }
+           }]
+   });*@
+
+        @*var uploadToAdd = [];
                 if ($("#attachFile").length > 0) {
             //it doesn't exist
 
@@ -2633,7 +2968,7 @@
                             });
                     }
                 }]
-        });
+        });*@
 
         $("#PatientDemographicsViewModel_BirthDate").change(function () {
             var dob = $("#PatientDemographicsViewModel_BirthDate").val();

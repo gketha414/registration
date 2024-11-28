@@ -37,7 +37,6 @@ namespace PreRegistration.Models
         public virtual DbSet<Gender> Genders { get; set; }
         public virtual DbSet<Hospital> Hospitals { get; set; }
         public virtual DbSet<HospitalService> HospitalServices { get; set; }
-        public virtual DbSet<InsuranceAttachment> InsuranceAttachments { get; set; }
         public virtual DbSet<InsuranceInformation> InsuranceInformations { get; set; }
         public virtual DbSet<MaritalStatu> MaritalStatus { get; set; }
         public virtual DbSet<MinorInformation> MinorInformations { get; set; }
@@ -47,6 +46,7 @@ namespace PreRegistration.Models
         public virtual DbSet<SpouseInformation> SpouseInformations { get; set; }
         public virtual DbSet<State> States { get; set; }
         public virtual DbSet<VW_PatientDemosGridView> VW_PatientDemosGridView { get; set; }
+        public virtual DbSet<InsuranceAttachment> InsuranceAttachments { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

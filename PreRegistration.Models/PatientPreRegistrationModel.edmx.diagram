@@ -15,7 +15,6 @@
         <EntityTypeShape EntityType="PatientPreRegistrationModel.Gender" Width="1.5" PointX="2.75" PointY="3.75" />
         <EntityTypeShape EntityType="PatientPreRegistrationModel.Hospital" Width="1.5" PointX="0.75" PointY="15.125" />
         <EntityTypeShape EntityType="PatientPreRegistrationModel.HospitalService" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="PatientPreRegistrationModel.InsuranceAttachment" Width="1.5" PointX="5.75" PointY="3.75" />
         <EntityTypeShape EntityType="PatientPreRegistrationModel.InsuranceInformation" Width="1.5" PointX="5.25" PointY="25.875" />
         <EntityTypeShape EntityType="PatientPreRegistrationModel.MaritalStatu" Width="1.5" PointX="6.75" PointY="0.75" />
         <EntityTypeShape EntityType="PatientPreRegistrationModel.MinorInformation" Width="1.5" PointX="8.25" PointY="11.5" />
@@ -34,6 +33,7 @@
         <AssociationConnector Association="PatientPreRegistrationModel.FK_MinorInformation_PatientDemographics" />
         <AssociationConnector Association="PatientPreRegistrationModel.FK_MinorInformation_ResponsibleParty" />
         <AssociationConnector Association="PatientPreRegistrationModel.FK_SpouseInformation_PatientDemographics1" />
+        <EntityTypeShape EntityType="PatientPreRegistrationModel.InsuranceAttachment" Width="1.5" PointX="10.375" PointY="5.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -1,49 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using Microsoft.AspNetCore.Http;using System;using System.Collections.Generic;using System.ComponentModel.DataAnnotations;using System.ComponentModel.DataAnnotations.Schema;namespace PreRegistration.Models.ViewModels{
+    public class InsuranceMultipleViewModel    {        [NotMapped]        public bool InsuranceSkip { get; set; }        public InsuranceInformationViewModel InsuranceOne { get; set; }        public InsuranceInformationViewModel InsuranceTwo { get; set; }        public InsuranceInformationViewModel InsuranceThree { get; set; }    }    public class InsuranceInformationViewModel    {        public int PersonID { get; set; }        [Display(Name = "Insurance Rank")]        public int InsRank { get; set; }        [Display(Name = "Insurance Plan Name")]        public string InsPlanName { get; set; }        [Display(Name = "Insurance Subscriber Name")]        public string Subscriber_Name { get; set; }        [Display(Name = "Relation PolicyHolder To Patient")]        public string Rel_PolicyHolder_To_Patient { get; set; }        [Display(Name = "Policy Number")]        public string Policy_Number { get; set; }        [Display(Name = "Group Number")]        public string Group_Number { get; set; }        [Display(Name = "Plan Code")]        public string PlanCode { get; set; }        [Display(Name = "Address 1")]        public string InsAddress1 { get; set; }        [Display(Name = "Address 2")]        public string InsAddress2 { get; set; }        [Display(Name = "City")]        public string InsCity { get; set; }        [Display(Name = "State")]        public string InsState { get; set; }        [Display(Name = "Zip Code")]        public Nullable<long> InsZip { get; set; }        [Display(Name = "Phone")]        public Nullable<long> InsPhone { get; set; }        [Display(Name = "Attachment Type")]        public int AttachmentType { get; set; }
 
-namespace PreRegistration.Models.ViewModels
-{   
-    public class InsuranceMultipleViewModel
-    {
-        [NotMapped]
-        public bool InsuranceSkip { get; set; }
-        public InsuranceInformationViewModel InsuranceOne { get; set; }
-        public InsuranceInformationViewModel InsuranceTwo { get; set; }
-        public InsuranceInformationViewModel InsuranceThree { get; set; }
-    }
-    public class InsuranceInformationViewModel
-    {
-        public int PersonID { get; set; }
-        [Display(Name = "Insurance Rank")]
-        public int InsRank { get; set; }
-        [Display(Name = "Insurance Plan Name")]
-        public string InsPlanName { get; set; }
-        [Display(Name = "Insurance Subscriber Name")]
-        public string Subscriber_Name { get; set; }
-        [Display(Name = "Relation PolicyHolder To Patient")]
-        public string Rel_PolicyHolder_To_Patient { get; set; }
-        [Display(Name = "Policy Number")]
-        public string Policy_Number { get; set; }
-        [Display(Name = "Group Number")]
-        public string Group_Number { get; set; }
-        [Display(Name = "Plan Code")]
-        public string PlanCode { get; set; }
-        [Display(Name = "Address 1")]
-        public string InsAddress1 { get; set; }
-        [Display(Name = "Address 2")]
-        public string InsAddress2 { get; set; }
-        [Display(Name = "City")]
-        public string InsCity { get; set; }
-        [Display(Name = "State")]
-        public string InsState { get; set; }
-        [Display(Name = "Zip Code")]
-        public Nullable<long> InsZip { get; set; }
-        [Display(Name = "Phone")]
-        public Nullable<long> InsPhone { get; set; }
-        [Display(Name = "Attachment Type")]
-        public int AttachmentType { get; set; }
-        public string Attachment { get; set; }
-    }
-}
+        public string Attachment { get; set; }        [NotMapped]        public List<string> AttachmentList { get; set; }    }}

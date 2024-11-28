@@ -878,6 +878,9 @@ namespace PreRegistration.DAL
                         {
                             if (model != null)
                             {
+                                var existingAttachments = _context.InsuranceAttachments.Where(a => a.InsId == model.InsId).ToList();
+
+                                _context.InsuranceAttachments.RemoveRange(existingAttachments);
                                 _context.InsuranceInformations.Remove(model);
                                 await _context.SaveChangesAsync();
                             }
@@ -909,13 +912,25 @@ namespace PreRegistration.DAL
 
                     if (insuranceViewModel.Attachment != null && model.InsId != 0)
                     {
-                        var attachment = new InsuranceAttachment
+                        var existingAttachments = _context.InsuranceAttachments.Where(a => a.InsId == model.InsId).ToList();
+                       
+                        _context.InsuranceAttachments.RemoveRange(existingAttachments);
+                        foreach (var fileName in insuranceViewModel.AttachmentList)
                         {
-                            InsId = model.InsId,
-                            PersonId = model.PersonID,
-                            FileName = insuranceViewModel.Attachment
-                        };
-                        _context.InsuranceAttachments.Add(attachment);
+                            var attachment = new InsuranceAttachment
+                            {
+                                InsId = model.InsId,
+                                PersonId = model.PersonID,
+                                FileName = fileName
+                            };
+                            _context.InsuranceAttachments.Add(attachment);
+                        }
+                        await _context.SaveChangesAsync();
+                    }else if (model.InsId != 0)
+                    {
+                        var existingAttachments = _context.InsuranceAttachments.Where(a => a.InsId == model.InsId).ToList();
+
+                        _context.InsuranceAttachments.RemoveRange(existingAttachments);
                         await _context.SaveChangesAsync();
                     }
                 }
